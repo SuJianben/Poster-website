@@ -1,0 +1,37 @@
+/* Imported unchanged from the Figma source: src/styles/poster.css */
+:root {
+  --bg-primary: #ffffff;
+  --bg-soft: #fafafa;
+  --ink-primary: #0a0a0a;
+  --ink-secondary: #666666;
+  --ink-tertiary: #999999;
+  --hairline: #eaeaea;
+  --accent: #0a0a0a;
+  --radius-card: 4px;
+  --radius-panel: 8px;
+  --font-display: "Fraunces", "Playfair Display", Georgia, serif;
+  --font-chrome: "Inter", system-ui, sans-serif;
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.store-root { background: var(--bg-primary); color: var(--ink-primary); font-family: var(--font-chrome); min-height: 100%; }
+.font-display { font-family: var(--font-display); }
+.font-chrome { font-family: var(--font-chrome); }
+.nav-label { font-family: var(--font-chrome); text-transform: uppercase; letter-spacing: 1px; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeIn 500ms var(--ease-std) both; }
+.rise-in { animation: riseIn 500ms var(--ease-std) both; }
+@keyframes floatY { 0%, 100% { transform: translateY(0); opacity: 0.6; } 50% { transform: translateY(6px); opacity: 1; } }
+.float-y { animation: floatY 2s ease-in-out infinite; }
+@keyframes cardEnter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.card-enter { animation: cardEnter 300ms var(--ease-std) both; }
+.cover-flow { display: flex; gap: 28px; overflow-x: auto; scroll-snap-type: x mandatory; perspective: 1600px; perspective-origin: 50% 45%; padding: 30px 50vw; scrollbar-width: none; }
+.cover-flow::-webkit-scrollbar { display: none; }
+.cover-flow-item { scroll-snap-align: center; flex: 0 0 auto; transition: transform 400ms var(--ease-std), opacity 400ms var(--ease-std), filter 400ms ease; }
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.edge-fade { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 97%, transparent 100%); }
+.tabnum { font-variant-numeric: tabular-nums; }
+@keyframes cartShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px) rotate(-6deg); } 75% { transform: translateX(3px) rotate(6deg); } }
+.cart-shake { animation: cartShake 400ms var(--ease-std); }
+@media (prefers-reduced-motion: reduce) { .fade-in, .rise-in, .float-y, .card-enter, .cart-shake { animation: none !important; } .cover-flow-item { transition: none !important; } * { scroll-behavior: auto !important; } }
