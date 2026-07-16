@@ -1,0 +1,33 @@
+/* Header colour is controlled by header-adaptive.js while it overlays the hero. */
+.site-header--adaptive {
+  --adaptive-header-foreground: #fff;
+  color: var(--adaptive-header-foreground);
+}
+
+.site-header--adaptive .site-logo,
+.site-header--adaptive .site-nav,
+.site-header--adaptive .site-actions,
+.site-header--adaptive .icon-button {
+  color: var(--adaptive-header-foreground);
+  transition: color 180ms ease;
+}
+
+.site-header--adaptive .cart-count {
+  background: var(--adaptive-header-foreground);
+  color: var(--adaptive-header-count-foreground, #111);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+/* Scrolled headers retain the existing white surface, but always use legible ink. */
+.site-header--adaptive.is-scrolled {
+  --adaptive-header-foreground: #111;
+  --adaptive-header-count-foreground: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header--adaptive .site-logo,
+  .site-header--adaptive .site-nav,
+  .site-header--adaptive .site-actions,
+  .site-header--adaptive .icon-button,
+  .site-header--adaptive .cart-count { transition: none; }
+}

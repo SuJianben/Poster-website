@@ -1,8 +1,21 @@
-<header class="site-header">
+<header class="site-header site-header--adaptive" data-adaptive-header>
   <div class="page-width site-header__inner">
-    <a class="site-logo" href="#top">Poster<em>Store</em></a>
-    <nav class="site-nav" aria-label="Main navigation"><a href="#categories">Shop</a><a href="#categories">Collections</a><a href="#categories">About</a><a href="#categories">Journal</a></nav>
-    <div class="site-actions"><a class="icon-button" aria-label="{{ 'general.search' | t }}" href="{{ routes.search_url }}">{% render 'icon', name: 'search' %}</a><a class="icon-button" aria-label="{{ 'general.cart' | t }}" href="{{ routes.cart_url }}">{% render 'icon', name: 'bag' %}{% if cart.item_count > 0 %}<span class="cart-count">{{ cart.item_count }}</span>{% endif %}</a></div>
+    <a class="site-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">Poster<em>Store</em></a>
+    <nav class="site-nav" aria-label="Main navigation">
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links %}
+          <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="#categories">Shop</a><a href="#categories">Collections</a><a href="#categories">About</a><a href="#categories">Journal</a>
+      {% endif %}
+    </nav>
+    <div class="site-actions">
+      <a class="icon-button" aria-label="{{ 'general.search' | t }}" href="{{ routes.search_url }}">{% render 'icon', name: 'search' %}</a>
+      <a class="icon-button" aria-label="{{ 'general.cart' | t }}" href="{{ routes.cart_url }}">{% render 'icon', name: 'bag' %}{% if cart.item_count > 0 %}<span class="cart-count">{{ cart.item_count }}</span>{% endif %}</a>
+    </div>
   </div>
 </header>
-{% schema %}{"name":"Header","settings":[{"type":"link_list","id":"menu","label":"Menu","default":"main-menu"}]}{% endschema %}
+{% schema %}
+{"name":"Header","settings":[{"type":"link_list","id":"menu","label":"Menu","default":"main-menu"}]}
+{% endschema %}
