@@ -24,6 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
     applyTransforms();
+    const initialCards = track.querySelectorAll('.cover-flow-item');
+    const middleCard = initialCards[Math.floor(initialCards.length / 2)];
+    if (middleCard) {
+      requestAnimationFrame(() => {
+        track.scrollTo({ left: middleCard.offsetLeft + middleCard.offsetWidth / 2 - track.clientWidth / 2, behavior: 'auto' });
+        applyTransforms();
+      });
+    }
     track.addEventListener('scroll', () => requestAnimationFrame(applyTransforms), { passive: true });
   });
 });
