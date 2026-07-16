@@ -7,13 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const applyTransforms = () => {
       const cards = track.querySelectorAll('.cover-flow-item');
       const center = track.scrollLeft + track.clientWidth / 2;
+      let closestCard = null;
+      let closestDistance = Infinity;
       cards.forEach((card) => {
         const itemCenter = card.offsetLeft + card.offsetWidth / 2;
         const delta = (itemCenter - center) / card.offsetWidth;
         const clamped = Math.max(-2.5, Math.min(2.5, delta));
         card.style.transform = `perspective(1600px) rotateY(${clamped * -30}deg) scale(${Math.max(.7, 1.2 - Math.abs(clamped) * .3)})`;
         card.style.opacity = String(Math.max(.45, 1 - Math.abs(clamped) * .3));
+        if (Math.abs(itemCenter - center) < closestDistance) { closestCard = card; closestDistance = Math.abs(itemCenter - center); }
       });
+      if (closestCard?.dataset.title) {
+        const section = track.closest('.featured-section');
+        section?.querySelector('[data-cover-title]')?.replaceChildren(closestCard.dataset.title);
+        section?.querySelector('[data-cover-meta]')?.replaceChildren(closestCard.dataset.meta || '');
+      }
     };
     applyTransforms();
     track.addEventListener('scroll', () => requestAnimationFrame(applyTransforms), { passive: true });

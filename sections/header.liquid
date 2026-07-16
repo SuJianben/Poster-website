@@ -1,7 +1,7 @@
 <header class="site-header">
   <div class="page-width site-header__inner">
-    <a class="site-logo" href="{{ routes.root_url }}">{% if settings.logo != blank %}{{ settings.logo | image_url: width: 320 | image_tag: alt: shop.name }}{% else %}{{ shop.name | default: 'Poster' }}<em>Store</em>{% endif %}</a>
-    <nav class="site-nav" aria-label="Main navigation">{% for link in section.settings.menu.links %}<a href="{{ link.url }}">{{ link.title }}</a>{% endfor %}</nav>
+    <a class="site-logo" href="#top">Poster<em>Store</em></a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="#categories">Shop</a><a href="#categories">Collections</a><a href="#categories">About</a><a href="#categories">Journal</a></nav>
     <div class="site-actions"><a class="icon-button" aria-label="{{ 'general.search' | t }}" href="{{ routes.search_url }}">{% render 'icon', name: 'search' %}</a><a class="icon-button" aria-label="{{ 'general.cart' | t }}" href="{{ routes.cart_url }}">{% render 'icon', name: 'bag' %}{% if cart.item_count > 0 %}<span class="cart-count">{{ cart.item_count }}</span>{% endif %}</a></div>
   </div>
 </header>
