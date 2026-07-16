@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_accent }}">
+    {{ content_for_header }}
+    {{ 'poster-theme.css' | asset_url | stylesheet_tag }}
+    <style>:root { --bg: {{ settings.color_background }}; --soft: {{ settings.color_surface }}; --ink: {{ settings.color_text }}; --muted: {{ settings.color_muted }}; --line: {{ settings.color_border }}; --accent: {{ settings.color_accent }}; --page-width: {{ settings.page_width }}px; }</style>
+    <script src="{{ 'poster-theme.js' | asset_url }}" defer="defer"></script>
+  </head>
+  <body class="template-{{ request.page_type | handle }}">
+    {% sections 'header-group' %}
+    <main id="MainContent" role="main">{{ content_for_layout }}</main>
+    {% sections 'footer-group' %}
+  </body>
+</html>

@@ -1,0 +1,2 @@
+<article class="generic-page"><div class="page-width" style="max-width:860px"><span class="eyebrow">{{ article.published_at | date: '%B %d, %Y' }}</span><h1 class="display" style="font-size:clamp(44px,6vw,76px)">{{ article.title }}</h1>{% if article.image %}{{ article.image | image_url: width: 1400 | image_tag: alt: article.title, style: 'margin:32px 0' }}{% endif %}<div style="line-height:1.8">{{ article.content }}</div></div></article>
+{% schema %}{"name":"Main article","settings":[]}{% endschema %}

@@ -1,0 +1,2 @@
+<section class="collection-page"><div class="page-width"><span class="eyebrow">Collection</span><h1 class="display" style="font-size:clamp(44px,6vw,76px);margin:10px 0 44px">{{ collection.title }}</h1><div class="product-grid" style="margin-top:0">{% for product in collection.products %}{% render 'poster-card', product: product %}{% else %}<p>{{ 'general.no_products' | t }}</p>{% endfor %}</div></div></section>
+{% schema %}{"name":"Main collection","settings":[]}{% endschema %}

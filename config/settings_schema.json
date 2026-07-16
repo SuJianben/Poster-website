@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Theme style",
+    "settings": [
+      {"type":"image_picker","id":"logo","label":"Logo image"},
+      {"type":"range","id":"page_width","label":"Content width","min":1100,"max":1600,"step":20,"default":1440,"unit":"px"},
+      {"type":"color","id":"color_background","label":"Background","default":"#FFFFFF"},
+      {"type":"color","id":"color_surface","label":"Soft surface","default":"#FAFAFA"},
+      {"type":"color","id":"color_text","label":"Text","default":"#0A0A0A"},
+      {"type":"color","id":"color_muted","label":"Muted text","default":"#666666"},
+      {"type":"color","id":"color_border","label":"Borders","default":"#EAEAEA"},
+      {"type":"color","id":"color_accent","label":"Accent","default":"#0A0A0A"}
+    ]
+  }
+]
