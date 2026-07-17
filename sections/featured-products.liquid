@@ -1,82 +1,35 @@
 {{ 'featured-flow.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'featured-flow.js' | asset_url }}" defer="defer"></script>
 
-{% liquid
-  assign initial_image = ''
-  if section.settings.collection != blank
-    assign initial_product = section.settings.collection.products[0]
-    if initial_product.featured_media != blank
-      assign initial_image = initial_product.featured_media | image_url: width: 1800
-    endif
-  elsif section.blocks.size > 0
-    assign initial_image = section.blocks[0].settings.asset_name | asset_url
-  endif
-%}
+{% assign tilted_titles = 'urban exploration|night scene|yellow wildflowers|street with mount fuji|bridgestone bicycle shop|train window view|train tracks|lawson convenience store|street scene|japanese culture' | split: '|' %}
+{% assign tilted_assets = 'reference-tilted-01.jpg|reference-tilted-02.jpg|reference-tilted-03.jpg|reference-tilted-04.jpg|reference-tilted-05.jpg|reference-tilted-06.jpg|reference-tilted-07.jpg|reference-tilted-08.jpg|reference-tilted-09.jpg|reference-tilted-10.jpg' | split: '|' %}
 
-<section
-  class="section section--soft featured-section featured-flow"
-  data-featured-flow
-  {% if initial_image != blank %}style="--ff-background: url('{{ initial_image }}');"{% endif %}
->
-  <div class="featured-flow__backdrop" aria-hidden="true"></div>
-  <div class="featured-flow__content">
-    <div class="featured-title page-width">
-      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
-      <h2>{{ section.settings.heading }}</h2>
+<section class="tilted-carousel" data-tilted-carousel aria-label="Image carousel">
+  <div class="tilted-carousel__viewport" data-tilted-viewport>
+    <div class="tilted-carousel__track" data-tilted-track>
+      {% for asset_name in tilted_assets %}
+        {% assign title = tilted_titles[forloop.index0] %}
+        <article class="tilted-carousel__slide" data-tilted-slide data-title="{{ title | escape }}" aria-current="false">
+          <button class="tilted-carousel__image" type="button" data-tilted-select aria-label="Show {{ title | escape }}">
+            <img src="{{ asset_name | asset_url }}" alt="{{ title | escape }}" width="500" height="667"{% unless forloop.index0 == 3 %} loading="lazy"{% endunless %}>
+          </button>
+          <p class="tilted-carousel__title">{{ title }}</p>
+        </article>
+      {% endfor %}
     </div>
+  </div>
 
-    <div class="featured-flow__viewport" data-featured-viewport tabindex="0" aria-label="Featured posters carousel">
-      <div class="featured-flow__track" data-featured-track>
-        {% if section.settings.collection != blank %}
-          {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
-            {% assign poster_image = product.featured_media | image_url: width: 1200 %}
-            <article
-              class="featured-flow__card"
-              data-featured-card
-              data-title="{{ product.title | escape }}"
-              data-meta="{{ product.vendor | escape }} · {{ product.price | money | escape }}"
-              data-link="{{ product.url }}"
-              data-image="{{ poster_image }}"
-              aria-current="false"
-            >
-              <a class="featured-flow__image" href="{{ product.url }}" tabindex="-1">
-                {% if product.featured_media != blank %}
-                  {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '300,450,600,900,1200', alt: product.title }}
-                {% endif %}
-              </a>
-            </article>
-          {% endfor %}
-        {% else %}
-          {% for block in section.blocks %}
-            {% assign poster_image = block.settings.asset_name | asset_url %}
-            <article
-              class="featured-flow__card"
-              data-featured-card
-              data-title="{{ block.settings.title | escape }}"
-              data-meta="{{ block.settings.meta | escape }}"
-              data-link="{{ block.settings.link }}"
-              data-image="{{ poster_image }}"
-              aria-current="false"
-              {{ block.shopify_attributes }}
-            >
-              <a class="featured-flow__image" href="{{ block.settings.link }}" tabindex="-1">
-                <img src="{{ block.settings.asset_name | asset_url }}" alt="{{ block.settings.title | escape }}" width="900" height="1350" loading="lazy">
-              </a>
-            </article>
-          {% endfor %}
-        {% endif %}
-      </div>
+  <div class="tilted-carousel__controls" aria-label="Carousel controls">
+    <button class="tilted-carousel__arrow" type="button" data-tilted-previous aria-label="Previous image"><span aria-hidden="true">‹</span></button>
+    <div class="tilted-carousel__dots" data-tilted-dots>
+      {% for asset_name in tilted_assets %}
+        <button type="button" class="tilted-carousel__dot" data-tilted-dot aria-label="Show image {{ forloop.index }}"></button>
+      {% endfor %}
     </div>
-
-    <div class="featured-current page-width">
-      <h3 class="display" data-featured-title></h3>
-      <p data-featured-meta></p>
-      <a class="button" data-featured-link href="#categories">View Poster →</a>
-      <small class="nav-label">Scroll · drag · click · ← → to browse</small>
-    </div>
+    <button class="tilted-carousel__arrow" type="button" data-tilted-next aria-label="Next image"><span aria-hidden="true">›</span></button>
   </div>
 </section>
 
 {% schema %}
-{"name":"Featured products","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Featured this week"},{"type":"text","id":"heading","label":"Heading","default":"Handpicked drops."},{"type":"collection","id":"collection","label":"Collection"},{"type":"range","id":"products_to_show","label":"Products to show","min":3,"max":12,"step":1,"default":7}],"blocks":[{"type":"poster","name":"Figma poster","settings":[{"type":"text","id":"asset_name","label":"Bundled Figma asset filename"},{"type":"text","id":"title","label":"Title"},{"type":"text","id":"meta","label":"Meta"},{"type":"url","id":"link","label":"Product link"}]}],"max_blocks":12}
+{"name":"Tilted carousel","settings":[]}
 {% endschema %}

@@ -1,90 +1,18 @@
-.featured-flow {
-  --ff-card-width: clamp(130px, 16vw, 312px);
-  --ff-card-gap: clamp(-42px, -3vw, -16px);
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding-block: 38px 24px;
-  background: #f7f7f6;
-}
-
-.featured-flow__backdrop,
-.featured-flow__backdrop::after {
-  position: absolute;
-  inset: -64px;
-  pointer-events: none;
-}
-
-.featured-flow__backdrop {
-  z-index: -2;
-  background-image: var(--ff-background);
-  background-position: center;
-  background-size: cover;
-  filter: blur(34px) saturate(1.15);
-  opacity: 0;
-  transform: scale(1.12);
-  transition: opacity 420ms ease, background-image 1ms linear 420ms;
-}
-
-.featured-flow.is-ready .featured-flow__backdrop { opacity: .53; }
-.featured-flow__backdrop::after { content: ''; background: rgba(250, 250, 249, .72); }
-.featured-flow__content { position: relative; z-index: 1; }
-
-.featured-flow .featured-title { margin-bottom: 20px; }
-.featured-flow__viewport {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: clip;
-  cursor: grab;
-  scrollbar-width: none;
-  touch-action: pan-y;
-  outline: none;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-}
-.featured-flow__viewport::-webkit-scrollbar { display: none; }
-.featured-flow__viewport:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-.featured-flow__viewport.is-dragging { cursor: grabbing; user-select: none; scroll-snap-type: none; }
-
-.featured-flow__track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  min-width: 100%;
-  min-height: clamp(280px, 35vw, 570px);
-  padding: 26px calc(50vw - (var(--ff-card-width) / 2)) 48px;
-  gap: 0;
-  perspective: 1700px;
-}
-
-.featured-flow__card {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 var(--ff-card-width);
-  width: var(--ff-card-width);
-  transform-style: preserve-3d;
-  will-change: transform, opacity;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-  transition: transform 360ms cubic-bezier(.2, .75, .2, 1), opacity 260ms ease, filter 260ms ease;
-}
-.featured-flow__card + .featured-flow__card { margin-inline-start: var(--ff-card-gap); }
-.featured-flow__card[aria-current='true'] { filter: none; }
-.featured-flow__image { display: block; overflow: hidden; aspect-ratio: 2 / 3; border-radius: 1px; box-shadow: 0 15px 30px rgba(0, 0, 0, .12); }
-.featured-flow__image img { width: 100%; height: 100%; object-fit: cover; }
-.featured-flow .featured-current { position: relative; margin-top: 18px; }
-.featured-flow .featured-current h3 { margin: 0; font-family: var(--display); font-size: clamp(21px, 2vw, 28px); }
-.featured-flow .featured-current p { color: var(--ink-secondary); }
-.featured-flow .featured-current .button { margin-top: 16px; }
-.featured-flow .featured-current small { display: block; margin-top: 16px; color: var(--ink-tertiary); font-size: 11px; }
-
-@media (max-width: 749px) {
-  .featured-flow { --ff-card-width: clamp(128px, 44vw, 220px); --ff-card-gap: -28px; }
-  .featured-flow__track { min-height: 310px; padding-block: 18px 36px; }
-  .featured-flow .featured-current { margin-top: 14px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .featured-flow__viewport { scroll-behavior: auto; }
-  .featured-flow__backdrop, .featured-flow__card { transition: none; }
-}
+/* Direct Liquid port of the supplied tilted-carousel reference. */
+.tilted-carousel { --tc-card-width: min(50vw, 500px); align-items:center; background:#ececec; color:#262626; display:flex; justify-content:center; min-height:720px; overflow:hidden; padding:4rem .5rem 8rem; position:relative; user-select:none; }
+.tilted-carousel__viewport { overflow:visible; perspective:1000px; width:var(--tc-card-width); }
+.tilted-carousel__track { display:flex; transform:translate3d(0,0,0); transition:transform .8s cubic-bezier(.22,1,.36,1); width:max-content; }
+.tilted-carousel__slide { align-items:center; display:flex; flex:0 0 var(--tc-card-width); flex-direction:column; gap:.5rem; perspective:1000px; }
+.tilted-carousel__image { appearance:none; background:transparent; border:0; border-radius:.5rem; cursor:pointer; display:block; height:calc(var(--tc-card-width) * 1.333333); overflow:hidden; padding:0; transform:rotateY(calc((var(--tc-active) - var(--tc-index)) * 60deg)) scale(.85); transform-style:preserve-3d; transition:transform 1s cubic-bezier(.22,1,.36,1); width:var(--tc-card-width); will-change:transform; }
+.tilted-carousel__slide.is-active .tilted-carousel__image { transform:rotateY(0deg) scale(1); }
+.tilted-carousel__image img { display:block; height:100%; object-fit:cover; width:100%; }
+.tilted-carousel__title { filter:blur(2px); font-size:.875rem; margin:0; opacity:0; text-align:center; transition:filter .3s ease,opacity .3s ease; white-space:nowrap; }
+.tilted-carousel__slide.is-active .tilted-carousel__title { filter:blur(0); opacity:1; }
+.tilted-carousel__controls { align-items:center; backdrop-filter:blur(2px); background:rgba(236,236,236,.5); border:1px solid rgba(226,226,226,.8); border-radius:999px; bottom:1rem; box-shadow:0 1px 2px rgba(0,0,0,.08); display:flex; gap:1rem; justify-content:center; left:50%; padding:0 .5rem; position:absolute; transform:translateX(-50%); z-index:2; }
+.tilted-carousel__arrow { appearance:none; background:transparent; border:0; color:#404040; cursor:pointer; font-size:2rem; font-weight:300; height:2.5rem; line-height:1; padding:0 .4rem .18rem; }
+.tilted-carousel__dots { align-items:center; display:flex; gap:.5rem; justify-content:center; width:180px; }
+.tilted-carousel__dot { appearance:none; background:rgba(38,38,38,.3); border:0; border-radius:999px; cursor:pointer; height:.5rem; padding:0; transition:width .3s,background-color .3s; width:.5rem; }
+.tilted-carousel__dot.is-active { background:#262626; width:1.75rem; }
+.tilted-carousel__image:focus-visible,.tilted-carousel__arrow:focus-visible,.tilted-carousel__dot:focus-visible { outline:2px solid #262626; outline-offset:3px; }
+@media (max-width:767px) { .tilted-carousel { --tc-card-width:min(75vw,320px); min-height:600px; padding-bottom:6rem; } .tilted-carousel__dots { gap:.35rem; width:132px; } .tilted-carousel__controls { gap:.5rem; } }
+@media (prefers-reduced-motion:reduce) { .tilted-carousel__track,.tilted-carousel__image,.tilted-carousel__title,.tilted-carousel__dot { transition:none; } }
