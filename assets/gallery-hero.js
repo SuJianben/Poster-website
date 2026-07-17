@@ -8,6 +8,7 @@
     const slides = [...hero.querySelectorAll('[data-gallery-slide]')];
     const copies = [...hero.querySelectorAll('[data-gallery-copy]')];
     const thumbnails = [...hero.querySelectorAll('[data-gallery-thumbnail]')];
+    const counters = [...hero.querySelectorAll('[data-gallery-counter]')];
     const previous = hero.querySelector('[data-gallery-previous]');
     const next = hero.querySelector('[data-gallery-next]');
     if (slides.length < 2) return;
@@ -29,6 +30,9 @@
         const isActive = thumbnailIndex === activeIndex;
         thumbnail.classList.toggle('is-active', isActive);
         thumbnail.setAttribute('aria-current', String(isActive));
+      });
+      counters.forEach((counter) => {
+        counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
       });
       const image = slides[activeIndex].querySelector('img');
       hero.dispatchEvent(new CustomEvent('poster:hero-change', { bubbles: true, detail: { image } }));

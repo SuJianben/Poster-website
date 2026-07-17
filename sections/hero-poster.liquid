@@ -24,7 +24,7 @@
   <div class="gallery-hero__content" data-gallery-content>
     {% for block in section.blocks %}
       <div class="gallery-hero__copy{% if forloop.first %} is-active{% endif %}" data-gallery-copy data-index="{{ forloop.index0 }}"{% unless forloop.first %} hidden{% endunless %}>
-        <p class="gallery-hero__counter">0{{ forloop.index }} / 0{{ section.blocks.size }}</p>
+        <p class="gallery-hero__counter" data-gallery-counter>01 / 01</p>
         <h1>{{ block.settings.title }}</h1>
         {% if block.settings.text != blank %}<p class="gallery-hero__description">{{ block.settings.text }}</p>{% endif %}
         {% if block.settings.button_label != blank %}<a class="gallery-hero__link" href="{{ block.settings.button_link | default: routes.all_products_collection_url }}">{{ block.settings.button_label }} <span aria-hidden="true">→</span></a>{% endif %}
