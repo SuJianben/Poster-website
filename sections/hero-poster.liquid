@@ -1,6 +1,65 @@
-<section id="top" class="hero">
-  <div class="hero__media">{% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '750,1100,1600,2400', alt: section.settings.heading }}{% else %}<img src="{{ 'figma-lifestyle-hero.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="2000" height="1333">{% endif %}</div><div class="hero__shade"></div>
-  <div class="hero__content"><h1 class="rise-in">{{ section.settings.heading }}</h1>{% if section.settings.text != blank %}<p class="rise-in">{{ section.settings.text }}</p>{% endif %}{% if section.settings.button_label != blank %}<a class="button button--light rise-in" href="{{ section.settings.button_link }}">{{ section.settings.button_label }} →</a>{% endif %}</div>
-  <div class="hero__scroll"><span class="nav-label">Scroll</span><span class="float-y">↓</span></div>
+<section id="top" class="phg" data-poster-hero-gallery data-section-id="{{ section.id }}" aria-roledescription="carousel" aria-label="{{ section.settings.accessibility_label | escape }}">
+  <div class="phg__slides">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% assign fallback_image = block.settings.fallback_asset | asset_url %}
+        <article class="phg__item{% if forloop.first %} is-active{% endif %}" data-phg-item data-title="{{ block.settings.title | escape }}" data-text="{{ block.settings.text | escape }}" data-link="{{ block.settings.link }}" data-label="{{ block.settings.link_label | escape }}" data-index="{{ forloop.index0 }}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}" {{ block.shopify_attributes }}>
+          <div class="phg__slide">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '750,1100,1600,2400', class: 'phg__image', alt: block.settings.title }}
+            {% else %}
+              <img class="phg__image" src="{{ fallback_image }}" alt="{{ block.settings.title | escape }}" width="2000" height="1333" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+            {% endif %}
+            {% unless forloop.first %}<button class="phg__thumb-button" type="button" data-phg-go="{{ forloop.index0 }}" aria-label="Show {{ block.settings.title | escape }}"></button>{% endunless %}
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <article class="phg__item is-active" data-phg-item data-title="{{ section.settings.heading | escape }}" data-text="{{ section.settings.text | escape }}" data-link="{{ section.settings.button_link }}" data-label="{{ section.settings.button_label | escape }}" data-index="0" aria-hidden="false">
+        <div class="phg__slide">{% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '750,1100,1600,2400', class: 'phg__image', alt: section.settings.heading }}{% else %}<img class="phg__image" src="{{ 'figma-lifestyle-hero.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="2000" height="1333">{% endif %}</div>
+      </article>
+    {% endif %}
+  </div>
+  <div class="phg__shade"></div>
+  <div class="phg__content">
+    <div class="phg__copy" data-phg-copy>
+      <p class="phg__counter" data-phg-counter>01 / {{ section.blocks.size | default: 1 | prepend: '0' | slice: -2 }}</p>
+      <h1 data-phg-title>{{ section.blocks.first.settings.title | default: section.settings.heading }}</h1>
+      <p class="phg__text" data-phg-text>{{ section.blocks.first.settings.text | default: section.settings.text }}</p>
+      <a class="phg__link" data-phg-link href="{{ section.blocks.first.settings.link | default: section.settings.button_link }}">{{ section.blocks.first.settings.link_label | default: section.settings.button_label }}</a>
+    </div>
+    <div class="phg__controls">
+      <button class="phg__nav" type="button" data-phg-prev aria-label="Previous slide">&larr;</button>
+      <button class="phg__nav" type="button" data-phg-next aria-label="Next slide">&rarr;</button>
+    </div>
+  </div>
 </section>
-{% schema %}{"name":"Poster hero","settings":[{"type":"image_picker","id":"image","label":"Hero image"},{"type":"text","id":"heading","label":"Heading","default":"Posters that make walls feel like home."},{"type":"text","id":"text","label":"Text","default":"Curated art prints from around the world."},{"type":"text","id":"button_label","label":"Button label","default":"Shop all posters"},{"type":"url","id":"button_link","label":"Button link"}]}{% endschema %}
+{% schema %}
+{
+  "name": "Poster gallery hero",
+  "settings": [
+    { "type": "text", "id": "accessibility_label", "label": "Carousel accessibility label", "default": "Featured poster collections" },
+    { "type": "image_picker", "id": "image", "label": "Fallback hero image" },
+    { "type": "text", "id": "heading", "label": "Fallback heading", "default": "Posters that make walls feel like home." },
+    { "type": "text", "id": "text", "label": "Fallback text", "default": "Curated art prints from around the world." },
+    { "type": "text", "id": "button_label", "label": "Fallback link label", "default": "Shop all posters" },
+    { "type": "url", "id": "button_link", "label": "Fallback link" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Gallery slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Slide image" },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback theme image file", "default": "figma-lifestyle-hero.jpg" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Posters that make walls feel like home." },
+        { "type": "text", "id": "text", "label": "Description", "default": "Curated art prints from around the world." },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Explore the collection" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "Poster gallery hero", "blocks": [{ "type": "slide" }, { "type": "slide" }, { "type": "slide" }] }]
+}
+{% endschema %}

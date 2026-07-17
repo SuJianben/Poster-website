@@ -8,8 +8,10 @@
     {{ 'figma-fonts.css' | asset_url | stylesheet_tag }}
     {{ 'figma-poster.css' | asset_url | stylesheet_tag }}
     {{ 'poster-theme.css' | asset_url | stylesheet_tag }}
+    {{ 'poster-hero-gallery.css' | asset_url | stylesheet_tag }}
     {{ 'header-adaptive.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'poster-theme.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'poster-hero-gallery.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-adaptive.js' | asset_url }}" defer="defer"></script>
   </head>
   <body class="store-root template-{{ request.page_type | handle }}">
