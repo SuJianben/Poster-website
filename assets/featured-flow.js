@@ -87,7 +87,9 @@
     });
     window.addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
     setSelected(selected, false);
-    requestAnimationFrame(() => setSelected(selected, false));
+    // Start on the middle card so the selected item has neighbouring cards on
+    // both sides, matching the intended converging cover-flow composition.
+    requestAnimationFrame(() => setSelected(selected, true));
   };
 
   document.addEventListener('DOMContentLoaded', () => document.querySelectorAll('[data-featured-flow]').forEach(initFlow));
