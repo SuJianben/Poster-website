@@ -3,6 +3,7 @@
   const initGallery = (section) => {
     if (section.dataset.ready === 'true') return;
     section.dataset.ready = 'true';
+    document.body.classList.add('has-reference-gallery-hero');
     const items = [...section.querySelectorAll('[data-phg-item]')];
     const copy = section.querySelector('[data-phg-copy]');
     const title = section.querySelector('[data-phg-title]');
@@ -35,6 +36,9 @@
     previous?.addEventListener('click', () => goTo(queue[queue.length - 1] ?? activeIndex - 1));
     next?.addEventListener('click', () => goTo(queue[0] ?? activeIndex + 1));
     section.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') { event.preventDefault(); previous?.click(); } if (event.key === 'ArrowRight') { event.preventDefault(); next?.click(); } });
+    const updateHeaderVisibility = () => document.body.classList.toggle('is-past-reference-gallery-hero', window.scrollY >= section.offsetTop + section.offsetHeight - 72);
+    updateHeaderVisibility();
+    window.addEventListener('scroll', updateHeaderVisibility, { passive:true });
     setThumbOffsets(); updateCopy(items[activeIndex], activeIndex);
   };
   const initialise = () => document.querySelectorAll('[data-poster-hero-gallery]').forEach(initGallery);
