@@ -87,9 +87,14 @@
     });
     window.addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
     setSelected(selected, false);
-    // Start on the middle card so the selected item has neighbouring cards on
-    // both sides, matching the intended converging cover-flow composition.
-    requestAnimationFrame(() => setSelected(selected, true));
+    // Wait for poster dimensions to resolve, then position the middle card
+    // directly. A smooth initial scroll lets the scroll observer briefly
+    // select the first card before it reaches the intended centre.
+    window.setTimeout(() => {
+      const initialCard = cards[selected];
+      viewport.scrollLeft = initialCard.offsetLeft + initialCard.offsetWidth / 2 - viewport.clientWidth / 2;
+      update();
+    }, 80);
   };
 
   document.addEventListener('DOMContentLoaded', () => document.querySelectorAll('[data-featured-flow]').forEach(initFlow));
