@@ -12,7 +12,7 @@
 
 .editorial-depth-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, 240px);
   gap: 20px;
   justify-content: center;
 }
@@ -28,7 +28,7 @@
 
 .editorial-depth-card__surface {
   position: relative;
-  height: clamp(260px, 28vw, 320px);
+  height: 320px;
   overflow: hidden;
   border-radius: var(--depth-card-radius);
   background: #333;
