@@ -9,15 +9,7 @@
  */
 {
   "sections": {
-    "hero": {
-      "type": "hero-poster",
-      "settings": {
-        "heading": "Posters that make walls feel like home.",
-        "text": "Curated art prints from around the world.",
-        "button_label": "Shop all posters",
-        "button_link": "/collections/all"
-      }
-    },
+    "hero": {"type":"hero-poster","blocks":{"hero":{"type":"slide","settings":{"asset_name":"figma-lifestyle-hero.jpg","title":"Posters that make walls feel like home.","text":"Curated art prints from around the world.","button_label":"Shop all posters","button_link":"/collections/all"}},"music":{"type":"slide","settings":{"asset_name":"figma-poster-m1.jpg","title":"Turn it up.","text":"Vinyl colors, electric shapes, and sound for the walls.","button_label":"Explore music","button_link":"/collections/all"}},"nordic":{"type":"slide","settings":{"asset_name":"figma-lifestyle-nordic.jpg","title":"Nordic calm.","text":"Muted palettes and clean lines for a quieter room.","button_label":"Explore Nordic","button_link":"/collections/all"}},"cinema":{"type":"slide","settings":{"asset_name":"figma-lifestyle-cinematic.jpg","title":"Cinematic nights.","text":"Cult classics and new-wave posters, ready for the lights to go down.","button_label":"Enter the reel","button_link":"/collections/all"}},"anime":{"type":"slide","settings":{"asset_name":"figma-poster-a2.jpg","title":"Neon city sky.","text":"Dream in saturated color and frame the future.","button_label":"Explore anime","button_link":"/collections/all"}},"sports":{"type":"slide","settings":{"asset_name":"figma-poster-s2.jpg","title":"Under lights.","text":"A gallery of motion, energy, and iconic competition.","button_label":"Explore sports","button_link":"/collections/all"}}},"block_order":["hero","music","nordic","cinema","anime","sports"],"settings":{}},
     "categories": {
       "type": "category-rail",
       "blocks": {

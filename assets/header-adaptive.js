@@ -11,7 +11,7 @@
   }
 
   function getHeroImage() {
-    return document.querySelector('.hero__media img');
+    return document.querySelector('.gallery-hero__slide.is-active img, .hero__media img');
   }
 
   function measureHero(image) {
@@ -55,6 +55,12 @@
     new MutationObserver(() => measureHero(getHeroImage()).then((value) => {
       if (value !== null) setHeaderColour(header, value < 145 ? LIGHT : DARK);
     })).observe(heroImage, { attributes: true, attributeFilter: ['src', 'srcset'] });
+
+    document.addEventListener('poster:hero-change', (event) => {
+      measureHero(event.detail?.image).then((value) => {
+        if (value !== null) setHeaderColour(header, value < 145 ? LIGHT : DARK);
+      });
+    });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialise, { once: true });
