@@ -86,13 +86,15 @@
       if (event.key === 'End') setSelected(cards.length - 1);
     });
     window.addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    const initialIndex = selected;
     setSelected(selected, false);
     // Wait for poster dimensions to resolve, then position the middle card
     // directly. A smooth initial scroll lets the scroll observer briefly
     // select the first card before it reaches the intended centre.
     window.setTimeout(() => {
-      const initialCard = cards[selected];
+      const initialCard = cards[initialIndex];
       viewport.scrollLeft = initialCard.offsetLeft + initialCard.offsetWidth / 2 - viewport.clientWidth / 2;
+      setSelected(initialIndex, false);
       update();
     }, 80);
   };
