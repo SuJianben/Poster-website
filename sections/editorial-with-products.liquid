@@ -1,2 +1,83 @@
-<section class="section"><div class="page-width editorial {% if section.settings.image_position == 'right' %}editorial--reverse{% endif %}"><div class="editorial__image">{% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '500,750,1000,1500', alt: section.settings.heading }}{% else %}<img src="{{ section.settings.fallback_image_asset | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1400" height="1750" loading="lazy">{% endif %}</div><div class="editorial__copy"><span class="eyebrow">{{ section.settings.eyebrow }}</span><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.text }}</p>{% if section.settings.link_label != blank %}<a class="text-link" href="{{ section.settings.link }}">{{ section.settings.link_label }} →</a>{% endif %}</div></div>{% if section.settings.collection != blank %}<div class="page-width product-grid">{% for product in section.settings.collection.products limit: 4 %}{% render 'poster-card', product: product %}{% endfor %}</div>{% elsif section.blocks.size > 0 %}<div class="page-width product-grid">{% for block in section.blocks %}<article class="poster-card" {{ block.shopify_attributes }}><a class="poster-card__image" href="{{ block.settings.link }}"><img src="{{ block.settings.asset_name | asset_url }}" alt="{{ block.settings.title | escape }}" width="900" height="1350" loading="lazy"></a><div class="poster-card__details"><a href="{{ block.settings.link }}">{{ block.settings.title }}</a><p>{{ block.settings.meta }}</p></div></article>{% endfor %}</div>{% endif %}</section>
-{% schema %}{"name":"Editorial with products","settings":[{"type":"image_picker","id":"image","label":"Shopify image override"},{"type":"text","id":"fallback_image_asset","label":"Bundled Figma image filename"},{"type":"select","id":"image_position","label":"Image position","default":"left","options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}]},{"type":"text","id":"eyebrow","label":"Eyebrow","default":"Editorial / Vol. 03"},{"type":"text","id":"heading","label":"Heading","default":"Nordic Calm."},{"type":"textarea","id":"text","label":"Text","default":"Muted palettes, clean lines, and Scandinavian wisdom—prints that make any room breathe."},{"type":"text","id":"link_label","label":"Link label","default":"Explore the series"},{"type":"url","id":"link","label":"Link"},{"type":"collection","id":"collection","label":"Products collection"}],"blocks":[{"type":"poster","name":"Figma poster","settings":[{"type":"text","id":"asset_name","label":"Bundled Figma asset filename"},{"type":"text","id":"title","label":"Title"},{"type":"text","id":"meta","label":"Meta"},{"type":"url","id":"link","label":"Product link"}]}],"max_blocks":4,"presets":[{"name":"Editorial with products"}]}{% endschema %}
+{{ 'editorial-depth-cards.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'editorial-depth-cards.js' | asset_url }}" defer="defer"></script>
+
+<section class="section editorial-products" data-editorial-depth-section>
+  <div class="page-width editorial {% if section.settings.image_position == 'right' %}editorial--reverse{% endif %}">
+    <div class="editorial__image">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '500,750,1000,1500', alt: section.settings.heading }}
+      {% else %}
+        <img src="{{ section.settings.fallback_image_asset | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1400" height="1750" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="editorial__copy">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+      {% if section.settings.link_label != blank %}
+        <a class="text-link" href="{{ section.settings.link }}">{{ section.settings.link_label }} →</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.collection != blank or section.blocks.size > 0 %}
+    <div class="editorial-depth-shell">
+      <div class="page-width editorial-depth-grid" data-editorial-depth-grid>
+        {% if section.settings.collection != blank %}
+          {% for product in section.settings.collection.products limit: 4 %}
+            <a class="editorial-depth-card" href="{{ product.url }}" data-depth-card aria-label="View {{ product.title | escape }}">
+              <div class="editorial-depth-card__surface">
+                {% if product.featured_media %}
+                  {{ product.featured_media | image_url: width: 1200 | image_tag: class: 'editorial-depth-card__image', loading: 'lazy', widths: '400,600,800,1200', alt: product.title }}
+                {% endif %}
+                <div class="editorial-depth-card__content">
+                  <h3>{{ product.title }}</h3>
+                  <p>{{ product.vendor }} · {{ product.price | money }}</p>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        {% else %}
+          {% for block in section.blocks %}
+            <a class="editorial-depth-card" href="{{ block.settings.link }}" data-depth-card aria-label="View {{ block.settings.title | escape }}" {{ block.shopify_attributes }}>
+              <div class="editorial-depth-card__surface">
+                <img class="editorial-depth-card__image" src="{{ block.settings.asset_name | asset_url }}" alt="{{ block.settings.title | escape }}" width="900" height="1350" loading="lazy">
+                <div class="editorial-depth-card__content">
+                  <h3>{{ block.settings.title }}</h3>
+                  {% if block.settings.meta != blank %}<p>{{ block.settings.meta }}</p>{% endif %}
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Editorial with products",
+  "settings": [
+    {"type":"image_picker","id":"image","label":"Shopify image override"},
+    {"type":"text","id":"fallback_image_asset","label":"Bundled Figma image filename"},
+    {"type":"select","id":"image_position","label":"Image position","default":"left","options":[{"value":"left","label":"Left"},{"value":"right","label":"Right"}]},
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Editorial / Vol. 03"},
+    {"type":"text","id":"heading","label":"Heading","default":"Nordic Calm."},
+    {"type":"textarea","id":"text","label":"Text","default":"Muted palettes, clean lines, and Scandinavian wisdom—prints that make any room breathe."},
+    {"type":"text","id":"link_label","label":"Link label","default":"Explore the series"},
+    {"type":"url","id":"link","label":"Link"},
+    {"type":"collection","id":"collection","label":"Products collection"}
+  ],
+  "blocks": [
+    {"type":"poster","name":"Figma poster","settings":[
+      {"type":"text","id":"asset_name","label":"Bundled Figma asset filename"},
+      {"type":"text","id":"title","label":"Title"},
+      {"type":"text","id":"meta","label":"Meta"},
+      {"type":"url","id":"link","label":"Product link"}
+    ]}
+  ],
+  "max_blocks": 4,
+  "presets": [{"name":"Editorial with products"}]
+}
+{% endschema %}
