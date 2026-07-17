@@ -1,55 +1,43 @@
 (() => {
   'use strict';
-
-  const initGalleryHero = (hero) => {
-    if (hero.dataset.ready === 'true') return;
-    hero.dataset.ready = 'true';
-
-    const slides = [...hero.querySelectorAll('[data-gallery-slide]')];
-    const copies = [...hero.querySelectorAll('[data-gallery-copy]')];
-    const thumbnails = [...hero.querySelectorAll('[data-gallery-thumbnail]')];
-    const counters = [...hero.querySelectorAll('[data-gallery-counter]')];
-    const previous = hero.querySelector('[data-gallery-previous]');
-    const next = hero.querySelector('[data-gallery-next]');
-    if (slides.length < 2) return;
-
-    let activeIndex = 0;
-    const show = (index) => {
-      activeIndex = (index + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => {
-        const isActive = slideIndex === activeIndex;
-        slide.classList.toggle('is-active', isActive);
-        slide.setAttribute('aria-hidden', String(!isActive));
-      });
-      copies.forEach((copy, copyIndex) => {
-        const isActive = copyIndex === activeIndex;
-        copy.classList.toggle('is-active', isActive);
-        copy.hidden = !isActive;
-      });
-      thumbnails.forEach((thumbnail, thumbnailIndex) => {
-        const isActive = thumbnailIndex === activeIndex;
-        thumbnail.classList.toggle('is-active', isActive);
-        thumbnail.setAttribute('aria-current', String(isActive));
-      });
-      counters.forEach((counter) => {
-        counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-      });
-      const image = slides[activeIndex].querySelector('img');
-      hero.dispatchEvent(new CustomEvent('poster:hero-change', { bubbles: true, detail: { image } }));
+  const initGallery = (section) => {
+    if (section.dataset.ready === 'true') return;
+    section.dataset.ready = 'true';
+    const items = [...section.querySelectorAll('[data-phg-item]')];
+    const copy = section.querySelector('[data-phg-copy]');
+    const title = section.querySelector('[data-phg-title]');
+    const text = section.querySelector('[data-phg-text]');
+    const counter = section.querySelector('[data-phg-counter]');
+    const previous = section.querySelector('[data-phg-prev]');
+    const next = section.querySelector('[data-phg-next]');
+    if (!items.length || !copy || !title || !text || !counter) return;
+    let activeIndex = Math.max(0, items.findIndex((item) => item.classList.contains('is-active')));
+    let queue = items.map((_, index) => index).filter((index) => index !== activeIndex);
+    const setThumbOffsets = () => queue.forEach((index, queueIndex) => items[index].style.setProperty('--phg-offset', String(queueIndex - (queue.length - 1) / 2)));
+    const updateCopy = (item, index) => {
+      title.textContent = item.dataset.title || '';
+      text.textContent = item.dataset.text || '';
+      counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
+      copy.style.animation = 'none'; requestAnimationFrame(() => { copy.style.animation = ''; });
     };
-
-    thumbnails.forEach((thumbnail, index) => thumbnail.addEventListener('click', () => show(index)));
-    previous?.addEventListener('click', () => show(activeIndex - 1));
-    next?.addEventListener('click', () => show(activeIndex + 1));
-    hero.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowLeft') { event.preventDefault(); show(activeIndex - 1); }
-      if (event.key === 'ArrowRight') { event.preventDefault(); show(activeIndex + 1); }
-    });
-    show(0);
+    const goTo = (index) => {
+      const nextIndex = (index + items.length) % items.length;
+      if (nextIndex === activeIndex) return;
+      const oldIndex = activeIndex;
+      items[oldIndex].classList.remove('is-active'); items[oldIndex].setAttribute('aria-hidden', 'true');
+      activeIndex = nextIndex;
+      items[activeIndex].classList.add('is-active'); items[activeIndex].setAttribute('aria-hidden', 'false');
+      queue = [...queue.filter((itemIndex) => itemIndex !== activeIndex), oldIndex];
+      setThumbOffsets(); updateCopy(items[activeIndex], activeIndex);
+      section.dispatchEvent(new CustomEvent('poster:hero-change', { bubbles:true, detail:{ image:items[activeIndex].querySelector('img') } }));
+    };
+    items.forEach((item, index) => item.querySelector('[data-phg-go]')?.addEventListener('click', () => goTo(index)));
+    previous?.addEventListener('click', () => goTo(queue[queue.length - 1] ?? activeIndex - 1));
+    next?.addEventListener('click', () => goTo(queue[0] ?? activeIndex + 1));
+    section.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') { event.preventDefault(); previous?.click(); } if (event.key === 'ArrowRight') { event.preventDefault(); next?.click(); } });
+    setThumbOffsets(); updateCopy(items[activeIndex], activeIndex);
   };
-
-  const initialise = () => document.querySelectorAll('[data-gallery-hero]').forEach(initGalleryHero);
-  document.addEventListener('shopify:section:load', (event) => event.target.querySelectorAll?.('[data-gallery-hero]').forEach(initGalleryHero));
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialise, { once: true });
-  else initialise();
+  const initialise = () => document.querySelectorAll('[data-poster-hero-gallery]').forEach(initGallery);
+  document.addEventListener('shopify:section:load', (event) => event.target.querySelectorAll?.('[data-poster-hero-gallery]').forEach(initGallery));
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialise, { once:true }); else initialise();
 })();
