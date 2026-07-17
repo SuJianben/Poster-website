@@ -14,6 +14,7 @@
     if (!track || !slides.length) return;
     let activeIndex = Math.min(3, slides.length - 1);
     const render = () => {
+      section.dataset.activeIndex = String(activeIndex);
       section.style.setProperty('--tc-active', String(activeIndex));
       track.style.transform = `translate3d(${-activeIndex * 100 / slides.length}%, 0, 0)`;
       slides.forEach((slide, index) => { const isActive = index === activeIndex; slide.classList.toggle('is-active', isActive); slide.setAttribute('aria-current', String(isActive)); slide.style.setProperty('--tc-index', String(index)); });
