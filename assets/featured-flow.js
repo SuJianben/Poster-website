@@ -15,7 +15,6 @@
       track.style.transform = `translate3d(${-activeIndex * 100 / slides.length}%, 0, 0)`;
       slides.forEach((slide, index) => { const isActive = index === activeIndex; slide.classList.toggle('is-active', isActive); slide.setAttribute('aria-current', String(isActive)); slide.style.setProperty('--tc-index', String(index)); });
       dots.forEach((dot, index) => { const isActive = index === activeIndex; dot.classList.toggle('is-active', isActive); dot.setAttribute('aria-current', String(isActive)); });
-      previous.disabled = activeIndex === 0; next.disabled = activeIndex === slides.length - 1;
     };
     const select = (index) => { activeIndex = Math.max(0, Math.min(index, slides.length - 1)); render(); };
     slides.forEach((slide, index) => slide.querySelector('[data-tilted-select]')?.addEventListener('click', () => select(index)));

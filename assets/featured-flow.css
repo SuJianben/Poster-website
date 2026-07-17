@@ -1,18 +1,20 @@
-/* Direct Liquid port of the supplied tilted-carousel reference. */
-.tilted-carousel { --tc-card-width: min(50vw, 500px); align-items:center; background:#ececec; color:#262626; display:flex; justify-content:center; min-height:720px; overflow:hidden; padding:4rem .5rem 8rem; position:relative; user-select:none; }
-.tilted-carousel__viewport { overflow:visible; perspective:1000px; width:var(--tc-card-width); }
-.tilted-carousel__track { display:flex; transform:translate3d(0,0,0); transition:transform .8s cubic-bezier(.22,1,.36,1); width:max-content; }
-.tilted-carousel__slide { align-items:center; display:flex; flex:0 0 var(--tc-card-width); flex-direction:column; gap:.5rem; perspective:1000px; }
-.tilted-carousel__image { appearance:none; background:transparent; border:0; border-radius:.5rem; cursor:pointer; display:block; height:calc(var(--tc-card-width) * 1.333333); overflow:hidden; padding:0; transform:rotateY(calc((var(--tc-active) - var(--tc-index)) * 60deg)) scale(.85); transform-style:preserve-3d; transition:transform 1s cubic-bezier(.22,1,.36,1); width:var(--tc-card-width); will-change:transform; }
+/* Exact CSS equivalent of the supplied Tailwind classes in tilted-carousel. */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+.tilted-carousel { background-color:#ececec; display:grid; font-family:"Bricolage Grotesque",sans-serif; min-height:100vh; overflow:hidden; place-content:center; position:relative; }
+.tilted-carousel__app { color:#262626; padding:.5rem; user-select:none; }
+.tilted-carousel__viewport { margin-top:2rem; overflow:visible; perspective:800px; width:7.5rem; }
+.tilted-carousel__track { display:flex; transform:translateX(0); transition:transform .8s cubic-bezier(.22,1,.36,1); width:max-content; }
+.tilted-carousel__slide { align-items:center; aspect-ratio:3 / 4; display:flex; flex:0 0 7.5rem; flex-direction:column; gap:.5rem; perspective:800px; width:7.5rem; }
+.tilted-carousel__image { appearance:none; aspect-ratio:3 / 4; background:transparent; border:0; border-radius:.5rem; cursor:pointer; display:block; height:100%; overflow:hidden; padding:0; transform:rotateY(calc((var(--tc-active) - var(--tc-index)) * 60deg)) scale(.85); transition:transform 1s cubic-bezier(.22,1,.36,1); will-change:transform,scale; width:100%; }
 .tilted-carousel__slide.is-active .tilted-carousel__image { transform:rotateY(0deg) scale(1); }
 .tilted-carousel__image img { display:block; height:100%; object-fit:cover; width:100%; }
-.tilted-carousel__title { filter:blur(2px); font-size:.875rem; margin:0; opacity:0; text-align:center; transition:filter .3s ease,opacity .3s ease; white-space:nowrap; }
+.tilted-carousel__title { filter:blur(2px); font-size:.75rem; margin:0; opacity:0; transition:filter .3s ease,opacity .3s ease; white-space:nowrap; will-change:opacity,filter; }
 .tilted-carousel__slide.is-active .tilted-carousel__title { filter:blur(0); opacity:1; }
-.tilted-carousel__controls { align-items:center; backdrop-filter:blur(2px); background:rgba(236,236,236,.5); border:1px solid rgba(226,226,226,.8); border-radius:999px; bottom:1rem; box-shadow:0 1px 2px rgba(0,0,0,.08); display:flex; gap:1rem; justify-content:center; left:50%; padding:0 .5rem; position:absolute; transform:translateX(-50%); z-index:2; }
-.tilted-carousel__arrow { appearance:none; background:transparent; border:0; color:#404040; cursor:pointer; font-size:2rem; font-weight:300; height:2.5rem; line-height:1; padding:0 .4rem .18rem; }
+.tilted-carousel__controls { align-items:center; backdrop-filter:blur(4px); background:rgb(229 229 229 / 50%); border:1px solid rgb(229 229 229 / 80%); border-radius:9999px; bottom:1rem; box-shadow:0 1px 2px rgb(0 0 0 / 5%); color:#404040; display:flex; gap:1rem; justify-content:center; left:0; margin-inline:auto; padding-inline:.5rem; position:fixed; right:0; width:fit-content; z-index:20; }
+.tilted-carousel__arrow { appearance:none; background:transparent; border:0; color:inherit; cursor:pointer; font-size:2rem; font-weight:300; height:2.5rem; line-height:1; padding:.25rem .5rem .45rem; }
 .tilted-carousel__dots { align-items:center; display:flex; gap:.5rem; justify-content:center; width:180px; }
-.tilted-carousel__dot { appearance:none; background:rgba(38,38,38,.3); border:0; border-radius:999px; cursor:pointer; height:.5rem; padding:0; transition:width .3s,background-color .3s; width:.5rem; }
-.tilted-carousel__dot.is-active { background:#262626; width:1.75rem; }
-.tilted-carousel__image:focus-visible,.tilted-carousel__arrow:focus-visible,.tilted-carousel__dot:focus-visible { outline:2px solid #262626; outline-offset:3px; }
-@media (max-width:767px) { .tilted-carousel { --tc-card-width:min(75vw,320px); min-height:600px; padding-bottom:6rem; } .tilted-carousel__dots { gap:.35rem; width:132px; } .tilted-carousel__controls { gap:.5rem; } }
+.tilted-carousel__dot { appearance:none; background:rgb(64 64 64 / 30%); border:0; border-radius:9999px; cursor:pointer; height:.5rem; padding:0; transition:width .3s,background-color .3s; width:.5rem; }
+.tilted-carousel__dot.is-active { background:currentColor; width:1.75rem; }
+.tilted-carousel__image:focus-visible,.tilted-carousel__arrow:focus-visible,.tilted-carousel__dot:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
+@media (min-width:768px) { .tilted-carousel__viewport { width:12.5rem; } .tilted-carousel__slide { flex-basis:12.5rem; width:12.5rem; } .tilted-carousel__title { font-size:.875rem; } }
 @media (prefers-reduced-motion:reduce) { .tilted-carousel__track,.tilted-carousel__image,.tilted-carousel__title,.tilted-carousel__dot { transition:none; } }

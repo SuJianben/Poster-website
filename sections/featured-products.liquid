@@ -5,17 +5,19 @@
 {% assign tilted_assets = 'reference-tilted-01.jpg|reference-tilted-02.jpg|reference-tilted-03.jpg|reference-tilted-04.jpg|reference-tilted-05.jpg|reference-tilted-06.jpg|reference-tilted-07.jpg|reference-tilted-08.jpg|reference-tilted-09.jpg|reference-tilted-10.jpg' | split: '|' %}
 
 <section class="tilted-carousel" data-tilted-carousel aria-label="Image carousel">
-  <div class="tilted-carousel__viewport" data-tilted-viewport>
-    <div class="tilted-carousel__track" data-tilted-track>
+  <div class="tilted-carousel__app">
+    <div class="tilted-carousel__viewport" data-tilted-viewport>
+      <div class="tilted-carousel__track" data-tilted-track>
       {% for asset_name in tilted_assets %}
         {% assign title = tilted_titles[forloop.index0] %}
-        <article class="tilted-carousel__slide" data-tilted-slide data-title="{{ title | escape }}" aria-current="false">
-          <button class="tilted-carousel__image" type="button" data-tilted-select aria-label="Show {{ title | escape }}">
-            <img src="{{ asset_name | asset_url }}" alt="{{ title | escape }}" width="500" height="667"{% unless forloop.index0 == 3 %} loading="lazy"{% endunless %}>
-          </button>
-          <p class="tilted-carousel__title">{{ title }}</p>
-        </article>
+          <article class="tilted-carousel__slide" data-tilted-slide data-title="{{ title | escape }}" aria-current="false">
+            <button class="tilted-carousel__image" type="button" data-tilted-select aria-label="Show {{ title | escape }}">
+              <img src="{{ asset_name | asset_url }}" alt="{{ title | escape }}" width="500" height="667"{% unless forloop.index0 == 3 %} loading="lazy"{% endunless %}>
+            </button>
+            <p class="tilted-carousel__title">{{ title }}</p>
+          </article>
       {% endfor %}
+      </div>
     </div>
   </div>
 
