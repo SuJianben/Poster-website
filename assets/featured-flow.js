@@ -8,6 +8,9 @@
     const dots = [...section.querySelectorAll('[data-tilted-dot]')];
     const previous = section.querySelector('[data-tilted-previous]');
     const next = section.querySelector('[data-tilted-next]');
+    const productTitle = section.querySelector('[data-tilted-title]');
+    const productMeta = section.querySelector('[data-tilted-meta]');
+    const productLink = section.querySelector('[data-tilted-link]');
     if (!track || !slides.length) return;
     let activeIndex = Math.min(3, slides.length - 1);
     const render = () => {
@@ -15,6 +18,10 @@
       track.style.transform = `translate3d(${-activeIndex * 100 / slides.length}%, 0, 0)`;
       slides.forEach((slide, index) => { const isActive = index === activeIndex; slide.classList.toggle('is-active', isActive); slide.setAttribute('aria-current', String(isActive)); slide.style.setProperty('--tc-index', String(index)); });
       dots.forEach((dot, index) => { const isActive = index === activeIndex; dot.classList.toggle('is-active', isActive); dot.setAttribute('aria-current', String(isActive)); });
+      const activeSlide = slides[activeIndex];
+      if (productTitle) productTitle.textContent = activeSlide.dataset.title || '';
+      if (productMeta) productMeta.textContent = activeSlide.dataset.meta || '';
+      if (productLink) productLink.href = activeSlide.dataset.link || '#';
     };
     const select = (index) => { activeIndex = Math.max(0, Math.min(index, slides.length - 1)); render(); };
     slides.forEach((slide, index) => slide.querySelector('[data-tilted-select]')?.addEventListener('click', () => select(index)));

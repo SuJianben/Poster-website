@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 .tilted-carousel { --tc-card-width:clamp(130px,16vw,312px); background-color:#ececec; display:grid; font-family:"Bricolage Grotesque",sans-serif; min-height:100vh; overflow:hidden; place-content:center; position:relative; }
 .tilted-carousel__app { color:#262626; padding:.5rem; user-select:none; }
-.tilted-carousel__viewport { margin-top:2rem; overflow:visible; perspective:800px; width:var(--tc-card-width); }
+.tilted-carousel__heading { margin:0 auto 2rem; text-align:center; }.tilted-carousel__heading p { color:var(--ink-tertiary); font-family:var(--sans); font-size:11px; letter-spacing:.11em; margin:0; text-transform:uppercase; }.tilted-carousel__heading h2 { font-family:var(--display); font-size:clamp(38px,4vw,52px); font-weight:500; letter-spacing:-.03em; line-height:1; margin:14px 0 0; }
+.tilted-carousel__viewport { margin-top:0; overflow:visible; perspective:800px; width:var(--tc-card-width); }
 .tilted-carousel__track { display:flex; transform:translateX(0); transition:transform .8s cubic-bezier(.22,1,.36,1); width:max-content; }
 .tilted-carousel__slide { align-items:center; aspect-ratio:2 / 3; display:flex; flex:0 0 var(--tc-card-width); flex-direction:column; gap:.5rem; perspective:800px; width:var(--tc-card-width); }
 .tilted-carousel__image { appearance:none; aspect-ratio:2 / 3; background:transparent; border:0; border-radius:.5rem; cursor:pointer; display:block; height:100%; overflow:hidden; padding:0; transform:rotateY(calc((var(--tc-active) - var(--tc-index)) * 60deg)) scale(.85); transition:transform 1s cubic-bezier(.22,1,.36,1); will-change:transform,scale; width:100%; }
 .tilted-carousel__slide.is-active .tilted-carousel__image { transform:rotateY(0deg) scale(1); }
 .tilted-carousel__image img { display:block; height:100%; object-fit:cover; width:100%; }
-.tilted-carousel__title { filter:blur(2px); font-size:.75rem; margin:0; opacity:0; transition:filter .3s ease,opacity .3s ease; white-space:nowrap; will-change:opacity,filter; }
-.tilted-carousel__slide.is-active .tilted-carousel__title { filter:blur(0); opacity:1; }
+.tilted-carousel__product { margin-top:1.5rem; text-align:center; }.tilted-carousel__product h3 { font-family:var(--display); font-size:23px; font-weight:500; letter-spacing:-.02em; margin:0; }.tilted-carousel__product p { color:var(--ink-secondary); font-family:var(--sans); font-size:14px; margin:4px 0 0; }.tilted-carousel__link { align-items:center; background:#0d0d0d; color:#fff; display:inline-flex; font-family:var(--sans); font-size:12px; gap:.5rem; justify-content:center; letter-spacing:.06em; margin-top:16px; min-height:48px; padding:0 26px; text-transform:uppercase; }.tilted-carousel__link:hover { opacity:.88; }
 .tilted-carousel__controls { align-items:center; backdrop-filter:blur(4px); background:rgb(229 229 229 / 50%); border:1px solid rgb(229 229 229 / 80%); border-radius:9999px; bottom:1rem; box-shadow:0 1px 2px rgb(0 0 0 / 5%); color:#404040; display:flex; gap:1rem; justify-content:center; left:50%; padding-inline:.5rem; position:absolute; transform:translateX(-50%); width:fit-content; z-index:20; }
 .tilted-carousel__arrow { appearance:none; background:transparent; border:0; color:inherit; cursor:pointer; font-size:2rem; font-weight:300; height:2.5rem; line-height:1; padding:.25rem .5rem .45rem; }
 .tilted-carousel__dots { align-items:center; display:flex; gap:.5rem; justify-content:center; width:180px; }
@@ -17,5 +17,5 @@
 .tilted-carousel__dot.is-active { background:currentColor; width:1.75rem; }
 .tilted-carousel__image:focus-visible,.tilted-carousel__arrow:focus-visible,.tilted-carousel__dot:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
 @media (max-width:767px) { .tilted-carousel { --tc-card-width:clamp(128px,44vw,220px); } }
-@media (min-width:768px) { .tilted-carousel__title { font-size:.875rem; } }
-@media (prefers-reduced-motion:reduce) { .tilted-carousel__track,.tilted-carousel__image,.tilted-carousel__title,.tilted-carousel__dot { transition:none; } }
+@media (max-width:767px) { .tilted-carousel__heading { margin-bottom:1.25rem; }.tilted-carousel__heading h2 { font-size:38px; }.tilted-carousel__product { margin-top:1.1rem; } }
+@media (prefers-reduced-motion:reduce) { .tilted-carousel__track,.tilted-carousel__image,.tilted-carousel__dot { transition:none; } }
