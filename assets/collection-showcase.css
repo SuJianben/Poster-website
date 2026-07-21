@@ -1,0 +1,41 @@
+.collection-showcase { background:var(--bg); padding:128px 0 96px; }
+.collection-showcase__intro { max-width:1040px; text-align:center; }
+.collection-showcase__breadcrumb { align-items:center; color:var(--muted); display:flex; font-size:12px; gap:9px; justify-content:center; margin-bottom:34px; }
+.collection-showcase__breadcrumb a:hover { color:var(--ink); }
+.collection-showcase__intro h1 { font-size:clamp(3rem,7vw,6.25rem); line-height:.93; margin:12px 0 20px; }
+.collection-showcase__lede { color:var(--muted); font-size:clamp(1rem,1.5vw,1.2rem); line-height:1.55; margin:auto; max-width:620px; }
+.collection-showcase__lede p { margin:0; }
+.collection-showcase__stories { margin-top:72px; }
+.collection-showcase__section-heading { margin-bottom:26px; text-align:center; }
+.collection-showcase__section-heading h2,.collection-showcase__products-heading h2 { font-size:clamp(2rem,3.2vw,3.2rem); line-height:1; margin:10px 0 0; }
+.collection-showcase__story-rail { display:grid; gap:16px; grid-auto-columns:minmax(230px, 22vw); grid-auto-flow:column; overflow-x:auto; padding:4px 2px 18px; scroll-padding-left:2px; scroll-snap-type:x mandatory; scrollbar-width:none; }
+.collection-showcase__story-rail::-webkit-scrollbar { display:none; }
+.collection-story { scroll-snap-align:start; }
+.collection-story__link { display:block; }
+.collection-story__media { aspect-ratio:4 / 5; background:var(--soft); overflow:hidden; }
+.collection-story__media img { height:100%; object-fit:cover; transition:transform .5s var(--ease-std); width:100%; }
+.collection-story:hover .collection-story__media img { transform:scale(1.04); }
+.collection-story__copy { padding:14px 2px 4px; }
+.collection-story__copy h3 { font:500 clamp(1.35rem,2vw,1.8rem)/1 var(--display); margin:0; }
+.collection-story__copy p { color:var(--muted); font-size:13px; line-height:1.45; margin:8px 0 13px; min-height:38px; }
+.collection-story__copy span { font-size:11px; letter-spacing:.09em; text-transform:uppercase; }
+.collection-showcase__editorial { border-block:1px solid var(--line); display:grid; gap:64px; grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr); margin-top:78px; padding-block:64px; }
+.collection-showcase__editorial-copy { font:500 clamp(1.5rem,2.4vw,2.35rem)/1.2 var(--display); letter-spacing:-.025em; max-width:740px; }
+.collection-showcase__editorial-copy p { margin:0; }
+.collection-showcase__faq > .eyebrow { margin:0 0 15px; }
+.collection-showcase__faq details { border-top:1px solid var(--line); padding:17px 0; }
+.collection-showcase__faq details:last-child { border-bottom:1px solid var(--line); }
+.collection-showcase__faq summary { cursor:pointer; font-size:14px; font-weight:600; list-style:none; padding-right:26px; position:relative; }
+.collection-showcase__faq summary::-webkit-details-marker { display:none; }
+.collection-showcase__faq summary::after { content:'+'; font-size:20px; font-weight:400; position:absolute; right:0; top:-5px; }
+.collection-showcase__faq details[open] summary::after { content:'−'; }
+.collection-showcase__faq details .rte { color:var(--muted); font-size:14px; line-height:1.55; padding:12px 28px 0 0; }
+.collection-showcase__products { margin-top:76px; }
+.collection-showcase__products-heading { align-items:end; display:flex; justify-content:space-between; margin-bottom:28px; }
+.collection-showcase__products-heading > p { color:var(--muted); font-size:12px; margin:0 0 4px; }
+.collection-showcase__grid { display:grid; gap:18px; grid-template-columns:repeat(4,minmax(0,1fr)); }
+.collection-showcase__grid .poster-card__image { border-radius:0; }
+.collection-showcase__empty { color:var(--muted); grid-column:1 / -1; margin:0; }
+.collection-showcase__pagination { margin-top:44px; text-align:center; }
+.collection-showcase__pagination .page { display:inline-block; margin:0 5px; }
+@media (max-width:750px) { .collection-showcase { padding:112px 0 64px; }.collection-showcase__breadcrumb { margin-bottom:25px; }.collection-showcase__stories { margin-top:54px; }.collection-showcase__story-rail { grid-auto-columns:72vw; }.collection-showcase__editorial { gap:36px; grid-template-columns:1fr; margin-top:54px; padding-block:48px; }.collection-showcase__products { margin-top:56px; }.collection-showcase__grid { gap:16px; grid-template-columns:repeat(2,minmax(0,1fr)); }.collection-showcase__products-heading { align-items:start; flex-direction:column; gap:12px; } }
