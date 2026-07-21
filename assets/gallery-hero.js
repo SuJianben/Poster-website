@@ -14,21 +14,22 @@
     if (!items.length || !copy || !title || !text || !counter) return;
     let activeIndex = Math.max(0, items.findIndex((item) => item.classList.contains('is-active')));
     const updateThumbnails = () => {
-      const visibleIndexes = [
-        (activeIndex - 1 + items.length) % items.length,
-        activeIndex,
-        (activeIndex + 1) % items.length
-      ];
+      const previousIndex = (activeIndex - 1 + items.length) % items.length;
+      const nextIndex = (activeIndex + 1) % items.length;
       items.forEach((item) => item.querySelector('.phg__slide')?.style.removeProperty('filter'));
       items[activeIndex].querySelector('.phg__slide')?.style.setProperty('filter', 'brightness(1)', 'important');
+      items.forEach((item, index) => {
+        const isSideThumbnail = index === previousIndex || index === nextIndex;
+        item.classList.toggle('is-thumb-visible', isSideThumbnail);
+        if (isSideThumbnail) item.style.setProperty('--phg-offset', index === previousIndex ? '-1' : '1');
+        else item.style.removeProperty('--phg-offset');
+      });
       thumbnails.forEach((thumbnail, index) => {
-        const slot = visibleIndexes.indexOf(index);
-        thumbnail.hidden = slot === -1;
-        thumbnail.tabIndex = slot === -1 ? -1 : 0;
-        thumbnail.classList.toggle('is-visible', slot !== -1);
+        const isCurrent = index === activeIndex;
+        thumbnail.hidden = !isCurrent;
+        thumbnail.tabIndex = -1;
+        thumbnail.classList.toggle('is-visible', isCurrent);
         thumbnail.classList.toggle('is-current', index === activeIndex);
-        thumbnail.classList.remove('is-slot-0', 'is-slot-1', 'is-slot-2');
-        if (slot !== -1) thumbnail.classList.add(`is-slot-${slot}`);
       });
     };
     const updateCopy = (item, index) => {
@@ -47,7 +48,7 @@
       updateThumbnails(); updateCopy(items[activeIndex], activeIndex);
       section.dispatchEvent(new CustomEvent('poster:hero-change', { bubbles:true, detail:{ image:items[activeIndex].querySelector('img') } }));
     };
-    thumbnails.forEach((thumbnail, index) => thumbnail.addEventListener('click', () => goTo(index)));
+    items.forEach((item, index) => item.querySelector('[data-phg-go]')?.addEventListener('click', () => goTo(index)));
     previous?.addEventListener('click', () => goTo(activeIndex - 1));
     next?.addEventListener('click', () => goTo(activeIndex + 1));
     section.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') { event.preventDefault(); previous?.click(); } if (event.key === 'ArrowRight') { event.preventDefault(); next?.click(); } });
