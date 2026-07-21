@@ -5,3 +5,8 @@
 .collection-filter button { background:transparent; border:0; color:#5d5d5d; cursor:pointer; font-size:13px; padding:0; }
 .visually-hidden { clip:rect(0 0 0 0); height:1px; margin:-1px; overflow:hidden; position:absolute; width:1px; }
 .collection-showcase__empty { color:#5d5d5d; font-size:14px; margin-top:24px; }
+.collection-showcase__catalog { align-items:start; margin-top:44px; }
+.collection-showcase__filters { border-top:0; }
+.collection-showcase__filters-title { margin:0 0 22px; }
+.collection-showcase__toolbar { border-bottom:0; min-height:0; padding:0 0 17px; }
+.collection-showcase__toolbar select { margin-left:auto; }
