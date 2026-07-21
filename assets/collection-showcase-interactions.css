@@ -1,0 +1,7 @@
+.template-collection .site-header { --adaptive-header-foreground:#111; --adaptive-header-count-foreground:#fff; background:#fff; border-bottom-color:var(--line); margin-bottom:0; }
+.collection-showcase__toolbar select { appearance:none; background:transparent; border:0; color:#111; cursor:pointer; font-size:15px; padding:0 20px 0 0; }
+.collection-filter label { align-items:center; cursor:pointer; display:flex; gap:8px; }
+.collection-filter input { accent-color:#111; height:18px; margin:0; width:18px; }
+.collection-filter button { background:transparent; border:0; color:#5d5d5d; cursor:pointer; font-size:13px; padding:0; }
+.visually-hidden { clip:rect(0 0 0 0); height:1px; margin:-1px; overflow:hidden; position:absolute; width:1px; }
+.collection-showcase__empty { color:#5d5d5d; font-size:14px; margin-top:24px; }
