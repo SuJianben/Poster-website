@@ -10,6 +10,7 @@
     const counter = section.querySelector('[data-phg-counter]');
     const previous = section.querySelector('[data-phg-prev]');
     const next = section.querySelector('[data-phg-next]');
+    const thumbnails = [...section.querySelectorAll('[data-phg-thumbnail]')];
     if (!items.length || !copy || !title || !text || !counter) return;
     let activeIndex = Math.max(0, items.findIndex((item) => item.classList.contains('is-active')));
     const getThumbIndexes = () => items.map((_, index) => index).filter((index) => index !== activeIndex);
@@ -18,7 +19,8 @@
       items.forEach((item) => item.querySelector('.phg__slide')?.style.removeProperty('filter'));
       items[activeIndex].style.removeProperty('--phg-offset');
       items[activeIndex].querySelector('.phg__slide')?.style.setProperty('filter', 'brightness(1)', 'important');
-      thumbIndexes.forEach((index, thumbIndex) => items[index].style.setProperty('--phg-offset', String(thumbIndex - (thumbIndexes.length - 1) / 2)));
+      thumbIndexes.forEach((index, thumbIndex) => items[index].style.setProperty('--phg-offset', String(thumbIndexes.length === 2 ? (thumbIndex === 0 ? -1 : 1) : thumbIndex - (thumbIndexes.length - 1) / 2)));
+      thumbnails.forEach((thumbnail, index) => { thumbnail.hidden = index !== activeIndex; });
     };
     const updateCopy = (item, index) => {
       title.textContent = item.dataset.title || '';

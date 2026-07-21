@@ -3,7 +3,7 @@
 
 <section id="top" class="phg" data-poster-hero-gallery data-section-id="{{ section.id }}" tabindex="0" aria-roledescription="carousel" aria-label="Gallery">
   <div class="phg__slides">
-    {% for block in section.blocks %}
+    {% for block in section.blocks limit: 3 %}
       {% assign fallback_asset = block.settings.asset_name | default: 'reference-gallery-01.jpg' %}
       <article class="phg__item{% if forloop.first %} is-active{% endif %}" data-phg-item data-title="{{ block.settings.title | escape }}" data-text="{{ block.settings.text | escape }}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}" {{ block.shopify_attributes }}>
         <div class="phg__slide">
@@ -12,12 +12,26 @@
           {% else %}
             <img class="phg__image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.title | escape }}" width="1600" height="900"{% unless forloop.first %} loading="lazy"{% endunless %}>
           {% endif %}
-          {% unless forloop.first %}<button class="phg__thumb-button" type="button" data-phg-go tabindex="-1" aria-label="Show {{ block.settings.title | escape }}"></button>{% endunless %}
+          <button class="phg__thumb-button" type="button" data-phg-go tabindex="-1" aria-label="Show {{ block.settings.title | escape }}"></button>
         </div>
       </article>
     {% endfor %}
   </div>
   <div class="phg__shade" aria-hidden="true"></div>
+  {% if section.blocks.size > 1 %}
+    <div class="phg__thumbnail-rail" aria-label="Current gallery image">
+      {% for block in section.blocks limit: 3 %}
+        {% assign fallback_asset = block.settings.asset_name | default: 'reference-gallery-01.jpg' %}
+        <div class="phg__thumbnail" data-phg-thumbnail hidden>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 400 | image_tag: class: 'phg__thumbnail-image', loading: 'lazy', widths: '120,240,400', alt: block.settings.image.alt | default: block.settings.title }}
+          {% else %}
+            <img class="phg__thumbnail-image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="225" loading="lazy">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
   <div class="phg__content">
     <div class="phg__copy" data-phg-copy>
       <p class="phg__counter" data-phg-counter>01 / 06</p>
@@ -36,5 +50,5 @@
 </section>
 
 {% schema %}
-{"name":"Gallery hero","max_blocks":6,"blocks":[{"type":"slide","name":"Gallery image","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"asset_name","label":"Bundled image asset","default":"reference-gallery-01.jpg"},{"type":"text","id":"title","label":"Title","default":"Into the Pines"},{"type":"textarea","id":"text","label":"Description","default":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna."}]}],"presets":[{"name":"Gallery hero","blocks":[{"type":"slide"},{"type":"slide"},{"type":"slide"},{"type":"slide"},{"type":"slide"},{"type":"slide"}]}]}
+{"name":"Gallery hero","max_blocks":3,"blocks":[{"type":"slide","name":"Gallery image","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"asset_name","label":"Bundled image asset","default":"reference-gallery-01.jpg"},{"type":"text","id":"title","label":"Title","default":"Into the Pines"},{"type":"textarea","id":"text","label":"Description","default":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna."}]}],"presets":[{"name":"Gallery hero","blocks":[{"type":"slide"},{"type":"slide"},{"type":"slide"}]}]}
 {% endschema %}
