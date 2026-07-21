@@ -12,25 +12,12 @@
           {% else %}
             <img class="phg__image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.title | escape }}" width="1600" height="900"{% unless forloop.first %} loading="lazy"{% endunless %}>
           {% endif %}
+          {% unless forloop.first %}<button class="phg__thumb-button" type="button" data-phg-go tabindex="-1" aria-label="Show {{ block.settings.title | escape }}"></button>{% endunless %}
         </div>
       </article>
     {% endfor %}
   </div>
   <div class="phg__shade" aria-hidden="true"></div>
-  {% if section.blocks.size > 1 %}
-    <div class="phg__thumbnail-rail" aria-label="Gallery thumbnails">
-      {% for block in section.blocks %}
-        {% assign fallback_asset = block.settings.asset_name | default: 'reference-gallery-01.jpg' %}
-        <button class="phg__thumbnail" type="button" data-phg-thumbnail hidden aria-label="Show {{ block.settings.title | escape }}">
-          {% if block.settings.image != blank %}
-            {{ block.settings.image | image_url: width: 400 | image_tag: class: 'phg__thumbnail-image', loading: 'lazy', widths: '120,240,400', alt: block.settings.image.alt | default: block.settings.title }}
-          {% else %}
-            <img class="phg__thumbnail-image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="225" loading="lazy">
-          {% endif %}
-        </button>
-      {% endfor %}
-    </div>
-  {% endif %}
   <div class="phg__content">
     <div class="phg__copy" data-phg-copy>
       <p class="phg__counter" data-phg-counter>01 / 06</p>
