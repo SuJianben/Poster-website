@@ -12,7 +12,6 @@
           {% else %}
             <img class="phg__image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.title | escape }}" width="1600" height="900"{% unless forloop.first %} loading="lazy"{% endunless %}>
           {% endif %}
-          <button class="phg__thumb-button" type="button" data-phg-go tabindex="-1" aria-label="Show {{ block.settings.title | escape }}"></button>
         </div>
       </article>
     {% endfor %}
