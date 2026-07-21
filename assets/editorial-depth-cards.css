@@ -12,8 +12,8 @@
 
 .editorial-depth-grid {
   display: grid;
-  grid-template-columns: repeat(4, 240px);
-  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
   justify-content: center;
 }
 
@@ -28,7 +28,8 @@
 
 .editorial-depth-card__surface {
   position: relative;
-  height: 320px;
+  aspect-ratio: 2 / 3;
+  height: auto;
   overflow: hidden;
   border-radius: var(--depth-card-radius);
   background: #333;
@@ -106,8 +107,7 @@
 
 @media (max-width: 750px) {
   .editorial-depth-shell { margin-top: 40px; padding: 26px 0; }
-  .editorial-depth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-  .editorial-depth-card__surface { height: clamp(220px, 67vw, 310px); }
+  .editorial-depth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .editorial-depth-card__content { right: 15px; bottom: 14px; left: 15px; }
   .editorial-depth-card__content h3 { font-size: clamp(27px, 8vw, 34px); }
 }
