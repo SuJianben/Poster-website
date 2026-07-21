@@ -24,13 +24,15 @@
       <h1 data-phg-title>{{ section.blocks.first.settings.title }}</h1>
       <p class="phg__text" data-phg-text>{{ section.blocks.first.settings.text }}</p>
     </div>
-    {% if section.blocks.size > 1 %}
+  </div>
+  {% if section.blocks.size > 1 %}
+    <div class="phg__controls-layer">
       <div class="phg__controls">
         <button class="phg__nav" type="button" data-phg-prev aria-label="Previous"><span aria-hidden="true">‹</span></button>
         <button class="phg__nav" type="button" data-phg-next aria-label="Next"><span aria-hidden="true">›</span></button>
       </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
 </section>
 
 {% schema %}

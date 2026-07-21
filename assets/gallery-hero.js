@@ -12,8 +12,11 @@
     const next = section.querySelector('[data-phg-next]');
     if (!items.length || !copy || !title || !text || !counter) return;
     let activeIndex = Math.max(0, items.findIndex((item) => item.classList.contains('is-active')));
-    let queue = items.map((_, index) => index).filter((index) => index !== activeIndex);
-    const setThumbOffsets = () => queue.forEach((index, queueIndex) => items[index].style.setProperty('--phg-offset', String(queueIndex - (queue.length - 1) / 2)));
+    const getThumbIndexes = () => items.map((_, index) => index).filter((index) => index !== activeIndex);
+    const setThumbOffsets = () => {
+      const thumbIndexes = getThumbIndexes();
+      thumbIndexes.forEach((index, thumbIndex) => items[index].style.setProperty('--phg-offset', String(thumbIndex - (thumbIndexes.length - 1) / 2)));
+    };
     const updateCopy = (item, index) => {
       title.textContent = item.dataset.title || '';
       text.textContent = item.dataset.text || '';
@@ -27,13 +30,12 @@
       items[oldIndex].classList.remove('is-active'); items[oldIndex].setAttribute('aria-hidden', 'true');
       activeIndex = nextIndex;
       items[activeIndex].classList.add('is-active'); items[activeIndex].setAttribute('aria-hidden', 'false');
-      queue = [...queue.filter((itemIndex) => itemIndex !== activeIndex), oldIndex];
       setThumbOffsets(); updateCopy(items[activeIndex], activeIndex);
       section.dispatchEvent(new CustomEvent('poster:hero-change', { bubbles:true, detail:{ image:items[activeIndex].querySelector('img') } }));
     };
     items.forEach((item, index) => item.querySelector('[data-phg-go]')?.addEventListener('click', () => goTo(index)));
-    previous?.addEventListener('click', () => goTo(queue[queue.length - 1] ?? activeIndex - 1));
-    next?.addEventListener('click', () => goTo(queue[0] ?? activeIndex + 1));
+    previous?.addEventListener('click', () => goTo(activeIndex - 1));
+    next?.addEventListener('click', () => goTo(activeIndex + 1));
     section.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') { event.preventDefault(); previous?.click(); } if (event.key === 'ArrowRight') { event.preventDefault(); next?.click(); } });
     setThumbOffsets(); updateCopy(items[activeIndex], activeIndex);
   };
