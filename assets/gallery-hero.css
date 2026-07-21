@@ -2,7 +2,7 @@
 .phg { --phg-thumb-scale: .055; --phg-thumb-gap: 14px; --phg-thumb-bottom: 28px; --phg-zoom-duration: .8s; --phg-zoom-ease: cubic-bezier(.22,1,.36,1); background:#0b0b0f; color:#fff; height:100vh; height:100dvh; min-height:0; overflow:hidden; position:relative; }
 .phg__slides { height:100%; }.phg__item { height:100%; inset:0; margin:0; pointer-events:none; position:absolute; transform:none; width:auto; }.phg__item.is-active { z-index:1; }.phg__item:not(.is-active) { z-index:10; }
 .phg__slide { border-radius:0; inset:0; overflow:hidden; pointer-events:auto; position:absolute; transform:translate(0,0) scale(1); transition:transform var(--phg-zoom-duration) var(--phg-zoom-ease),border-radius var(--phg-zoom-duration) var(--phg-zoom-ease),filter .25s ease; will-change:transform; }
-.phg__item.is-active .phg__slide { filter:brightness(1); }
+.phg__item.is-active .phg__slide { filter:brightness(1) !important; }
 .phg__item:not(.is-active) .phg__slide { border-radius:48px; filter:brightness(.7); transform:translate(calc(var(--phg-offset) * (var(--phg-thumb-scale) * 100vw + var(--phg-thumb-gap))),calc((50vh - var(--phg-thumb-scale) * 50vh) - var(--phg-thumb-bottom))) scale(var(--phg-thumb-scale)); }.phg__item:not(.is-active) .phg__slide:hover { filter:brightness(1); }
 .phg__image { display:block; height:100%; object-fit:cover; width:100%; }.phg__thumb-button { appearance:none; background:none; border:0; cursor:pointer; inset:0; padding:0; position:absolute; }
 .phg__shade { background:linear-gradient(90deg,rgba(0,0,0,.6),transparent); inset:0 auto 0 0; max-width:min(520px,70%); pointer-events:none; position:absolute; width:100%; z-index:5; }

@@ -15,6 +15,7 @@
     const getThumbIndexes = () => items.map((_, index) => index).filter((index) => index !== activeIndex);
     const setThumbOffsets = () => {
       const thumbIndexes = getThumbIndexes();
+      items[activeIndex].style.removeProperty('--phg-offset');
       thumbIndexes.forEach((index, thumbIndex) => items[index].style.setProperty('--phg-offset', String(thumbIndex - (thumbIndexes.length - 1) / 2)));
     };
     const updateCopy = (item, index) => {
