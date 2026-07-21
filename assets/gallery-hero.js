@@ -19,8 +19,13 @@
       items.forEach((item) => item.querySelector('.phg__slide')?.style.removeProperty('filter'));
       items[activeIndex].style.removeProperty('--phg-offset');
       items[activeIndex].querySelector('.phg__slide')?.style.setProperty('filter', 'brightness(1)', 'important');
-      thumbIndexes.forEach((index, thumbIndex) => items[index].style.setProperty('--phg-offset', String(thumbIndexes.length === 2 ? (thumbIndex === 0 ? -1 : 1) : thumbIndex - (thumbIndexes.length - 1) / 2)));
-      thumbnails.forEach((thumbnail, index) => { thumbnail.hidden = index !== activeIndex; });
+      thumbIndexes.forEach((index) => items[index].style.setProperty('--phg-offset', String(index - 1)));
+      thumbnails.forEach((thumbnail, index) => {
+        const isActive = index === activeIndex;
+        thumbnail.hidden = !isActive;
+        thumbnail.classList.remove('is-slot-0', 'is-slot-1', 'is-slot-2');
+        if (isActive) thumbnail.classList.add(`is-slot-${index}`);
+      });
     };
     const updateCopy = (item, index) => {
       title.textContent = item.dataset.title || '';
