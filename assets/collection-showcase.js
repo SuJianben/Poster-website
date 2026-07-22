@@ -21,6 +21,7 @@
     const mobileFilter = section.querySelector('[data-mobile-filter-toggle]');
     const mobileFilterClose = section.querySelector('[data-mobile-filter-close]');
     const mobileSort = section.querySelector('[data-mobile-sort-toggle]');
+    const mobileSortMenu = section.querySelector('[data-mobile-sort-menu]');
     const filterPanel = section.querySelector('.collection-showcase__filters');
 
     if (!grid || !cards.length) return;
@@ -77,8 +78,18 @@
       mobileFilter?.setAttribute('aria-expanded', 'false');
     });
     mobileSort?.addEventListener('click', () => {
-      sort?.focus();
-      sort?.click();
+      const expanded = mobileSort.getAttribute('aria-expanded') === 'true';
+      mobileSort.setAttribute('aria-expanded', String(!expanded));
+      if (mobileSortMenu) mobileSortMenu.hidden = expanded;
+    });
+    section.querySelectorAll('[data-mobile-sort-value]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!sort) return;
+        sort.value = button.dataset.mobileSortValue;
+        sort.dispatchEvent(new Event('change', { bubbles: true }));
+        mobileSortMenu.hidden = true;
+        mobileSort?.setAttribute('aria-expanded', 'false');
+      });
     });
     clear?.addEventListener('click', () => {
       filters.forEach((filter) => { filter.checked = false; });
