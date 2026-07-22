@@ -95,46 +95,20 @@
     gap: 7px;
   }
 
-  .collection-showcase__mobile-sort-menu {
-    background: #fbfaf7;
-    box-shadow: -12px 0 30px rgba(0, 0, 0, .12);
-    display: grid;
-    gap: 10px;
-    inset: 0 0 0 auto;
-    padding: 30px;
-    position: fixed;
-    right: 0;
-    width: min(88vw, 360px);
-    z-index: 90;
-  }
-
-  .collection-showcase__mobile-sort-menu[hidden] {
-    display: none;
-  }
-
-  .collection-showcase__mobile-sort-menu button {
-    border: 0;
-    border-radius: 0;
-    font-size: 17px;
-    font-weight: 400;
-    gap: 12px;
-    justify-content: flex-start;
-    min-height: 48px;
-    padding: 0;
-    text-transform: none;
-  }
-
-  .collection-showcase__mobile-sort-menu button::before {
-    border: 1px solid #c7c7c7;
-    border-radius: 50%;
-    content: '';
-    height: 18px;
-    width: 18px;
-  }
-
-  .collection-showcase__mobile-sort-menu button.is-selected::before {
-    border: 6px solid #111;
-    box-sizing: border-box;
+  .collection-showcase__mobile-controls select {
+    appearance: auto;
+    background: transparent;
+    border: 1px solid #111;
+    border-radius: 999px;
+    color: #111;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    height: 32px;
+    letter-spacing: .08em;
+    padding: 0 24px 0 14px;
+    text-align: center;
+    text-transform: uppercase;
   }
 
   .collection-showcase__toolbar {

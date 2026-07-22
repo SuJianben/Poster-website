@@ -19,17 +19,13 @@
     const clear = section.querySelector('[data-collection-clear]');
     const sort = section.querySelector('[data-collection-sort]');
     const mobileFilter = section.querySelector('[data-mobile-filter-toggle]');
-    const mobileSort = section.querySelector('[data-mobile-sort-toggle]');
-    const mobileSortMenu = section.querySelector('[data-mobile-sort-menu]');
+    const mobileSortSelect = section.querySelector('[data-mobile-sort-select]');
     const filterPanel = section.querySelector('.collection-showcase__filters');
     const drawerScrim = section.querySelector('[data-mobile-drawer-scrim]');
     const closeMobileDrawer = () => {
       filterPanel?.classList.remove('is-mobile-open');
-      mobileSortMenu?.classList.remove('is-mobile-open');
-      if (mobileSortMenu) mobileSortMenu.hidden = true;
       if (drawerScrim) drawerScrim.hidden = true;
       mobileFilter?.setAttribute('aria-expanded', 'false');
-      mobileSort?.setAttribute('aria-expanded', 'false');
     };
 
     if (!grid || !cards.length) return;
@@ -75,30 +71,18 @@
     });
     sort?.addEventListener('change', () => {
       sortCards();
-      if (mobileSort) mobileSort.textContent = sort.options[sort.selectedIndex].text.replace('Sort by: ', '');
+      if (mobileSortSelect) mobileSortSelect.value = sort.value;
     });
     mobileFilter?.addEventListener('click', () => {
       filterPanel?.classList.add('is-mobile-open');
       if (drawerScrim) drawerScrim.hidden = false;
       mobileFilter.setAttribute('aria-expanded', 'true');
     });
-    mobileSort?.addEventListener('click', () => {
-      mobileSort.setAttribute('aria-expanded', 'true');
-      if (mobileSortMenu) {
-        mobileSortMenu.hidden = false;
-        mobileSortMenu.classList.add('is-mobile-open');
-      }
-      if (drawerScrim) drawerScrim.hidden = false;
-    });
     drawerScrim?.addEventListener('click', closeMobileDrawer);
-    section.querySelectorAll('[data-mobile-sort-value]').forEach((button) => {
-      button.addEventListener('click', () => {
-        if (!sort) return;
-        sort.value = button.dataset.mobileSortValue;
-        sort.dispatchEvent(new Event('change', { bubbles: true }));
-        section.querySelectorAll('[data-mobile-sort-value]').forEach((item) => item.classList.toggle('is-selected', item === button));
-        closeMobileDrawer();
-      });
+    mobileSortSelect?.addEventListener('change', () => {
+      if (!sort) return;
+      sort.value = mobileSortSelect.value;
+      sort.dispatchEvent(new Event('change', { bubbles: true }));
     });
     clear?.addEventListener('click', () => {
       filters.forEach((filter) => { filter.checked = false; });
