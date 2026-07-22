@@ -19,13 +19,17 @@
     const clear = section.querySelector('[data-collection-clear]');
     const sort = section.querySelector('[data-collection-sort]');
     const mobileFilter = section.querySelector('[data-mobile-filter-toggle]');
-    const mobileSortSelect = section.querySelector('[data-mobile-sort-select]');
+    const mobileSort = section.querySelector('[data-mobile-sort-toggle]');
+    const mobileSortMenu = section.querySelector('[data-mobile-sort-menu]');
     const filterPanel = section.querySelector('.collection-showcase__filters');
     const drawerScrim = section.querySelector('[data-mobile-drawer-scrim]');
     const closeMobileDrawer = () => {
       filterPanel?.classList.remove('is-mobile-open');
+      mobileSortMenu?.classList.remove('is-mobile-open');
+      if (mobileSortMenu) mobileSortMenu.hidden = true;
       if (drawerScrim) drawerScrim.hidden = true;
       mobileFilter?.setAttribute('aria-expanded', 'false');
+      mobileSort?.setAttribute('aria-expanded', 'false');
     };
 
     if (!grid || !cards.length) return;
@@ -71,7 +75,7 @@
     });
     sort?.addEventListener('change', () => {
       sortCards();
-      if (mobileSortSelect) mobileSortSelect.value = sort.value;
+      if (mobileSort) mobileSort.textContent = sort.options[sort.selectedIndex].text.replace('Sort by: ', '');
     });
     mobileFilter?.addEventListener('click', () => {
       filterPanel?.classList.add('is-mobile-open');
@@ -79,10 +83,22 @@
       mobileFilter.setAttribute('aria-expanded', 'true');
     });
     drawerScrim?.addEventListener('click', closeMobileDrawer);
-    mobileSortSelect?.addEventListener('change', () => {
-      if (!sort) return;
-      sort.value = mobileSortSelect.value;
-      sort.dispatchEvent(new Event('change', { bubbles: true }));
+    mobileSort?.addEventListener('click', () => {
+      const expanded = mobileSort.getAttribute('aria-expanded') === 'true';
+      mobileSort.setAttribute('aria-expanded', String(!expanded));
+      if (mobileSortMenu) {
+        mobileSortMenu.hidden = expanded;
+        mobileSortMenu.classList.toggle('is-mobile-open', !expanded);
+      }
+    });
+    section.querySelectorAll('[data-mobile-sort-value]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!sort) return;
+        sort.value = button.dataset.mobileSortValue;
+        sort.dispatchEvent(new Event('change', { bubbles: true }));
+        section.querySelectorAll('[data-mobile-sort-value]').forEach((item) => item.classList.toggle('is-selected', item === button));
+        closeMobileDrawer();
+      });
     });
     clear?.addEventListener('click', () => {
       filters.forEach((filter) => { filter.checked = false; });
