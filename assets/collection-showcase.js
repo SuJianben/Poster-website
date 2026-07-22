@@ -18,6 +18,10 @@
     const empty = section.querySelector('[data-collection-empty]');
     const clear = section.querySelector('[data-collection-clear]');
     const sort = section.querySelector('[data-collection-sort]');
+    const mobileFilter = section.querySelector('[data-mobile-filter-toggle]');
+    const mobileFilterClose = section.querySelector('[data-mobile-filter-close]');
+    const mobileSort = section.querySelector('[data-mobile-sort-toggle]');
+    const filterPanel = section.querySelector('.collection-showcase__filters');
 
     if (!grid || !cards.length) return;
 
@@ -60,7 +64,22 @@
         button.textContent = expanded ? 'Show All' : 'Show Less';
       });
     });
-    sort?.addEventListener('change', sortCards);
+    sort?.addEventListener('change', () => {
+      sortCards();
+      if (mobileSort) mobileSort.textContent = sort.options[sort.selectedIndex].text.replace('Sort by: ', '');
+    });
+    mobileFilter?.addEventListener('click', () => {
+      filterPanel?.classList.add('is-mobile-open');
+      mobileFilter.setAttribute('aria-expanded', 'true');
+    });
+    mobileFilterClose?.addEventListener('click', () => {
+      filterPanel?.classList.remove('is-mobile-open');
+      mobileFilter?.setAttribute('aria-expanded', 'false');
+    });
+    mobileSort?.addEventListener('click', () => {
+      sort?.focus();
+      sort?.click();
+    });
     clear?.addEventListener('click', () => {
       filters.forEach((filter) => { filter.checked = false; });
       updateVisibility();
