@@ -23,6 +23,14 @@
     const mobileSortMenu = section.querySelector('[data-mobile-sort-menu]');
     const filterPanel = section.querySelector('.collection-showcase__filters');
     const drawerScrim = section.querySelector('[data-mobile-drawer-scrim]');
+    const closeMobileDrawer = () => {
+      filterPanel?.classList.remove('is-mobile-open');
+      mobileSortMenu?.classList.remove('is-mobile-open');
+      if (mobileSortMenu) mobileSortMenu.hidden = true;
+      if (drawerScrim) drawerScrim.hidden = true;
+      mobileFilter?.setAttribute('aria-expanded', 'false');
+      mobileSort?.setAttribute('aria-expanded', 'false');
+    };
 
     if (!grid || !cards.length) return;
 
@@ -110,11 +118,3 @@
     initialise();
   }
 })();
-    const closeMobileDrawer = () => {
-      filterPanel?.classList.remove('is-mobile-open');
-      mobileSortMenu?.classList.remove('is-mobile-open');
-      if (mobileSortMenu) mobileSortMenu.hidden = true;
-      if (drawerScrim) drawerScrim.hidden = true;
-      mobileFilter?.setAttribute('aria-expanded', 'false');
-      mobileSort?.setAttribute('aria-expanded', 'false');
-    };
