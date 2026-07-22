@@ -10,18 +10,24 @@
   assign fallback_titles = 'Paper Bird,Midnight Transit,Wild Bloom,Fuji Street,Bicycle Stories,The Tramp,Silver Screen,Neon Marquee,Monster Nights,City Motion,Fjord Blue,Still Water' | split: ','
   assign fallback_artists = 'Fons Heijnsbroek,Alex Mclean,Anika Reed,Aiko Tanaka,Marcel Kent,Smithsonian,Luthfian Alfajr,Christian Lue,Lilian Do Khac,Kaito Mori,Hendrik Schuette,Joakim Nådell' | split: ','
   assign fallback_prices = '$199,$149,$189,$189,$175,$249,$189,$179,$159,$179,$199,$179' | split: ','
-  assign fallback_types = 'Art Print,Art Print,Poster,Poster,Art Print,Poster,Art Print,Art Print,Poster,Poster,Art Print,Art Print' | split: ','
-  assign fallback_subjects = 'Abstract,City,Flowers,Landscape,City,People,Film,City,Film,City,Landscape,Nature' | split: ','
-  assign fallback_colors = 'Cream,Blue,Yellow,Blue,Orange,Yellow,Red,Purple,Black,Blue,Blue,Blue' | split: ','
-  assign fallback_mediums = 'Painting,Photography,Illustration,Photography,Photography,Photography,Photography,Photography,Photography,Photography,Photography,Photography' | split: ','
-  assign fallback_styles = 'Modern,Modern,Abstract,Minimalism,Modern,Vintage,Vintage,Retro,Vintage,Modern,Minimalism,Minimalism' | split: ','
-  assign fallback_patterns = 'Abstract,Solid,Floral,Solid,Solid,Vintage,Collage,Solid,Collage,Solid,Solid,Solid' | split: ','
-  assign fallback_type_options = 'Art Print,Poster' | split: ','
-  assign fallback_subject_options = 'Nature,Abstract,Flowers,Landscape,City,People,Film' | split: ','
-  assign fallback_color_options = 'Cream,Blue,Yellow,Orange,Red,Purple,Black' | split: ','
-  assign fallback_medium_options = 'Graphic Design,Painting,Illustration,Photography' | split: ','
-  assign fallback_style_options = 'Vintage,Abstract,Retro,Modern,Minimalism' | split: ','
-  assign fallback_pattern_options = 'Floral,Abstract,Collage,Solid,Vintage' | split: ','
+  assign fallback_types = 'Art Print,Bath Mat,Bath Towel,Canvas Print,Carry All Pouch,Collage Set,Comforter,Desk Mat,Duvet Cover,Duvet Cover Set,Wall Tapestry,Throw Pillow' | split: ','
+  assign fallback_subjects = 'Nature,Abstract,Flowers,Plants,Shapes,Landscape,Animals,Lines,Tropical,Forest,City,People' | split: ','
+  assign fallback_colors = 'Cream,Sage,Black,Yellow,Orange,Green,Blue,Pink,Purple,Red,Cream,Blue' | split: ','
+  assign fallback_mediums = 'Graphic Design,Painting,Illustration,Drawing,Photography,Vector Art,Collage,Typography,digital-art,Painting,Photography,Illustration' | split: ','
+  assign fallback_styles = 'Vintage,Abstract,Retro,Modern,Minimalism,Boho,Geometric,Contemporary,Watercolor,Mid-Century Modern,Vintage,Modern' | split: ','
+  assign fallback_patterns = 'Floral,Botanical,Geometric,Stripes,Checks,Animal Print,Plaid,Dots,Swirl,Solid,Abstract,Collage' | split: ','
+  assign fallback_type_options = 'Art Print,Bath Mat,Bath Towel,Canvas Print,Carry All Pouch,Collage Set,Comforter,Desk Mat,Duvet Cover,Duvet Cover Set,Wall Tapestry,Throw Pillow'
+  assign fallback_type_counts = '40317,34183,30521,3192,32970,14,31253,26335,31378,13,6846,9234'
+  assign fallback_subject_options = 'Nature,Abstract,Flowers,Plants,Shapes,Landscape,Animals,Lines,Tropical,Forest,City,People'
+  assign fallback_subject_counts = '549222,471626,424172,209451,184680,163081,150771,146859,132825,104629,83711,71548'
+  assign fallback_color_options = 'Cream,Sage,Black,Yellow,Orange,Green,Blue,Pink,Purple,Red,Teal,Brown'
+  assign fallback_color_counts = '771905,307364,272832,235651,185931,135743,125184,117681,103840,78515,65304,48960'
+  assign fallback_medium_options = 'Graphic Design,Painting,Illustration,Drawing,Photography,Vector Art,Collage,Typography,digital-art,Printmaking,Ink,Textile'
+  assign fallback_medium_counts = '564144,428557,353472,242909,131341,90607,86712,60923,108,57402,38816,26175'
+  assign fallback_style_options = 'Vintage,Abstract,Retro,Modern,Minimalism,Boho,Geometric,Contemporary,Watercolor,Mid-Century Modern,Maximalist,Classic'
+  assign fallback_style_counts = '604897,471507,441293,391743,352322,324031,273874,257750,235878,186756,145230,120843'
+  assign fallback_pattern_options = 'Floral,Botanical,Geometric,Stripes,Checks,Animal Print,Plaid,Dots,Swirl,Solid,Abstract,Collage'
+  assign fallback_pattern_counts = '440616,383443,273872,157130,43630,31219,28107,24619,20616,18418,16112,12964'
 %}
 <section class="collection-showcase" data-collection-showcase>
   <header class="collection-showcase__intro page-width">
@@ -34,12 +40,12 @@
   <div class="collection-showcase__catalog page-width" id="collection-products">
     <aside class="collection-showcase__filters" aria-label="Collection filters">
       <p class="collection-showcase__filters-title">Refine</p>
-      <details class="collection-filter" open><summary>Product Type</summary><ul>{% for value in fallback_type_options %}<li><label><input type="checkbox" value="{{ value }}" data-filter-key="type" data-collection-filter> <span>{{ value }}</span></label></li>{% endfor %}</ul></details>
-      <details class="collection-filter"><summary>Subject</summary><ul>{% for value in fallback_subject_options %}<li><label><input type="checkbox" value="{{ value }}" data-filter-key="subject" data-collection-filter> <span>{{ value }}</span></label></li>{% endfor %}</ul></details>
-      <details class="collection-filter"><summary>Color</summary><ul>{% for value in fallback_color_options %}<li><label><input type="checkbox" value="{{ value }}" data-filter-key="color" data-collection-filter> <span>{{ value }}</span></label></li>{% endfor %}</ul></details>
-      <details class="collection-filter"><summary>Art Medium</summary><ul>{% for value in fallback_medium_options %}<li><label><input type="checkbox" value="{{ value }}" data-filter-key="medium" data-collection-filter> <span>{{ value }}</span></label></li>{% endfor %}</ul></details>
-      <details class="collection-filter"><summary>Style</summary><ul>{% for value in fallback_style_options %}<li><label><input type="checkbox" value="{{ value }}" data-filter-key="style" data-collection-filter> <span>{{ value }}</span></label></li>{% endfor %}</ul></details>
-      <details class="collection-filter"><summary>Pattern</summary><ul>{% for value in fallback_pattern_options %}<li><label><input type="checkbox" value="{{ value }}" data-filter-key="pattern" data-collection-filter> <span>{{ value }}</span></label></li>{% endfor %}</ul></details>
+      <details class="collection-filter" open><summary>Product Type</summary>{% render 'collection-filter-list', options: fallback_type_options, counts: fallback_type_counts, filter_key: 'type', visible_limit: 10 %}</details>
+      <details class="collection-filter" open><summary>Subject</summary>{% render 'collection-filter-list', options: fallback_subject_options, counts: fallback_subject_counts, filter_key: 'subject', visible_limit: 10 %}</details>
+      <details class="collection-filter" open><summary>Color</summary>{% render 'collection-filter-list', options: fallback_color_options, counts: fallback_color_counts, filter_key: 'color', visible_limit: 10 %}</details>
+      <details class="collection-filter" open><summary>Art Medium</summary>{% render 'collection-filter-list', options: fallback_medium_options, counts: fallback_medium_counts, filter_key: 'medium', visible_limit: 10 %}</details>
+      <details class="collection-filter" open><summary>Style</summary>{% render 'collection-filter-list', options: fallback_style_options, counts: fallback_style_counts, filter_key: 'style', visible_limit: 10 %}</details>
+      <details class="collection-filter" open><summary>Pattern</summary>{% render 'collection-filter-list', options: fallback_pattern_options, counts: fallback_pattern_counts, filter_key: 'pattern', visible_limit: 10 %}</details>
       <button class="collection-showcase__clear" type="button" data-collection-clear hidden>Clear filters</button>
     </aside>
     <div class="collection-showcase__results"><div class="collection-showcase__toolbar"><p data-collection-count>{{ fallback_titles.size }} pieces</p><label class="visually-hidden" for="collection-sort-{{ section.id }}">Sort products</label><select id="collection-sort-{{ section.id }}" data-collection-sort><option value="relevance">Sort by: Relevance</option><option value="title-asc">Title: A–Z</option><option value="title-desc">Title: Z–A</option><option value="price-asc">Price: Low to high</option><option value="price-desc">Price: High to low</option></select></div><div class="collection-showcase__grid" data-collection-grid>{% for fallback_title in fallback_titles %}<article class="poster-card collection-fallback-card" data-collection-card data-title="{{ fallback_title | escape }}" data-price="{{ fallback_prices[forloop.index0] | remove: '$' }}" data-type="{{ fallback_types[forloop.index0] }}" data-subject="{{ fallback_subjects[forloop.index0] }}" data-color="{{ fallback_colors[forloop.index0] }}" data-medium="{{ fallback_mediums[forloop.index0] }}" data-style="{{ fallback_styles[forloop.index0] }}" data-pattern="{{ fallback_patterns[forloop.index0] }}"><a class="poster-card__image" href="#collection-products"><img src="{{ fallback_images[forloop.index0] | asset_url }}" width="900" height="900" loading="lazy" alt="{{ fallback_title | escape }}"><span class="collection-fallback-card__quick-view" aria-hidden="true">Quick view</span></a><div class="poster-card__details"><p>By: {{ fallback_artists[forloop.index0] }}</p><a href="#collection-products">{{ fallback_title }}</a><p>Starting at {{ fallback_prices[forloop.index0] }}</p></div></article>{% endfor %}</div><p class="collection-showcase__empty" data-collection-empty hidden>No posters match these filters.</p></div>

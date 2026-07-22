@@ -1,0 +1,21 @@
+{% liquid
+  assign filter_values = options | split: ','
+  assign filter_counts = counts | split: ','
+  assign initial_limit = visible_limit | default: 10
+%}
+<ul>
+  {% for value in filter_values %}
+    {% assign is_extra = false %}
+    {% if forloop.index > initial_limit %}{% assign is_extra = true %}{% endif %}
+    <li{% if is_extra %} data-filter-extra hidden{% endif %}>
+      <label>
+        <input type="checkbox" value="{{ value }}" data-filter-key="{{ filter_key }}" data-collection-filter>
+        <span class="collection-filter__label">{{ value }}</span>
+        <span class="collection-filter__count">{{ filter_counts[forloop.index0] }}</span>
+      </label>
+    </li>
+  {% endfor %}
+  {% if filter_values.size > initial_limit %}
+    <li><button class="collection-filter__show-more" type="button" data-filter-show-all>Show All</button></li>
+  {% endif %}
+</ul>

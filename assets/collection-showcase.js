@@ -50,6 +50,16 @@
     };
 
     filters.forEach((filter) => filter.addEventListener('change', updateVisibility));
+    section.querySelectorAll('[data-filter-show-all]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.closest('.collection-filter');
+        const extras = [...filter.querySelectorAll('[data-filter-extra]')];
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        extras.forEach((item) => { item.hidden = expanded; });
+        button.setAttribute('aria-expanded', String(!expanded));
+        button.textContent = expanded ? 'Show All' : 'Show Less';
+      });
+    });
     sort?.addEventListener('change', sortCards);
     clear?.addEventListener('click', () => {
       filters.forEach((filter) => { filter.checked = false; });

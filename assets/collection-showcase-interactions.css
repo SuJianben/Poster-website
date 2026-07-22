@@ -11,6 +11,11 @@
 .collection-showcase__toolbar { border-bottom:0; min-height:0; padding:0 0 17px; }
 .collection-showcase__toolbar select { margin-left:auto; }
 .collection-showcase__clear { background:transparent; border:0; color:#5d5d5d; cursor:pointer; font-size:13px; margin-top:14px; padding:0; text-decoration:underline; text-underline-offset:3px; }
+.collection-filter li + li { margin-top:9px; }
+.collection-filter li label { align-items:center; justify-content:space-between; min-height:20px; }
+.collection-filter__label { margin-right:auto; }
+.collection-filter__count { color:#9a9893; font-variant-numeric:tabular-nums; margin-left:12px; }
+.collection-filter__show-more { background:transparent; border:0; color:#111; cursor:pointer; font:inherit; padding:3px 0 0; text-align:left; }
 .collection-showcase__grid .collection-fallback-card .poster-card__image { position:relative; }
 .collection-showcase__grid .collection-fallback-card:hover .poster-card__image img { transform:none; }
 .collection-fallback-card__quick-view { align-items:center; background:#000; bottom:0; color:#fff; display:flex; font-size:13px; font-weight:600; inset-inline:0; justify-content:center; min-height:58px; pointer-events:none; position:absolute; text-transform:none; transform:translateY(100%); transition:transform .24s var(--ease-std); }
