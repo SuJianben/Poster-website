@@ -8,11 +8,18 @@
 }
 
 .collection-showcase__catalog {
-  margin-top: 32px;
+  margin-top: 57px;
 }
 
 .collection-showcase__toolbar {
-  padding-bottom: 34px;
+  padding-bottom: 9px;
+}
+
+/* Keep the story label inside the card's 230px row: 200px image + 30px label. */
+@media (min-width: 901px) {
+  .collection-story img {
+    height: 200px;
+  }
 }
 
 @media (max-width: 750px) {
