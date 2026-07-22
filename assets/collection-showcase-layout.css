@@ -1,0 +1,26 @@
+/* Desktop geometry measured against the Society6 collection reference at 1920px. */
+.collection-showcase {
+  padding-top: 154px;
+}
+
+.collection-showcase .page-width {
+  width: min(calc(100% - 40px), 1280px);
+}
+
+.collection-showcase__catalog {
+  margin-top: 32px;
+}
+
+.collection-showcase__toolbar {
+  padding-bottom: 34px;
+}
+
+@media (max-width: 750px) {
+  .collection-showcase {
+    padding-top: 88px;
+  }
+
+  .collection-showcase .page-width {
+    width: min(calc(100% - 28px), 1280px);
+  }
+}
