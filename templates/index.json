@@ -137,14 +137,6 @@
             "meta": "Izuddin Helmi · A2 · $179"
           }
         },
-        "r3": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-r3.jpg",
-            "title": "Digital Sun",
-            "meta": "Neeqolah · A2 · $169"
-          }
-        }
       },
       "block_order": [
         "c2",
@@ -152,8 +144,7 @@
         "t3",
         "m1",
         "a2",
-        "s2",
-        "r3"
+        "s2"
       ],
       "settings": {
         "eyebrow": "Featured this week",
