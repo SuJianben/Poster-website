@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 0.4 seconds
-Output:
 (() => {
   const getSelectedFilters = (filters) => filters.reduce((selected, filter) => {
     if (!filter.checked) return selected;
