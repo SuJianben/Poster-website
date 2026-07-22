@@ -9,7 +9,41 @@
  */
 {
   "sections": {
-    "hero": {"type":"hero-poster","blocks":{"pines":{"type":"slide","settings":{"asset_name":"reference-gallery-01.jpg","title":"Into the Pines","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna. Nam eros purus, congue pulvinar turpis pretium, vulputate interdum turpis. Vivamus non arcu."}},"high_country":{"type":"slide","settings":{"asset_name":"reference-gallery-02.jpg","title":"The High Country","text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit."}},"offshore":{"type":"slide","settings":{"asset_name":"reference-gallery-03.jpg","title":"Last Light Offshore","text":"Praesent vel orci orci. Nam sed eleifend felis. Duis eget risus vel nisl feugiat semper eu ut ligula. Morbi eget lorem porttitor, gravida diam lobortis."}}},"block_order":["pines","high_country","offshore"],"settings":{}},
+    "hero": {
+      "type": "hero-poster",
+      "blocks": {
+        "pines": {
+          "type": "slide",
+          "settings": {
+            "asset_name": "reference-gallery-01.jpg",
+            "title": "Into the Pines",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna. Nam eros purus, congue pulvinar turpis pretium, vulputate interdum turpis. Vivamus non arcu."
+          }
+        },
+        "high_country": {
+          "type": "slide",
+          "settings": {
+            "asset_name": "reference-gallery-02.jpg",
+            "title": "The High Country",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          }
+        },
+        "offshore": {
+          "type": "slide",
+          "settings": {
+            "asset_name": "reference-gallery-03.jpg",
+            "title": "Last Light Offshore",
+            "text": "Praesent vel orci orci. Nam sed eleifend felis. Duis eget risus vel nisl feugiat semper eu ut ligula. Morbi eget lorem porttitor, gravida diam lobortis."
+          }
+        }
+      },
+      "block_order": [
+        "pines",
+        "high_country",
+        "offshore"
+      ],
+      "settings": {}
+    },
     "categories": {
       "type": "category-rail",
       "blocks": {
@@ -88,11 +122,7 @@
     },
     "featured": {
       "type": "featured-products",
-      "settings": {
-        "eyebrow": "Featured this week",
-        "heading": "Handpicked drops.",
-        "products_to_show": 7
-      }
+      "settings": {}
     },
     "editorial_1": {
       "type": "editorial-with-products",
