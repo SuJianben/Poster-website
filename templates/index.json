@@ -88,64 +88,6 @@
     },
     "featured": {
       "type": "featured-products",
-      "blocks": {
-        "c2": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-c2.jpg",
-            "title": "The Tramp",
-            "meta": "Smithsonian · A2 · $249"
-          }
-        },
-        "n1": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-n1.jpg",
-            "title": "Fjord Blue",
-            "meta": "Hendrik Schuette · A2 · $199"
-          }
-        },
-        "t3": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-t3.jpg",
-            "title": "Paper Bird",
-            "meta": "Fons Heijnsbroek · A2 · $199"
-          }
-        },
-        "m1": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-m1.jpg",
-            "title": "Purple Groove",
-            "meta": "Erik Mclean · A2 · $149"
-          }
-        },
-        "a2": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-a2.jpg",
-            "title": "Neon City Sky",
-            "meta": "Rohit Dey · A2 · $169"
-          }
-        },
-        "s2": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-s2.jpg",
-            "title": "Under Lights",
-            "meta": "Izuddin Helmi · A2 · $179"
-          }
-        },
-      },
-      "block_order": [
-        "c2",
-        "n1",
-        "t3",
-        "m1",
-        "a2",
-        "s2"
-      ],
       "settings": {
         "eyebrow": "Featured this week",
         "heading": "Handpicked drops.",
