@@ -19,11 +19,10 @@
     const clear = section.querySelector('[data-collection-clear]');
     const sort = section.querySelector('[data-collection-sort]');
     const mobileFilter = section.querySelector('[data-mobile-filter-toggle]');
-    const mobileFilterClose = section.querySelector('[data-mobile-filter-close]');
     const mobileSort = section.querySelector('[data-mobile-sort-toggle]');
     const mobileSortMenu = section.querySelector('[data-mobile-sort-menu]');
-    const mobileSortClose = section.querySelector('[data-mobile-sort-close]');
     const filterPanel = section.querySelector('.collection-showcase__filters');
+    const drawerScrim = section.querySelector('[data-mobile-drawer-scrim]');
 
     if (!grid || !cards.length) return;
 
@@ -72,11 +71,8 @@
     });
     mobileFilter?.addEventListener('click', () => {
       filterPanel?.classList.add('is-mobile-open');
+      if (drawerScrim) drawerScrim.hidden = false;
       mobileFilter.setAttribute('aria-expanded', 'true');
-    });
-    mobileFilterClose?.addEventListener('click', () => {
-      filterPanel?.classList.remove('is-mobile-open');
-      mobileFilter?.setAttribute('aria-expanded', 'false');
     });
     mobileSort?.addEventListener('click', () => {
       mobileSort.setAttribute('aria-expanded', 'true');
@@ -84,20 +80,16 @@
         mobileSortMenu.hidden = false;
         mobileSortMenu.classList.add('is-mobile-open');
       }
+      if (drawerScrim) drawerScrim.hidden = false;
     });
-    mobileSortClose?.addEventListener('click', () => {
-      mobileSortMenu?.classList.remove('is-mobile-open');
-      if (mobileSortMenu) mobileSortMenu.hidden = true;
-      mobileSort?.setAttribute('aria-expanded', 'false');
-    });
+    drawerScrim?.addEventListener('click', closeMobileDrawer);
     section.querySelectorAll('[data-mobile-sort-value]').forEach((button) => {
       button.addEventListener('click', () => {
         if (!sort) return;
         sort.value = button.dataset.mobileSortValue;
         sort.dispatchEvent(new Event('change', { bubbles: true }));
-        mobileSortMenu.classList.remove('is-mobile-open');
-        mobileSortMenu.hidden = true;
-        mobileSort?.setAttribute('aria-expanded', 'false');
+        section.querySelectorAll('[data-mobile-sort-value]').forEach((item) => item.classList.toggle('is-selected', item === button));
+        closeMobileDrawer();
       });
     });
     clear?.addEventListener('click', () => {
@@ -118,3 +110,11 @@
     initialise();
   }
 })();
+    const closeMobileDrawer = () => {
+      filterPanel?.classList.remove('is-mobile-open');
+      mobileSortMenu?.classList.remove('is-mobile-open');
+      if (mobileSortMenu) mobileSortMenu.hidden = true;
+      if (drawerScrim) drawerScrim.hidden = true;
+      mobileFilter?.setAttribute('aria-expanded', 'false');
+      mobileSort?.setAttribute('aria-expanded', 'false');
+    };
