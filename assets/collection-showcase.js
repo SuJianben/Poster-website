@@ -85,11 +85,14 @@
     drawerScrim?.addEventListener('click', closeMobileDrawer);
     mobileSort?.addEventListener('click', () => {
       const expanded = mobileSort.getAttribute('aria-expanded') === 'true';
+      filterPanel?.classList.remove('is-mobile-open');
+      mobileFilter?.setAttribute('aria-expanded', 'false');
       mobileSort.setAttribute('aria-expanded', String(!expanded));
       if (mobileSortMenu) {
         mobileSortMenu.hidden = expanded;
         mobileSortMenu.classList.toggle('is-mobile-open', !expanded);
       }
+      if (drawerScrim) drawerScrim.hidden = expanded;
     });
     section.querySelectorAll('[data-mobile-sort-value]').forEach((button) => {
       button.addEventListener('click', () => {
