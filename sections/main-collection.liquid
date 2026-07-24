@@ -1,20 +1,121 @@
-<section class="collection-page">
-  <div class="page-width">
-    <span class="eyebrow">Collection</span>
-    <h1 class="display" style="font-size:clamp(44px,6vw,76px);margin:10px 0 44px">{{ collection.title }}</h1>
-    <div class="product-grid" style="margin-top:0">
+{{ 'collection-gallery.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
+
+{% assign collection_count = collection.products_count %}
+{% assign category_labels = section.settings.category_labels | split: ',' %}
+
+<section class="cg-collection" data-cg-collection data-columns="4">
+  <div class="cg-shell">
+    <div class="cg-breadcrumb">{{ collection.title }}</div>
+    <header class="cg-heading">
+      <h1>{{ collection.title }} <span>({{ collection_count }})</span></h1>
+      {% if collection.description != blank %}
+        <div>{{ collection.description }}</div>
+      {% else %}
+        <p>{{ section.settings.fallback_description }}</p>
+      {% endif %}
+    </header>
+
+    <nav class="cg-category-nav" aria-label="Collection categories">
+      {% for label in category_labels %}
+        {% assign label_clean = label | strip %}
+        {% if label_clean != blank %}
+          <a class="{% if forloop.first %}is-current{% endif %}" href="{{ collection.url }}">{{ label_clean }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+
+    <div class="cg-toolbar">
+      <div class="cg-tool-group">
+        <span class="cg-toolbar-label">Gallery:</span>
+        <div class="cg-segment" aria-label="Gallery columns">
+          <button type="button" data-cg-columns="3">3</button>
+          <button type="button" class="is-active" data-cg-columns="4">4</button>
+          <button type="button" data-cg-columns="6">6</button>
+        </div>
+        <span class="cg-toolbar-label">View:</span>
+        <div class="cg-segment" aria-label="Gallery view">
+          <button type="button" class="is-active" data-cg-view="product">Product</button>
+          <button type="button" data-cg-view="lifestyle">Lifestyle</button>
+        </div>
+      </div>
+      <button class="cg-filter-trigger" type="button" data-cg-open-drawer aria-haspopup="dialog">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4h13M4.5 8h7M6.5 12h3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        Filters
+      </button>
+    </div>
+
+    <div class="cg-product-grid" aria-live="polite">
       {% for product in collection.products %}
-        {% render 'poster-card', product: product %}
+        {% assign product_types = product.type | downcase | replace: ' ', '-' %}
+        {% assign product_tags = product.tags | join: '|' | downcase | replace: ' ', '-' %}
+        <article class="cg-product" data-cg-product data-cg-types="{{ product_types }}|{{ product_tags }}">
+          <a class="cg-product-media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+            {% if product.tags contains 'Bestseller' %}<span class="cg-badge">Bestseller</span>{% endif %}
+            {% if product.featured_media %}
+              {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '320,480,640,800,1200', alt: product.title }}
+            {% endif %}
+          </a>
+          <button class="cg-heart" type="button" data-cg-heart aria-pressed="false" aria-label="Save {{ product.title | escape }}"></button>
+          <div class="cg-product-meta">
+            <a class="cg-product-title" href="{{ product.url }}">{{ product.title }}</a>
+            <span class="cg-product-price">From {{ product.price | money }}</span>
+            {% if product.vendor != blank %}<span class="cg-product-vendor">{{ product.vendor }}</span>{% endif %}
+          </div>
+        </article>
       {% else %}
         <p>{{ 'general.no_products' | t }}</p>
       {% endfor %}
     </div>
   </div>
+
+  <div class="cg-drawer" data-cg-drawer aria-hidden="true">
+    <button class="cg-drawer__scrim" type="button" data-cg-close-drawer aria-label="Close filters"></button>
+    <aside class="cg-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cg-filter-title">
+      <div class="cg-drawer__head">
+        <h2 id="cg-filter-title">Filters</h2>
+        <button class="cg-drawer-close" type="button" data-cg-close-drawer aria-label="Close filters">×</button>
+      </div>
+      <div class="cg-filter-group">
+        <h3>Product type</h3>
+        {% for type in collection.all_types %}
+          {% assign filter_value = type | downcase | replace: ' ', '-' %}
+          <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ type }}</label>
+        {% endfor %}
+      </div>
+      {% if collection.all_tags.size > 0 %}
+        <div class="cg-filter-group">
+          <h3>Style</h3>
+          {% for tag in collection.all_tags limit: 8 %}
+            {% assign filter_value = tag | downcase | replace: ' ', '-' %}
+            <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ tag }}</label>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="cg-filter-actions">
+        <button type="button" data-cg-clear>Clear all</button>
+        <button type="button" data-cg-close-drawer>Show results</button>
+      </div>
+    </aside>
+  </div>
 </section>
 
 {% schema %}
 {
-  "name": "Main collection",
-  "settings": []
+  "name": "Collection gallery",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "default": "A curated selection of art prints for the room that brings people together. Each piece is chosen to anchor the space with personality, warmth and lasting visual presence."
+    },
+    {
+      "type": "text",
+      "id": "category_labels",
+      "label": "Category navigation labels",
+      "default": "Living room, Bedroom, Kitchen, Bathroom, Home Office"
+    }
+  ]
 }
 {% endschema %}
