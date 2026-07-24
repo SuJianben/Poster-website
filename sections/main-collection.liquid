@@ -1,7 +1,7 @@
 {{ 'collection-gallery.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
 
-{% assign show_fallback_products = section.settings.use_fallback_products %}
+{% assign show_fallback_products = section.settings.use_fallback_products | default: true, allow_false: true %}
 {% if collection.products_count == 0 %}{% assign show_fallback_products = true %}{% endif %}
 {% assign collection_count = collection.products_count %}
 {% if show_fallback_products %}{% assign collection_count = 12 %}{% endif %}
