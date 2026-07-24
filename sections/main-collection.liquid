@@ -1,8 +1,8 @@
 {{ 'collection-gallery.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
 
-{% assign show_fallback_products = section.settings.use_fallback_products | default: true, allow_false: true %}
-{% if collection.products_count == 0 %}{% assign show_fallback_products = true %}{% endif %}
+{% comment %}Temporary visual QA mode requested by the merchant. Remove this assignment to restore live collection products.{% endcomment %}
+{% assign show_fallback_products = true %}
 {% assign collection_count = collection.products_count %}
 {% if show_fallback_products %}{% assign collection_count = 12 %}{% endif %}
 {% assign category_labels = section.settings.category_labels | split: ',' %}
@@ -159,12 +159,6 @@
       "id": "category_labels",
       "label": "Category navigation labels",
       "default": "Living room, Bedroom, Kitchen, Bathroom, Home Office"
-    },
-    {
-      "type": "checkbox",
-      "id": "use_fallback_products",
-      "label": "Use fallback gallery products",
-      "default": true
     },
     {
       "type": "checkbox",

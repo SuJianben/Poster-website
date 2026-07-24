@@ -11,9 +11,7 @@
   "sections": {
     "main": {
       "type": "main-collection",
-      "settings": {
-        "use_fallback_products": true
-      }
+      "settings": {}
     }
   },
   "order": [
