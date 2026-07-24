@@ -1,2 +1,139 @@
-<section class="product-page"><div class="page-width product-layout"><div class="product-media">{% if product.featured_media %}{{ product.featured_media | image_url: width: 1400 | image_tag: widths: '600,900,1400', alt: product.title }}{% endif %}</div><div class="product-info"><span class="eyebrow">{{ product.vendor }}</span><h1>{{ product.title }}</h1><p class="price">{{ product.selected_or_first_available_variant.price | money }}</p>{% if product.description != blank %}<div>{{ product.description }}</div>{% endif %}{% form 'product', product, class: 'product-form' %}{% unless product.has_only_default_variant %}<label for="Variant-{{ section.id }}">{{ 'product.variant' | t }}</label><select name="id" id="Variant-{{ section.id }}">{% for variant in product.variants %}<option value="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title }} — {{ variant.price | money }}</option>{% endfor %}</select>{% endunless %}<label for="Quantity-{{ section.id }}">{{ 'product.quantity' | t }}</label><input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1"><button class="button" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}{{ 'product.add_to_cart' | t }}{% else %}{{ 'product.sold_out' | t }}{% endif %}</button>{% endform %}</div></div></section>
-{% schema %}{"name":"Main product","settings":[]}{% endschema %}
+{{ 'product-showcase.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-showcase.js' | asset_url }}" defer="defer"></script>
+
+{% assign selected_variant = product.selected_or_first_available_variant %}
+{% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
+
+<section class="ps-product" data-ps-product data-section-id="{{ section.id }}">
+  <div class="ps-shell">
+    <nav class="ps-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a><span>/</span>
+      {% if collection %}<a href="{{ collection.url }}">{{ collection.title }}</a><span>/</span>{% endif %}
+      <span aria-current="page">{{ product.title }}</span>
+    </nav>
+
+    <div class="ps-layout">
+      <div class="ps-left">
+        <div class="ps-media-stage">
+          <div class="ps-thumbnails" aria-label="Product media">
+            {% for media in product.media %}
+              {% if media.media_type == 'image' %}
+                <button class="ps-thumbnail {% if media.id == selected_media.id or forloop.first and selected_media == blank %}is-active{% endif %}" type="button" data-ps-media data-media-id="{{ media.id }}" data-media-src="{{ media.preview_image | image_url: width: 1800 }}" data-media-alt="{{ media.alt | default: product.title | escape }}" aria-label="Show image {{ forloop.index }}">
+                  {{ media.preview_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90,140,180', alt: media.alt | default: product.title }}
+                </button>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="ps-main-media">
+            {% if selected_media %}
+              {{ selected_media.preview_image | image_url: width: 1800 | image_tag: class: 'ps-main-media__image', loading: 'eager', widths: '640,900,1200,1600,1800', alt: selected_media.alt | default: product.title, data_ps_main_image: '' }}
+            {% else %}
+              <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="ps-left-details">
+          <details open>
+            <summary>Product details <span>+</span></summary>
+            <div class="ps-detail-content rte">{{ product.description | default: '<p>Made to order with carefully selected materials and designed to bring character to your space.</p>' }}</div>
+          </details>
+          <details>
+            <summary>Material & workmanship <span>+</span></summary>
+            <div class="ps-detail-content"><p>Printed with archival-quality inks and prepared with care for a long-lasting finish.</p></div>
+          </details>
+          <details>
+            <summary>Shipping and returns <span>+</span></summary>
+            <div class="ps-detail-content"><p>Each order is made for you. Delivery estimates are shown before checkout.</p></div>
+          </details>
+        </div>
+      </div>
+
+      <aside class="ps-purchase" aria-label="Purchase {{ product.title | escape }}">
+        {% if product.compare_at_price_max > product.price %}<span class="ps-sale-badge">Save {{ product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max }}%</span>{% endif %}
+        <p class="ps-review-line">★★★★★ <span>Verified reviews</span></p>
+        <h1>{{ product.title }}</h1>
+        {% if product.vendor != blank %}<p class="ps-vendor">Artist: <strong>{{ product.vendor }}</strong></p>{% endif %}
+        <div class="ps-price" data-ps-price>
+          <span class="ps-price__current">{{ selected_variant.price | money }}</span>
+          <s class="ps-price__compare {% unless selected_variant.compare_at_price > selected_variant.price %}is-hidden{% endunless %}" data-ps-compare>{{ selected_variant.compare_at_price | money }}</s>
+        </div>
+        <p class="ps-shipping-note">Free shipping on qualifying orders.</p>
+
+        {% form 'product', product, class: 'ps-form', data_ps_form: '' %}
+          <input type="hidden" name="id" value="{{ selected_variant.id }}" data-ps-variant-input>
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              <fieldset class="ps-option-group" data-ps-option-group data-option-position="{{ option.position }}">
+                <legend>{{ option.name }}: <span data-ps-option-label>{{ option.selected_value }}</span></legend>
+                <div class="ps-option-values">
+                  {% for value in option.values %}
+                    <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                    <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
+                  {% endfor %}
+                </div>
+              </fieldset>
+            {% endfor %}
+          {% endunless %}
+
+          <div class="ps-form__quantity">
+            <label for="Quantity-{{ section.id }}">Quantity</label>
+            <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
+          </div>
+          <button class="ps-add-button" type="submit" data-ps-add-button {% unless selected_variant.available %}disabled{% endunless %}>
+            <span data-ps-add-label>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
+          </button>
+          <p class="ps-form__status" data-ps-status role="status"></p>
+        {% endform %}
+
+        <div class="ps-offer"><strong>Summer offer</strong><span> Add more pieces to save more.</span></div>
+        <div class="ps-quantity-savings">
+          <div><strong>Buy quantity</strong><strong>Discount</strong></div>
+          <div><span>Buy 1</span><span>Standard price</span></div>
+          <div><span>Buy 2</span><span>Save 10%</span></div>
+          <div><span>Buy 3+</span><span>Save 15%</span></div>
+        </div>
+        <ul class="ps-assurances">
+          <li>Immediately ready to hang</li>
+          <li>Securely packed for delivery</li>
+          <li>Estimated delivery shown at checkout</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <section class="ps-benefits" aria-label="Shopping benefits">
+    <div><strong>Premium quality</strong><span>Made with carefully selected materials.</span></div>
+    <div><strong>Satisfied or money back</strong><span>Shop with confidence.</span></div>
+    <div><strong>Free shipping</strong><span>On qualifying orders.</span></div>
+    <div><strong>30 days return right</strong><span>Easy returns when eligible.</span></div>
+  </section>
+
+  {% if section.settings.lifestyle_image %}
+    <div class="ps-lifestyle">
+      {{ section.settings.lifestyle_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: product.title }}
+    </div>
+  {% endif %}
+
+  <section class="ps-description-shell">
+    <div class="ps-description-tabs"><span class="is-active">Description</span><span>Fair pricing</span><span>Artist information</span><span>Material & workmanship</span><span>Shipping and returns</span></div>
+    <div class="ps-description rte">{{ product.description }}</div>
+  </section>
+</section>
+
+<script type="application/json" data-ps-variants>
+  {{ product.variants | json }}
+</script>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "lifestyle_image",
+      "label": "Lifestyle image below product"
+    }
+  ]
+}
+{% endschema %}
