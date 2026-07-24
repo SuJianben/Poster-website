@@ -60,7 +60,10 @@
           <a class="cg-product-media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
             {% if product.tags contains 'Bestseller' %}<span class="cg-badge">Bestseller</span>{% endif %}
             {% if product.featured_media %}
-              {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '320,480,640,800,1200', alt: product.title }}
+              {{ product.featured_media | image_url: width: 1200 | image_tag: class: 'cg-product-image', loading: 'lazy', widths: '320,480,640,800,1200', alt: product.title }}
+            {% endif %}
+            {% if product.images.size > 1 %}
+              {{ product.images[1] | image_url: width: 1200 | image_tag: class: 'cg-product-hover-image', loading: 'lazy', widths: '320,480,640,800,1200', alt: '' }}
             {% endif %}
           </a>
           <button class="cg-heart" type="button" data-cg-heart aria-pressed="false" aria-label="Save {{ product.title | escape }}"></button>
@@ -73,6 +76,7 @@
         {% endfor %}
       {% else %}
         {% assign fallback_images = 'figma-poster-a1.jpg|figma-poster-s1.jpg|figma-poster-c1.jpg|figma-poster-m1.jpg|figma-poster-n1.jpg|figma-poster-r1.jpg|figma-poster-t1.jpg|figma-poster-a2.jpg|figma-poster-s2.jpg|figma-poster-c2.jpg|figma-poster-m2.jpg|figma-poster-n2.jpg' | split: '|' %}
+        {% assign fallback_hover_images = 'figma-poster-a3.jpg|figma-poster-s3.jpg|figma-poster-c3.jpg|figma-poster-m3.jpg|figma-poster-n3.jpg|figma-poster-r3.jpg|figma-poster-t3.jpg|figma-poster-a4.jpg|figma-poster-s4.jpg|figma-poster-c4.jpg|figma-poster-m4.jpg|figma-poster-n4.jpg' | split: '|' %}
         {% assign fallback_titles = 'Quiet Figure|Yellow Field|City Studies|Blue Horizon|Night Transit|Paper Bird|Soft Geometry|Palm House|Green Room|Modern Ritual|Still Water|Sunset Lines' | split: '|' %}
         {% assign fallback_vendors = 'Sofia Lind|Hanna Peterson|Mika Ito|Aiko Tanaka|Alex Mclean|Fons Heijnsbroek|Nora King|Mila Anders|Joakim Nådell|Christian Lue|Tessa Ward|Anika Reed' | split: '|' %}
         {% assign fallback_prices = '$79.00|$89.00|$69.00|$99.00|$149.00|$129.00|$79.00|$109.00|$89.00|$119.00|$99.00|$79.00' | split: '|' %}
@@ -82,6 +86,7 @@
           {% if forloop.index <= 3 %}{% assign fallback_bestseller = true %}{% endif %}
           {% render 'collection-gallery-fallback-card',
             fallback_image: fallback_image,
+            fallback_hover_image: fallback_hover_images[fallback_index],
             fallback_title: fallback_titles[fallback_index],
             fallback_vendor: fallback_vendors[fallback_index],
             fallback_price: fallback_prices[fallback_index],

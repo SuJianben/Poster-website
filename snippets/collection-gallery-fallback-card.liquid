@@ -6,12 +6,23 @@
   <a class="cg-product-media" href="{{ collection.url }}" aria-label="{{ fallback_title | escape }}">
     {% if fallback_bestseller %}<span class="cg-badge">Bestseller</span>{% endif %}
     <img
+      class="cg-product-image"
       src="{{ fallback_image | asset_url }}"
       alt="{{ fallback_title | escape }}"
       width="900"
       height="1200"
       loading="lazy"
     >
+    {% if fallback_hover_image != blank %}
+      <img
+        class="cg-product-hover-image"
+        src="{{ fallback_hover_image | asset_url }}"
+        alt=""
+        width="900"
+        height="1200"
+        loading="lazy"
+      >
+    {% endif %}
   </a>
   <button class="cg-heart" type="button" data-cg-heart aria-pressed="false" aria-label="Save {{ fallback_title | escape }}"></button>
   <div class="cg-product-meta">
