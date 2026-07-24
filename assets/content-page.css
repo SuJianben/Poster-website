@@ -24,7 +24,7 @@
 .cp-body h2 { font-size: 31px; }
 .cp-body h3 { font-size: 25px; }
 .cp-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-.cp-article-image { display: block; width: auto; max-width: 68%; height: auto; margin: 0 auto 34px; border-radius: 3px; }
+.cp-article-image { display: block; width: auto; max-width: 58%; height: auto; margin: 0 auto 34px; border-radius: 3px; }
 
 @media (max-width: 750px) {
   .cp-page { width: min(100% - 28px, 1180px); padding: 92px 0 54px; }

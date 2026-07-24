@@ -10,7 +10,7 @@
 {% assign seo_intro = collection.metafields.custom.collection_seo_intro.value | default: section.settings.seo_intro %}
 {% assign seo_body = collection.metafields.custom.collection_seo_body.value | default: collection.description | default: section.settings.seo_body %}
 
-<section class="cg-collection" data-cg-collection data-columns="4">
+<section class="cg-collection" data-cg-collection data-cg-product-collection data-columns="4">
   <div class="cg-shell">
     <div class="cg-breadcrumb">{{ collection.title }}</div>
     <header class="cg-heading">
