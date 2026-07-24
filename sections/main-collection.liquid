@@ -49,7 +49,8 @@
     </div>
 
     <div class="cg-product-grid" aria-live="polite">
-      {% for product in collection.products %}
+      {% if collection.products_count > 0 %}
+        {% for product in collection.products %}
         {% assign product_types = product.type | downcase | replace: ' ', '-' %}
         {% assign product_tags = product.tags | join: '|' | downcase | replace: ' ', '-' %}
         <article class="cg-product" data-cg-product data-cg-types="{{ product_types }}|{{ product_tags }}">
@@ -66,9 +67,27 @@
             {% if product.vendor != blank %}<span class="cg-product-vendor">{{ product.vendor }}</span>{% endif %}
           </div>
         </article>
+        {% endfor %}
       {% else %}
-        <p>{{ 'general.no_products' | t }}</p>
-      {% endfor %}
+        {% assign fallback_images = 'figma-poster-a1.jpg|figma-poster-s1.jpg|figma-poster-c1.jpg|figma-poster-m1.jpg|figma-poster-n1.jpg|figma-poster-r1.jpg|figma-poster-t1.jpg|figma-poster-a2.jpg|figma-poster-s2.jpg|figma-poster-c2.jpg|figma-poster-m2.jpg|figma-poster-n2.jpg' | split: '|' %}
+        {% assign fallback_titles = 'Quiet Figure|Yellow Field|City Studies|Blue Horizon|Night Transit|Paper Bird|Soft Geometry|Palm House|Green Room|Modern Ritual|Still Water|Sunset Lines' | split: '|' %}
+        {% assign fallback_vendors = 'Sofia Lind|Hanna Peterson|Mika Ito|Aiko Tanaka|Alex Mclean|Fons Heijnsbroek|Nora King|Mila Anders|Joakim Nådell|Christian Lue|Tessa Ward|Anika Reed' | split: '|' %}
+        {% assign fallback_prices = '$79.00|$89.00|$69.00|$99.00|$149.00|$129.00|$79.00|$109.00|$89.00|$119.00|$99.00|$79.00' | split: '|' %}
+        {% for fallback_image in fallback_images %}
+          {% assign fallback_index = forloop.index0 %}
+          {% assign fallback_bestseller = false %}
+          {% if forloop.index <= 3 %}{% assign fallback_bestseller = true %}{% endif %}
+          {% render 'collection-gallery-fallback-card',
+            fallback_image: fallback_image,
+            fallback_title: fallback_titles[fallback_index],
+            fallback_vendor: fallback_vendors[fallback_index],
+            fallback_price: fallback_prices[fallback_index],
+            fallback_type: 'art-print',
+            fallback_style: 'gallery',
+            fallback_bestseller: fallback_bestseller
+          %}
+        {% endfor %}
+      {% endif %}
     </div>
 
     {% if section.settings.show_seo %}

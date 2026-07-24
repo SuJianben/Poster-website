@@ -1,0 +1,22 @@
+{% comment %}
+  Temporary storefront-only card used when a collection has no products.
+  Real collection products always take precedence in main-collection.liquid.
+{% endcomment %}
+<article class="cg-product" data-cg-product data-cg-types="{{ fallback_type | default: 'art-print' }}|{{ fallback_style | default: 'abstract' }}" data-cg-fallback>
+  <a class="cg-product-media" href="{{ collection.url }}" aria-label="{{ fallback_title | escape }}">
+    {% if fallback_bestseller %}<span class="cg-badge">Bestseller</span>{% endif %}
+    <img
+      src="{{ fallback_image | asset_url }}"
+      alt="{{ fallback_title | escape }}"
+      width="900"
+      height="1200"
+      loading="lazy"
+    >
+  </a>
+  <button class="cg-heart" type="button" data-cg-heart aria-pressed="false" aria-label="Save {{ fallback_title | escape }}"></button>
+  <div class="cg-product-meta">
+    <a class="cg-product-title" href="{{ collection.url }}">{{ fallback_title }}</a>
+    <span class="cg-product-price">From {{ fallback_price }}</span>
+    <span class="cg-product-vendor">{{ fallback_vendor }}</span>
+  </div>
+</article>
