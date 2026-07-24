@@ -79,8 +79,10 @@
       <div class="cg-filter-group">
         <h3>Product type</h3>
         {% for type in collection.all_types %}
-          {% assign filter_value = type | downcase | replace: ' ', '-' %}
-          <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ type }}</label>
+          {% if type != blank %}
+            {% assign filter_value = type | downcase | replace: ' ', '-' %}
+            <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ type }}</label>
+          {% endif %}
         {% endfor %}
       </div>
       {% if collection.all_tags.size > 0 %}
