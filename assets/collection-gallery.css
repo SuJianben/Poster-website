@@ -54,7 +54,7 @@
 .cg-product-price { color: #3f4443; white-space: nowrap; }
 .cg-product-vendor { grid-column: 1 / -1; color: var(--cg-muted); }
 
-.cg-pagination { display: flex; align-items: center; gap: 16px; padding: 42px 0 14px; }
+.cg-pagination { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 42px 0 14px; }
 .cg-pagination[hidden] { display: none; }
 .cg-pagination button { display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid #2d3030; background: #fff; color: #2d3030; font: 600 10px/1 var(--sans); cursor: pointer; }
 .cg-pagination button.is-current { background: #373b3c; color: #fff; }
