@@ -9,6 +9,11 @@
   const filterInputs = root.querySelectorAll('[data-cg-filter]');
   const cards = root.querySelectorAll('[data-cg-product]');
   const categoryLinks = root.querySelectorAll('.cg-category-nav a');
+  const pagination = root.querySelector('[data-cg-pagination]');
+  const pageButtons = root.querySelectorAll('[data-cg-page]');
+  const nextPageButton = root.querySelector('[data-cg-next]');
+  const pageSize = 8;
+  let currentPage = 1;
 
   const setDrawer = (open) => {
     drawer.classList.toggle('is-open', open);
@@ -22,6 +27,22 @@
       const types = (card.dataset.cgTypes || '').split('|');
       card.classList.toggle('is-filtered', filters.length > 0 && !filters.some((type) => types.includes(type)));
     });
+    setPage(1);
+  };
+
+  const setPage = (page) => {
+    const visibleCards = [...cards].filter((card) => !card.classList.contains('is-filtered'));
+    const pageCount = Math.max(1, Math.ceil(visibleCards.length / pageSize));
+    currentPage = Math.min(Math.max(page, 1), pageCount);
+    visibleCards.forEach((card, index) => card.classList.toggle('is-page-hidden', Math.floor(index / pageSize) + 1 !== currentPage));
+    pagination?.toggleAttribute('hidden', pageCount < 2);
+    pageButtons.forEach((button) => {
+      const buttonPage = Number(button.dataset.cgPage);
+      button.hidden = buttonPage > pageCount;
+      button.classList.toggle('is-current', buttonPage === currentPage);
+      button.toggleAttribute('aria-current', buttonPage === currentPage);
+    });
+    nextPageButton?.toggleAttribute('disabled', currentPage === pageCount);
   };
 
   triggers.forEach((button) => button.addEventListener('click', () => setDrawer(true)));
@@ -39,6 +60,8 @@
   }));
 
   filterInputs.forEach((input) => input.addEventListener('change', applyFilters));
+  pageButtons.forEach((button) => button.addEventListener('click', () => setPage(Number(button.dataset.cgPage))));
+  nextPageButton?.addEventListener('click', () => setPage(currentPage + 1));
   root.querySelector('[data-cg-clear]')?.addEventListener('click', () => {
     filterInputs.forEach((input) => { input.checked = false; });
     applyFilters();
@@ -51,4 +74,5 @@
     categoryLinks.forEach((item) => item.classList.remove('is-current'));
     link.classList.add('is-current');
   }));
+  setPage(1);
 })();

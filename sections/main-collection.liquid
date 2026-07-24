@@ -93,6 +93,12 @@
       {% endunless %}
     </div>
 
+    <nav class="cg-pagination" data-cg-pagination aria-label="Product pages">
+      <button class="is-current" type="button" data-cg-page="1" aria-current="page">1</button>
+      <button type="button" data-cg-page="2">2</button>
+      <button class="cg-pagination__next" type="button" data-cg-next aria-label="Next page">›</button>
+    </nav>
+
     {% if section.settings.show_seo %}
       <section class="cg-seo" aria-labelledby="cg-seo-title">
         <h2 id="cg-seo-title">{{ seo_title }}</h2>
