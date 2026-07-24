@@ -1,7 +1,10 @@
 {{ 'collection-gallery.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
 
+{% assign show_fallback_products = section.settings.use_fallback_products %}
+{% if collection.products_count == 0 %}{% assign show_fallback_products = true %}{% endif %}
 {% assign collection_count = collection.products_count %}
+{% if show_fallback_products %}{% assign collection_count = 12 %}{% endif %}
 {% assign category_labels = section.settings.category_labels | split: ',' %}
 {% assign seo_title = collection.metafields.custom.collection_seo_title.value | default: collection.title %}
 {% assign seo_intro = collection.metafields.custom.collection_seo_intro.value | default: section.settings.seo_intro %}
@@ -49,7 +52,7 @@
     </div>
 
     <div class="cg-product-grid" aria-live="polite">
-      {% if collection.products_count > 0 %}
+      {% unless show_fallback_products %}
         {% for product in collection.products %}
         {% assign product_types = product.type | downcase | replace: ' ', '-' %}
         {% assign product_tags = product.tags | join: '|' | downcase | replace: ' ', '-' %}
@@ -87,7 +90,7 @@
             fallback_bestseller: fallback_bestseller
           %}
         {% endfor %}
-      {% endif %}
+      {% endunless %}
     </div>
 
     {% if section.settings.show_seo %}
@@ -108,14 +111,23 @@
       </div>
       <div class="cg-filter-group">
         <h3>Product type</h3>
-        {% for type in collection.all_types %}
-          {% if type != blank %}
-            {% assign filter_value = type | downcase | replace: ' ', '-' %}
-            <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ type }}</label>
-          {% endif %}
-        {% endfor %}
+        {% if show_fallback_products %}
+          <label class="cg-filter-option"><input type="checkbox" value="art-print" data-cg-filter> Art print</label>
+        {% else %}
+          {% for type in collection.all_types %}
+            {% if type != blank %}
+              {% assign filter_value = type | downcase | replace: ' ', '-' %}
+              <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ type }}</label>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
       </div>
-      {% if collection.all_tags.size > 0 %}
+      {% if show_fallback_products %}
+        <div class="cg-filter-group">
+          <h3>Style</h3>
+          <label class="cg-filter-option"><input type="checkbox" value="gallery" data-cg-filter> Gallery</label>
+        </div>
+      {% elsif collection.all_tags.size > 0 %}
         <div class="cg-filter-group">
           <h3>Style</h3>
           {% for tag in collection.all_tags limit: 8 %}
@@ -147,6 +159,12 @@
       "id": "category_labels",
       "label": "Category navigation labels",
       "default": "Living room, Bedroom, Kitchen, Bathroom, Home Office"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_fallback_products",
+      "label": "Use fallback gallery products",
+      "default": true
     },
     {
       "type": "checkbox",
