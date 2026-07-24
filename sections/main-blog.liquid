@@ -1,2 +1,63 @@
-<section class="generic-page"><div class="page-width"><span class="eyebrow">Journal</span><h1 class="display" style="font-size:clamp(44px,6vw,76px)">{{ blog.title }}</h1><div class="product-grid">{% for article in blog.articles %}<article><a class="poster-card__image" href="{{ article.url }}">{% if article.image %}{{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title }}{% endif %}</a><h2 class="display" style="font-size:25px">{{ article.title }}</h2><p style="color:var(--muted)">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p></article>{% endfor %}</div></div></section>
-{% schema %}{"name":"Main blog","settings":[]}{% endschema %}
+{{ 'blog-stories.css' | asset_url | stylesheet_tag }}
+
+{% assign story_count = blog.articles_count %}
+{% if story_count == 0 %}{% assign story_count = 8 %}{% endif %}
+{% assign story_categories = 'Curated By,Home Stories,Journal' | split: ',' %}
+
+<section class="bs-stories">
+  <div class="bs-stories__intro">
+    <h1>{{ blog.title | default: 'Stories' }} <span>({{ story_count }})</span></h1>
+    {% if blog.description != blank %}
+      <div class="bs-stories__description">{{ blog.description }}</div>
+    {% else %}
+      <p>Stories is our destination for inspiration, bringing together curated art selections, creative conversations, and homes filled with personality. Discover how artists, designers, and our community live with art, style their spaces, and find beauty in everyday moments.</p>
+    {% endif %}
+  </div>
+
+  <nav class="bs-stories__nav" aria-label="Story categories">
+    {% for category in story_categories %}
+      {% assign category_label = category | strip %}
+      <a class="{% if forloop.first %}is-current{% endif %}" href="{{ blog.url }}/tagged/{{ category_label | handleize }}">{{ category_label }}</a>
+    {% endfor %}
+  </nav>
+
+  <div class="bs-stories__grid">
+    {% for article in blog.articles %}
+      <article class="bs-story-card">
+        <a class="bs-story-card__media" href="{{ article.url }}" aria-label="{{ article.title | escape }}">
+          <span class="bs-story-card__tag">{{ article.tags.first | default: 'Curated By' }}</span>
+          {% if article.image %}
+            {{ article.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '480,720,960,1400', alt: article.title }}
+          {% endif %}
+        </a>
+        <div class="bs-story-card__meta">
+          <a href="{{ article.url }}">{{ article.title }}</a>
+          <p>{{ article.excerpt_or_content | strip_html | truncate: 115 }}</p>
+        </div>
+      </article>
+    {% else %}
+      {% assign fallback_images = 'figma-lifestyle-hero.jpg|figma-lifestyle-nordic.jpg|figma-lifestyle-cinematic.jpg|reference-gallery-01.jpg|reference-gallery-02.jpg|reference-gallery-03.jpg|reference-gallery-04.jpg|reference-gallery-05.jpg' | split: '|' %}
+      {% assign fallback_titles = 'At Home With Clara|The Art of Living Well|A New Perspective|Collecting With Intention|Rooms With Stories|Inside the Studio|The Everyday Gallery|Objects of Affection' | split: '|' %}
+      {% for fallback_image in fallback_images %}
+        {% assign fallback_index = forloop.index0 %}
+        <article class="bs-story-card" data-bs-fallback>
+          <a class="bs-story-card__media" href="{{ blog.url }}" aria-label="{{ fallback_titles[fallback_index] | escape }}">
+            <span class="bs-story-card__tag">Curated By</span>
+            <img src="{{ fallback_image | asset_url }}" alt="{{ fallback_titles[fallback_index] | escape }}" width="1400" height="1750" loading="lazy">
+          </a>
+          <div class="bs-story-card__meta">
+            <a href="{{ blog.url }}">{{ fallback_titles[fallback_index] }}</a>
+            <p>Explore the people, places and art that make a home feel personal.</p>
+          </div>
+        </article>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main blog",
+  "settings": []
+}
+{% endschema %}
