@@ -26,7 +26,17 @@
           </div>
           <div class="ps-main-media">
             {% if selected_media %}
-              {{ selected_media.preview_image | image_url: width: 1800 | image_tag: class: 'ps-main-media__image', loading: 'eager', widths: '640,900,1200,1600,1800', alt: selected_media.alt | default: product.title, data_ps_main_image: '' }}
+              <img
+                class="ps-main-media__image"
+                data-ps-main-image
+                src="{{ selected_media.preview_image | image_url: width: 1800 }}"
+                srcset="{{ selected_media.preview_image | image_url: width: 640 }} 640w, {{ selected_media.preview_image | image_url: width: 900 }} 900w, {{ selected_media.preview_image | image_url: width: 1200 }} 1200w, {{ selected_media.preview_image | image_url: width: 1600 }} 1600w, {{ selected_media.preview_image | image_url: width: 1800 }} 1800w"
+                sizes="(min-width: 901px) 58vw, 100vw"
+                width="{{ selected_media.preview_image.width }}"
+                height="{{ selected_media.preview_image.height }}"
+                loading="eager"
+                alt="{{ selected_media.alt | default: product.title | escape }}"
+              >
             {% else %}
               <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
             {% endif %}
@@ -109,11 +119,13 @@
     <div><strong>30 days return right</strong><span>Easy returns when eligible.</span></div>
   </section>
 
-  {% if section.settings.lifestyle_image %}
-    <div class="ps-lifestyle">
+  <div class="ps-lifestyle">
+    {% if section.settings.lifestyle_image %}
       {{ section.settings.lifestyle_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: product.title }}
-    </div>
-  {% endif %}
+    {% else %}
+      <img src="{{ 'figma-lifestyle-hero.jpg' | asset_url }}" width="2200" height="1240" loading="lazy" alt="{{ product.title | escape }} in a styled interior">
+    {% endif %}
+  </div>
 
   <section class="ps-description-shell">
     <div class="ps-description-tabs"><span class="is-active">Description</span><span>Fair pricing</span><span>Artist information</span><span>Material & workmanship</span><span>Shipping and returns</span></div>
