@@ -1,57 +1,69 @@
-{{ 'blog-stories.css' | asset_url | stylesheet_tag }}
+{{ 'collection-gallery.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
 
 {% assign story_count = blog.articles_count %}
-{% if story_count == 0 %}{% assign story_count = 8 %}{% endif %}
+{% if story_count == 0 %}{% assign story_count = 12 %}{% endif %}
 {% assign story_categories = 'Curated By,Home Stories,Journal' | split: ',' %}
 
-<section class="bs-stories">
-  <div class="bs-stories__intro">
-    <h1>{{ blog.title | default: 'Stories' }} <span>({{ story_count }})</span></h1>
-    {% if blog.description != blank %}
-      <div class="bs-stories__description">{{ blog.description }}</div>
-    {% else %}
-      <p>Stories is our destination for inspiration, bringing together curated art selections, creative conversations, and homes filled with personality. Discover how artists, designers, and our community live with art, style their spaces, and find beauty in everyday moments.</p>
-    {% endif %}
-  </div>
+<section class="cg-collection" data-cg-collection data-columns="4">
+  <div class="cg-shell">
+    <div class="cg-breadcrumb">{{ blog.title | default: 'Stories' }}</div>
+    <header class="cg-heading">
+      <h1>{{ blog.title | default: 'Stories' }} <span>({{ story_count }})</span></h1>
+      {% if blog.description != blank %}
+        <div>{{ blog.description }}</div>
+      {% else %}
+        <p>Stories is our destination for inspiration, bringing together curated art selections, creative conversations, and homes filled with personality. Discover how artists, designers, and our community live with art, style their spaces, and find beauty in everyday moments.</p>
+      {% endif %}
+    </header>
 
-  <nav class="bs-stories__nav" aria-label="Story categories">
-    {% for category in story_categories %}
-      {% assign category_label = category | strip %}
-      <a class="{% if forloop.first %}is-current{% endif %}" href="{{ blog.url }}/tagged/{{ category_label | handleize }}">{{ category_label }}</a>
-    {% endfor %}
-  </nav>
+    <nav class="cg-category-nav" aria-label="Story categories">
+      {% for category in story_categories %}
+        {% assign category_label = category | strip %}
+        <a class="{% if forloop.first %}is-current{% endif %}" href="{{ blog.url }}/tagged/{{ category_label | handleize }}">{{ category_label }}</a>
+      {% endfor %}
+    </nav>
 
-  <div class="bs-stories__grid">
-    {% for article in blog.articles %}
-      <article class="bs-story-card">
-        <a class="bs-story-card__media" href="{{ article.url }}" aria-label="{{ article.title | escape }}">
-          <span class="bs-story-card__tag">{{ article.tags.first | default: 'Curated By' }}</span>
-          {% if article.image %}
-            {{ article.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '480,720,960,1400', alt: article.title }}
-          {% endif %}
-        </a>
-        <div class="bs-story-card__meta">
-          <a href="{{ article.url }}">{{ article.title }}</a>
-          <p>{{ article.excerpt_or_content | strip_html | truncate: 115 }}</p>
-        </div>
-      </article>
-    {% else %}
-      {% assign fallback_images = 'figma-lifestyle-hero.jpg|figma-lifestyle-nordic.jpg|figma-lifestyle-cinematic.jpg|reference-gallery-01.jpg|reference-gallery-02.jpg|reference-gallery-03.jpg|reference-gallery-04.jpg|reference-gallery-05.jpg' | split: '|' %}
-      {% assign fallback_titles = 'At Home With Clara|The Art of Living Well|A New Perspective|Collecting With Intention|Rooms With Stories|Inside the Studio|The Everyday Gallery|Objects of Affection' | split: '|' %}
-      {% for fallback_image in fallback_images %}
-        {% assign fallback_index = forloop.index0 %}
-        <article class="bs-story-card" data-bs-fallback>
-          <a class="bs-story-card__media" href="{{ blog.url }}" aria-label="{{ fallback_titles[fallback_index] | escape }}">
-            <span class="bs-story-card__tag">Curated By</span>
-            <img src="{{ fallback_image | asset_url }}" alt="{{ fallback_titles[fallback_index] | escape }}" width="1400" height="1750" loading="lazy">
+    <div class="cg-product-grid" aria-live="polite">
+      {% for article in blog.articles %}
+        <article class="cg-product" data-cg-product>
+          <a class="cg-product-media" href="{{ article.url }}" aria-label="{{ article.title | escape }}">
+            <span class="cg-badge">{{ article.tags.first | default: 'Curated By' }}</span>
+            {% if article.image %}
+              {{ article.image | image_url: width: 1200 | image_tag: class: 'cg-product-image', loading: 'lazy', widths: '320,480,640,800,1200', alt: article.title }}
+            {% endif %}
           </a>
-          <div class="bs-story-card__meta">
-            <a href="{{ blog.url }}">{{ fallback_titles[fallback_index] }}</a>
-            <p>Explore the people, places and art that make a home feel personal.</p>
+          <div class="cg-product-meta">
+            <a class="cg-product-title" href="{{ article.url }}">{{ article.title }}</a>
+            <span class="cg-product-price">{{ article.published_at | date: '%b %d, %Y' }}</span>
+            {% if article.author != blank %}<span class="cg-product-vendor">{{ article.author }}</span>{% endif %}
           </div>
         </article>
+      {% else %}
+        {% assign fallback_images = 'figma-lifestyle-hero.jpg|figma-lifestyle-nordic.jpg|figma-lifestyle-cinematic.jpg|reference-gallery-01.jpg|reference-gallery-02.jpg|reference-gallery-03.jpg|reference-gallery-04.jpg|reference-gallery-05.jpg|reference-gallery-06.jpg|reference-tilted-01.jpg|reference-tilted-02.jpg|reference-tilted-03.jpg' | split: '|' %}
+        {% assign fallback_titles = 'At Home With Clara|The Art of Living Well|A New Perspective|Collecting With Intention|Rooms With Stories|Inside the Studio|The Everyday Gallery|Objects of Affection|The Colour of Home|A Quiet Weekend|Notes on Craft|Living With Art' | split: '|' %}
+        {% for fallback_image in fallback_images %}
+          {% assign fallback_index = forloop.index0 %}
+          <article class="cg-product" data-cg-product data-cg-fallback>
+            <a class="cg-product-media" href="{{ blog.url }}" aria-label="{{ fallback_titles[fallback_index] | escape }}">
+              <span class="cg-badge">Curated By</span>
+              <img class="cg-product-image" src="{{ fallback_image | asset_url }}" alt="{{ fallback_titles[fallback_index] | escape }}" width="1200" height="1500" loading="lazy">
+            </a>
+            <div class="cg-product-meta">
+              <a class="cg-product-title" href="{{ blog.url }}">{{ fallback_titles[fallback_index] }}</a>
+              <span class="cg-product-price">Journal</span>
+              <span class="cg-product-vendor">Poster Store</span>
+            </div>
+          </article>
+        {% endfor %}
       {% endfor %}
-    {% endfor %}
+    </div>
+
+    <nav class="cg-pagination" data-cg-pagination aria-label="Story pages">
+      <button class="is-current" type="button" data-cg-page="1" aria-current="page">1</button>
+      <button type="button" data-cg-page="2">2</button>
+      <button class="cg-pagination__next" type="button" data-cg-next aria-label="Next page">›</button>
+    </nav>
   </div>
 </section>
 
