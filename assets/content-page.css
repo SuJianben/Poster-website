@@ -14,7 +14,7 @@
 .cp-actions button { display: grid; width: 24px; height: 24px; place-items: center; border: 0; border-radius: 3px; background: transparent; color: #5b6367; cursor: pointer; }
 .cp-actions button:hover, .cp-actions button:focus-visible { background: #f2f3f2; color: #1e2223; outline: 0; }
 .cp-actions svg { width: 17px; height: 17px; }
-.cp-body { max-width: 900px; padding: 48px; color: #41474b; font: 400 18px/1.55 var(--display); }
+.cp-body { padding: 48px; color: #41474b; font: 400 18px/1.55 var(--display); }
 .cp-body > :first-child { margin-top: 0; }
 .cp-body > :last-child { margin-bottom: 0; }
 .cp-body p, .cp-body ul, .cp-body ol { margin: 0 0 27px; }
@@ -24,7 +24,7 @@
 .cp-body h2 { font-size: 31px; }
 .cp-body h3 { font-size: 25px; }
 .cp-body a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-.cp-article-image { display: block; width: 100%; height: auto; margin: 0 0 34px; border-radius: 3px; }
+.cp-article-image { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto 34px; border-radius: 3px; }
 
 @media (max-width: 750px) {
   .cp-page { width: min(100% - 28px, 1180px); padding: 92px 0 54px; }
