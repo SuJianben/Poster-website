@@ -3,6 +3,9 @@
 
 {% assign collection_count = collection.products_count %}
 {% assign category_labels = section.settings.category_labels | split: ',' %}
+{% assign seo_title = collection.metafields.custom.collection_seo_title.value | default: collection.title %}
+{% assign seo_intro = collection.metafields.custom.collection_seo_intro.value | default: section.settings.seo_intro %}
+{% assign seo_body = collection.metafields.custom.collection_seo_body.value | default: collection.description | default: section.settings.seo_body %}
 
 <section class="cg-collection" data-cg-collection data-columns="4">
   <div class="cg-shell">
@@ -67,6 +70,14 @@
         <p>{{ 'general.no_products' | t }}</p>
       {% endfor %}
     </div>
+
+    {% if section.settings.show_seo %}
+      <section class="cg-seo" aria-labelledby="cg-seo-title">
+        <h2 id="cg-seo-title">{{ seo_title }}</h2>
+        {% if seo_intro != blank %}<p class="cg-seo__lead">{{ seo_intro }}</p>{% endif %}
+        {% if seo_body != blank %}<div>{{ seo_body }}</div>{% endif %}
+      </section>
+    {% endif %}
   </div>
 
   <div class="cg-drawer" data-cg-drawer aria-hidden="true">
@@ -117,6 +128,24 @@
       "id": "category_labels",
       "label": "Category navigation labels",
       "default": "Living room, Bedroom, Kitchen, Bathroom, Home Office"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_seo",
+      "label": "Show collection SEO content",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "seo_intro",
+      "label": "SEO fallback intro",
+      "default": "Discover a curated selection created to bring a distinct point of view to your space."
+    },
+    {
+      "type": "richtext",
+      "id": "seo_body",
+      "label": "SEO fallback body",
+      "default": "<p>Explore art chosen for its character, colour and lasting visual presence. Each piece is designed to help make your room feel personal and complete.</p>"
     }
   ]
 }

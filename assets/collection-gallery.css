@@ -31,7 +31,7 @@
 .cg-segment button { min-width: 29px; padding: 0 8px; border: 0; border-right: 1px solid #d9d9d7; background: #fff; color: #767b7c; font-size: 10px; cursor: pointer; }
 .cg-segment button:last-child { border-right: 0; }
 .cg-segment button.is-active { color: var(--cg-ink); background: #f3f3f1; font-weight: 700; }
-.cg-filter-trigger { display: inline-flex; min-width: 86px; height: 25px; align-items: center; justify-content: center; gap: 7px; border: 1px solid #bfc0bd; background: #fff; color: #757979; font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+.cg-filter-trigger { display: inline-flex; min-width: 86px; height: 25px; align-items: center; justify-content: center; gap: 7px; border: 1px solid #bfc0bd; background: #fff; color: var(--cg-muted); font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; }
 .cg-filter-trigger svg { width: 13px; height: 13px; }
 
 .cg-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px var(--cg-gap); padding-top: 12px; }
@@ -52,6 +52,12 @@
 .cg-product-title { overflow: hidden; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
 .cg-product-price { color: #3f4443; white-space: nowrap; }
 .cg-product-vendor { grid-column: 1 / -1; color: var(--cg-muted); }
+
+.cg-seo { max-width: 780px; padding: 82px 6px 6px; color: var(--cg-muted); }
+.cg-seo h2 { margin: 0 0 10px; color: var(--cg-ink); font: 500 clamp(28px, 2.4vw, 37px)/1.05 var(--display); letter-spacing: -.025em; }
+.cg-seo__lead { margin: 0 0 13px; font-size: 13px; line-height: 1.5; }
+.cg-seo p { margin: 0 0 12px; font-size: 13px; line-height: 1.52; }
+.cg-seo a { color: var(--cg-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
 
 .cg-drawer { position: fixed; z-index: 100; inset: 0; visibility: hidden; pointer-events: none; }
 .cg-drawer.is-open { visibility: visible; pointer-events: auto; }
@@ -88,6 +94,9 @@ body.cg-drawer-active { overflow: hidden; }
   .cg-product-media img { width: 82%; height: 80%; }
   .cg-product-meta { padding: 7px 1px 0; font-size: 11px; }
   .cg-product-vendor { font-size: 10px; }
+  .cg-seo { padding: 54px 0 4px; }
+  .cg-seo h2 { font-size: 28px; }
+  .cg-seo__lead, .cg-seo p { font-size: 12px; }
   .cg-badge { top: 6px; left: 6px; font-size: 7px; }
   .cg-heart { top: 4px; right: 3px; }
   .cg-drawer__panel { width: min(90vw, 390px); padding: 22px; }
