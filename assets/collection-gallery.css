@@ -26,12 +26,12 @@
 
 .cg-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; border-bottom: 1px solid var(--cg-line); }
 .cg-tool-group { display: flex; align-items: center; gap: 8px; }
-.cg-toolbar-label { color: var(--cg-muted); font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+.cg-toolbar-label { color: var(--cg-muted); font: 600 10px/1 var(--sans); letter-spacing: .05em; text-transform: uppercase; }
 .cg-segment { display: flex; height: 24px; border: 1px solid #cfd0ce; }
 .cg-segment button { min-width: 29px; padding: 0 8px; border: 0; border-right: 1px solid #d9d9d7; background: #fff; color: #767b7c; font-size: 10px; cursor: pointer; }
 .cg-segment button:last-child { border-right: 0; }
 .cg-segment button.is-active { color: var(--cg-ink); background: #f3f3f1; font-weight: 700; }
-.cg-filter-trigger { display: inline-flex; min-width: 86px; height: 25px; align-items: center; justify-content: center; gap: 7px; border: 1px solid #bfc0bd; background: #fff; color: var(--cg-muted); font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; }
+.cg-filter-trigger { display: inline-flex; min-width: 86px; height: 25px; align-items: center; justify-content: center; gap: 7px; border: 1px solid #bfc0bd; background: #fff; color: var(--cg-muted); font: 600 10px/1 var(--sans) !important; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; }
 .cg-filter-trigger svg { width: 13px; height: 13px; }
 
 .cg-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px var(--cg-gap); padding-top: 12px; }
