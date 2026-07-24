@@ -42,20 +42,6 @@
             {% endif %}
           </div>
         </div>
-        <div class="ps-left-details">
-          <details open>
-            <summary>Product details <span>+</span></summary>
-            <div class="ps-detail-content rte">{{ product.description | default: '<p>Made to order with carefully selected materials and designed to bring character to your space.</p>' }}</div>
-          </details>
-          <details>
-            <summary>Material & workmanship <span>+</span></summary>
-            <div class="ps-detail-content"><p>Printed with archival-quality inks and prepared with care for a long-lasting finish.</p></div>
-          </details>
-          <details>
-            <summary>Shipping and returns <span>+</span></summary>
-            <div class="ps-detail-content"><p>Each order is made for you. Delivery estimates are shown before checkout.</p></div>
-          </details>
-        </div>
       </div>
 
       <aside class="ps-purchase" aria-label="Purchase {{ product.title | escape }}">
@@ -108,6 +94,23 @@
           <li>Estimated delivery shown at checkout</li>
         </ul>
       </aside>
+    </div>
+
+    <div class="ps-left-details-grid">
+      <div class="ps-left-details">
+        <details open>
+          <summary>Product details <span>+</span></summary>
+          <div class="ps-detail-content rte">{{ product.description | default: '<p>Made to order with carefully selected materials and designed to bring character to your space.</p>' }}</div>
+        </details>
+        <details>
+          <summary>Material & workmanship <span>+</span></summary>
+          <div class="ps-detail-content"><p>Printed with archival-quality inks and prepared with care for a long-lasting finish.</p></div>
+        </details>
+        <details>
+          <summary>Shipping and returns <span>+</span></summary>
+          <div class="ps-detail-content"><p>Each order is made for you. Delivery estimates are shown before checkout.</p></div>
+        </details>
+      </div>
     </div>
 
   </div>
