@@ -56,5 +56,9 @@
 
   root.querySelectorAll('[data-ps-media]').forEach((thumbnail) => thumbnail.addEventListener('click', () => setMedia(thumbnail.dataset.mediaId)));
   root.querySelectorAll('[data-ps-option-group] input').forEach((input) => input.addEventListener('change', updateVariant));
+  root.querySelectorAll('[data-ps-choice-group]').forEach((group) => group.querySelectorAll('[data-ps-choice]').forEach((choice) => choice.addEventListener('click', () => {
+    group.querySelectorAll('[data-ps-choice]').forEach((item) => item.classList.remove('is-selected'));
+    choice.classList.add('is-selected');
+  })));
   form?.addEventListener('submit', () => { if (addButton && !addButton.disabled) addLabel.textContent = 'Adding…'; });
 })();

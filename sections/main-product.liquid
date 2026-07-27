@@ -69,6 +69,36 @@
         </div>
         <p class="ps-shipping-note">Free shipping on qualifying orders.</p>
 
+        <div class="ps-product-config" aria-label="Product configuration">
+          <div class="ps-config-group">
+            <p class="ps-config-label">Material: <strong>Canvas</strong></p>
+            <div class="ps-config-options" data-ps-choice-group>
+              <button type="button" data-ps-choice>Poster</button>
+              <button type="button" class="is-selected" data-ps-choice>Canvas</button>
+              <button type="button" data-ps-choice>Acrylic</button>
+            </div>
+          </div>
+          <div class="ps-config-group">
+            <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong>40 x 30 cm</strong></p><button type="button" class="ps-size-guide">Size guide</button></div>
+            <div class="ps-config-options ps-config-options--size" data-ps-choice-group>
+              <button type="button" class="is-selected" data-ps-choice>16&quot; x 12&quot;</button>
+              <button type="button" data-ps-choice>30&quot; x 20&quot;</button>
+              <button type="button" data-ps-choice>40&quot; x 30&quot;</button>
+              <button type="button" data-ps-choice>48&quot; x 36&quot;</button>
+              <button type="button" data-ps-choice>63&quot; x 47&quot;</button>
+            </div>
+          </div>
+          <div class="ps-config-group">
+            <p class="ps-config-label">Premium frame: <strong>No frame</strong></p>
+            <div class="ps-frame-options" data-ps-choice-group>
+              <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice aria-label="Natural frame"></button>
+              <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice aria-label="White frame"></button>
+              <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice aria-label="Black frame"></button>
+            </div>
+          </div>
+          <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
+        </div>
+
         {% form 'product', product, class: 'ps-form', data_ps_form: '' %}
           <input type="hidden" name="id" value="{{ selected_variant.id }}" data-ps-variant-input>
           {% unless product.has_only_default_variant %}
@@ -104,9 +134,14 @@
         </div>
         <ul class="ps-assurances">
           <li>Immediately ready to hang</li>
-          <li>Securely packed for delivery</li>
-          <li>Estimated delivery shown at checkout</li>
+          <li>Free worldwide shipping over $49</li>
+          <li>Estimated delivery: Jul 29 - Jul 31</li>
         </ul>
+        <div class="ps-payment-block">
+          <p>Securely packaged &amp; paid</p>
+          <div class="ps-payment-badges" aria-label="Accepted payment methods"><span>AMEX</span><span>Apple Pay</span><span>blik</span><span>G Pay</span><span>MC</span><span>PayPal</span><span>VISA</span><span>Klarna</span></div>
+          <small>♢ Special packaging for art galleries</small>
+        </div>
       </aside>
     </div>
 
