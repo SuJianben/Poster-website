@@ -55,6 +55,17 @@
   };
 
   root.querySelectorAll('[data-ps-media]').forEach((thumbnail) => thumbnail.addEventListener('click', () => setMedia(thumbnail.dataset.mediaId)));
+  root.querySelectorAll('[data-ps-accordion]').forEach((accordion) => {
+    const trigger = accordion.querySelector('[data-ps-accordion-trigger]');
+    const panel = accordion.querySelector('[data-ps-accordion-panel]');
+    if (!trigger || !panel) return;
+
+    trigger.addEventListener('click', () => {
+      const isOpen = accordion.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', String(isOpen));
+      panel.setAttribute('aria-hidden', String(!isOpen));
+    });
+  });
   root.querySelectorAll('[data-ps-option-group] input').forEach((input) => input.addEventListener('change', updateVariant));
   root.querySelectorAll('[data-ps-choice-group]').forEach((group) => group.querySelectorAll('[data-ps-choice]').forEach((choice) => choice.addEventListener('click', () => {
     group.querySelectorAll('[data-ps-choice]').forEach((item) => item.classList.remove('is-selected'));
