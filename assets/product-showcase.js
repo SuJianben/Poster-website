@@ -107,5 +107,25 @@
     const output = group.parentElement?.querySelector('[data-ps-choice-output]');
     if (output) output.textContent = choice.dataset.psFrameName || choice.textContent.trim();
   })));
-  form?.addEventListener('submit', () => { if (addButton && !addButton.disabled) addLabel.textContent = 'Adding…'; });
+  form?.addEventListener('submit', async (event) => {
+    if (!addButton || addButton.disabled) return;
+    event.preventDefault();
+    addButton.disabled = true;
+    addLabel.textContent = 'Adding…';
+    try {
+      const response = await fetch('/cart/add.js', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+      if (!response.ok) throw new Error('Could not add this item to cart.');
+      const cartResponse = await fetch('/cart.js', { headers: { Accept: 'application/json' } });
+      if (!cartResponse.ok) throw new Error('Could not refresh cart.');
+      const cart = await cartResponse.json();
+      document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart } }));
+      addLabel.textContent = 'Added to cart';
+    } catch (error) {
+      status.textContent = error.message || 'Could not add this item to cart.';
+      addLabel.textContent = 'Try again';
+    } finally {
+      addButton.disabled = false;
+      window.setTimeout(() => updateVariant(), 900);
+    }
+  });
 })();
