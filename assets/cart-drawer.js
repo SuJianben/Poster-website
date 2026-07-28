@@ -1,4 +1,5 @@
 (() => {
+  const init = () => {
   const drawer = document.querySelector('[data-cart-drawer]');
   if (!drawer) return;
 
@@ -78,5 +79,15 @@
     open();
   });
   document.addEventListener('cart:updated', (event) => { if (event.detail?.cart) window.CartDrawer.open(event.detail.cart); });
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && drawer.classList.contains('is-open')) close(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && drawer.classList.contains('is-open')) close(); });
+  };
+
+  // The drawer markup is rendered at the bottom of the layout while this
+  // deferred asset is loaded in the head. Initialise only after that markup
+  // exists so product-page AJAX adds and the header link share one drawer.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
 })();
