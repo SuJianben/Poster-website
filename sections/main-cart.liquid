@@ -16,7 +16,7 @@
       {% form 'cart', cart, class: 'cp-cart__form' %}
         <div class="cp-cart__layout">
           <div class="cp-cart__items-panel">
-            <h1>Your cart (<span>{{ cart.item_count }}</span>)</h1>
+            <h1>Your cart (<span data-cart-page-count>{{ cart.item_count }}</span>)</h1>
             <div class="cp-cart__items">
               {% for item in cart.items %}
                 <article class="cp-cart__item" data-cart-page-line="{{ item.key }}">
@@ -43,7 +43,6 @@
                 </article>
               {% endfor %}
             </div>
-            <button class="cp-cart__update" type="submit" name="update">Update cart</button>
           </div>
 
           <aside class="cp-cart__summary" aria-label="Order summary">

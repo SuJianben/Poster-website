@@ -7,6 +7,8 @@
   }).format(cents / 100);
   const refreshCartUi = (cart) => {
     document.querySelectorAll('.cart-count').forEach((badge) => { badge.textContent = cart.item_count; badge.hidden = cart.item_count === 0; });
+    const titleCount = page.querySelector('[data-cart-page-count]');
+    if (titleCount) titleCount.textContent = cart.item_count;
     const total = page.querySelector('[data-cart-page-total]');
     if (total) total.textContent = money(cart.total_price);
     cart.items.forEach((item) => {
