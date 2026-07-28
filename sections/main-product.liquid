@@ -177,8 +177,35 @@
   </div>
 
   <section class="ps-description-shell">
-    <div class="ps-description-tabs"><span class="is-active">Description</span><span>Fair pricing</span><span>Artist information</span><span>Material & workmanship</span><span>Shipping and returns</span></div>
-    <div class="ps-description rte">{{ product.description }}</div>
+    <div class="ps-description-tabs" role="tablist" aria-label="Product information">
+      <button class="is-active" id="ps-description-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="description" aria-selected="true" aria-controls="ps-description-panel-{{ section.id }}">Description</button>
+      <button id="ps-fair-pricing-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="fair-pricing" aria-selected="false" aria-controls="ps-fair-pricing-panel-{{ section.id }}">Fair Pricing</button>
+      <button id="ps-artist-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="artist" aria-selected="false" aria-controls="ps-artist-panel-{{ section.id }}">Artist Information</button>
+      <button id="ps-material-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="material" aria-selected="false" aria-controls="ps-material-panel-{{ section.id }}">Material &amp; Workmanship</button>
+      <button id="ps-shipping-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="shipping" aria-selected="false" aria-controls="ps-shipping-panel-{{ section.id }}">Shipping and Returns</button>
+      <button id="ps-security-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="security" aria-selected="false" aria-controls="ps-security-panel-{{ section.id }}">Security</button>
+    </div>
+
+    <div class="ps-description-panels">
+      <div class="ps-description-panel is-active" id="ps-description-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="description" aria-labelledby="ps-description-tab-{{ section.id }}" tabindex="0">
+        <div class="ps-description rte">{{ product.description }}</div>
+      </div>
+      <div class="ps-description-panel" id="ps-fair-pricing-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="fair-pricing" aria-labelledby="ps-fair-pricing-tab-{{ section.id }}" hidden tabindex="0">
+        <div class="ps-description"><h2>Fair pricing</h2><p>We keep pricing clear and considered, so you can choose a piece you love with confidence. Every order is made with carefully selected materials and prepared with lasting quality in mind.</p></div>
+      </div>
+      <div class="ps-description-panel" id="ps-artist-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="artist" aria-labelledby="ps-artist-tab-{{ section.id }}" hidden tabindex="0">
+        <div class="ps-description"><h2>Artist information</h2><p>{% if product.vendor != blank %}{{ product.vendor }}{% else %}Our artist collection{% endif %} brings distinctive ideas and character to every piece. Each artwork is selected to give your space a more personal point of view.</p></div>
+      </div>
+      <div class="ps-description-panel" id="ps-material-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="material" aria-labelledby="ps-material-tab-{{ section.id }}" hidden tabindex="0">
+        <div class="ps-description"><h2>Material &amp; workmanship</h2><p>Made with carefully selected materials, precise printing and thoughtful finishing. Every piece is prepared for a clean presentation and long-lasting everyday enjoyment.</p></div>
+      </div>
+      <div class="ps-description-panel" id="ps-shipping-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="shipping" aria-labelledby="ps-shipping-tab-{{ section.id }}" hidden tabindex="0">
+        <div class="ps-description"><h2>Shipping and returns</h2><p>Orders are prepared with care and securely packed for delivery. Shipping details are shown before checkout, and eligible returns can be requested within the applicable return period.</p></div>
+      </div>
+      <div class="ps-description-panel" id="ps-security-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="security" aria-labelledby="ps-security-tab-{{ section.id }}" hidden tabindex="0">
+        <div class="ps-description"><h2>Security</h2><p>Your order is handled through Shopify’s secure checkout. We use protected payment processing and securely packaged delivery so you can shop with confidence.</p></div>
+      </div>
+    </div>
   </section>
 </section>
 

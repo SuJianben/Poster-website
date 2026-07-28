@@ -83,6 +83,19 @@
       panel.setAttribute('aria-hidden', String(!isOpen));
     });
   });
+  root.querySelectorAll('[data-ps-description-tab]').forEach((tab) => tab.addEventListener('click', () => {
+    const key = tab.dataset.psDescriptionTab;
+    root.querySelectorAll('[data-ps-description-tab]').forEach((item) => {
+      const isActive = item === tab;
+      item.classList.toggle('is-active', isActive);
+      item.setAttribute('aria-selected', String(isActive));
+    });
+    root.querySelectorAll('[data-ps-description-panel]').forEach((panel) => {
+      const isActive = panel.dataset.psDescriptionPanel === key;
+      panel.classList.toggle('is-active', isActive);
+      panel.hidden = !isActive;
+    });
+  }));
   root.querySelectorAll('[data-ps-option-group] input').forEach((input) => input.addEventListener('change', updateVariant));
   root.querySelectorAll('[data-ps-choice-group]').forEach((group) => group.querySelectorAll('[data-ps-choice]').forEach((choice) => choice.addEventListener('click', () => {
     group.querySelectorAll('[data-ps-choice]').forEach((item) => {
