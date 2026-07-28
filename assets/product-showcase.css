@@ -36,7 +36,7 @@
 .ps-accordion-panel__body-inner { min-height: 0; overflow: hidden; }
 .ps-detail-content { padding: 0 0 20px; color: #555b5e; font: 400 14px/1.55 var(--sans); }
 .ps-detail-content p { margin: 0; }
-.ps-purchase { position: relative; display: flex; flex-direction: column; gap: 20px; padding: 27px 45px 45px; border: 1px solid var(--ps-line); background: #fff; box-shadow: 0 8px 20px rgba(28,31,31,.05); }
+.ps-purchase { position: relative; display: flex; flex-direction: column; gap: 20px; padding: 0 45px 45px; border: 1px solid var(--ps-line); background: #fff; box-shadow: 0 8px 20px rgba(28,31,31,.05); }
 .ps-sale-badge { position: absolute; top: -11px; left: 24px; padding: 4px 8px; background: #d52047; color: #fff; font: 700 10px/1 var(--sans); text-transform: uppercase; }
 .ps-review-line { margin: 0; color: #079759; font: 600 12px/1 var(--sans); letter-spacing: .06em; }
 .ps-review-line span { color: var(--ps-muted); letter-spacing: 0; }
@@ -139,7 +139,7 @@
   .ps-main-media, .ps-main-media__image { min-height: 0; height: auto; max-height: 72vh; }
   .ps-media-navigation { width: 40px; height: 40px; }
   .ps-left-details { margin-top: 18px; }
-  .ps-purchase { padding: 27px 45px 45px; }.ps-purchase h1{font-size:20px;}
+  .ps-purchase { padding: 0 45px 45px; }.ps-purchase h1{font-size:20px;}
   .ps-config-options--size { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ps-benefits { grid-template-columns: repeat(2, 1fr); margin-top: 38px; padding: 22px 14px; }
   .ps-benefits div { padding: 12px 18px; border-bottom: 1px solid #dedfdd; }
