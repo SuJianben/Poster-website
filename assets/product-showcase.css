@@ -116,8 +116,8 @@
 .ps-benefits span { color: var(--ps-muted); font: 400 11px/1.35 var(--sans); }
 .ps-lifestyle { width: min(100%, 1800px); margin: 0 auto; }
 .ps-lifestyle img { display: block; width: 100%; height: auto; }
-.ps-description-shell { width: min(100% - 120px, 1800px); margin: 76px auto 110px; }
-.ps-description-tabs { display: flex; justify-content: space-between; gap: clamp(28px, 4vw, 82px); overflow-x: auto; border-bottom: 1px solid #d3d4d2; white-space: nowrap; }
+.ps-description-shell { width: min(100% - 40px, 1280px); margin: 76px auto 110px; }
+.ps-description-tabs { display: flex; justify-content: space-between; gap: clamp(12px, 1.2vw, 28px); overflow-x: hidden; overflow-y: hidden; border-bottom: 1px solid #d3d4d2; white-space: nowrap; }
 .ps-description-tabs button { position: relative; flex: 0 0 auto; padding: 0 0 15px; border: 0; background: transparent; color: #b7b8b7; cursor: pointer; font: 700 clamp(18px, 1.65vw, 28px)/1.2 var(--sans); letter-spacing: -.045em; transition: color .18s ease; }
 .ps-description-tabs button::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: var(--ps-ink); content: ''; transform: scaleX(0); transform-origin: left center; transition: transform .2s ease; }
 .ps-description-tabs button:hover, .ps-description-tabs button:focus-visible, .ps-description-tabs button.is-active { color: var(--ps-ink); outline: 0; }
@@ -151,7 +151,8 @@
   .ps-benefits div { padding: 12px 18px; border-bottom: 1px solid #dedfdd; }
   .ps-benefits div:nth-child(2) { border-right: 0; }
   .ps-description-shell { width: min(100% - 28px, 1800px); margin: 52px auto 70px; }
-  .ps-description-tabs { justify-content: flex-start; gap: 28px; }
+  .ps-description-tabs { justify-content: flex-start; gap: 28px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+  .ps-description-tabs::-webkit-scrollbar { display: none; }
   .ps-description-tabs button { padding-bottom: 12px; font-size: 18px; }
   .ps-description { padding-top: 27px; font-size: 15px; line-height: 1.55; }
   .ps-description h2 { margin-bottom: 20px; font-size: 28px; }
