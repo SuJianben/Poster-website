@@ -4,7 +4,9 @@
 
   const variantData = document.querySelector('[data-ps-variants]');
   const variants = variantData ? JSON.parse(variantData.textContent) : [];
-  const form = root.querySelector('[data-ps-form]');
+  // Shopify's form tag preserves underscore attribute names verbatim. The
+  // section already owns this form class, so it is the stable binding point.
+  const form = root.querySelector('.ps-form');
   const variantInput = root.querySelector('[data-ps-variant-input]');
   const price = root.querySelector('[data-ps-price]');
   const currentPrice = root.querySelector('.ps-price__current');
