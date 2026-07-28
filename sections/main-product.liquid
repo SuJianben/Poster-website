@@ -129,9 +129,9 @@
             {% endfor %}
           {% endunless %}
 
-          <div class="ps-form__quantity">
+          <div class="ps-form__quantity" data-ps-quantity>
             <label for="Quantity-{{ section.id }}">Quantity</label>
-            <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
+            <div><button type="button" data-ps-quantity-change="-1" aria-label="Decrease quantity">−</button><input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1"><button type="button" data-ps-quantity-change="1" aria-label="Increase quantity">+</button></div>
           </div>
           <button class="ps-add-button" type="submit" data-ps-add-button {% unless selected_variant.available %}disabled{% endunless %}>
             <span class="ps-add-button__label" data-ps-add-label>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
@@ -139,8 +139,8 @@
           <p class="ps-form__status" data-ps-status role="status"></p>
         {% endform %}
 
-        <div class="ps-offer"><strong>Summer offer</strong><span> Add more pieces to save more.</span></div>
-        <div class="ps-quantity-savings">
+        <button type="button" class="ps-offer" data-ps-offer-toggle aria-expanded="false"><strong>SUMMER OFFER</strong><span> - BUY3+ Save 15%</span><em>more⌄</em></button>
+        <div class="ps-quantity-savings" data-ps-offer-details hidden>
           <div><strong>Buy quantity</strong><strong>Discount</strong></div>
           <div><span>Buy 1</span><span>Standard price</span></div>
           <div><span>Buy 2</span><span>Save 10%</span></div>
