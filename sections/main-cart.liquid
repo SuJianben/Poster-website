@@ -66,9 +66,13 @@
         <div class="cp-recent__rail-wrap">
           <div class="cp-recent__rail" data-cart-recent-rail>
             {% for product in recommendation_collection.products limit: section.settings.recommendation_limit %}
+              {%- assign alternate_image = product.images[1] -%}
               <article class="cp-recent__card">
                 <a href="{{ product.url }}" class="cp-recent__image">
-                  {% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '240, 360, 480, 620', alt: product.title }}{% endif %}
+                  {% if product.featured_image %}
+                    {{ product.featured_image | image_url: width: 620 | image_tag: class: 'cp-recent__image-primary', widths: '240, 360, 480, 620', alt: product.title }}
+                    {% if alternate_image %}{{ alternate_image | image_url: width: 620 | image_tag: class: 'cp-recent__image-secondary', widths: '240, 360, 480, 620', alt: product.title }}{% endif %}
+                  {% endif %}
                 </a>
                 <a href="{{ product.url }}" class="cp-recent__title">{{ product.title }}</a>
                 <p class="cp-recent__price">{{ product.price | money }}</p>
@@ -79,6 +83,7 @@
             <button type="button" data-cart-recent-scroll="prev" aria-label="Previous products">‹</button>
             <button type="button" data-cart-recent-scroll="next" aria-label="Next products">›</button>
           </div>
+          <div class="cp-recent__progress" aria-hidden="true"><span data-cart-recent-progress></span></div>
         </div>
       </div>
     </section>
