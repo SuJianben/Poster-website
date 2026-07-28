@@ -121,6 +121,7 @@
       if (!cartResponse.ok) throw new Error('Could not refresh cart.');
       const cart = await cartResponse.json();
       document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart } }));
+      window.CartDrawer?.open(cart);
       addLabel.textContent = 'Added to cart';
     } catch (error) {
       status.textContent = error.message || 'Could not add this item to cart.';
