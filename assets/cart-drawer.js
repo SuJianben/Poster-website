@@ -16,6 +16,11 @@
     document.documentElement.classList.add('is-cart-drawer-open');
     window.setTimeout(() => panel?.focus(), 30);
   };
+  const showLoading = () => {
+    content.innerHTML = '<div class="cd-drawer__empty cd-drawer__loading"><p>Loading your cart…</p></div>';
+    footer.hidden = true;
+    open();
+  };
   const close = () => {
     drawer.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
@@ -55,6 +60,9 @@
       if (cart) render(cart);
       open();
     },
+    openLoading() {
+      showLoading();
+    },
     refresh: async () => {
       const cart = await fetchCart();
       render(cart);
@@ -75,8 +83,8 @@
     const trigger = event.target.closest('[data-cart-drawer-open]');
     if (!trigger) return;
     event.preventDefault();
+    showLoading();
     try { render(await fetchCart()); } catch (error) { console.error(error); }
-    open();
   });
   document.addEventListener('cart:updated', (event) => { if (event.detail?.cart) window.CartDrawer.open(event.detail.cart); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && drawer.classList.contains('is-open')) close(); });

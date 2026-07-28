@@ -114,6 +114,9 @@
     event.preventDefault();
     addButton.disabled = true;
     addLabel.textContent = 'Adding…';
+    // Open immediately so the customer gets feedback before Shopify returns
+    // the refreshed cart payload.
+    window.CartDrawer?.openLoading();
     try {
       const response = await fetch('/cart/add.js', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
       if (!response.ok) throw new Error('Could not add this item to cart.');
