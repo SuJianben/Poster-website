@@ -11,7 +11,7 @@
       {% endif %}
     </nav>
     <div class="site-actions">
-      <a class="icon-button" aria-label="{{ 'general.search' | t }}" href="{{ routes.search_url }}">{% render 'icon', name: 'search' %}</a>
+      <a class="icon-button" aria-label="{{ 'general.search' | t }}" href="{{ routes.search_url }}" data-search-overlay-open>{% render 'icon', name: 'search' %}</a>
       <a class="icon-button" aria-label="{{ 'general.cart' | t }}" href="{{ routes.cart_url }}" data-cart-drawer-open>{% render 'icon', name: 'bag' %}<span class="cart-count"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span></a>
     </div>
   </div>

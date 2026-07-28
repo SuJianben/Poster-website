@@ -1,0 +1,13 @@
+{%- assign search_overlay_products = collections.all.products -%}
+<aside class="so-overlay" data-search-overlay aria-hidden="true">
+  <div class="so-overlay__bar"><strong>{{ shop.name }}</strong><button type="button" data-search-overlay-close aria-label="Close search">×</button></div>
+  <form class="so-overlay__form" action="{{ routes.search_url }}" method="get" role="search"><label class="visually-hidden" for="OverlaySearch">Search</label><span aria-hidden="true">⌕</span><input id="OverlaySearch" name="q" type="search" placeholder="SEARCH" autocomplete="off"></form>
+  <div class="so-overlay__body">
+    <nav class="so-overlay__nav" aria-label="Explore"><p>Explore</p><a href="{{ routes.all_products_collection_url }}">Bestsellers</a><a href="{{ routes.all_products_collection_url }}">New Arrivals</a><a href="{{ routes.collections_url }}">Collections</a><a href="{{ routes.search_url }}?type=product">Artists</a></nav>
+    <div class="so-overlay__products">
+      {% for product in search_overlay_products limit: 5 %}
+        <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><span>{{ product.vendor }}</span><strong>From {{ product.price | money }}</strong></div></article>
+      {% endfor %}
+    </div><a class="so-overlay__all" href="{{ routes.all_products_collection_url }}">SEE ALL</a>
+  </div>
+</aside>
