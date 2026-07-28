@@ -17,11 +17,12 @@
 .ps-thumbnail-rail__control { position: absolute; z-index: 2; left: 50%; transform: translateX(-50%); }
 .ps-thumbnail-rail__control--up { top: 0; }
 .ps-thumbnail-rail__control--down { bottom: 0; }
-.ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible, .ps-media-navigation:hover, .ps-media-navigation:focus-visible { background: var(--ps-ink); color: #fff; outline: 0; }
+.ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible { background: var(--ps-ink); color: #fff; outline: 0; }
 .ps-main-media { position: relative; display: grid; place-items: center; overflow: hidden; background: #f3f3f2; }
 .ps-main-media__image { display: block; width: 100%; height: auto; max-height: min(60vh, 720px); object-fit: contain; transition: opacity .18s ease; }
-.ps-media-navigation { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); }
-.ps-media-navigation:hover, .ps-media-navigation:focus-visible { transform: translateY(-50%) scale(1.03); }
+.ps-media-navigation { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); opacity: 0; pointer-events: none; background: linear-gradient(90deg, var(--ps-ink) 0 50%, #fff 50% 100%); background-size: 200% 100%; background-position: 100% 0; transition: opacity .18s ease, transform .18s ease, background-position .26s ease, color .18s ease; }
+.ps-main-media:hover .ps-media-navigation, .ps-main-media:focus-within .ps-media-navigation { opacity: 1; pointer-events: auto; }
+.ps-media-navigation:hover, .ps-media-navigation:focus-visible { transform: translateY(-50%) scale(1.03); background-position: 0 0; color: #fff; outline: 0; }
 .ps-media-navigation--previous { left: 18px; }
 .ps-media-navigation--next { right: 18px; }
 .ps-left-details { margin: 22px 0 0; border-top: 1px solid var(--ps-line); }
