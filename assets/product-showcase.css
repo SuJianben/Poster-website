@@ -7,13 +7,23 @@
 .ps-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 430px); gap: clamp(34px, 5vw, 76px); align-items: start; }
 .ps-left { min-width: 0; position: sticky; top: 88px; align-self: start; }
 .ps-media-stage { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 24px; align-items: start; }
-.ps-thumbnails { display: grid; gap: 10px; max-height: min(60vh, 620px); overflow-y: auto; padding-right: 3px; scrollbar-width: none; }
+.ps-thumbnail-rail { position: relative; height: min(60vh, 620px); }
+.ps-thumbnails { display: grid; height: 100%; gap: 10px; overflow-y: auto; padding: 28px 3px; scrollbar-width: none; scroll-behavior: smooth; }
 .ps-thumbnails::-webkit-scrollbar { display: none; }
 .ps-thumbnail { width: 60px; height: 72px; padding: 0; overflow: hidden; border: 1px solid transparent; border-radius: 3px; background: #f3f3f1; cursor: pointer; }
 .ps-thumbnail.is-active { border-color: var(--ps-ink); }
 .ps-thumbnail img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.ps-main-media { display: grid; place-items: center; overflow: hidden; background: #f3f3f2; }
+.ps-thumbnail-rail__control, .ps-media-navigation { display: grid; width: 34px; height: 34px; padding: 0; place-items: center; border: 0; border-radius: 50%; background: #fff; color: var(--ps-ink); box-shadow: 0 2px 9px rgba(25, 30, 30, .14); cursor: pointer; font: 500 19px/1 var(--sans); transition: background .18s ease, color .18s ease, transform .18s ease; }
+.ps-thumbnail-rail__control { position: absolute; z-index: 2; left: 50%; transform: translateX(-50%); }
+.ps-thumbnail-rail__control--up { top: 0; }
+.ps-thumbnail-rail__control--down { bottom: 0; }
+.ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible, .ps-media-navigation:hover, .ps-media-navigation:focus-visible { background: var(--ps-ink); color: #fff; outline: 0; }
+.ps-main-media { position: relative; display: grid; place-items: center; overflow: hidden; background: #f3f3f2; }
 .ps-main-media__image { display: block; width: 100%; height: auto; max-height: min(60vh, 720px); object-fit: contain; transition: opacity .18s ease; }
+.ps-media-navigation { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); }
+.ps-media-navigation:hover, .ps-media-navigation:focus-visible { transform: translateY(-50%) scale(1.03); }
+.ps-media-navigation--previous { left: 18px; }
+.ps-media-navigation--next { right: 18px; }
 .ps-left-details { margin: 22px 0 0; border-top: 1px solid var(--ps-line); }
 .ps-accordion-panel { border-bottom: 1px solid var(--ps-line); }
 .ps-accordion-panel__trigger { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border: 0; background: transparent; color: var(--ps-ink); cursor: pointer; font: 600 13px/1.3 var(--sans); text-align: left; }
@@ -48,11 +58,13 @@
 .ps-config-options--size { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
 .ps-config-options--size button { width: 100%; min-width: 0; }
 .ps-frame-options { display: flex; gap: 8px; }
-.ps-frame-option { width: 76px; height: 62px; border: 1px solid #d4d6d5; background: #e7e7e3; cursor: pointer; }
+.ps-frame-option { position: relative; width: 76px; height: 62px; border: 1px solid #d4d6d5; background: #e7e7e3; cursor: pointer; }
 .ps-frame-option::after { content: ''; display: block; width: 68%; height: 58%; margin: 11px auto; background: #f8f8f5; box-shadow: inset 0 0 0 7px #c9c6bf; transform: perspective(80px) rotateX(5deg); }
 .ps-frame-option--white::after { box-shadow: inset 0 0 0 7px #fff; }
 .ps-frame-option--black::after { box-shadow: inset 0 0 0 7px #202325; }
 .ps-frame-option.is-selected { border: 2px solid var(--ps-ink); }
+.ps-frame-option::before { position: absolute; z-index: 2; bottom: calc(100% + 6px); left: 50%; padding: 4px 6px; transform: translate(-50%, 4px); opacity: 0; background: var(--ps-ink); color: #fff; content: attr(data-ps-frame-name); font: 600 9px/1 var(--sans); pointer-events: none; transition: opacity .15s ease, transform .15s ease; white-space: nowrap; }
+.ps-frame-option:hover::before, .ps-frame-option:focus-visible::before { transform: translate(-50%, 0); opacity: 1; }
 .ps-addon { display: flex; align-items: center; gap: 8px; color: var(--ps-ink); font: 600 12px/1.3 var(--sans); cursor: pointer; }
 .ps-addon input { position: absolute; opacity: 0; }
 .ps-addon span { width: 38px; height: 23px; border-radius: 999px; background: #cfd1d0; }
@@ -69,8 +81,8 @@
 .ps-option-values input:checked + label { border-color: var(--ps-ink); box-shadow: inset 0 0 0 1px var(--ps-ink); color: var(--ps-ink); }
 .ps-form__quantity { display: flex; align-items: center; gap: 14px; margin: 0 0 16px; font: 500 12px/1 var(--sans); }
 .ps-form__quantity input { width: 64px; height: 38px; border: 1px solid #d4d6d5; text-align: center; font: inherit; }
-.ps-add-button { width: 100%; min-height: 48px; border: 0; background: #101314; color: #fff; font: 700 12px/1 var(--sans); cursor: pointer; text-transform: uppercase; }
-.ps-add-button:hover:not(:disabled) { background: #3b4243; }
+.ps-add-button { width: 100%; min-height: 48px; border: 1px solid #101314; background: #101314; color: #fff; font: 700 12px/1 var(--sans); cursor: pointer; text-transform: uppercase; transition: background .18s ease, color .18s ease; }
+.ps-add-button:hover:not(:disabled), .ps-add-button:focus-visible:not(:disabled) { background: #fff; color: #101314; outline: 0; }
 .ps-add-button:disabled { cursor: not-allowed; opacity: .5; }
 .ps-form__status { min-height: 16px; margin: 9px 0 0; color: #a33831; font: 400 12px/1.3 var(--sans); }
 .ps-offer { margin-top: 17px; font: 400 13px/1.4 var(--sans); }
@@ -111,9 +123,12 @@
   .ps-layout { grid-template-columns: 1fr; gap: 24px; }
   .ps-left { position: static; }
   .ps-media-stage { grid-template-columns: 1fr; gap: 10px; }
-  .ps-thumbnails { display: flex; grid-row: 2; max-height: none; overflow-x: auto; overflow-y: hidden; padding: 0 0 2px; }
+  .ps-thumbnail-rail { display: contents; }
+  .ps-thumbnail-rail__control { display: none; }
+  .ps-thumbnails { display: flex; grid-row: 2; height: auto; max-height: none; overflow-x: auto; overflow-y: hidden; padding: 0 0 2px; }
   .ps-thumbnail { flex: 0 0 58px; height: 70px; }
   .ps-main-media, .ps-main-media__image { min-height: 0; height: auto; max-height: 72vh; }
+  .ps-media-navigation { width: 32px; height: 32px; }
   .ps-left-details { margin-top: 18px; }
   .ps-purchase { padding: 25px 20px; }
   .ps-config-options--size { grid-template-columns: repeat(2, minmax(0, 1fr)); }

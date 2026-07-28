@@ -15,14 +15,18 @@
     <div class="ps-layout">
       <div class="ps-left">
         <div class="ps-media-stage">
-          <div class="ps-thumbnails" aria-label="Product media">
-            {% for media in product.media %}
-              {% if media.media_type == 'image' %}
-                <button class="ps-thumbnail {% if media.id == selected_media.id or forloop.first and selected_media == blank %}is-active{% endif %}" type="button" data-ps-media data-media-id="{{ media.id }}" data-media-src="{{ media.preview_image | image_url: width: 1800 }}" data-media-alt="{{ media.alt | default: product.title | escape }}" aria-label="Show image {{ forloop.index }}">
-                  {{ media.preview_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90,140,180', alt: media.alt | default: product.title }}
-                </button>
-              {% endif %}
-            {% endfor %}
+          <div class="ps-thumbnail-rail">
+            <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--up" type="button" data-ps-thumbnail-scroll="-1" aria-label="Show previous thumbnails">↑</button>
+            <div class="ps-thumbnails" data-ps-thumbnail-rail aria-label="Product media">
+              {% for media in product.media %}
+                {% if media.media_type == 'image' %}
+                  <button class="ps-thumbnail {% if media.id == selected_media.id or forloop.first and selected_media == blank %}is-active{% endif %}" type="button" data-ps-media data-media-id="{{ media.id }}" data-media-src="{{ media.preview_image | image_url: width: 1800 }}" data-media-alt="{{ media.alt | default: product.title | escape }}" aria-label="Show image {{ forloop.index }}">
+                    {{ media.preview_image | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90,140,180', alt: media.alt | default: product.title }}
+                  </button>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--down" type="button" data-ps-thumbnail-scroll="1" aria-label="Show next thumbnails">↓</button>
           </div>
           <div class="ps-main-media">
             {% if selected_media %}
@@ -40,6 +44,8 @@
             {% else %}
               <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
             {% endif %}
+            <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image">←</button>
+            <button class="ps-media-navigation ps-media-navigation--next" type="button" data-ps-media-direction="1" aria-label="Show next image">→</button>
           </div>
         </div>
         <div class="ps-left-details" data-ps-accordions>
@@ -79,29 +85,29 @@
 
         <div class="ps-product-config" aria-label="Product configuration">
           <div class="ps-config-group">
-            <p class="ps-config-label">Material: <strong>Canvas</strong></p>
+            <p class="ps-config-label">Material: <strong data-ps-choice-output>Canvas</strong></p>
             <div class="ps-config-options" data-ps-choice-group>
-              <button type="button" data-ps-choice>Poster</button>
-              <button type="button" class="is-selected" data-ps-choice>Canvas</button>
-              <button type="button" data-ps-choice>Acrylic</button>
+              <button type="button" data-ps-choice aria-pressed="false">Poster</button>
+              <button type="button" class="is-selected" data-ps-choice aria-pressed="true">Canvas</button>
+              <button type="button" data-ps-choice aria-pressed="false">Acrylic</button>
             </div>
           </div>
           <div class="ps-config-group">
-            <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong>40 x 30 cm</strong></p><button type="button" class="ps-size-guide">Size guide</button></div>
+            <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong data-ps-choice-output>16&quot; x 12&quot;</strong></p><button type="button" class="ps-size-guide">Size guide</button></div>
             <div class="ps-config-options ps-config-options--size" data-ps-choice-group>
-              <button type="button" class="is-selected" data-ps-choice>16&quot; x 12&quot;</button>
-              <button type="button" data-ps-choice>30&quot; x 20&quot;</button>
-              <button type="button" data-ps-choice>40&quot; x 30&quot;</button>
-              <button type="button" data-ps-choice>48&quot; x 36&quot;</button>
-              <button type="button" data-ps-choice>63&quot; x 47&quot;</button>
+              <button type="button" class="is-selected" data-ps-choice aria-pressed="true">16&quot; x 12&quot;</button>
+              <button type="button" data-ps-choice aria-pressed="false">30&quot; x 20&quot;</button>
+              <button type="button" data-ps-choice aria-pressed="false">40&quot; x 30&quot;</button>
+              <button type="button" data-ps-choice aria-pressed="false">48&quot; x 36&quot;</button>
+              <button type="button" data-ps-choice aria-pressed="false">63&quot; x 47&quot;</button>
             </div>
           </div>
           <div class="ps-config-group">
-            <p class="ps-config-label">Premium frame: <strong>No frame</strong></p>
+            <p class="ps-config-label">Premium frame: <strong data-ps-choice-output>No frame</strong></p>
             <div class="ps-frame-options" data-ps-choice-group>
-              <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice aria-label="Natural frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice aria-label="White frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice aria-label="Black frame"></button>
+              <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-frame-name="No frame" aria-pressed="true" aria-label="No frame"></button>
+              <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-frame-name="White frame" aria-pressed="false" aria-label="White frame"></button>
+              <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-frame-name="Black frame" aria-pressed="false" aria-label="Black frame"></button>
             </div>
           </div>
           <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>

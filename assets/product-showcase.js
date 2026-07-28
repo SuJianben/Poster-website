@@ -28,6 +28,15 @@
       mainImage.alt = thumbnail.dataset.mediaAlt || '';
       mainImage.style.opacity = '1';
     }, 150);
+    thumbnail.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+  };
+
+  const changeMedia = (direction) => {
+    const media = [...root.querySelectorAll('[data-ps-media]')];
+    if (!media.length) return;
+    const activeIndex = Math.max(media.findIndex((item) => item.classList.contains('is-active')), 0);
+    const nextIndex = (activeIndex + direction + media.length) % media.length;
+    setMedia(media[nextIndex].dataset.mediaId);
   };
 
   const updateVariant = () => {
@@ -55,6 +64,14 @@
   };
 
   root.querySelectorAll('[data-ps-media]').forEach((thumbnail) => thumbnail.addEventListener('click', () => setMedia(thumbnail.dataset.mediaId)));
+  root.querySelectorAll('[data-ps-thumbnail-scroll]').forEach((control) => control.addEventListener('click', () => {
+    const rail = root.querySelector('[data-ps-thumbnail-rail]');
+    const item = rail?.querySelector('[data-ps-media]');
+    if (!rail || !item) return;
+    const direction = Number(control.dataset.psThumbnailScroll);
+    rail.scrollBy({ top: direction * (item.offsetHeight + 10), behavior: 'smooth' });
+  }));
+  root.querySelectorAll('[data-ps-media-direction]').forEach((control) => control.addEventListener('click', () => changeMedia(Number(control.dataset.psMediaDirection))));
   root.querySelectorAll('[data-ps-accordion]').forEach((accordion) => {
     const trigger = accordion.querySelector('[data-ps-accordion-trigger]');
     const panel = accordion.querySelector('[data-ps-accordion-panel]');
@@ -68,8 +85,14 @@
   });
   root.querySelectorAll('[data-ps-option-group] input').forEach((input) => input.addEventListener('change', updateVariant));
   root.querySelectorAll('[data-ps-choice-group]').forEach((group) => group.querySelectorAll('[data-ps-choice]').forEach((choice) => choice.addEventListener('click', () => {
-    group.querySelectorAll('[data-ps-choice]').forEach((item) => item.classList.remove('is-selected'));
+    group.querySelectorAll('[data-ps-choice]').forEach((item) => {
+      item.classList.remove('is-selected');
+      item.setAttribute('aria-pressed', 'false');
+    });
     choice.classList.add('is-selected');
+    choice.setAttribute('aria-pressed', 'true');
+    const output = group.parentElement?.querySelector('[data-ps-choice-output]');
+    if (output) output.textContent = choice.dataset.psFrameName || choice.textContent.trim();
   })));
   form?.addEventListener('submit', () => { if (addButton && !addButton.disabled) addLabel.textContent = 'Adding…'; });
 })();
