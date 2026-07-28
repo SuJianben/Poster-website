@@ -16,7 +16,7 @@
       <div class="ps-left">
         <div class="ps-media-stage">
           <div class="ps-thumbnail-rail">
-            <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--up" type="button" data-ps-thumbnail-scroll="-1" aria-label="Show previous thumbnails">↑</button>
+            <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--up" type="button" data-ps-thumbnail-scroll="-1" aria-label="Show previous thumbnails"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 15l6-6 6 6" /></svg></button>
             <div class="ps-thumbnails" data-ps-thumbnail-rail aria-label="Product media">
               {% for media in product.media %}
                 {% if media.media_type == 'image' %}
@@ -26,7 +26,7 @@
                 {% endif %}
               {% endfor %}
             </div>
-            <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--down" type="button" data-ps-thumbnail-scroll="1" aria-label="Show next thumbnails">↓</button>
+            <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--down" type="button" data-ps-thumbnail-scroll="1" aria-label="Show next thumbnails"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg></button>
           </div>
           <div class="ps-main-media">
             {% if selected_media %}
@@ -44,8 +44,8 @@
             {% else %}
               <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
             {% endif %}
-            <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image">←</button>
-            <button class="ps-media-navigation ps-media-navigation--next" type="button" data-ps-media-direction="1" aria-label="Show next image">→</button>
+            <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
+            <button class="ps-media-navigation ps-media-navigation--next" type="button" data-ps-media-direction="1" aria-label="Show next image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" /></svg></button>
           </div>
         </div>
         <div class="ps-left-details" data-ps-accordions>
@@ -134,7 +134,7 @@
             <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
           </div>
           <button class="ps-add-button" type="submit" data-ps-add-button {% unless selected_variant.available %}disabled{% endunless %}>
-            <span data-ps-add-label>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
+            <span class="ps-add-button__label" data-ps-add-label>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
           </button>
           <p class="ps-form__status" data-ps-status role="status"></p>
         {% endform %}
