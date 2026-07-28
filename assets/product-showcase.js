@@ -110,7 +110,24 @@
     if (output) output.textContent = choice.dataset.psFrameName || choice.textContent.trim();
   })));
   root.querySelectorAll('[data-ps-quantity-change]').forEach((button) => button.addEventListener('click', () => { const input = root.querySelector('[data-ps-quantity] input'); if (input) input.value = Math.max(1, Number(input.value || 1) + Number(button.dataset.psQuantityChange)); }));
-  root.querySelector('[data-ps-offer-toggle]')?.addEventListener('click', (event) => { const open = event.currentTarget.getAttribute('aria-expanded') !== 'true'; event.currentTarget.setAttribute('aria-expanded', String(open)); root.querySelector('[data-ps-offer-details]').hidden = !open; });
+  const offerToggle = root.querySelector('[data-ps-offer-toggle]');
+  const offerDetails = root.querySelector('[data-ps-offer-details]');
+  let offerCloseTimer;
+  offerToggle?.addEventListener('click', () => {
+    const open = offerToggle.getAttribute('aria-expanded') !== 'true';
+    offerToggle.setAttribute('aria-expanded', String(open));
+    if (!offerDetails) return;
+
+    window.clearTimeout(offerCloseTimer);
+    if (open) {
+      offerDetails.hidden = false;
+      window.requestAnimationFrame(() => offerDetails.classList.add('is-open'));
+      return;
+    }
+
+    offerDetails.classList.remove('is-open');
+    offerCloseTimer = window.setTimeout(() => { offerDetails.hidden = true; }, 220);
+  });
   form?.addEventListener('submit', async (event) => {
     if (!addButton || addButton.disabled) return;
     event.preventDefault();
