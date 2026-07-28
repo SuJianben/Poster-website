@@ -1,2 +1,97 @@
-<section class="generic-page cart-page"><div class="page-width"><h1 class="display" style="font-size:56px">{{ 'cart.title' | t }}</h1>{% if cart.item_count > 0 %}{% form 'cart', cart %}<table><tbody>{% for item in cart.items %}<tr><td>{% if item.image %}{{ item.image | image_url: width: 140 | image_tag: alt: item.product.title }}{% endif %}</td><td><a href="{{ item.url }}">{{ item.product.title }}</a></td><td><input type="number" name="updates[]" value="{{ item.quantity }}" min="0"></td><td>{{ item.final_line_price | money }}</td></tr>{% endfor %}</tbody></table><p class="price" style="margin-top:28px">{{ 'cart.total' | t }} {{ cart.total_price | money }}</p><button class="button" name="checkout" type="submit">{{ 'cart.checkout' | t }}</button>{% endform %}{% else %}<p>{{ 'cart.empty' | t }}</p><a class="button" href="{{ routes.all_products_collection_url }}">{{ 'cart.continue' | t }}</a>{% endif %}</div></section>
-{% schema %}{"name":"Main cart","settings":[]}{% endschema %}
+{{ 'cart-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cart-page.js' | asset_url }}" defer="defer"></script>
+
+{%- assign recommendation_collection = section.settings.recommendation_collection -%}
+{%- if recommendation_collection == blank -%}
+  {%- assign recommendation_collection = collections.all -%}
+{%- endif -%}
+
+<section class="cp-cart" data-cart-page>
+  <div class="cp-cart__shell">
+    <nav class="cp-cart__crumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a><span aria-hidden="true">/</span><span>Your Shopping Cart</span>
+    </nav>
+
+    {% if cart.item_count > 0 %}
+      {% form 'cart', cart, class: 'cp-cart__form' %}
+        <div class="cp-cart__layout">
+          <div class="cp-cart__items-panel">
+            <h1>Your cart (<span>{{ cart.item_count }}</span>)</h1>
+            <div class="cp-cart__items">
+              {% for item in cart.items %}
+                <article class="cp-cart__item">
+                  <a class="cp-cart__remove" href="{{ item.url_to_remove }}" aria-label="Remove {{ item.product.title | escape }}">×</a>
+                  <a class="cp-cart__image" href="{{ item.url }}">
+                    {% if item.image %}
+                      {{ item.image | image_url: width: 220 | image_tag: widths: '110, 160, 220', alt: item.product.title }}
+                    {% endif %}
+                  </a>
+                  <div class="cp-cart__item-details">
+                    <a href="{{ item.url }}" class="cp-cart__item-title">{{ item.product.title }}</a>
+                    {% unless item.product.has_only_default_variant %}<p>{{ item.variant.title }}</p>{% endunless %}
+                    <div class="cp-cart__line-price">
+                      <strong>{{ item.final_price | money }}</strong>
+                      {% if item.original_price > item.final_price %}<s>{{ item.original_price | money }}</s>{% endif %}
+                    </div>
+                  </div>
+                  <label class="cp-cart__quantity" aria-label="Quantity for {{ item.product.title | escape }}">
+                    <span aria-hidden="true">−</span>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity">
+                    <span aria-hidden="true">+</span>
+                  </label>
+                  <strong class="cp-cart__item-total">{{ item.final_line_price | money }}</strong>
+                </article>
+              {% endfor %}
+            </div>
+            <button class="cp-cart__update" type="submit" name="update">Update cart</button>
+          </div>
+
+          <aside class="cp-cart__summary" aria-label="Order summary">
+            <p class="cp-cart__shipping-note">Shipping calculated at checkout.</p>
+            <div class="cp-cart__summary-total"><span>Estimated total</span><strong>{{ cart.total_price | money_with_currency }}</strong></div>
+            <p class="cp-cart__tax-note">Tax included. Shipping and discounts calculated at checkout.</p>
+            <button class="cp-cart__checkout" type="submit" name="checkout"><span>Check Out</span></button>
+            {% if additional_checkout_buttons %}<div class="cp-cart__express">{{ content_for_additional_checkout_buttons }}</div>{% endif %}
+          </aside>
+        </div>
+      {% endform %}
+    {% else %}
+      <div class="cp-cart__empty"><h1>Your cart is empty</h1><a href="{{ routes.all_products_collection_url }}">Continue shopping</a></div>
+    {% endif %}
+  </div>
+
+  {% if recommendation_collection.products_count > 0 %}
+    <section class="cp-recent" aria-labelledby="recently-viewed-title">
+      <div class="cp-cart__shell">
+        <h2 id="recently-viewed-title">Recently viewed products</h2>
+        <div class="cp-recent__rail-wrap">
+          <div class="cp-recent__rail" data-cart-recent-rail>
+            {% for product in recommendation_collection.products limit: section.settings.recommendation_limit %}
+              <article class="cp-recent__card">
+                <a href="{{ product.url }}" class="cp-recent__image">
+                  {% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '240, 360, 480, 620', alt: product.title }}{% endif %}
+                </a>
+                <a href="{{ product.url }}" class="cp-recent__title">{{ product.title }}</a>
+                <p class="cp-recent__price">{{ product.price | money }}</p>
+              </article>
+            {% endfor %}
+          </div>
+          <div class="cp-recent__controls">
+            <button type="button" data-cart-recent-scroll="prev" aria-label="Previous products">‹</button>
+            <button type="button" data-cart-recent-scroll="next" aria-label="Next products">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": [
+    { "type": "collection", "id": "recommendation_collection", "label": "Recently viewed fallback collection" },
+    { "type": "range", "id": "recommendation_limit", "label": "Products to show", "min": 4, "max": 12, "step": 1, "default": 6 }
+  ]
+}
+{% endschema %}
