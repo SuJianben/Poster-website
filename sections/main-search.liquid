@@ -2,11 +2,10 @@
 
 <section class="sp-search">
   <div class="sp-search__shell">
-    <h1>{{ 'search.title' | t }}</h1>
     <form class="sp-search__form" action="{{ routes.search_url }}" method="get" role="search">
       <label class="visually-hidden" for="SearchPageInput">{{ 'search.placeholder' | t }}</label>
+      <svg class="sp-search__icon" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><circle cx="6.5" cy="6.5" r="3.5"/><path d="m9.2 9.2 3.2 3.2"/></svg>
       <input id="SearchPageInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" autocomplete="off">
-      <button type="submit" aria-label="{{ 'general.search' | t }}">{% render 'icon', name: 'search' %}</button>
     </form>
     {% if search.performed %}
       {% if search.results_count > 0 %}
