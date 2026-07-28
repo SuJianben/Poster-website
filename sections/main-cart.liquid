@@ -19,8 +19,8 @@
             <h1>Your cart (<span>{{ cart.item_count }}</span>)</h1>
             <div class="cp-cart__items">
               {% for item in cart.items %}
-                <article class="cp-cart__item">
-                  <a class="cp-cart__remove" href="{{ item.url_to_remove }}" aria-label="Remove {{ item.product.title | escape }}">×</a>
+                <article class="cp-cart__item" data-cart-page-line="{{ item.key }}">
+                  <button class="cp-cart__remove" type="button" data-cart-page-change="0" aria-label="Remove {{ item.product.title | escape }}">×</button>
                   <a class="cp-cart__image" href="{{ item.url }}">
                     {% if item.image %}
                       {{ item.image | image_url: width: 220 | image_tag: widths: '110, 160, 220', alt: item.product.title }}
@@ -35,11 +35,11 @@
                     </div>
                   </div>
                   <label class="cp-cart__quantity" aria-label="Quantity for {{ item.product.title | escape }}">
-                    <span aria-hidden="true">−</span>
-                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity">
-                    <span aria-hidden="true">+</span>
+                    <button type="button" data-cart-page-change="-1" aria-label="Decrease quantity for {{ item.product.title | escape }}">−</button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity" data-cart-page-quantity>
+                    <button type="button" data-cart-page-change="1" aria-label="Increase quantity for {{ item.product.title | escape }}">+</button>
                   </label>
-                  <strong class="cp-cart__item-total">{{ item.final_line_price | money }}</strong>
+                  <strong class="cp-cart__item-total" data-cart-page-line-total>{{ item.final_line_price | money }}</strong>
                 </article>
               {% endfor %}
             </div>
@@ -48,7 +48,7 @@
 
           <aside class="cp-cart__summary" aria-label="Order summary">
             <p class="cp-cart__shipping-note">Shipping calculated at checkout.</p>
-            <div class="cp-cart__summary-total"><span>Estimated total</span><strong>{{ cart.total_price | money_with_currency }}</strong></div>
+            <div class="cp-cart__summary-total"><span>Estimated total</span><strong data-cart-page-total>{{ cart.total_price | money_with_currency }}</strong></div>
             <p class="cp-cart__tax-note">Tax included. Shipping and discounts calculated at checkout.</p>
             <button class="cp-cart__checkout" type="submit" name="checkout"><span>Check Out</span></button>
             {% if additional_checkout_buttons %}<div class="cp-cart__express">{{ content_for_additional_checkout_buttons }}</div>{% endif %}
