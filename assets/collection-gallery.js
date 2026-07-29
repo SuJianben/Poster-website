@@ -10,10 +10,24 @@
   const cards = root.querySelectorAll('[data-cg-product]');
   const categoryLinks = root.querySelectorAll('.cg-category-nav a');
   const pagination = root.querySelector('[data-cg-pagination]');
-  const pageButtons = root.querySelectorAll('[data-cg-page]');
   const nextPageButton = root.querySelector('[data-cg-next]');
-  const pageSize = 8;
+  const pageSize = 4;
   let currentPage = 1;
+
+  const renderPageButtons = (pageCount) => {
+    if (!pagination || !nextPageButton) return;
+
+    pagination.querySelectorAll('[data-cg-page]').forEach((button) => button.remove());
+    const fragment = document.createDocumentFragment();
+    for (let page = 1; page <= pageCount; page += 1) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.cgPage = String(page);
+      button.textContent = String(page);
+      fragment.append(button);
+    }
+    pagination.insertBefore(fragment, nextPageButton);
+  };
 
   const setDrawer = (open) => {
     drawer.classList.toggle('is-open', open);
@@ -36,9 +50,9 @@
     currentPage = Math.min(Math.max(page, 1), pageCount);
     visibleCards.forEach((card, index) => card.classList.toggle('is-page-hidden', Math.floor(index / pageSize) + 1 !== currentPage));
     pagination?.toggleAttribute('hidden', pageCount < 2);
-    pageButtons.forEach((button) => {
+    renderPageButtons(pageCount);
+    pagination?.querySelectorAll('[data-cg-page]').forEach((button) => {
       const buttonPage = Number(button.dataset.cgPage);
-      button.hidden = buttonPage > pageCount;
       button.classList.toggle('is-current', buttonPage === currentPage);
       button.toggleAttribute('aria-current', buttonPage === currentPage);
     });
@@ -60,7 +74,10 @@
   }));
 
   filterInputs.forEach((input) => input.addEventListener('change', applyFilters));
-  pageButtons.forEach((button) => button.addEventListener('click', () => setPage(Number(button.dataset.cgPage))));
+  pagination?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-cg-page]');
+    if (button) setPage(Number(button.dataset.cgPage));
+  });
   nextPageButton?.addEventListener('click', () => setPage(currentPage + 1));
   root.querySelector('[data-cg-clear]')?.addEventListener('click', () => {
     filterInputs.forEach((input) => { input.checked = false; });
