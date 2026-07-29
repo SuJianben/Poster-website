@@ -2,3 +2,6 @@
 .so-overlay__products { min-width: 0; }
 .so-overlay__body { width: 100%; padding: 25px; }
 .so-overlay__image img { object-fit: contain; }
+.so-overlay__form input[type='search'] { border: 0 !important; border-radius: 0 !important; box-shadow: none !important; outline: 0 !important; appearance: none; -webkit-appearance: none; }
+.so-overlay__form input[type='search']:focus { border: 0 !important; box-shadow: none !important; outline: 0 !important; }
+.so-overlay__body { min-height: calc(100vh - 139px); max-height: none; }
