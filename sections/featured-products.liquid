@@ -4,6 +4,7 @@
 {% assign tilted_titles = 'Paper Bird|Midnight Transit|Wild Bloom|Fuji Street|Bicycle Stories|Northbound|Track Lines|Lawson Glow|City Motion|Quiet Ritual' | split: '|' %}
 {% assign tilted_meta = 'Fons Heijnsbroek · A2 · $199|Mira Cole · A2 · $179|Noah Fields · A2 · $169|Aiko Tanaka · A2 · $189|Riku Studio · A2 · $179|Sora Kim · A2 · $159|Yuki Ito · A2 · $169|Nami Okada · A2 · $189|Kaito Mori · A2 · $179|Hana Watanabe · A2 · $199' | split: '|' %}
 {% assign tilted_assets = 'reference-tilted-01.jpg|reference-tilted-02.jpg|reference-tilted-03.jpg|reference-tilted-04.jpg|reference-tilted-05.jpg|reference-tilted-06.jpg|reference-tilted-07.jpg|reference-tilted-08.jpg|reference-tilted-09.jpg|reference-tilted-10.jpg' | split: '|' %}
+{% assign selected_collection = section.settings.collection %}
 
 <section class="tilted-carousel" data-tilted-carousel aria-label="Image carousel">
   <div class="tilted-carousel__app">
@@ -13,15 +14,28 @@
     </header>
     <div class="tilted-carousel__viewport" data-tilted-viewport>
       <div class="tilted-carousel__track" data-tilted-track>
-      {% for asset_name in tilted_assets %}
-        {% assign title = tilted_titles[forloop.index0] %}
-        {% assign meta = tilted_meta[forloop.index0] %}
+      {% if selected_collection != blank and selected_collection.products_count > 0 %}
+        {% for product in selected_collection.products limit: section.settings.max_products %}
+          {% capture product_meta %}{% if product.vendor != blank %}{{ product.vendor }} · {% endif %}{{ product.price | money }}{% endcapture %}
+          <article class="tilted-carousel__slide" data-tilted-slide data-title="{{ product.title | escape }}" data-meta="{{ product_meta | strip | escape }}" data-link="{{ product.url }}" data-source="collection" aria-current="false">
+            <button class="tilted-carousel__image" type="button" data-tilted-select aria-label="Show {{ product.title | escape }}">
+              {% if product.featured_media %}
+                {{ product.featured_media | image_url: width: 900 | image_tag: alt: product.title, widths: '320,480,640,900', loading: 'lazy' }}
+              {% endif %}
+            </button>
+          </article>
+        {% endfor %}
+      {% else %}
+        {% for asset_name in tilted_assets %}
+          {% assign title = tilted_titles[forloop.index0] %}
+          {% assign meta = tilted_meta[forloop.index0] %}
           <article class="tilted-carousel__slide" data-tilted-slide data-title="{{ title | escape }}" data-meta="{{ meta | escape }}" data-link="#" data-source="mock" aria-current="false">
             <button class="tilted-carousel__image" type="button" data-tilted-select aria-label="Show {{ title | escape }}">
               <img src="{{ asset_name | asset_url }}" alt="{{ title | escape }}" width="500" height="667"{% unless forloop.index0 == 3 %} loading="lazy"{% endunless %}>
             </button>
           </article>
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
       </div>
     </div>
     <div class="tilted-carousel__product" data-tilted-product>
@@ -34,14 +48,26 @@
   <div class="tilted-carousel__controls" aria-label="Carousel controls">
     <button class="tilted-carousel__arrow" type="button" data-tilted-previous aria-label="Previous image"><span aria-hidden="true">‹</span></button>
     <div class="tilted-carousel__dots" data-tilted-dots>
-      {% for asset_name in tilted_assets %}
-        <button type="button" class="tilted-carousel__dot" data-tilted-dot aria-label="Show image {{ forloop.index }}"></button>
-      {% endfor %}
+      {% if selected_collection != blank and selected_collection.products_count > 0 %}
+        {% for product in selected_collection.products limit: section.settings.max_products %}
+          <button type="button" class="tilted-carousel__dot" data-tilted-dot aria-label="Show image {{ forloop.index }}"></button>
+        {% endfor %}
+      {% else %}
+        {% for asset_name in tilted_assets %}
+          <button type="button" class="tilted-carousel__dot" data-tilted-dot aria-label="Show image {{ forloop.index }}"></button>
+        {% endfor %}
+      {% endif %}
     </div>
     <button class="tilted-carousel__arrow" type="button" data-tilted-next aria-label="Next image"><span aria-hidden="true">›</span></button>
   </div>
 </section>
 
 {% schema %}
-{"name":"Tilted carousel","settings":[]}
+{
+  "name":"Tilted carousel",
+  "settings":[
+    {"type":"collection","id":"collection","label":"Collection"},
+    {"type":"range","id":"max_products","label":"Products to show","min":3,"max":12,"step":1,"default":10}
+  ]
+}
 {% endschema %}
