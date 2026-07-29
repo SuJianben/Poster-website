@@ -145,19 +145,19 @@
   color: #161616;
 }
 
-.so-overlay__products {
+.so-overlay__cards {
   min-width: 0;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
 }
 
-.so-overlay__products.is-refreshing {
+.so-overlay__cards.is-refreshing {
   opacity: .25;
   transition: opacity .16s;
 }
 
-.so-overlay__products[hidden] {
+.so-overlay__cards[hidden] {
   display: none;
 }
 
@@ -193,6 +193,20 @@
 
 .so-overlay__card strong {
   font-weight: 500;
+}
+
+.so-overlay__content-card > div {
+  display: block;
+}
+
+.so-overlay__content-card > div a,
+.so-overlay__content-card > div span {
+  display: block;
+}
+
+.so-overlay__content-card > div span {
+  margin-top: 5px;
+  color: #555;
 }
 
 .so-overlay__all {
@@ -236,7 +250,7 @@
     display: none;
   }
 
-  .so-overlay__products {
+  .so-overlay__cards {
     display: flex;
     overflow-x: auto;
   }

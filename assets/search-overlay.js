@@ -3,7 +3,8 @@
   if (!overlay) return;
 
   const searchInput = overlay.querySelector('input');
-  const productPanels = [...overlay.querySelectorAll('[data-search-overlay-products]')];
+  const contentPanels = [...overlay.querySelectorAll('[data-search-overlay-panel-content]')];
+  const seeAll = overlay.querySelector('[data-search-overlay-all]');
   const categories = [...overlay.querySelectorAll('[data-search-overlay-category]')];
   let searchTimer;
 
@@ -20,9 +21,10 @@
 
   const selectCategory = (category) => {
     categories.forEach((item) => item.classList.toggle('is-active', item === category));
-    productPanels.forEach((panel) => {
-      panel.hidden = panel.dataset.searchOverlayProducts !== category.dataset.searchOverlayPanel;
+    contentPanels.forEach((panel) => {
+      panel.hidden = panel.dataset.searchOverlayPanelContent !== category.dataset.searchOverlayPanel;
     });
+    if (seeAll) seeAll.href = category.href;
   };
 
   document.addEventListener('click', (event) => {
@@ -47,7 +49,7 @@
     if (query.length < 2) return;
 
     searchTimer = window.setTimeout(async () => {
-      const products = productPanels.find((panel) => !panel.hidden);
+      const products = contentPanels.find((panel) => !panel.hidden);
       if (!products) return;
 
       products.classList.add('is-refreshing');

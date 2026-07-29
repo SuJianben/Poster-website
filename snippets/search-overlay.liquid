@@ -1,4 +1,9 @@
 {%- assign search_overlay_products = collections.all.products -%}
+{%- assign fallback_story_images = 'figma-lifestyle-hero.jpg|figma-lifestyle-nordic.jpg|figma-lifestyle-cinematic.jpg|reference-gallery-01.jpg|reference-gallery-02.jpg' | split: '|' -%}
+{%- assign fallback_collection_titles = 'New perspectives|Living with colour|Objects of affection|Quiet moments|Curated stories' | split: '|' -%}
+{%- assign fallback_artist_titles = 'Clara Nielsen|Sofia Lind|Atelier Studio|Mia Hansen|Noah Carter' | split: '|' -%}
+{%- assign fallback_artist_descriptions = 'A visual journal|Artist conversation|Studio notes|New work|Creative practice' | split: '|' -%}
+
 <aside class="so-overlay" data-search-overlay aria-hidden="true">
   <div class="so-overlay__bar"><strong>{{ shop.name }}</strong><button type="button" data-search-overlay-close aria-label="Close search">×</button></div>
   <form class="so-overlay__form" action="{{ routes.search_url }}" method="get" role="search">
@@ -8,26 +13,53 @@
     </div>
   </form>
   <div class="so-overlay__body">
-    <nav class="so-overlay__nav" aria-label="Explore"><p>Explore</p><a href="{{ routes.all_products_collection_url }}" data-search-overlay-category data-search-overlay-panel="bestsellers" class="is-active">Bestsellers</a><a href="{{ routes.all_products_collection_url }}" data-search-overlay-category data-search-overlay-panel="new-arrivals">New Arrivals</a><a href="{{ routes.collections_url }}" data-search-overlay-category data-search-overlay-panel="collections">Collections</a><a href="{{ routes.search_url }}?type=product" data-search-overlay-category data-search-overlay-panel="artists">Artists</a></nav>
-    <div class="so-overlay__products" data-search-overlay-products="bestsellers">
+    <nav class="so-overlay__nav" aria-label="Explore">
+      <p>Explore</p>
+      <a href="{{ routes.all_products_collection_url }}" data-search-overlay-category data-search-overlay-panel="bestsellers" class="is-active">Bestsellers</a>
+      <a href="{{ routes.all_products_collection_url }}" data-search-overlay-category data-search-overlay-panel="new-arrivals">New Arrivals</a>
+      <a href="{{ routes.collections_url }}" data-search-overlay-category data-search-overlay-panel="collections">Collections</a>
+      <a href="{{ routes.search_url }}?type=article" data-search-overlay-category data-search-overlay-panel="artists">Artists</a>
+    </nav>
+    <div class="so-overlay__cards" data-search-overlay-panel-content="bestsellers">
       {% for product in search_overlay_products limit: 5 %}
-        <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
+        <article class="so-overlay__card so-overlay__product-card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
       {% endfor %}
     </div>
-    <div class="so-overlay__products" data-search-overlay-products="new-arrivals" hidden>
+    <div class="so-overlay__cards" data-search-overlay-panel-content="new-arrivals" hidden>
       {% for product in search_overlay_products offset: 3 limit: 5 %}
-        <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
+        <article class="so-overlay__card so-overlay__product-card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
       {% endfor %}
     </div>
-    <div class="so-overlay__products" data-search-overlay-products="collections" hidden>
-      {% for product in search_overlay_products offset: 1 limit: 5 %}
-        <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
+    <div class="so-overlay__cards" data-search-overlay-panel-content="collections" hidden>
+      {% assign collection_count = 0 %}
+      {% for collection in collections %}
+        {% unless collection.handle == 'all' %}
+          {% if collection_count < 5 %}
+            <article class="so-overlay__card so-overlay__content-card"><a href="{{ collection.url }}" class="so-overlay__image">{% if collection.featured_image %}{{ collection.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: collection.title }}{% endif %}</a><div><a href="{{ collection.url }}">{{ collection.title }}</a><span>Collection</span></div></article>
+            {% assign collection_count = collection_count | plus: 1 %}
+          {% endif %}
+        {% endunless %}
       {% endfor %}
+      {% if collection_count == 0 %}
+        {% for fallback_image in fallback_story_images %}
+          {% assign fallback_index = forloop.index0 %}
+          <article class="so-overlay__card so-overlay__content-card"><a href="{{ routes.collections_url }}" class="so-overlay__image"><img src="{{ fallback_image | asset_url }}" alt="{{ fallback_collection_titles[fallback_index] | escape }}" width="620" height="864" loading="lazy"></a><div><a href="{{ routes.collections_url }}">{{ fallback_collection_titles[fallback_index] }}</a><span>Collection</span></div></article>
+        {% endfor %}
+      {% endif %}
     </div>
-    <div class="so-overlay__products" data-search-overlay-products="artists" hidden>
-      {% for product in search_overlay_products reversed limit: 5 %}
-        <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
+    <div class="so-overlay__cards" data-search-overlay-panel-content="artists" hidden>
+      {% assign artist_article_count = 0 %}
+      {% for article in blogs['news'].articles limit: 5 %}
+        <article class="so-overlay__card so-overlay__content-card"><a href="{{ article.url }}" class="so-overlay__image">{% if article.image %}{{ article.image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: article.title }}{% endif %}</a><div><a href="{{ article.url }}">{{ article.title }}</a><span>{{ article.author | default: 'Artist story' }}</span></div></article>
+        {% assign artist_article_count = artist_article_count | plus: 1 %}
       {% endfor %}
-    </div><a class="so-overlay__all" href="{{ routes.all_products_collection_url }}">SEE ALL</a>
+      {% if artist_article_count == 0 %}
+        {% for fallback_image in fallback_story_images %}
+          {% assign fallback_index = forloop.index0 %}
+          <article class="so-overlay__card so-overlay__content-card"><a href="{{ routes.search_url }}?type=article" class="so-overlay__image"><img src="{{ fallback_image | asset_url }}" alt="{{ fallback_artist_titles[fallback_index] | escape }}" width="620" height="864" loading="lazy"></a><div><a href="{{ routes.search_url }}?type=article">{{ fallback_artist_titles[fallback_index] }}</a><span>{{ fallback_artist_descriptions[fallback_index] }}</span></div></article>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <a class="so-overlay__all" data-search-overlay-all href="{{ routes.all_products_collection_url }}">SEE ALL</a>
   </div>
 </aside>
