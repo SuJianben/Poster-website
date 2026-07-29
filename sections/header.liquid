@@ -1,4 +1,4 @@
-<header class="site-header site-header--adaptive" data-adaptive-header>
+<header class="site-header site-header--adaptive{% unless request.page_type == 'index' %} site-header--solid{% endunless %}" data-adaptive-header>
   <div class="page-width site-header__inner">
     <a class="site-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">Poster<em>Store</em></a>
     <nav class="site-nav" aria-label="Main navigation">

@@ -24,6 +24,16 @@
   --adaptive-header-count-foreground: #fff;
 }
 
+/* Only the homepage header sits on top of the hero. Other templates reserve
+   header space and use ink controls so white page backgrounds remain legible. */
+.site-header--adaptive.site-header--solid {
+  --adaptive-header-foreground: #111;
+  --adaptive-header-count-foreground: #fff;
+  margin-bottom: 0;
+  background: #fff;
+  border-bottom-color: var(--line);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .site-header--adaptive .site-logo,
   .site-header--adaptive .site-nav,
