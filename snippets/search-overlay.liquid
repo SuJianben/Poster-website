@@ -1,7 +1,12 @@
 {%- assign search_overlay_products = collections.all.products -%}
 <aside class="so-overlay" data-search-overlay aria-hidden="true">
   <div class="so-overlay__bar"><strong>{{ shop.name }}</strong><button type="button" data-search-overlay-close aria-label="Close search">×</button></div>
-  <form class="so-overlay__form" action="{{ routes.search_url }}" method="get" role="search"><svg class="so-overlay__search-icon" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><circle cx="6.5" cy="6.5" r="3.5"/><path d="m9.2 9.2 3.2 3.2"/></svg><input id="OverlaySearch" name="q" type="search" placeholder="SEARCH" autocomplete="off" aria-label="Search"></form>
+  <form class="so-overlay__form" action="{{ routes.search_url }}" method="get" role="search">
+    <div class="so-overlay__input-wrap">
+      <svg class="so-overlay__search-icon" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><circle cx="6.5" cy="6.5" r="3.5"/><path d="m9.2 9.2 3.2 3.2"/></svg>
+      <input id="OverlaySearch" name="q" type="search" placeholder="SEARCH" autocomplete="off" aria-label="Search">
+    </div>
+  </form>
   <div class="so-overlay__body">
     <nav class="so-overlay__nav" aria-label="Explore"><p>Explore</p><a href="{{ routes.all_products_collection_url }}" data-search-overlay-category class="is-active">Bestsellers</a><a href="{{ routes.all_products_collection_url }}" data-search-overlay-category>New Arrivals</a><a href="{{ routes.collections_url }}" data-search-overlay-category>Collections</a><a href="{{ routes.search_url }}?type=product" data-search-overlay-category>Artists</a></nav>
     <div class="so-overlay__products">
