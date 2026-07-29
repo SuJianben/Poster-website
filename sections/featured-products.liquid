@@ -6,7 +6,7 @@
 {% assign tilted_assets = 'reference-tilted-01.jpg|reference-tilted-02.jpg|reference-tilted-03.jpg|reference-tilted-04.jpg|reference-tilted-05.jpg|reference-tilted-06.jpg|reference-tilted-07.jpg|reference-tilted-08.jpg|reference-tilted-09.jpg|reference-tilted-10.jpg' | split: '|' %}
 {% assign selected_collection = section.settings.collection %}
 
-<section class="tilted-carousel" data-tilted-carousel aria-label="Image carousel">
+<section class="tilted-carousel" data-tilted-carousel data-tilted-collection-link="{% if selected_collection != blank %}{{ selected_collection.url }}{% endif %}" aria-label="Image carousel">
   <div class="tilted-carousel__app">
     <header class="tilted-carousel__heading">
       <p>Featured this week</p>
@@ -41,7 +41,7 @@
     <div class="tilted-carousel__product" data-tilted-product>
       <h3 data-tilted-title>{{ tilted_titles[3] }}</h3>
       <p data-tilted-meta>{{ tilted_meta[3] }}</p>
-      <a class="tilted-carousel__link" data-tilted-link href="#">View poster <span aria-hidden="true">→</span></a>
+      <a class="tilted-carousel__link" data-tilted-link href="{% if selected_collection != blank %}{{ selected_collection.url }}{% else %}#{% endif %}">View poster <span aria-hidden="true">→</span></a>
     </div>
   </div>
 
