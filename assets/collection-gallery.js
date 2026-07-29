@@ -11,7 +11,7 @@
   const categoryLinks = root.querySelectorAll('.cg-category-nav a');
   const pagination = root.querySelector('[data-cg-pagination]');
   const nextPageButton = root.querySelector('[data-cg-next]');
-  const pageSize = 4;
+  const pageSize = 8;
   let currentPage = 1;
 
   const renderPageButtons = (pageCount) => {
