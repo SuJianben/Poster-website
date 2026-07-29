@@ -35,7 +35,7 @@
       {% for collection in collections %}
         {% unless collection.handle == 'all' %}
           {% if collection_count < 5 %}
-            <article class="so-overlay__card so-overlay__content-card"><a href="{{ collection.url }}" class="so-overlay__image">{% if collection.featured_image %}{{ collection.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: collection.title }}{% endif %}</a><div><a href="{{ collection.url }}">{{ collection.title }}</a><span>Collection</span></div></article>
+            <article class="so-overlay__card so-overlay__content-card"><a href="{{ collection.url }}" class="so-overlay__image">{% if collection.featured_image %}{{ collection.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: collection.title }}{% else %}{% assign collection_fallback_index = collection_count | modulo: 5 %}<img src="{{ fallback_story_images[collection_fallback_index] | asset_url }}" alt="{{ collection.title | escape }}" width="620" height="864" loading="lazy">{% endif %}</a><div><a href="{{ collection.url }}">{{ collection.title }}</a><span>Collection</span></div></article>
             {% assign collection_count = collection_count | plus: 1 %}
           {% endif %}
         {% endunless %}
@@ -50,7 +50,7 @@
     <div class="so-overlay__cards" data-search-overlay-panel-content="artists" hidden>
       {% assign artist_article_count = 0 %}
       {% for article in blogs['news'].articles limit: 5 %}
-        <article class="so-overlay__card so-overlay__content-card"><a href="{{ article.url }}" class="so-overlay__image">{% if article.image %}{{ article.image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: article.title }}{% endif %}</a><div><a href="{{ article.url }}">{{ article.title }}</a><span>{{ article.author | default: 'Artist story' }}</span></div></article>
+        <article class="so-overlay__card so-overlay__content-card"><a href="{{ article.url }}" class="so-overlay__image">{% if article.image %}{{ article.image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: article.title }}{% else %}<img src="{{ fallback_story_images[forloop.index0] | asset_url }}" alt="{{ article.title | escape }}" width="620" height="864" loading="lazy">{% endif %}</a><div><a href="{{ article.url }}">{{ article.title }}</a><span>{{ article.author | default: 'Artist story' }}</span></div></article>
         {% assign artist_article_count = artist_article_count | plus: 1 %}
       {% endfor %}
       {% if artist_article_count == 0 %}
