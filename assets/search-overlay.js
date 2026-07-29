@@ -28,7 +28,16 @@
   };
 
   document.addEventListener('click', (event) => {
-    if (event.target.closest('[data-search-overlay-open]')) {
+    const openTrigger = event.target.closest('[data-search-overlay-open]');
+
+    if (overlay.classList.contains('is-open') && !overlay.contains(event.target) && !openTrigger) {
+      event.preventDefault();
+      event.stopPropagation();
+      close();
+      return;
+    }
+
+    if (openTrigger) {
       event.preventDefault();
       open();
     }
