@@ -3,7 +3,7 @@
   if (!overlay) return;
 
   const searchInput = overlay.querySelector('input');
-  const products = overlay.querySelector('.so-overlay__products');
+  const productPanels = [...overlay.querySelectorAll('[data-search-overlay-products]')];
   const categories = [...overlay.querySelectorAll('[data-search-overlay-category]')];
   let searchTimer;
 
@@ -20,6 +20,9 @@
 
   const selectCategory = (category) => {
     categories.forEach((item) => item.classList.toggle('is-active', item === category));
+    productPanels.forEach((panel) => {
+      panel.hidden = panel.dataset.searchOverlayProducts !== category.dataset.searchOverlayPanel;
+    });
   };
 
   document.addEventListener('click', (event) => {
@@ -44,6 +47,9 @@
     if (query.length < 2) return;
 
     searchTimer = window.setTimeout(async () => {
+      const products = productPanels.find((panel) => !panel.hidden);
+      if (!products) return;
+
       products.classList.add('is-refreshing');
 
       try {

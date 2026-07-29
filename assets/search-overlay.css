@@ -157,6 +157,10 @@
   transition: opacity .16s;
 }
 
+.so-overlay__products[hidden] {
+  display: none;
+}
+
 .so-overlay__image {
   display: block;
   aspect-ratio: .718;

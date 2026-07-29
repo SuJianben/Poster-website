@@ -8,9 +8,24 @@
     </div>
   </form>
   <div class="so-overlay__body">
-    <nav class="so-overlay__nav" aria-label="Explore"><p>Explore</p><a href="{{ routes.all_products_collection_url }}" data-search-overlay-category class="is-active">Bestsellers</a><a href="{{ routes.all_products_collection_url }}" data-search-overlay-category>New Arrivals</a><a href="{{ routes.collections_url }}" data-search-overlay-category>Collections</a><a href="{{ routes.search_url }}?type=product" data-search-overlay-category>Artists</a></nav>
-    <div class="so-overlay__products">
+    <nav class="so-overlay__nav" aria-label="Explore"><p>Explore</p><a href="{{ routes.all_products_collection_url }}" data-search-overlay-category data-search-overlay-panel="bestsellers" class="is-active">Bestsellers</a><a href="{{ routes.all_products_collection_url }}" data-search-overlay-category data-search-overlay-panel="new-arrivals">New Arrivals</a><a href="{{ routes.collections_url }}" data-search-overlay-category data-search-overlay-panel="collections">Collections</a><a href="{{ routes.search_url }}?type=product" data-search-overlay-category data-search-overlay-panel="artists">Artists</a></nav>
+    <div class="so-overlay__products" data-search-overlay-products="bestsellers">
       {% for product in search_overlay_products limit: 5 %}
+        <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
+      {% endfor %}
+    </div>
+    <div class="so-overlay__products" data-search-overlay-products="new-arrivals" hidden>
+      {% for product in search_overlay_products offset: 3 limit: 5 %}
+        <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
+      {% endfor %}
+    </div>
+    <div class="so-overlay__products" data-search-overlay-products="collections" hidden>
+      {% for product in search_overlay_products offset: 1 limit: 5 %}
+        <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
+      {% endfor %}
+    </div>
+    <div class="so-overlay__products" data-search-overlay-products="artists" hidden>
+      {% for product in search_overlay_products reversed limit: 5 %}
         <article class="so-overlay__card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
       {% endfor %}
     </div><a class="so-overlay__all" href="{{ routes.all_products_collection_url }}">SEE ALL</a>
