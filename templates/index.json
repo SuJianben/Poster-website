@@ -15,7 +15,6 @@
         "pines": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/TKF-newseasonPC.jpg",
             "asset_name": "reference-gallery-01.jpg",
             "title": "Into the Pines",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna. Nam eros purus, congue pulvinar turpis pretium, vulputate interdum turpis. Vivamus non arcu."
@@ -24,7 +23,6 @@
         "high_country": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/BLK-newseasonPC.jpg",
             "asset_name": "reference-gallery-02.jpg",
             "title": "The High Country",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -33,7 +31,6 @@
         "offshore": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/BLK-zjsPC.jpg",
             "asset_name": "reference-gallery-03.jpg",
             "title": "Last Light Offshore",
             "text": "Praesent vel orci orci. Nam sed eleifend felis. Duis eget risus vel nisl feugiat semper eu ut ligula. Morbi eget lorem porttitor, gravida diam lobortis."
@@ -54,64 +51,56 @@
           "type": "category",
           "settings": {
             "title": "Film",
-            "asset_name": "figma-poster-c1.jpg",
-            "link": "shopify://collections/anime-posters"
+            "asset_name": "figma-poster-c1.jpg"
           }
         },
         "music": {
           "type": "category",
           "settings": {
             "title": "Music",
-            "asset_name": "figma-poster-m1.jpg",
-            "link": "shopify://collections/horror-posters"
+            "asset_name": "figma-poster-m1.jpg"
           }
         },
         "sports": {
           "type": "category",
           "settings": {
             "title": "Sports",
-            "asset_name": "figma-poster-s2.jpg",
-            "link": "shopify://collections/music-posters"
+            "asset_name": "figma-poster-s2.jpg"
           }
         },
         "nordic": {
           "type": "category",
           "settings": {
             "title": "Nordic",
-            "asset_name": "figma-poster-n1.jpg",
-            "link": "shopify://collections/tv-series-posters"
+            "asset_name": "figma-poster-n1.jpg"
           }
         },
         "vintage": {
           "type": "category",
           "settings": {
             "title": "Vintage",
-            "asset_name": "figma-poster-r1.jpg",
-            "link": "shopify://collections/music-posters"
+            "asset_name": "figma-poster-r1.jpg"
           }
         },
         "anime": {
           "type": "category",
           "settings": {
             "title": "Anime",
-            "asset_name": "figma-poster-a2.jpg",
-            "link": "shopify://collections/music-posters"
+            "asset_name": "figma-poster-a2.jpg"
           }
         },
         "art": {
           "type": "category",
           "settings": {
             "title": "Art",
-            "asset_name": "figma-poster-t1.jpg",
-            "link": "shopify://collections/anime-posters"
+            "asset_name": "figma-poster-t1.jpg"
           }
         },
         "new": {
           "type": "category",
           "settings": {
             "title": "New Arrivals",
-            "asset_name": "figma-poster-a2.jpg",
-            "link": "shopify://collections/horror-posters"
+            "asset_name": "figma-poster-a2.jpg"
           }
         }
       },
@@ -143,8 +132,7 @@
           "settings": {
             "asset_name": "figma-poster-n1.jpg",
             "title": "Fjord Blue",
-            "meta": "Hendrik Schuette · $199",
-            "link": ""
+            "meta": "Hendrik Schuette · $199"
           }
         },
         "n2": {
@@ -152,8 +140,7 @@
           "settings": {
             "asset_name": "figma-poster-n2.jpg",
             "title": "Still Water",
-            "meta": "Joakim Nådell · $179",
-            "link": ""
+            "meta": "Joakim Nådell · $179"
           }
         },
         "n4": {
@@ -161,8 +148,7 @@
           "settings": {
             "asset_name": "figma-poster-n4.jpg",
             "title": "Green Peaks",
-            "meta": "Sebastian Doll · $189",
-            "link": ""
+            "meta": "Sebastian Doll · $189"
           }
         },
         "n5": {
@@ -170,8 +156,7 @@
           "settings": {
             "asset_name": "figma-poster-n5.jpg",
             "title": "Snow Lake",
-            "meta": "Daniil Smetanin · $175",
-            "link": ""
+            "meta": "Daniil Smetanin · $175"
           }
         }
       },
@@ -187,9 +172,7 @@
         "eyebrow": "Editorial / Vol. 03",
         "heading": "Nordic Calm.",
         "text": "Muted palettes, clean lines, and Scandinavian wisdom—prints that make any room breathe.",
-        "link_label": "Explore the series",
-        "link": "",
-        "collection": ""
+        "link_label": "Explore the series"
       }
     },
     "editorial_2": {
@@ -200,8 +183,7 @@
           "settings": {
             "asset_name": "figma-poster-c2.jpg",
             "title": "The Tramp",
-            "meta": "Smithsonian · $249",
-            "link": ""
+            "meta": "Smithsonian · $249"
           }
         },
         "c1": {
@@ -209,8 +191,7 @@
           "settings": {
             "asset_name": "figma-poster-c1.jpg",
             "title": "Silver Screen",
-            "meta": "Luthfian Alfajr · $189",
-            "link": ""
+            "meta": "Luthfian Alfajr · $189"
           }
         },
         "c4": {
@@ -218,8 +199,7 @@
           "settings": {
             "asset_name": "figma-poster-c4.jpg",
             "title": "Neon Marquee",
-            "meta": "Christian Lue · $179",
-            "link": ""
+            "meta": "Christian Lue · $179"
           }
         },
         "c3": {
@@ -227,8 +207,7 @@
           "settings": {
             "asset_name": "figma-poster-c3.jpg",
             "title": "Monster Nights",
-            "meta": "Lilian Do Khac · $159",
-            "link": ""
+            "meta": "Lilian Do Khac · $159"
           }
         }
       },
@@ -244,9 +223,7 @@
         "eyebrow": "Editorial / Vol. 04",
         "heading": "Cinematic Nights.",
         "text": "From cult classics to new-wave posters—stories worth framing, for the room where the lights go down.",
-        "link_label": "Enter the reel",
-        "link": "",
-        "collection": ""
+        "link_label": "Enter the reel"
       }
     }
   },

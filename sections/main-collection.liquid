@@ -1,10 +1,7 @@
 {{ 'collection-gallery.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
 
-{% comment %}Temporary visual QA mode requested by the merchant. Remove this assignment to restore live collection products.{% endcomment %}
-{% assign show_fallback_products = true %}
 {% assign collection_count = collection.products_count %}
-{% if show_fallback_products %}{% assign collection_count = 12 %}{% endif %}
 {% assign category_labels = section.settings.category_labels | split: ',' %}
 {% assign seo_title = collection.metafields.custom.collection_seo_title.value | default: collection.title %}
 {% assign seo_intro = collection.metafields.custom.collection_seo_intro.value | default: section.settings.seo_intro %}
@@ -52,8 +49,7 @@
     </div>
 
     <div class="cg-product-grid" aria-live="polite">
-      {% unless show_fallback_products %}
-        {% for product in collection.products %}
+      {% for product in collection.products %}
         {% assign product_types = product.type | downcase | replace: ' ', '-' %}
         {% assign product_tags = product.tags | join: '|' | downcase | replace: ' ', '-' %}
         <article class="cg-product" data-cg-product data-cg-types="{{ product_types }}|{{ product_tags }}">
@@ -73,29 +69,9 @@
             {% if product.vendor != blank %}<span class="cg-product-vendor">{{ product.vendor }}</span>{% endif %}
           </div>
         </article>
-        {% endfor %}
       {% else %}
-        {% assign fallback_images = 'figma-poster-a1.jpg|figma-poster-s1.jpg|figma-poster-c1.jpg|figma-poster-m1.jpg|figma-poster-n1.jpg|figma-poster-r1.jpg|figma-poster-t1.jpg|figma-poster-a2.jpg|figma-poster-s2.jpg|figma-poster-c2.jpg|figma-poster-m2.jpg|figma-poster-n2.jpg' | split: '|' %}
-        {% assign fallback_hover_images = 'figma-poster-a3.jpg|figma-poster-s3.jpg|figma-poster-c3.jpg|figma-poster-m3.jpg|figma-poster-n3.jpg|figma-poster-r3.jpg|figma-poster-t3.jpg|figma-poster-a4.jpg|figma-poster-s4.jpg|figma-poster-c4.jpg|figma-poster-m4.jpg|figma-poster-n4.jpg' | split: '|' %}
-        {% assign fallback_titles = 'Quiet Figure|Yellow Field|City Studies|Blue Horizon|Night Transit|Paper Bird|Soft Geometry|Palm House|Green Room|Modern Ritual|Still Water|Sunset Lines' | split: '|' %}
-        {% assign fallback_vendors = 'Sofia Lind|Hanna Peterson|Mika Ito|Aiko Tanaka|Alex Mclean|Fons Heijnsbroek|Nora King|Mila Anders|Joakim Nådell|Christian Lue|Tessa Ward|Anika Reed' | split: '|' %}
-        {% assign fallback_prices = '$79.00|$89.00|$69.00|$99.00|$149.00|$129.00|$79.00|$109.00|$89.00|$119.00|$99.00|$79.00' | split: '|' %}
-        {% for fallback_image in fallback_images %}
-          {% assign fallback_index = forloop.index0 %}
-          {% assign fallback_bestseller = false %}
-          {% if forloop.index <= 3 %}{% assign fallback_bestseller = true %}{% endif %}
-          {% render 'collection-gallery-fallback-card',
-            fallback_image: fallback_image,
-            fallback_hover_image: fallback_hover_images[fallback_index],
-            fallback_title: fallback_titles[fallback_index],
-            fallback_vendor: fallback_vendors[fallback_index],
-            fallback_price: fallback_prices[fallback_index],
-            fallback_type: 'art-print',
-            fallback_style: 'gallery',
-            fallback_bestseller: fallback_bestseller
-          %}
-        {% endfor %}
-      {% endunless %}
+        <p class="cg-product-grid__empty">No products are available in this collection yet.</p>
+      {% endfor %}
     </div>
 
     <nav class="cg-pagination" data-cg-pagination aria-label="Product pages">
@@ -120,25 +96,18 @@
         <h2 id="cg-filter-title">Filters</h2>
         <button class="cg-drawer-close" type="button" data-cg-close-drawer aria-label="Close filters">×</button>
       </div>
-      <div class="cg-filter-group">
-        <h3>Product type</h3>
-        {% if show_fallback_products %}
-          <label class="cg-filter-option"><input type="checkbox" value="art-print" data-cg-filter> Art print</label>
-        {% else %}
+      {% if collection.all_types.size > 0 %}
+        <div class="cg-filter-group">
+          <h3>Product type</h3>
           {% for type in collection.all_types %}
             {% if type != blank %}
               {% assign filter_value = type | downcase | replace: ' ', '-' %}
               <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ type }}</label>
             {% endif %}
           {% endfor %}
-        {% endif %}
-      </div>
-      {% if show_fallback_products %}
-        <div class="cg-filter-group">
-          <h3>Style</h3>
-          <label class="cg-filter-option"><input type="checkbox" value="gallery" data-cg-filter> Gallery</label>
         </div>
-      {% elsif collection.all_tags.size > 0 %}
+      {% endif %}
+      {% if collection.all_tags.size > 0 %}
         <div class="cg-filter-group">
           <h3>Style</h3>
           {% for tag in collection.all_tags limit: 8 %}
