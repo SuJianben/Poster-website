@@ -55,7 +55,7 @@
           "settings": {
             "title": "Film",
             "asset_name": "figma-poster-c1.jpg",
-            "link": ""
+            "link": "shopify://collections/anime-posters"
           }
         },
         "music": {
@@ -63,7 +63,7 @@
           "settings": {
             "title": "Music",
             "asset_name": "figma-poster-m1.jpg",
-            "link": ""
+            "link": "shopify://collections/horror-posters"
           }
         },
         "sports": {
@@ -71,7 +71,7 @@
           "settings": {
             "title": "Sports",
             "asset_name": "figma-poster-s2.jpg",
-            "link": ""
+            "link": "shopify://collections/music-posters"
           }
         },
         "nordic": {
@@ -79,7 +79,7 @@
           "settings": {
             "title": "Nordic",
             "asset_name": "figma-poster-n1.jpg",
-            "link": ""
+            "link": "shopify://collections/tv-series-posters"
           }
         },
         "vintage": {
@@ -87,7 +87,7 @@
           "settings": {
             "title": "Vintage",
             "asset_name": "figma-poster-r1.jpg",
-            "link": ""
+            "link": "shopify://collections/music-posters"
           }
         },
         "anime": {
@@ -95,7 +95,7 @@
           "settings": {
             "title": "Anime",
             "asset_name": "figma-poster-a2.jpg",
-            "link": ""
+            "link": "shopify://collections/music-posters"
           }
         },
         "art": {
@@ -103,7 +103,7 @@
           "settings": {
             "title": "Art",
             "asset_name": "figma-poster-t1.jpg",
-            "link": ""
+            "link": "shopify://collections/anime-posters"
           }
         },
         "new": {
@@ -111,7 +111,7 @@
           "settings": {
             "title": "New Arrivals",
             "asset_name": "figma-poster-a2.jpg",
-            "link": ""
+            "link": "shopify://collections/horror-posters"
           }
         }
       },
