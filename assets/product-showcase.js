@@ -31,6 +31,19 @@
   placeDetailsForViewport();
   productMobileBreakpoint.addEventListener('change', placeDetailsForViewport);
 
+  const fitArtPreview = () => {
+    if (!artPreview || !mainMedia || !mainImage?.naturalWidth || !mainImage?.naturalHeight) return;
+    const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
+    const maxHeight = Math.min(window.innerHeight * 0.6, 720);
+    const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
+    artPreview.style.width = `${Math.round(width)}px`;
+    artPreview.style.height = `${Math.round(width / ratio)}px`;
+  };
+
+  mainImage?.addEventListener('load', fitArtPreview);
+  window.addEventListener('resize', fitArtPreview, { passive: true });
+  fitArtPreview();
+
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
   const selectedValues = () => {
     const activeVariant = variants.find((item) => String(item.id) === String(variantInput?.value));
@@ -53,6 +66,7 @@
       mainImage.src = thumbnail.dataset.mediaSrc;
       mainImage.alt = thumbnail.dataset.mediaAlt || '';
       mainImage.style.opacity = '1';
+      fitArtPreview();
     }, 150);
     thumbnail.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
   };
