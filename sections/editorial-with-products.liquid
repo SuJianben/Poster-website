@@ -1,7 +1,7 @@
 {{ 'editorial-depth-cards.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'editorial-depth-cards.js' | asset_url }}" defer="defer"></script>
 
-<section class="section editorial-products{% unless section.settings.image_position == 'right' %} editorial-products--standard{% endunless %}" data-editorial-depth-section>
+<section class="section editorial-products" data-editorial-depth-section>
   <div class="page-width editorial {% if section.settings.image_position == 'right' %}editorial--reverse{% endif %}">
     <div class="editorial__image">
       {% if section.settings.image != blank %}
