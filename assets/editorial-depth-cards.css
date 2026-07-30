@@ -106,7 +106,7 @@
 .editorial-depth-card:focus-visible { outline: 2px solid #111; outline-offset: 4px; }
 
 @media (max-width: 750px) {
-  .editorial-depth-shell { margin-top: 10px; padding: 26px 0; }
+  .editorial-depth-shell { margin-top: 10px; padding: 0; }
   .editorial-depth-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .editorial-depth-card__content { right: 15px; bottom: 14px; left: 15px; }
   .editorial-depth-card__content h3 { font-size: clamp(27px, 8vw, 34px); }
