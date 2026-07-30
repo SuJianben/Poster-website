@@ -16,6 +16,6 @@
 .tilted-carousel__dot { appearance:none; background:rgb(64 64 64 / 30%); border:0; border-radius:9999px; cursor:pointer; height:.5rem; padding:0; transition:width .3s,background-color .3s; width:.5rem; }
 .tilted-carousel__dot.is-active { background:currentColor; width:1.75rem; }
 .tilted-carousel__image:focus-visible,.tilted-carousel__arrow:focus-visible,.tilted-carousel__dot:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
-@media (max-width:767px) { .tilted-carousel { --tc-card-width:clamp(128px,44vw,220px); padding:48px 0; } }
-@media (max-width:767px) { .tilted-carousel__heading { margin-bottom:24px; }.tilted-carousel__heading h2 { font-size:38px; }.tilted-carousel__product { margin-top:20px; }.tilted-carousel__controls { margin-top:28px; } }
+@media (max-width:767px) { .tilted-carousel { --tc-card-width:clamp(128px,44vw,220px); padding:40px 0; } }
+@media (max-width:767px) { .tilted-carousel__heading { margin-bottom:20px; }.tilted-carousel__heading h2 { font-size:34px; }.tilted-carousel__product { margin-top:18px; }.tilted-carousel__controls { margin-top:24px; } }
 @media (prefers-reduced-motion:reduce) { .tilted-carousel__track,.tilted-carousel__image,.tilted-carousel__dot { transition:none; } }
