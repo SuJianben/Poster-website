@@ -19,7 +19,7 @@
 .ps-thumbnail-rail__control--up { top: 0; }
 .ps-thumbnail-rail__control--down { bottom: 0; }
 .ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible { background-position: 0 0; color: #fff; outline: 0; }
-.ps-main-media { position: relative; display: grid; place-items: center; overflow: hidden; background: #f3f3f2; touch-action: pan-y; }
+.ps-main-media { position: relative; display: grid; height: 620px; place-items: center; overflow: hidden; background: #f3f3f2; touch-action: pan-y; }
 .ps-main-media__image { display: block; width: 100%; height: auto; max-height: min(60vh, 720px); object-fit: contain; transition: opacity .18s ease; }
 .ps-art-preview { display: block; box-sizing: border-box; max-width: 100%; transition: filter .2s ease; }
 .ps-art-preview__frame, .ps-art-preview__mat { display: block; box-sizing: border-box; width: 100%; height: 100%; max-width: 100%; transition: padding .24s ease, background-color .24s ease, box-shadow .24s ease; }
