@@ -101,7 +101,7 @@
             {% for option in product.options_with_values %}
               {% assign option_name = option.name | downcase %}
               {% if option_name contains 'size' %}
-                <fieldset class="ps-config-group ps-option-group" data-ps-option-group data-option-position="{{ option.position }}" aria-label="{{ option.name | escape }}">
+                <fieldset class="ps-config-group ps-config-group--size ps-option-group" data-ps-option-group data-option-position="{{ option.position }}" aria-label="{{ option.name | escape }}">
                   <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong data-ps-option-label>{{ option.selected_value }}</strong></p><button type="button" class="ps-size-guide">Size guide</button></div>
                   <div class="ps-config-options ps-config-options--size">
                     {% for value in option.values %}
