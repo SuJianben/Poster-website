@@ -41,6 +41,20 @@
     dots.forEach((dot, index) => dot.addEventListener('click', () => select(index)));
     previous?.addEventListener('click', () => select(activeIndex - 1));
     next?.addEventListener('click', () => select(activeIndex + 1));
+    let swipeStart = null;
+    viewport.addEventListener('pointerdown', (event) => {
+      if (!window.matchMedia('(max-width: 767px)').matches || !event.isPrimary) return;
+      swipeStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    }, { passive: true });
+    viewport.addEventListener('pointerup', (event) => {
+      if (!swipeStart || swipeStart.id !== event.pointerId) return;
+      const deltaX = event.clientX - swipeStart.x;
+      const deltaY = event.clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(deltaX) < 32 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+      select(activeIndex + (deltaX < 0 ? 1 : -1));
+    }, { passive: true });
+    viewport.addEventListener('pointercancel', () => { swipeStart = null; }, { passive: true });
     section.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') select(activeIndex - 1); if (event.key === 'ArrowRight') select(activeIndex + 1); });
     window.addEventListener('resize', centerActiveCard, { passive:true });
     render();

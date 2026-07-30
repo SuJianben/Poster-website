@@ -19,7 +19,7 @@
 .ps-thumbnail-rail__control--up { top: 0; }
 .ps-thumbnail-rail__control--down { bottom: 0; }
 .ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible { background-position: 0 0; color: #fff; outline: 0; }
-.ps-main-media { position: relative; display: grid; place-items: center; overflow: hidden; background: #f3f3f2; }
+.ps-main-media { position: relative; display: grid; place-items: center; overflow: hidden; background: #f3f3f2; touch-action: pan-y; }
 .ps-main-media__image { display: block; width: 100%; height: auto; max-height: min(60vh, 720px); object-fit: contain; transition: opacity .18s ease; }
 .ps-media-navigation { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); opacity: 0; pointer-events: none; }
 .ps-main-media:hover .ps-media-navigation, .ps-main-media:focus-within .ps-media-navigation { opacity: 1; pointer-events: auto; }
