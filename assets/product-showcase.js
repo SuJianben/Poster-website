@@ -34,12 +34,8 @@
   const fitArtPreview = () => {
     if (!artPreview || !mainMedia || !mainImage?.naturalWidth || !mainImage?.naturalHeight) return;
     const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
-    const isMobile = window.matchMedia('(max-width: 900px)').matches;
-    const maxWidth = isMobile ? mainMedia.clientWidth : mainMedia.clientWidth * 0.78;
-    const maxHeight = isMobile
-      ? Math.min(window.innerHeight * 0.6, 720)
-      : mainMedia.clientHeight * 0.78;
-    const width = Math.min(maxWidth, maxHeight * ratio);
+    const maxHeight = Math.min(window.innerHeight * 0.6, 720);
+    const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
     artPreview.style.width = `${Math.round(width)}px`;
     artPreview.style.height = `${Math.round(width / ratio)}px`;
   };
