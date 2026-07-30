@@ -132,7 +132,7 @@
 .ps-description td, .ps-description th { padding: 10px; border: 1px solid #d8d9d7; text-align: left; }
 
 @media (max-width: 900px) {
-  .ps-product { padding-top: 78px; }
+  .ps-product { padding-top: 40px; }
   .ps-shell { width: min(100% - 28px, 1280px); }
   .ps-layout { grid-template-columns: 1fr; gap: 24px; }
   .ps-left { position: static; }
