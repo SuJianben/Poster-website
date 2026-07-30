@@ -31,7 +31,16 @@
   productMobileBreakpoint.addEventListener('change', placeDetailsForViewport);
 
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
-  const selectedValues = () => [...root.querySelectorAll('[data-ps-option-group]')].map((group) => group.querySelector('input:checked')?.value);
+  const selectedValues = () => {
+    const activeVariant = variants.find((item) => String(item.id) === String(variantInput?.value));
+    const values = [...(activeVariant?.options || [])];
+    root.querySelectorAll('[data-ps-option-group]').forEach((group) => {
+      const position = Number(group.dataset.optionPosition) - 1;
+      const selected = group.querySelector('input:checked')?.value;
+      if (position >= 0 && selected) values[position] = selected;
+    });
+    return values;
+  };
 
   const setMedia = (id) => {
     const thumbnail = root.querySelector(`[data-media-id="${id}"]`);
@@ -126,7 +135,11 @@
       panel.hidden = !isActive;
     });
   }));
-  root.querySelectorAll('[data-ps-option-group] input').forEach((input) => input.addEventListener('change', updateVariant));
+  root.querySelectorAll('[data-ps-option-group] input').forEach((input) => input.addEventListener('change', () => {
+    const label = input.closest('[data-ps-option-group]')?.querySelector('[data-ps-option-label]');
+    if (label) label.textContent = input.value;
+    updateVariant();
+  }));
   root.querySelectorAll('[data-ps-choice-group]').forEach((group) => group.querySelectorAll('[data-ps-choice]').forEach((choice) => choice.addEventListener('click', () => {
     group.querySelectorAll('[data-ps-choice]').forEach((item) => {
       item.classList.remove('is-selected');
