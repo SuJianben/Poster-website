@@ -4,7 +4,7 @@
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
 
-<section class="ps-product" data-ps-product data-section-id="{{ section.id }}" style="--ps-frame-oak-light-vertical: url('{{ 'ps-frame-oak-light-vertical.webp' | asset_url }}'); --ps-frame-oak-light-horizontal: url('{{ 'ps-frame-oak-light-horizontal.webp' | asset_url }}'); --ps-frame-oak-dark-vertical: url('{{ 'ps-frame-oak-dark-vertical.webp' | asset_url }}'); --ps-frame-oak-dark-horizontal: url('{{ 'ps-frame-oak-dark-horizontal.webp' | asset_url }}');">
+<section class="ps-product" data-ps-product data-section-id="{{ section.id }}" style="--ps-frame-oak-border: url('{{ 'ps-frame-oak-border.png' | asset_url }}'); --ps-frame-oak-light-vertical: url('{{ 'ps-frame-oak-light-vertical.webp' | asset_url }}'); --ps-frame-oak-light-horizontal: url('{{ 'ps-frame-oak-light-horizontal.webp' | asset_url }}'); --ps-frame-oak-dark-vertical: url('{{ 'ps-frame-oak-dark-vertical.webp' | asset_url }}'); --ps-frame-oak-dark-horizontal: url('{{ 'ps-frame-oak-dark-horizontal.webp' | asset_url }}');">
   <div class="ps-shell">
     <nav class="ps-breadcrumb" aria-label="Breadcrumb">
       <a href="{{ routes.root_url }}">Home</a><span>/</span>
