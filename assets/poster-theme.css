@@ -57,7 +57,7 @@ button, input, select { font: inherit; }
 .editorial__copy h2 { margin: 16px 0; font: 500 clamp(36px,4.5vw,56px)/1.05 var(--display); }
 .editorial__copy p { max-width: 480px; color: var(--muted); line-height: 1.65; }
 .product-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; margin-top: 58px; }
-.site-footer { background: var(--soft); border-top: 1px solid var(--line); padding: 78px 0 28px; }
+.site-footer { background: var(--soft); border-top: 1px solid var(--line); padding: 64px 0 28px; }
 .newsletter { max-width: 460px; }.newsletter h2 { margin: 0; font: 500 32px var(--display); }.newsletter p { color: var(--muted); }
 .newsletter form { display: flex; gap: 8px; margin-top: 20px; }.newsletter input { min-width: 0; flex: 1; border: 1px solid var(--line); padding: 13px; background: #fff; }
 .footer-links { display: grid; grid-template-columns: repeat(4,1fr); gap: 28px; margin: 58px 0; padding-top: 42px; border-top: 1px solid var(--line); }.footer-links h3 { margin: 0 0 14px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }.footer-links a { display: block; margin: 9px 0; color: var(--muted); font-size: 14px; }
