@@ -30,7 +30,16 @@
   productMobileBreakpoint.addEventListener('change', placeDetailsForViewport);
 
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
-  const selectedValues = () => [...root.querySelectorAll('[data-ps-option-group]')].map((group) => group.querySelector('input:checked')?.value);
+  const selectedValues = () => {
+    const activeVariant = variants.find((item) => String(item.id) === String(variantInput?.value));
+    const values = [...(activeVariant?.options || [])];
+    root.querySelectorAll('[data-ps-option-group]').forEach((group) => {
+      const position = Number(group.dataset.psOptionPosition) - 1;
+      const selected = group.querySelector('input:checked')?.value;
+      if (position >= 0 && selected) values[position] = selected;
+    });
+    return values;
+  };
 
   const setMedia = (id) => {
     const thumbnail = root.querySelector(`[data-media-id="${id}"]`);
@@ -126,6 +135,16 @@
     });
   }));
   root.querySelectorAll('[data-ps-option-group] input').forEach((input) => input.addEventListener('change', updateVariant));
+  root.querySelectorAll('[data-ps-choice-group]').forEach((group) => group.querySelectorAll('[data-ps-choice]').forEach((choice) => choice.addEventListener('click', () => {
+    group.querySelectorAll('[data-ps-choice]').forEach((item) => {
+      item.classList.remove('is-selected');
+      item.setAttribute('aria-pressed', 'false');
+    });
+    choice.classList.add('is-selected');
+    choice.setAttribute('aria-pressed', 'true');
+    const output = group.parentElement?.querySelector('[data-ps-choice-output]');
+    if (output) output.textContent = choice.dataset.psFrameName || choice.textContent.trim();
+  })));
   root.querySelectorAll('[data-ps-quantity-change]').forEach((button) => button.addEventListener('click', () => { const input = root.querySelector('[data-ps-quantity] input'); if (input) input.value = Math.max(1, Number(input.value || 1) + Number(button.dataset.psQuantityChange)); }));
   const offerToggle = root.querySelector('[data-ps-offer-toggle]');
   const offerDetails = root.querySelector('[data-ps-offer-details]');
