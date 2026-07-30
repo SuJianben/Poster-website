@@ -34,7 +34,7 @@
     const activeVariant = variants.find((item) => String(item.id) === String(variantInput?.value));
     const values = [...(activeVariant?.options || [])];
     root.querySelectorAll('[data-ps-option-group]').forEach((group) => {
-      const position = Number(group.dataset.psOptionPosition) - 1;
+      const position = Number(group.dataset.optionPosition) - 1;
       const selected = group.querySelector('input:checked')?.value;
       if (position >= 0 && selected) values[position] = selected;
     });
