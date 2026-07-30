@@ -147,7 +147,7 @@
   .ps-main-media, .ps-main-media__image { min-height: 0; height: auto; max-height: 72vh; }
   .ps-media-navigation { width: 40px; height: 40px; }
   .ps-left-details { margin-top: 18px; }
-  .ps-purchase { padding: 45px; }.ps-purchase h1{font-size:20px;}
+  .ps-purchase { padding: 20px; }.ps-purchase h1{font-size:20px;}
   .ps-config-options--size { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ps-benefits { grid-template-columns: repeat(2, 1fr); margin-top: 38px; padding: 22px 14px; }
   .ps-benefits div { padding: 12px 18px; border-bottom: 1px solid #dedfdd; }
