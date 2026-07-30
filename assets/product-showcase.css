@@ -56,7 +56,7 @@
 .ps-size-guide { padding: 0 0 5px; border: 0; background: #fff; color: #4e5354; font: 500 9px/1 var(--sans); text-decoration: underline; text-transform: capitalize; cursor: pointer; }
 .ps-config-options { display: flex; flex-wrap: wrap; gap: 7px; }
 .ps-config-options button, .ps-config-options input + label { min-width: 74px; min-height: 42px; padding: 9px 12px; border: 1px solid #d4d6d557; background: #fff; color: #5f6465; font: 600 12px/1 var(--sans); cursor: pointer; }.ps-config-options input { position: absolute; opacity: 0; pointer-events: none; }.ps-config-options input + label { display: grid; place-items: center; }.ps-config-options button.is-selected, .ps-config-options input:checked + label { border: 1px solid #797979; color: var(--ps-ink); }
-.ps-config-options--size { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+.ps-config-options--size { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
 .ps-config-options--size button, .ps-config-options--size label { width: 100%; min-width: 0; }
 .ps-frame-options { display: flex; gap: 8px; }
 .ps-frame-option { position: relative; width: 76px; height: 62px; border: 1px solid #d4d6d557; background: #fff; cursor: pointer; }
