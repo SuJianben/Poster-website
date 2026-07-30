@@ -84,43 +84,14 @@
         </div>
         <p class="ps-shipping-note">Free shipping on qualifying orders.</p>
 
-        <div class="ps-product-config" aria-label="Product configuration">
-          <div class="ps-config-group">
-            <p class="ps-config-label">Material: <strong data-ps-choice-output>Canvas</strong></p>
-            <div class="ps-config-options" data-ps-choice-group>
-              <button type="button" data-ps-choice aria-pressed="false">Poster</button>
-              <button type="button" class="is-selected" data-ps-choice aria-pressed="true">Canvas</button>
-              <button type="button" data-ps-choice aria-pressed="false">Acrylic</button>
-            </div>
-          </div>
-          <div class="ps-config-group">
-            <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong data-ps-choice-output>16&quot; x 12&quot;</strong></p><button type="button" class="ps-size-guide">Size guide</button></div>
-            <div class="ps-config-options ps-config-options--size" data-ps-choice-group>
-              <button type="button" class="is-selected" data-ps-choice aria-pressed="true">16&quot; x 12&quot;</button>
-              <button type="button" data-ps-choice aria-pressed="false">30&quot; x 20&quot;</button>
-              <button type="button" data-ps-choice aria-pressed="false">40&quot; x 30&quot;</button>
-              <button type="button" data-ps-choice aria-pressed="false">48&quot; x 36&quot;</button>
-              <button type="button" data-ps-choice aria-pressed="false">63&quot; x 47&quot;</button>
-            </div>
-          </div>
-          <div class="ps-config-group">
-            <p class="ps-config-label">Premium frame: <strong data-ps-choice-output>No frame</strong></p>
-            <div class="ps-frame-options" data-ps-choice-group>
-              <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-frame-name="No frame" aria-pressed="true" aria-label="No frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-frame-name="White frame" aria-pressed="false" aria-label="White frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-frame-name="Black frame" aria-pressed="false" aria-label="Black frame"></button>
-            </div>
-          </div>
-          <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
-        </div>
-
         {% form 'product', product, class: 'ps-form', data_ps_form: '' %}
           <input type="hidden" name="id" value="{{ selected_variant.id }}" data-ps-variant-input>
           {% unless product.has_only_default_variant %}
             {% for option in product.options_with_values %}
-              <fieldset class="ps-option-group" data-ps-option-group data-option-position="{{ option.position }}">
+              {% assign option_name = option.name | downcase %}
+              <fieldset class="ps-option-group{% if option_name contains 'size' %} ps-option-group--size{% endif %}" data-ps-option-group data-option-position="{{ option.position }}">
                 <legend>{{ option.name }}: <span data-ps-option-label>{{ option.selected_value }}</span></legend>
-                <div class="ps-option-values">
+                <div class="ps-option-values{% if option_name contains 'size' %} ps-option-values--size{% endif %}">
                   {% for value in option.values %}
                     <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
                     <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
