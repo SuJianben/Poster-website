@@ -16,6 +16,7 @@
   const status = root.querySelector('[data-ps-status]');
   const mainImage = root.querySelector('[data-ps-main-image]');
   const mainMedia = root.querySelector('.ps-main-media');
+  const artPreview = root.querySelector('[data-ps-art-preview]');
   const details = root.querySelector('[data-ps-accordions]');
   const desktopDetailsAnchor = root.querySelector('[data-ps-details-desktop-anchor]');
   const mobileDetailsAnchor = root.querySelector('[data-ps-details-mobile-anchor]');
@@ -149,6 +150,10 @@
     choice.setAttribute('aria-pressed', 'true');
     const output = group.parentElement?.querySelector('[data-ps-choice-output]');
     if (output) output.textContent = choice.dataset.psFrameName || choice.textContent.trim();
+    const previewTarget = group.dataset.psPreviewTarget;
+    if (artPreview && previewTarget && choice.dataset.psPreviewValue) {
+      artPreview.dataset[`psPreview${previewTarget.charAt(0).toUpperCase()}${previewTarget.slice(1)}`] = choice.dataset.psPreviewValue;
+    }
   })));
   root.querySelectorAll('[data-ps-quantity-change]').forEach((button) => button.addEventListener('click', () => { const input = root.querySelector('[data-ps-quantity] input'); if (input) input.value = Math.max(1, Number(input.value || 1) + Number(button.dataset.psQuantityChange)); }));
   const offerToggle = root.querySelector('[data-ps-offer-toggle]');

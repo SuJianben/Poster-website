@@ -29,21 +29,25 @@
             <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--down" type="button" data-ps-thumbnail-scroll="1" aria-label="Show next thumbnails"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg></button>
           </div>
           <div class="ps-main-media">
-            {% if selected_media %}
-              <img
-                class="ps-main-media__image"
-                data-ps-main-image
-                src="{{ selected_media.preview_image | image_url: width: 1800 }}"
-                srcset="{{ selected_media.preview_image | image_url: width: 640 }} 640w, {{ selected_media.preview_image | image_url: width: 900 }} 900w, {{ selected_media.preview_image | image_url: width: 1200 }} 1200w, {{ selected_media.preview_image | image_url: width: 1600 }} 1600w, {{ selected_media.preview_image | image_url: width: 1800 }} 1800w"
-                sizes="(min-width: 901px) 58vw, 100vw"
-                width="{{ selected_media.preview_image.width }}"
-                height="{{ selected_media.preview_image.height }}"
-                loading="eager"
-                alt="{{ selected_media.alt | default: product.title | escape }}"
-              >
-            {% else %}
-              <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
-            {% endif %}
+            <div class="ps-art-preview" data-ps-art-preview data-ps-preview-frame="none" data-ps-preview-mat="none">
+              <div class="ps-art-preview__frame"><div class="ps-art-preview__mat">
+                {% if selected_media %}
+                  <img
+                    class="ps-main-media__image"
+                    data-ps-main-image
+                    src="{{ selected_media.preview_image | image_url: width: 1800 }}"
+                    srcset="{{ selected_media.preview_image | image_url: width: 640 }} 640w, {{ selected_media.preview_image | image_url: width: 900 }} 900w, {{ selected_media.preview_image | image_url: width: 1200 }} 1200w, {{ selected_media.preview_image | image_url: width: 1600 }} 1600w, {{ selected_media.preview_image | image_url: width: 1800 }} 1800w"
+                    sizes="(min-width: 901px) 58vw, 100vw"
+                    width="{{ selected_media.preview_image.width }}"
+                    height="{{ selected_media.preview_image.height }}"
+                    loading="eager"
+                    alt="{{ selected_media.alt | default: product.title | escape }}"
+                  >
+                {% else %}
+                  <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
+                {% endif %}
+              </div></div>
+            </div>
             <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
             <button class="ps-media-navigation ps-media-navigation--next" type="button" data-ps-media-direction="1" aria-label="Show next image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" /></svg></button>
           </div>
@@ -110,11 +114,19 @@
             {% endfor %}
           {% endunless %}
           <div class="ps-config-group">
-            <p class="ps-config-label">Premium frame: <strong data-ps-choice-output>No frame</strong></p>
-            <div class="ps-frame-options" data-ps-choice-group>
-              <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-frame-name="No frame" aria-pressed="true" aria-label="No frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-frame-name="White frame" aria-pressed="false" aria-label="White frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-frame-name="Black frame" aria-pressed="false" aria-label="Black frame"></button>
+            <p class="ps-config-label">Passepartout: <strong data-ps-choice-output>None</strong></p>
+            <div class="ps-config-options" data-ps-choice-group data-ps-preview-target="mat">
+              <button type="button" class="is-selected" data-ps-choice data-ps-preview-value="none" aria-pressed="true">No passepartout</button>
+              <button type="button" data-ps-choice data-ps-preview-value="white" aria-pressed="false">White passepartout</button>
+              <button type="button" data-ps-choice data-ps-preview-value="black" aria-pressed="false">Black passepartout</button>
+            </div>
+          </div>
+          <div class="ps-config-group">
+            <p class="ps-config-label">Frame: <strong data-ps-choice-output>No frame</strong></p>
+            <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="frame">
+              <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-preview-value="none" data-ps-frame-name="No frame" aria-pressed="true" aria-label="No frame"></button>
+              <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-preview-value="oak" data-ps-frame-name="Oak frame" aria-pressed="false" aria-label="Oak frame"></button>
+              <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-preview-value="black" data-ps-frame-name="Black frame" aria-pressed="false" aria-label="Black frame"></button>
             </div>
           </div>
           <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
