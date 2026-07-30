@@ -15,6 +15,18 @@
   const addLabel = root.querySelector('[data-ps-add-label]');
   const status = root.querySelector('[data-ps-status]');
   const mainImage = root.querySelector('[data-ps-main-image]');
+  const leftDetails = root.querySelector('.ps-left-details');
+  const desktopDetailsAnchor = root.querySelector('[data-ps-details-desktop-anchor]');
+  const mobileDetailsAnchor = root.querySelector('[data-ps-details-mobile-anchor]');
+  const productMobileBreakpoint = window.matchMedia('(max-width: 900px)');
+
+  const placeDetailsForViewport = () => {
+    if (!leftDetails || !desktopDetailsAnchor || !mobileDetailsAnchor) return;
+    (productMobileBreakpoint.matches ? mobileDetailsAnchor : desktopDetailsAnchor).after(leftDetails);
+  };
+
+  placeDetailsForViewport();
+  productMobileBreakpoint.addEventListener('change', placeDetailsForViewport);
 
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
   const selectedValues = () => [...root.querySelectorAll('[data-ps-option-group]')].map((group) => group.querySelector('input:checked')?.value);
