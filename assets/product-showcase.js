@@ -33,20 +33,11 @@
 
   const fitArtPreview = () => {
     if (!artPreview || !mainMedia || !mainImage?.naturalWidth || !mainImage?.naturalHeight) return;
-    const selectedSize = root.querySelector('.ps-config-group--size input:checked')?.value || '';
-    const sizeMatch = selectedSize.match(/(\d+(?:\.\d+)?)\s*(?:["']|cm)?\s*[x×]\s*(\d+(?:\.\d+)?)/i);
-    const posterWidth = Number(sizeMatch?.[1]) || mainImage.naturalWidth;
-    const posterHeight = Number(sizeMatch?.[2]) || mainImage.naturalHeight;
-    const frameExtension = artPreview.dataset.psPreviewFrame === 'none' ? 0 : 10;
-    const totalWidth = posterWidth + (frameExtension * 2);
-    const totalHeight = posterHeight + (frameExtension * 2);
+    const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
     const maxHeight = Math.min(window.innerHeight * 0.6, 720);
-    const scale = Math.min(mainMedia.clientWidth / totalWidth, maxHeight / totalHeight);
-    const matInset = artPreview.dataset.psPreviewMat === 'none' ? 0 : Math.min(posterWidth, posterHeight) * 0.1;
-    artPreview.style.width = `${Math.round(totalWidth * scale)}px`;
-    artPreview.style.height = `${Math.round(totalHeight * scale)}px`;
-    artPreview.style.setProperty('--ps-preview-frame-width', `${Math.round(frameExtension * scale)}px`);
-    artPreview.style.setProperty('--ps-preview-mat-width', `${Math.round(matInset * scale)}px`);
+    const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
+    artPreview.style.width = `${Math.round(width)}px`;
+    artPreview.style.height = `${Math.round(width / ratio)}px`;
   };
 
   mainImage?.addEventListener('load', fitArtPreview);
@@ -162,7 +153,6 @@
   root.querySelectorAll('[data-ps-option-group] input').forEach((input) => input.addEventListener('change', () => {
     const label = input.closest('[data-ps-option-group]')?.querySelector('[data-ps-option-label]');
     if (label) label.textContent = input.value;
-    fitArtPreview();
     updateVariant();
   }));
   root.querySelectorAll('[data-ps-choice-group]').forEach((group) => group.querySelectorAll('[data-ps-choice]').forEach((choice) => choice.addEventListener('click', () => {
@@ -177,7 +167,6 @@
     const previewTarget = group.dataset.psPreviewTarget;
     if (artPreview && previewTarget && choice.dataset.psPreviewValue) {
       artPreview.dataset[`psPreview${previewTarget.charAt(0).toUpperCase()}${previewTarget.slice(1)}`] = choice.dataset.psPreviewValue;
-      fitArtPreview();
     }
   })));
   root.querySelectorAll('[data-ps-quantity-change]').forEach((button) => button.addEventListener('click', () => { const input = root.querySelector('[data-ps-quantity] input'); if (input) input.value = Math.max(1, Number(input.value || 1) + Number(button.dataset.psQuantityChange)); }));
