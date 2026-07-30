@@ -30,16 +30,7 @@
   productMobileBreakpoint.addEventListener('change', placeDetailsForViewport);
 
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
-  const selectedValues = () => {
-    const activeVariant = variants.find((item) => String(item.id) === String(variantInput?.value));
-    const values = [...(activeVariant?.options || [])];
-    root.querySelectorAll('[data-ps-option-group]').forEach((group) => {
-      const position = Number(group.dataset.optionPosition) - 1;
-      const selected = group.querySelector('input:checked')?.value;
-      if (position >= 0 && selected) values[position] = selected;
-    });
-    return values;
-  };
+  const selectedValues = () => [...root.querySelectorAll('[data-ps-option-group] input:checked')].map((input) => input.value);
 
   const setMedia = (id) => {
     const thumbnail = root.querySelector(`[data-media-id="${id}"]`);
