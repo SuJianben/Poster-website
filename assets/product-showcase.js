@@ -32,8 +32,8 @@
   productMobileBreakpoint.addEventListener('change', placeDetailsForViewport);
 
   const fitArtPreview = () => {
-    if (!artPreview || !mainMedia || !mainImage?.naturalWidth || !mainImage?.naturalHeight) return;
-    const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
+    if (!artPreview || !mainMedia) return;
+    const ratio = 800 / 1100;
     const maxHeight = Math.min(window.innerHeight * 0.6, 720);
     const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
     artPreview.style.width = `${Math.round(width)}px`;

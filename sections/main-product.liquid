@@ -30,7 +30,8 @@
           </div>
           <div class="ps-main-media">
             <div class="ps-art-preview" data-ps-art-preview data-ps-preview-frame="none" data-ps-preview-mat="none">
-              <div class="ps-art-preview__frame"><div class="ps-art-preview__mat">
+              <div class="ps-art-preview__frame-content">
+                <div class="ps-art-preview__mat-content">
                 {% if selected_media %}
                   <img
                     class="ps-main-media__image"
@@ -46,7 +47,11 @@
                 {% else %}
                   <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
                 {% endif %}
-              </div></div>
+                  <img class="ps-art-preview__mat-overlay ps-art-preview__mat-overlay--white" src="{{ 'ps-passepartout-white.png' | asset_url }}" width="800" height="1100" alt="" aria-hidden="true">
+                  <img class="ps-art-preview__mat-overlay ps-art-preview__mat-overlay--pink" src="{{ 'ps-passepartout-pink.png' | asset_url }}" width="800" height="1100" alt="" aria-hidden="true">
+                </div>
+              </div>
+              <img class="ps-art-preview__frame-overlay" src="{{ 'ps-frame-oak.png' | asset_url }}" width="800" height="1100" alt="" aria-hidden="true">
             </div>
             <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
             <button class="ps-media-navigation ps-media-navigation--next" type="button" data-ps-media-direction="1" aria-label="Show next image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" /></svg></button>
@@ -118,15 +123,14 @@
             <div class="ps-config-options" data-ps-choice-group data-ps-preview-target="mat">
               <button type="button" class="is-selected" data-ps-choice data-ps-preview-value="none" aria-pressed="true">No passepartout</button>
               <button type="button" data-ps-choice data-ps-preview-value="white" aria-pressed="false">White passepartout</button>
-              <button type="button" data-ps-choice data-ps-preview-value="black" aria-pressed="false">Black passepartout</button>
+              <button type="button" data-ps-choice data-ps-preview-value="pink" aria-pressed="false">Pink passepartout</button>
             </div>
           </div>
           <div class="ps-config-group">
             <p class="ps-config-label">Frame: <strong data-ps-choice-output>No frame</strong></p>
             <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="frame">
               <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-preview-value="none" data-ps-frame-name="No frame" aria-pressed="true" aria-label="No frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-preview-value="oak" data-ps-frame-name="Oak frame" aria-pressed="false" aria-label="Oak frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-preview-value="black" data-ps-frame-name="Black frame" aria-pressed="false" aria-label="Black frame"></button>
+              <button type="button" class="ps-frame-option ps-frame-option--oak" data-ps-choice data-ps-preview-value="oak" data-ps-frame-name="Oak frame" aria-pressed="false" aria-label="Oak frame"></button>
             </div>
           </div>
           <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
