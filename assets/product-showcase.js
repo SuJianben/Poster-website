@@ -16,6 +16,19 @@
   const status = root.querySelector('[data-ps-status]');
   const mainImage = root.querySelector('[data-ps-main-image]');
   const mainMedia = root.querySelector('.ps-main-media');
+  const details = root.querySelector('[data-ps-accordions]');
+  const desktopDetailsAnchor = root.querySelector('[data-ps-details-desktop-anchor]');
+  const mobileDetailsAnchor = root.querySelector('[data-ps-details-mobile-anchor]');
+  const productMobileBreakpoint = window.matchMedia('(max-width: 900px)');
+
+  const placeDetailsForViewport = () => {
+    if (!details || !desktopDetailsAnchor || !mobileDetailsAnchor) return;
+    const anchor = productMobileBreakpoint.matches ? mobileDetailsAnchor : desktopDetailsAnchor;
+    anchor.after(details);
+  };
+
+  placeDetailsForViewport();
+  productMobileBreakpoint.addEventListener('change', placeDetailsForViewport);
 
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
   const selectedValues = () => [...root.querySelectorAll('[data-ps-option-group]')].map((group) => group.querySelector('input:checked')?.value);
