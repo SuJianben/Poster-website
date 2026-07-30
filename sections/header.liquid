@@ -11,9 +11,30 @@
       {% endif %}
     </nav>
     <div class="site-actions">
+      <button class="icon-button mobile-menu-trigger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-mobile-menu-open>
+        <span class="mobile-menu-trigger__lines" aria-hidden="true"></span>
+      </button>
       <a class="icon-button" aria-label="{{ 'general.search' | t }}" href="{{ routes.search_url }}" data-search-overlay-open>{% render 'icon', name: 'search' %}</a>
       <a class="icon-button" aria-label="{{ 'general.cart' | t }}" href="{{ routes.cart_url }}" data-cart-drawer-open>{% render 'icon', name: 'bag' %}<span class="cart-count"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span></a>
     </div>
+  </div>
+  <div id="mobile-menu" class="mobile-menu" data-mobile-menu aria-hidden="true">
+    <button class="mobile-menu__backdrop" type="button" aria-label="Close menu" data-mobile-menu-close></button>
+    <aside class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Main navigation" tabindex="-1">
+      <div class="mobile-menu__head">
+        <span class="site-logo" aria-hidden="true">Poster<em>Store</em></span>
+        <button class="mobile-menu__close" type="button" aria-label="Close menu" data-mobile-menu-close>×</button>
+      </div>
+      <nav class="mobile-menu__links" aria-label="Mobile navigation">
+        {% if section.settings.menu != blank %}
+          {% for link in section.settings.menu.links %}
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          {% endfor %}
+        {% else %}
+          <a href="#categories">Shop</a><a href="#categories">Collections</a><a href="#categories">About</a><a href="#categories">Journal</a>
+        {% endif %}
+      </nav>
+    </aside>
   </div>
 </header>
 {% schema %}
