@@ -19,7 +19,7 @@
 .ps-thumbnail-rail__control--up { top: 0; }
 .ps-thumbnail-rail__control--down { bottom: 0; }
 .ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible { background-position: 0 0; color: #fff; outline: 0; }
-.ps-main-media { position: relative; display: grid; place-items: center; overflow: hidden; background: #f3f3f2; touch-action: pan-y; }
+.ps-main-media { position: relative; display: grid; place-items: center; overflow: hidden; background: #f3f3f2; }
 .ps-main-media__image { display: block; width: 100%; height: auto; max-height: min(60vh, 720px); object-fit: contain; transition: opacity .18s ease; }
 .ps-media-navigation { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); opacity: 0; pointer-events: none; }
 .ps-main-media:hover .ps-media-navigation, .ps-main-media:focus-within .ps-media-navigation { opacity: 1; pointer-events: auto; }
@@ -27,8 +27,6 @@
 .ps-media-navigation--previous { left: 18px; }
 .ps-media-navigation--next { right: 18px; }
 .ps-left-details { margin: 22px 0 0; border-top: 1px solid var(--ps-line); }
-.ps-details-relocation-anchor { display: none; }
-.ps-purchase > .ps-left-details { width: 100%; margin: 0; }
 .ps-accordion-panel { border-bottom: 1px solid var(--ps-line); }
 .ps-accordion-panel__trigger { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border: 0; background: transparent; color: var(--ps-ink); cursor: pointer; font: 600 13px/1.3 var(--sans); text-align: left; }
 .ps-accordion-panel__icon { flex: 0 0 auto; font: 400 22px/1 var(--sans); transition: transform .28s ease; }
@@ -60,7 +58,7 @@
 .ps-config-options--size button { width: 100%; min-width: 0; }
 .ps-frame-options { display: flex; gap: 8px; }
 .ps-frame-option { position: relative; width: 76px; height: 62px; border: 1px solid #d4d6d557; background: #fff; cursor: pointer; }
-.ps-frame-option::after { display: block; width: 68%; height: 58%; margin: 11px auto; background: #f8f8f5; box-shadow: inset 0 0 0 7px #c9c6bf; content: ''; transform: perspective(80px) rotateX(5deg); }
+.ps-frame-option::after { content: ''; display: block; width: 68%; height: 58%; margin: 11px auto; background: #f8f8f5; box-shadow: inset 0 0 0 7px #c9c6bf; transform: perspective(80px) rotateX(5deg); }
 .ps-frame-option--white::after { box-shadow: inset 0 0 0 7px #F5F5DC; }
 .ps-frame-option--black::after { box-shadow: inset 0 0 0 7px #202325; }
 .ps-frame-option.is-selected { border: 1px solid #797979; }
@@ -69,7 +67,7 @@
 .ps-addon { display: flex; align-items: center; gap: 8px; color: var(--ps-ink); font: 600 12px/1.3 var(--sans); cursor: pointer; }
 .ps-addon input { position: absolute; opacity: 0; }
 .ps-addon span { width: 38px; height: 23px; border-radius: 999px; background: #cfd1d0; }
-.ps-addon span::before { display: block; width: 18px; height: 18px; margin: 2px; border-radius: 50%; background: #fff; content: ''; transition: transform .18s ease; }
+.ps-addon span::before { content: ''; display: block; width: 18px; height: 18px; margin: 2px; border-radius: 50%; background: #fff; transition: transform .18s ease; }
 .ps-addon input:checked + span { background: #1b2021; }
 .ps-addon input:checked + span::before { transform: translateX(15px); }
 .ps-addon small { color: var(--ps-muted); font-weight: 400; }
@@ -134,9 +132,8 @@
 .ps-description td, .ps-description th { padding: 10px; border: 1px solid #d8d9d7; text-align: left; }
 
 @media (max-width: 900px) {
-  .ps-product { padding-top: 40px; }
+  .ps-product { padding-top: 78px; }
   .ps-shell { width: min(100% - 28px, 1280px); }
-  .ps-breadcrumb { font-size: 20px; }
   .ps-layout { grid-template-columns: 1fr; gap: 24px; }
   .ps-left { position: static; }
   .ps-media-stage { grid-template-columns: 1fr; gap: 10px; }
@@ -147,7 +144,7 @@
   .ps-main-media, .ps-main-media__image { min-height: 0; height: auto; max-height: 72vh; }
   .ps-media-navigation { width: 40px; height: 40px; }
   .ps-left-details { margin-top: 18px; }
-  .ps-purchase { padding: 20px; }.ps-purchase h1{font-size:20px;}
+  .ps-purchase { padding: 45px; }.ps-purchase h1{font-size:20px;}
   .ps-config-options--size { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ps-benefits { grid-template-columns: repeat(2, 1fr); margin-top: 38px; padding: 22px 14px; }
   .ps-benefits div { padding: 12px 18px; border-bottom: 1px solid #dedfdd; }

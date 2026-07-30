@@ -15,22 +15,9 @@
   const addLabel = root.querySelector('[data-ps-add-label]');
   const status = root.querySelector('[data-ps-status]');
   const mainImage = root.querySelector('[data-ps-main-image]');
-  const mainMedia = root.querySelector('.ps-main-media');
-  const leftDetails = root.querySelector('.ps-left-details');
-  const desktopDetailsAnchor = root.querySelector('[data-ps-details-desktop-anchor]');
-  const mobileDetailsAnchor = root.querySelector('[data-ps-details-mobile-anchor]');
-  const productMobileBreakpoint = window.matchMedia('(max-width: 900px)');
-
-  const placeDetailsForViewport = () => {
-    if (!leftDetails || !desktopDetailsAnchor || !mobileDetailsAnchor) return;
-    (productMobileBreakpoint.matches ? mobileDetailsAnchor : desktopDetailsAnchor).after(leftDetails);
-  };
-
-  placeDetailsForViewport();
-  productMobileBreakpoint.addEventListener('change', placeDetailsForViewport);
 
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
-  const selectedValues = () => [...root.querySelectorAll('[data-ps-option-group] input:checked')].map((input) => input.value);
+  const selectedValues = () => [...root.querySelectorAll('[data-ps-option-group]')].map((group) => group.querySelector('input:checked')?.value);
 
   const setMedia = (id) => {
     const thumbnail = root.querySelector(`[data-media-id="${id}"]`);
@@ -87,20 +74,6 @@
     rail.scrollBy({ top: direction * (item.offsetHeight + 10), behavior: 'smooth' });
   }));
   root.querySelectorAll('[data-ps-media-direction]').forEach((control) => control.addEventListener('click', () => changeMedia(Number(control.dataset.psMediaDirection))));
-  let mediaSwipeStart = null;
-  mainMedia?.addEventListener('pointerdown', (event) => {
-    if (!window.matchMedia('(max-width: 900px)').matches || !event.isPrimary) return;
-    mediaSwipeStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
-  }, { passive: true });
-  mainMedia?.addEventListener('pointerup', (event) => {
-    if (!mediaSwipeStart || mediaSwipeStart.id !== event.pointerId) return;
-    const deltaX = event.clientX - mediaSwipeStart.x;
-    const deltaY = event.clientY - mediaSwipeStart.y;
-    mediaSwipeStart = null;
-    if (Math.abs(deltaX) < 32 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
-    changeMedia(deltaX < 0 ? 1 : -1);
-  }, { passive: true });
-  mainMedia?.addEventListener('pointercancel', () => { mediaSwipeStart = null; }, { passive: true });
   root.querySelectorAll('[data-ps-accordion]').forEach((accordion) => {
     const trigger = accordion.querySelector('[data-ps-accordion-trigger]');
     const panel = accordion.querySelector('[data-ps-accordion-panel]');
