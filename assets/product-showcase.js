@@ -59,8 +59,13 @@
     // The transparent frame canvas may extend beyond that artwork; it must
     // never be allowed to reduce the artwork just to fit its empty margins.
     const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
+    const compositionHeight = Math.round((width / ratio) * frameHeightScale);
     artPreview.style.width = `${Math.round(width * frameWidthScale)}px`;
-    artPreview.style.height = `${Math.round((width / ratio) * frameHeightScale)}px`;
+    artPreview.style.height = `${compositionHeight}px`;
+    // Keep the enlarged outer frame inside the media section instead of
+    // letting it overlap the details accordions below. The artwork itself
+    // keeps the same no-frame dimensions; only the section height expands.
+    mainMedia.style.height = `${Math.max(620, compositionHeight)}px`;
   };
 
   mainImage?.addEventListener('load', fitArtPreview);
