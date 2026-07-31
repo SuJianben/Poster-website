@@ -66,6 +66,11 @@
     // a visual layer over the artwork, so it must not stretch the page layout.
     mainMedia.style.height = '620px';
     artPreview.style.transform = hasFrame ? 'translateY(-24px)' : 'none';
+    if (desktopDetailsAnchor && details) {
+      const frameVisualBottom = hasFrame ? compositionHeight * (982 / 1100) - 24 : 620;
+      const frameOverflow = Math.max(0, Math.round(frameVisualBottom - 620));
+      details.style.marginTop = `${22 + frameOverflow}px`;
+    }
   };
 
   mainImage?.addEventListener('load', fitArtPreview);
