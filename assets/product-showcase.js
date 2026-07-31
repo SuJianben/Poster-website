@@ -23,6 +23,10 @@
   const productMobileBreakpoint = window.matchMedia('(max-width: 900px)');
   const mediaPreviewState = new Map();
   let activeMediaId = root.querySelector('[data-ps-media].is-active')?.dataset.mediaId || root.querySelector('[data-ps-media]')?.dataset.mediaId || '';
+  // The source catalog keeps one clean artwork image as the final gallery item.
+  // Custom framing is intentionally previewed only on that image, so regular
+  // lifestyle/detail images never receive the visual treatment.
+  const customPreviewMediaId = [...root.querySelectorAll('[data-ps-media]')].at(-1)?.dataset.mediaId || '';
 
   const applyPreviewState = () => {
     if (!artPreview) return;
@@ -191,11 +195,16 @@
     }
     const previewTarget = group.dataset.psPreviewTarget;
     if (artPreview && previewTarget && choice.dataset.psPreviewValue) {
-      mediaPreviewState.set(activeMediaId, {
-        frame: previewTarget === 'frame' ? choice.dataset.psPreviewValue : (mediaPreviewState.get(activeMediaId)?.frame || 'none'),
-        mat: previewTarget === 'mat' ? choice.dataset.psPreviewValue : (mediaPreviewState.get(activeMediaId)?.mat || 'none')
+      const previewMediaId = customPreviewMediaId || activeMediaId;
+      mediaPreviewState.set(previewMediaId, {
+        frame: previewTarget === 'frame' ? choice.dataset.psPreviewValue : (mediaPreviewState.get(previewMediaId)?.frame || 'none'),
+        mat: previewTarget === 'mat' ? choice.dataset.psPreviewValue : (mediaPreviewState.get(previewMediaId)?.mat || 'none')
       });
-      applyPreviewState();
+      if (activeMediaId !== previewMediaId) {
+        setMedia(previewMediaId);
+      } else {
+        applyPreviewState();
+      }
     }
   })));
   root.querySelectorAll('[data-ps-frame-select]').forEach((select) => {
