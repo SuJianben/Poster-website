@@ -33,6 +33,7 @@
 .ps-art-preview[data-ps-preview-frame="black"][data-ps-preview-mat="none"] .ps-main-media__image { object-fit: fill; }
 .ps-art-preview[data-ps-preview-frame="oak"][data-ps-preview-mat="white"], .ps-art-preview[data-ps-preview-frame="oak"][data-ps-preview-mat="black"], .ps-art-preview[data-ps-preview-frame="black"][data-ps-preview-mat="white"], .ps-art-preview[data-ps-preview-frame="black"][data-ps-preview-mat="black"] { --ps-art-left: 22.625%; --ps-art-top: 22.09%; --ps-art-width: 54.875%; --ps-art-height: 56%; }
 .ps-art-preview[data-ps-preview-mat="white"] .ps-art-preview__mat-image, .ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__mat-image { display: block; }
+.ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__mat-image { filter: brightness(.18) saturate(.25); }
 .ps-art-preview[data-ps-preview-frame="oak"] .ps-art-preview__frame-image--oak { display: block; filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
 .ps-art-preview[data-ps-preview-frame="black"] .ps-art-preview__frame-image--black { display: block; filter: brightness(.3) saturate(.55) drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
 .ps-media-navigation { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); opacity: 0; pointer-events: none; }
