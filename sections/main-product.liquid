@@ -123,10 +123,15 @@
           </div>
           <div class="ps-config-group">
             <p class="ps-config-label">Frame: <strong data-ps-choice-output>No frame</strong></p>
-            <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="frame">
-              <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-preview-value="none" data-ps-frame-name="No frame" aria-pressed="true" aria-label="No frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-preview-value="oak" data-ps-frame-name="Oak frame" aria-pressed="false" aria-label="Oak frame"></button>
-              <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-preview-value="black" data-ps-frame-name="Black frame" aria-pressed="false" aria-label="Black frame"></button>
+            <div class="ps-frame-select" data-ps-frame-select>
+              <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
+                <span data-ps-frame-select-value>No frame</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </button>
+              <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="frame" role="listbox" aria-label="Frame options">
+                <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-preview-value="none" data-ps-frame-name="No frame" aria-pressed="true" role="option" aria-selected="true"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__name">No frame</span></button>
+                <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-preview-value="oak" data-ps-frame-name="Oak frame" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__name">Oak frame</span></button>
+                <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-preview-value="black" data-ps-frame-name="Black frame" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__name">Black frame</span></button>
+              </div>
             </div>
           </div>
           <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>

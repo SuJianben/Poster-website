@@ -159,16 +159,45 @@
     group.querySelectorAll('[data-ps-choice]').forEach((item) => {
       item.classList.remove('is-selected');
       item.setAttribute('aria-pressed', 'false');
+      item.setAttribute('aria-selected', 'false');
     });
     choice.classList.add('is-selected');
     choice.setAttribute('aria-pressed', 'true');
-    const output = group.parentElement?.querySelector('[data-ps-choice-output]');
+    choice.setAttribute('aria-selected', 'true');
+    const output = group.closest('.ps-config-group')?.querySelector('[data-ps-choice-output]');
     if (output) output.textContent = choice.dataset.psFrameName || choice.textContent.trim();
+    const frameSelect = group.closest('[data-ps-frame-select]');
+    if (frameSelect) {
+      const value = frameSelect.querySelector('[data-ps-frame-select-value]');
+      const trigger = frameSelect.querySelector('[data-ps-frame-trigger]');
+      if (value) value.textContent = choice.dataset.psFrameName || choice.textContent.trim();
+      frameSelect.classList.remove('is-open');
+      trigger?.setAttribute('aria-expanded', 'false');
+    }
     const previewTarget = group.dataset.psPreviewTarget;
     if (artPreview && previewTarget && choice.dataset.psPreviewValue) {
       artPreview.dataset[`psPreview${previewTarget.charAt(0).toUpperCase()}${previewTarget.slice(1)}`] = choice.dataset.psPreviewValue;
     }
   })));
+  root.querySelectorAll('[data-ps-frame-select]').forEach((select) => {
+    const trigger = select.querySelector('[data-ps-frame-trigger]');
+    trigger?.addEventListener('click', () => {
+      const open = !select.classList.contains('is-open');
+      root.querySelectorAll('[data-ps-frame-select].is-open').forEach((item) => {
+        item.classList.remove('is-open');
+        item.querySelector('[data-ps-frame-trigger]')?.setAttribute('aria-expanded', 'false');
+      });
+      select.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+    });
+  });
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('[data-ps-frame-select]')) return;
+    root.querySelectorAll('[data-ps-frame-select].is-open').forEach((select) => {
+      select.classList.remove('is-open');
+      select.querySelector('[data-ps-frame-trigger]')?.setAttribute('aria-expanded', 'false');
+    });
+  });
   root.querySelectorAll('[data-ps-quantity-change]').forEach((button) => button.addEventListener('click', () => { const input = root.querySelector('[data-ps-quantity] input'); if (input) input.value = Math.max(1, Number(input.value || 1) + Number(button.dataset.psQuantityChange)); }));
   const offerToggle = root.querySelector('[data-ps-offer-toggle]');
   const offerDetails = root.querySelector('[data-ps-offer-details]');
