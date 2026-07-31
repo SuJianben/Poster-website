@@ -63,10 +63,14 @@
     thumbnail.classList.add('is-active');
     mainImage.style.opacity = '0';
     window.setTimeout(() => {
+      if (thumbnail.dataset.mediaSrcset) {
+        mainImage.srcset = thumbnail.dataset.mediaSrcset;
+      } else {
+        mainImage.removeAttribute('srcset');
+      }
       mainImage.src = thumbnail.dataset.mediaSrc;
       mainImage.alt = thumbnail.dataset.mediaAlt || '';
       mainImage.style.opacity = '1';
-      fitArtPreview();
     }, 150);
     thumbnail.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
   };
