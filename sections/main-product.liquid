@@ -4,7 +4,7 @@
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
 
-<section class="ps-product" data-ps-product data-section-id="{{ section.id }}" style="--ps-frame-oak-light-vertical: url('{{ 'ps-frame-oak-light-vertical.webp' | asset_url }}'); --ps-frame-oak-light-horizontal: url('{{ 'ps-frame-oak-light-horizontal.webp' | asset_url }}'); --ps-frame-oak-dark-vertical: url('{{ 'ps-frame-oak-dark-vertical.webp' | asset_url }}'); --ps-frame-oak-dark-horizontal: url('{{ 'ps-frame-oak-dark-horizontal.webp' | asset_url }}');">
+<section class="ps-product" data-ps-product data-section-id="{{ section.id }}">
   <div class="ps-shell">
     <nav class="ps-breadcrumb" aria-label="Breadcrumb">
       <a href="{{ routes.root_url }}">Home</a><span>/</span>
@@ -46,7 +46,10 @@
                 {% else %}
                   <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
                 {% endif %}
+                <img class="ps-art-preview__mat-image ps-art-preview__mat-image--white" src="{{ 'ps-passepartout-white.png' | asset_url }}" alt="" aria-hidden="true">
               </div></div>
+              <img class="ps-art-preview__frame-image ps-art-preview__frame-image--oak" src="{{ 'ps-frame-oak-border.png' | asset_url }}" alt="" aria-hidden="true">
+              <img class="ps-art-preview__frame-image ps-art-preview__frame-image--black" src="{{ 'ps-frame-oak-border.png' | asset_url }}" alt="" aria-hidden="true">
             </div>
             <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
             <button class="ps-media-navigation ps-media-navigation--next" type="button" data-ps-media-direction="1" aria-label="Show next image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" /></svg></button>
