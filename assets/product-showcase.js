@@ -55,7 +55,10 @@
     // composition to that opening, rather than shrinking the artwork.
     const frameWidthScale = hasFrame ? 1 / 0.70875 : 1;
     const frameHeightScale = hasFrame ? 1 / 0.7282 : 1;
-    const width = Math.min(mainMedia.clientWidth / frameWidthScale, (maxHeight * ratio) / frameHeightScale);
+    // Size the artwork exactly as it would be rendered without a frame.
+    // The transparent frame canvas may extend beyond that artwork; it must
+    // never be allowed to reduce the artwork just to fit its empty margins.
+    const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
     artPreview.style.width = `${Math.round(width * frameWidthScale)}px`;
     artPreview.style.height = `${Math.round((width / ratio) * frameHeightScale)}px`;
   };
