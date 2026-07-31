@@ -62,10 +62,10 @@
     const compositionHeight = Math.round((width / ratio) * frameHeightScale);
     artPreview.style.width = `${Math.round(width * frameWidthScale)}px`;
     artPreview.style.height = `${compositionHeight}px`;
-    // Keep the enlarged outer frame inside the media section instead of
-    // letting it overlap the details accordions below. The artwork itself
-    // keeps the same no-frame dimensions; only the section height expands.
-    mainMedia.style.height = `${Math.max(620, compositionHeight)}px`;
+    // Keep the media section at its original 620px height. The outer frame is
+    // a visual layer over the artwork, so it must not stretch the page layout.
+    mainMedia.style.height = '620px';
+    artPreview.style.transform = hasFrame ? 'translateY(-24px)' : 'none';
   };
 
   mainImage?.addEventListener('load', fitArtPreview);
