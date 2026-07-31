@@ -1,5 +1,5 @@
 {{ 'product-showcase.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'product-showcase.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-showcase.js' | asset_url }}&psv=single-preview-20260731" defer="defer"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
