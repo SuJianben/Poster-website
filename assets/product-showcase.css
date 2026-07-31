@@ -29,6 +29,8 @@
 .ps-art-preview[data-ps-preview-mat="black"] { --ps-art-left: 22.625%; --ps-art-top: 22.09%; --ps-art-width: 54.875%; --ps-art-height: 56%; }
 .ps-art-preview[data-ps-preview-frame="oak"] { --ps-art-left: 3.25%; --ps-art-top: 2.5%; --ps-art-width: 93%; --ps-art-height: 95%; }
 .ps-art-preview[data-ps-preview-frame="black"] { --ps-art-left: 3.25%; --ps-art-top: 2.5%; --ps-art-width: 93%; --ps-art-height: 95%; }
+.ps-art-preview[data-ps-preview-frame="oak"][data-ps-preview-mat="none"] .ps-main-media__image,
+.ps-art-preview[data-ps-preview-frame="black"][data-ps-preview-mat="none"] .ps-main-media__image { object-fit: fill; }
 .ps-art-preview[data-ps-preview-frame="oak"][data-ps-preview-mat="white"], .ps-art-preview[data-ps-preview-frame="oak"][data-ps-preview-mat="black"], .ps-art-preview[data-ps-preview-frame="black"][data-ps-preview-mat="white"], .ps-art-preview[data-ps-preview-frame="black"][data-ps-preview-mat="black"] { --ps-art-left: 22.625%; --ps-art-top: 22.09%; --ps-art-width: 54.875%; --ps-art-height: 56%; }
 .ps-art-preview[data-ps-preview-mat="white"] .ps-art-preview__mat-image, .ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__mat-image { display: block; }
 .ps-art-preview[data-ps-preview-frame="oak"] .ps-art-preview__frame-image--oak { display: block; filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
