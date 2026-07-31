@@ -53,8 +53,8 @@
     // The transparent frame artwork has a 70.875% × 72.82% opening. Keep
     // the artwork at its natural rendered size and enlarge only the outer
     // composition to that opening, rather than shrinking the artwork.
-    const frameWidthScale = hasFrame ? 1 / 0.70875 : 1;
-    const frameHeightScale = hasFrame ? 1 / 0.7282 : 1;
+    const frameWidthScale = hasFrame ? 1 / 0.89711 : 1;
+    const frameHeightScale = hasFrame ? 1 / 0.92209 : 1;
     // Size the artwork exactly as it would be rendered without a frame.
     // The transparent frame canvas may extend beyond that artwork; it must
     // never be allowed to reduce the artwork just to fit its empty margins.
@@ -67,7 +67,7 @@
     mainMedia.style.height = '620px';
     artPreview.style.transform = hasFrame ? 'translateY(-24px)' : 'none';
     if (desktopDetailsAnchor && details) {
-      const frameVisualBottom = hasFrame ? compositionHeight * (982 / 1100) - 24 : 620;
+      const frameVisualBottom = hasFrame ? compositionHeight * 0.9965 - 24 : 620;
       const frameOverflow = Math.max(0, Math.round(frameVisualBottom - 620));
       details.style.marginTop = `${22 + frameOverflow}px`;
     }
