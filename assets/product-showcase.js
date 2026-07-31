@@ -33,6 +33,7 @@
     const state = mediaPreviewState.get(activeMediaId) || { frame: 'none', mat: 'none' };
     artPreview.dataset.psPreviewFrame = state.frame;
     artPreview.dataset.psPreviewMat = state.mat;
+    fitArtPreview();
   };
 
   const placeDetailsForViewport = () => {
@@ -48,9 +49,15 @@
     if (!artPreview || !mainMedia || !mainImage?.naturalWidth || !mainImage?.naturalHeight) return;
     const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
     const maxHeight = Math.min(window.innerHeight * 0.6, 720);
-    const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
-    artPreview.style.width = `${Math.round(width)}px`;
-    artPreview.style.height = `${Math.round(width / ratio)}px`;
+    const hasFrame = artPreview.dataset.psPreviewFrame && artPreview.dataset.psPreviewFrame !== 'none';
+    // The transparent frame artwork has a 70.875% × 72.82% opening. Keep
+    // the artwork at its natural rendered size and enlarge only the outer
+    // composition to that opening, rather than shrinking the artwork.
+    const frameWidthScale = hasFrame ? 1 / 0.70875 : 1;
+    const frameHeightScale = hasFrame ? 1 / 0.7282 : 1;
+    const width = Math.min(mainMedia.clientWidth / frameWidthScale, (maxHeight * ratio) / frameHeightScale);
+    artPreview.style.width = `${Math.round(width * frameWidthScale)}px`;
+    artPreview.style.height = `${Math.round((width / ratio) * frameHeightScale)}px`;
   };
 
   mainImage?.addEventListener('load', fitArtPreview);

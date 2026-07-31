@@ -19,16 +19,20 @@
 .ps-thumbnail-rail__control--up { top: 0; }
 .ps-thumbnail-rail__control--down { bottom: 0; }
 .ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible { background-position: 0 0; color: #fff; outline: 0; }
-.ps-main-media { position: relative; display: grid; height: 620px; place-items: center; overflow: hidden; background: #f3f3f2; touch-action: pan-y; }
+.ps-main-media { position: relative; display: grid; height: 620px; place-items: center; overflow: visible; background: #f3f3f2; touch-action: pan-y; }
 .ps-main-media__image { display: block; width: 100%; height: auto; max-height: min(60vh, 720px); object-fit: contain; transition: opacity .18s ease; }
 .ps-art-preview { position: relative; display: block; box-sizing: border-box; max-width: 100%; overflow: visible; transition: width .24s ease, height .24s ease; }
-.ps-art-preview__frame, .ps-art-preview__mat { position: relative; display: block; box-sizing: border-box; width: 100%; height: 100%; max-width: 100%; transition: padding .24s ease, background-color .24s ease, box-shadow .24s ease; }
-.ps-art-preview .ps-main-media__image { width: 100%; height: 100%; max-height: none; object-fit: contain; }
-.ps-art-preview__frame-image { position: absolute; z-index: 3; inset: -5.5%; display: none; width: 111%; height: 111%; pointer-events: none; object-fit: fill; filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
-.ps-art-preview[data-ps-preview-frame="oak"] .ps-art-preview__frame-image--oak { display: block; }
+.ps-art-preview__composition, .ps-art-preview__frame, .ps-art-preview__mat { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; overflow: visible; }
+.ps-art-preview .ps-main-media__image { position: absolute; z-index: 1; top: var(--ps-art-top, 0%); left: var(--ps-art-left, 0%); width: var(--ps-art-width, 100%); height: var(--ps-art-height, 100%); max-height: none; object-fit: contain; }
+.ps-art-preview__mat-image, .ps-art-preview__frame-image { position: absolute; z-index: 2; inset: 0; display: none; width: 100%; height: 100%; pointer-events: none; object-fit: fill; }
+.ps-art-preview[data-ps-preview-mat="white"] { --ps-art-left: 22.625%; --ps-art-top: 22.09%; --ps-art-width: 54.875%; --ps-art-height: 56%; }
+.ps-art-preview[data-ps-preview-mat="black"] { --ps-art-left: 22.625%; --ps-art-top: 22.09%; --ps-art-width: 54.875%; --ps-art-height: 56%; }
+.ps-art-preview[data-ps-preview-frame="oak"] { --ps-art-left: 14.25%; --ps-art-top: 13.91%; --ps-art-width: 70.875%; --ps-art-height: 72.82%; }
+.ps-art-preview[data-ps-preview-frame="black"] { --ps-art-left: 14.25%; --ps-art-top: 13.91%; --ps-art-width: 70.875%; --ps-art-height: 72.82%; }
+.ps-art-preview[data-ps-preview-frame="oak"][data-ps-preview-mat="white"], .ps-art-preview[data-ps-preview-frame="oak"][data-ps-preview-mat="black"], .ps-art-preview[data-ps-preview-frame="black"][data-ps-preview-mat="white"], .ps-art-preview[data-ps-preview-frame="black"][data-ps-preview-mat="black"] { --ps-art-left: 22.625%; --ps-art-top: 22.09%; --ps-art-width: 54.875%; --ps-art-height: 56%; }
+.ps-art-preview[data-ps-preview-mat="white"] .ps-art-preview__mat-image, .ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__mat-image { display: block; }
+.ps-art-preview[data-ps-preview-frame="oak"] .ps-art-preview__frame-image--oak { display: block; filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
 .ps-art-preview[data-ps-preview-frame="black"] .ps-art-preview__frame-image--black { display: block; filter: brightness(.3) saturate(.55) drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
-.ps-art-preview[data-ps-preview-mat="white"] .ps-art-preview__mat { padding: clamp(20px, 5vw, 72px); background: #fff; box-shadow: inset 0 0 0 1px #e0e0de; }
-.ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__mat { padding: clamp(20px, 5vw, 72px); background: #232626; }
 .ps-media-navigation { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); opacity: 0; pointer-events: none; }
 .ps-main-media:hover .ps-media-navigation, .ps-main-media:focus-within .ps-media-navigation { opacity: 1; pointer-events: auto; }
 .ps-media-navigation:hover, .ps-media-navigation:focus-visible { transform: translateY(-50%) scale(1.03); background-position: 0 0; color: #fff; outline: 0; }
