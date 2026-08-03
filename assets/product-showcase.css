@@ -33,6 +33,11 @@
 .ps-print-preview .print-preview__inner[data-has-frame="black"] .print-preview__layer--frame-black,
 .ps-print-preview .print-preview__inner[data-has-frame="oak"] .print-preview__layer--frame-oak { display: block; }
 .ps-print-preview .print-preview__inner[data-has-frame="black"] .print-preview__layer--frame-black { filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
+.ps-print-preview .ps-main-media__image { width: 100%; height: 100%; max-height: none; }
+@media only screen and (min-width: 990px) {
+  .ps-main-media { height: calc(100svh - var(--header-sticky-height, 60px)); max-height: calc(100svh - var(--header-sticky-height, 60px)); }
+  .ps-print-preview .print-preview__inner { width: min(100%, calc(100svh - var(--header-sticky-height, 60px))); }
+}
 .ps-media-navigation { position: absolute; z-index: 2; top: 50%; transform: translateY(-50%); opacity: 0; pointer-events: none; }
 .ps-main-media:hover .ps-media-navigation, .ps-main-media:focus-within .ps-media-navigation { opacity: 1; pointer-events: auto; }
 .ps-media-navigation:hover, .ps-media-navigation:focus-visible { transform: translateY(-50%) scale(1.03); background-position: 0 0; color: #fff; outline: 0; }
