@@ -49,19 +49,15 @@
     if (!artPreview || !mainMedia || !mainImage?.naturalWidth || !mainImage?.naturalHeight) return;
     const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
     const isMobile = productMobileBreakpoint.matches;
-    const maxHeight = isMobile ? Math.min(window.innerHeight * 0.72, 620) : Math.min(window.innerHeight * 0.6, 620);
+    const maxHeight = isMobile ? Math.min(window.innerHeight * 0.72, 620) : mainMedia.clientHeight;
     const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
-    const height = Math.round(width / ratio);
     artPreview.style.width = `${Math.round(width)}px`;
-    artPreview.style.height = `${height}px`;
+    artPreview.style.setProperty('--ps-preview-aspect', `${mainImage.naturalWidth} / ${mainImage.naturalHeight}`);
+    artPreview.style.removeProperty('height');
     artPreview.dataset.psPreviewOrientation = ratio > 1.08 ? 'landscape' : ratio < .92 ? 'portrait' : 'square';
-    // Frame and passepartout are independent image layers in one fixed box.
-    // Selecting either must not change the box, artwork size, or page flow.
-    mainMedia.style.height = isMobile ? `${height}px` : '620px';
-    artPreview.style.transform = 'none';
-    if (desktopDetailsAnchor && details) {
-      details.style.marginTop = '22px';
-    }
+    // The media stage owns the available display height. The artwork, mat and
+    // frame share one aspect-ratio canvas and must never get separate fitting.
+    mainMedia.style.removeProperty('height');
   };
 
   mainImage?.addEventListener('load', fitArtPreview);
