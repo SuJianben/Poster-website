@@ -216,8 +216,13 @@
     const frameSelect = group.closest('[data-ps-frame-select]');
     if (frameSelect) {
       const value = frameSelect.querySelector('[data-ps-frame-select-value]');
+      const triggerPlus = frameSelect.querySelector('[data-ps-frame-trigger-plus]');
+      const triggerPrice = frameSelect.querySelector('[data-ps-frame-trigger-price]');
       const trigger = frameSelect.querySelector('[data-ps-frame-trigger]');
-      if (value) value.textContent = choice.dataset.psFrameName || choice.textContent.trim();
+      const isNoFrame = choice.dataset.psPreviewValue === 'none';
+      if (value) value.textContent = isNoFrame ? 'Add frame' : (choice.dataset.psFrameName || choice.textContent.trim());
+      if (triggerPlus) triggerPlus.hidden = !isNoFrame;
+      if (triggerPrice) triggerPrice.textContent = choice.dataset.psFramePrice || (isNoFrame ? 'From €35,00' : '€45,00');
       frameSelect.classList.remove('is-open');
       trigger?.setAttribute('aria-expanded', 'false');
     }
