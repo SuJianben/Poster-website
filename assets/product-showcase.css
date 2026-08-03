@@ -21,15 +21,15 @@
 .ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible { background-position: 0 0; color: #fff; outline: 0; }
 .ps-main-media { position: relative; display: grid; height: 620px; place-items: center; overflow: visible; background: #f3f3f2; touch-action: pan-y; }
 .ps-main-media__image { display: block; width: 100%; height: auto; max-height: min(60vh, 720px); object-fit: contain; transition: opacity .18s ease; }
-.ps-art-preview { position: relative; display: block; box-sizing: border-box; aspect-ratio: var(--ps-preview-aspect, 2 / 3); overflow: visible; transition: none; }
-.ps-art-preview__composition { position: relative; width: 100%; height: 100%; overflow: visible; isolation: isolate; }
-.ps-art-preview__layer { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; object-fit: fill; transform-origin: center; }
-.ps-art-preview__layer--art { z-index: 1; object-fit: fill; transition: opacity .18s ease, transform .24s ease; }
-.ps-art-preview__composition > .ps-main-media__image.ps-art-preview__layer--art { width: 100%; height: 100%; max-height: none; object-fit: fill; }
+.ps-art-preview { position: relative; display: block; box-sizing: border-box; aspect-ratio: var(--ps-preview-aspect, 2 / 3); overflow: hidden; isolation: isolate; transition: none; }
+.ps-art-preview__composition { position: relative; width: 100%; height: 100%; overflow: hidden; isolation: isolate; }
+.ps-art-preview__layer { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; object-fit: contain; transform-origin: center; }
+.ps-art-preview__layer--art { z-index: 1; object-fit: contain; transform: scale(.75); transition: opacity .18s ease, transform .24s ease; }
+.ps-art-preview__composition > .ps-main-media__image.ps-art-preview__layer--art { width: 100%; height: 100%; max-height: none; object-fit: contain; transform: scale(.75); }
 .ps-art-preview__mat-image { z-index: 2; display: none; }
 .ps-art-preview__frame-image { z-index: 3; display: none; }
 .ps-art-preview[data-ps-preview-mat="white"] .ps-art-preview__layer--art,
-.ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__layer--art { transform: scale(.57); }
+.ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__layer--art { transform: scale(.57); transition: none; }
 .ps-art-preview[data-ps-preview-mat="white"] .ps-art-preview__mat-image,
 .ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__mat-image { display: block; }
 .ps-art-preview[data-ps-preview-mat="black"] .ps-art-preview__mat-image { filter: brightness(.18) saturate(.25); }
