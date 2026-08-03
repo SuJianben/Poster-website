@@ -27,6 +27,7 @@
   // Custom framing is intentionally previewed only on that image, so regular
   // lifestyle/detail images never receive the visual treatment.
   const customPreviewMediaId = [...root.querySelectorAll('[data-ps-media]')].at(-1)?.dataset.mediaId || '';
+  let mediaSwitchToken = 0;
 
   const applyPreviewState = () => {
     if (!artPreview) return;
@@ -86,8 +87,9 @@
     activeMediaId = id;
     root.querySelectorAll('[data-ps-media]').forEach((item) => item.classList.remove('is-active'));
     thumbnail.classList.add('is-active');
-    mainImage.style.opacity = '0';
-    window.setTimeout(() => {
+    const switchToken = ++mediaSwitchToken;
+    const commitMedia = () => {
+      if (switchToken !== mediaSwitchToken) return;
       if (thumbnail.dataset.mediaSrcset) {
         mainImage.srcset = thumbnail.dataset.mediaSrcset;
       } else {
@@ -97,7 +99,22 @@
       mainImage.alt = thumbnail.dataset.mediaAlt || '';
       mainImage.style.opacity = '1';
       applyPreviewState();
-    }, 150);
+    };
+    const preload = new Image();
+    let committed = false;
+    const finishPreload = () => {
+      if (committed) return;
+      committed = true;
+      commitMedia();
+    };
+    preload.onload = finishPreload;
+    preload.onerror = finishPreload;
+    if (thumbnail.dataset.mediaSrcset) {
+      preload.srcset = thumbnail.dataset.mediaSrcset;
+      preload.sizes = mainImage.sizes || '(min-width: 901px) 58vw, 100vw';
+    }
+    preload.src = thumbnail.dataset.mediaSrc;
+    if (preload.complete) finishPreload();
     thumbnail.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
   };
 
