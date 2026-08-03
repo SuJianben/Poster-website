@@ -31,8 +31,20 @@
   const applyPreviewState = () => {
     if (!artPreview) return;
     const state = mediaPreviewState.get(activeMediaId) || { frame: 'none', mat: 'none' };
-    artPreview.dataset.psPreviewFrame = state.frame;
-    artPreview.dataset.psPreviewMat = state.mat;
+    const canvas = artPreview.querySelector('[data-pdp-print-preview]');
+    const passepartout = artPreview.querySelector('[data-pdp-print-passepartout]');
+    const frameLayers = [...artPreview.querySelectorAll('[data-pdp-print-frame]')];
+    if (canvas) {
+      canvas.dataset.hasPassepartout = state.mat !== 'none' ? 'true' : 'false';
+      canvas.dataset.hasFrame = state.frame;
+    }
+    if (passepartout) {
+      passepartout.hidden = state.mat === 'none';
+      passepartout.style.filter = state.mat === 'black' ? 'brightness(.18) saturate(.25)' : '';
+    }
+    frameLayers.forEach((layer) => {
+      layer.hidden = layer.dataset.pdpPrintFrame !== state.frame;
+    });
     fitArtPreview();
   };
 
@@ -48,16 +60,8 @@
   const fitArtPreview = () => {
     if (!artPreview || !mainMedia || !mainImage?.naturalWidth || !mainImage?.naturalHeight) return;
     const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
-    const isMobile = productMobileBreakpoint.matches;
-    const maxHeight = isMobile ? Math.min(window.innerHeight * 0.72, 620) : mainMedia.clientHeight;
-    const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
-    artPreview.style.width = `${Math.round(width)}px`;
-    artPreview.style.setProperty('--ps-preview-aspect', `${mainImage.naturalWidth} / ${mainImage.naturalHeight}`);
-    artPreview.style.removeProperty('height');
+    artPreview.style.setProperty('--pdp-aspect', `${mainImage.naturalWidth} / ${mainImage.naturalHeight}`);
     artPreview.dataset.psPreviewOrientation = ratio > 1.08 ? 'landscape' : ratio < .92 ? 'portrait' : 'square';
-    // The media stage owns the available display height. The artwork, mat and
-    // frame share one aspect-ratio canvas and must never get separate fitting.
-    mainMedia.style.removeProperty('height');
   };
 
   mainImage?.addEventListener('load', fitArtPreview);
