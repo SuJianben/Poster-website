@@ -48,28 +48,19 @@
   const fitArtPreview = () => {
     if (!artPreview || !mainMedia || !mainImage?.naturalWidth || !mainImage?.naturalHeight) return;
     const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
-    const maxHeight = Math.min(window.innerHeight * 0.6, 720);
-    const hasFrame = artPreview.dataset.psPreviewFrame && artPreview.dataset.psPreviewFrame !== 'none';
-    // The transparent frame artwork has a 70.875% × 72.82% opening. Keep
-    // the artwork at its natural rendered size and enlarge only the outer
-    // composition to that opening, rather than shrinking the artwork.
-    const frameWidthScale = hasFrame ? 1 / 0.89711 : 1;
-    const frameHeightScale = hasFrame ? 1 / 0.92209 : 1;
-    // Size the artwork exactly as it would be rendered without a frame.
-    // The transparent frame canvas may extend beyond that artwork; it must
-    // never be allowed to reduce the artwork just to fit its empty margins.
+    const isMobile = productMobileBreakpoint.matches;
+    const maxHeight = isMobile ? Math.min(window.innerHeight * 0.72, 620) : Math.min(window.innerHeight * 0.6, 620);
     const width = Math.min(mainMedia.clientWidth, maxHeight * ratio);
-    const compositionHeight = Math.round((width / ratio) * frameHeightScale);
-    artPreview.style.width = `${Math.round(width * frameWidthScale)}px`;
-    artPreview.style.height = `${compositionHeight}px`;
-    // Keep the media section at its original 620px height. The outer frame is
-    // a visual layer over the artwork, so it must not stretch the page layout.
-    mainMedia.style.height = '620px';
-    artPreview.style.transform = hasFrame ? 'translateY(-5px)' : 'none';
+    const height = Math.round(width / ratio);
+    artPreview.style.width = `${Math.round(width)}px`;
+    artPreview.style.height = `${height}px`;
+    artPreview.dataset.psPreviewOrientation = ratio > 1.08 ? 'landscape' : ratio < .92 ? 'portrait' : 'square';
+    // Frame and passepartout are independent image layers in one fixed box.
+    // Selecting either must not change the box, artwork size, or page flow.
+    mainMedia.style.height = isMobile ? `${height}px` : '620px';
+    artPreview.style.transform = 'none';
     if (desktopDetailsAnchor && details) {
-      const frameVisualBottom = hasFrame ? compositionHeight * 0.9965 - 5 : 620;
-      const frameOverflow = Math.max(0, Math.round(frameVisualBottom - 620));
-      details.style.marginTop = `${22 + frameOverflow}px`;
+      details.style.marginTop = '22px';
     }
   };
 

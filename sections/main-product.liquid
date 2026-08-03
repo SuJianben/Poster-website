@@ -31,10 +31,9 @@
           <div class="ps-main-media">
             <div class="ps-art-preview" data-ps-art-preview data-ps-preview-frame="none" data-ps-preview-mat="none">
               <div class="ps-art-preview__composition">
-                <div class="ps-art-preview__frame"><div class="ps-art-preview__mat">
                 {% if selected_media %}
                   <img
-                    class="ps-main-media__image"
+                    class="ps-main-media__image ps-art-preview__layer ps-art-preview__layer--art"
                     data-ps-main-image
                     src="{{ selected_media.preview_image | image_url: width: 1800 }}"
                     srcset="{{ selected_media.preview_image | image_url: width: 640 }} 640w, {{ selected_media.preview_image | image_url: width: 900 }} 900w, {{ selected_media.preview_image | image_url: width: 1200 }} 1200w, {{ selected_media.preview_image | image_url: width: 1600 }} 1600w, {{ selected_media.preview_image | image_url: width: 1800 }} 1800w"
@@ -45,12 +44,11 @@
                     alt="{{ selected_media.alt | default: product.title | escape }}"
                   >
                 {% else %}
-                  <img class="ps-main-media__image" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
+                  <img class="ps-main-media__image ps-art-preview__layer ps-art-preview__layer--art" data-ps-main-image src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
                 {% endif %}
-              </div></div>
-                <img class="ps-art-preview__mat-image ps-art-preview__mat-image--white" src="{{ 'ps-passepartout-white.png' | asset_url }}" width="800" height="1100" alt="" aria-hidden="true">
-      <img class="ps-art-preview__frame-image ps-art-preview__frame-image--oak" src="{{ 'ps-frame-oak-border.png' | asset_url }}" width="622" height="860" alt="" aria-hidden="true">
-      <img class="ps-art-preview__frame-image ps-art-preview__frame-image--black" src="{{ 'ps-frame-oak-border.png' | asset_url }}" width="622" height="860" alt="" aria-hidden="true">
+                <img class="ps-art-preview__layer ps-art-preview__mat-image ps-art-preview__mat-image--white" src="{{ 'ps-passepartout-white.png' | asset_url }}" width="800" height="1100" alt="" aria-hidden="true">
+                <img class="ps-art-preview__layer ps-art-preview__frame-image ps-art-preview__frame-image--oak" src="{{ 'ps-frame-oak-border.png' | asset_url }}" width="622" height="860" alt="" aria-hidden="true">
+                <img class="ps-art-preview__layer ps-art-preview__frame-image ps-art-preview__frame-image--black" src="{{ 'ps-frame-oak-border.png' | asset_url }}" width="622" height="860" alt="" aria-hidden="true">
               </div>
             </div>
             <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
