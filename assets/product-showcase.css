@@ -19,10 +19,10 @@
 .ps-thumbnail-rail__control--up { top: 0; }
 .ps-thumbnail-rail__control--down { bottom: 0; }
 .ps-thumbnail-rail__control:hover, .ps-thumbnail-rail__control:focus-visible { background-position: 0 0; color: #fff; outline: 0; }
-.ps-main-media { position: relative; display: grid; height: 620px; place-items: center; overflow: hidden; background: #f3f3f2; touch-action: pan-y; }
+.ps-main-media { position: relative; display: grid; height: 620px; place-items: center; overflow: hidden; background: #ebebeb; touch-action: pan-y; }
 .ps-main-media__image { display: block; width: 100%; height: auto; max-height: min(60vh, 720px); object-fit: contain; transition: opacity .18s ease; }
-.ps-print-preview { display: block; width: min(100%, 450px); height: 100%; max-width: 100%; aspect-ratio: var(--pdp-aspect, 800 / 1100); }
-.ps-print-preview .print-preview__inner { position: relative; width: 100%; height: 100%; aspect-ratio: auto; overflow: hidden; isolation: isolate; }
+.ps-print-preview { display: flex; width: 100%; height: 100%; max-width: 100%; align-items: center; justify-content: center; background: #ebebeb; }
+.ps-print-preview .print-preview__inner { position: relative; width: min(100%, 620px); height: auto; aspect-ratio: 1 / 1; overflow: hidden; isolation: isolate; }
 .ps-print-preview .print-preview__bg { position: absolute; inset: 0; z-index: 0; background: #ebebeb; }
 .ps-print-preview .print-preview__layer { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; object-fit: contain; transform-origin: center; }
 .ps-print-preview .print-preview__layer--art { z-index: 1; object-fit: contain; transform: scale(var(--art-scale, .75)); transition: transform .24s ease; }
@@ -162,8 +162,8 @@
   .ps-thumbnails { display: flex; grid-row: 2; height: auto; max-height: none; overflow-x: auto; overflow-y: hidden; padding: 0 0 2px; }
   .ps-thumbnail { flex: 0 0 58px; height: 70px; }
   .ps-main-media, .ps-main-media__image { min-height: 0; height: auto; max-height: 72vh; }
-  .ps-print-preview { width: 100%; height: auto; aspect-ratio: var(--pdp-aspect, 800 / 1100); }
-  .ps-print-preview .print-preview__inner { height: 100%; }
+  .ps-print-preview { width: 100%; height: auto; aspect-ratio: 1 / 1; }
+  .ps-print-preview .print-preview__inner { width: 100%; height: 100%; }
   .ps-media-navigation { width: 40px; height: 40px; }
   .ps-left-details { margin-top: 18px; }
   .ps-purchase { padding: 20px; }.ps-purchase h1{font-size:20px;}
