@@ -86,9 +86,6 @@
 .ps-frame-options::-webkit-scrollbar { width: 9px; }
 .ps-frame-options::-webkit-scrollbar-track { background: #fff; }
 .ps-frame-options::-webkit-scrollbar-thumb { border: 2px solid #fff; border-radius: 6px; background: #909392; }
-.ps-frame-options__head { display: flex; align-items: center; justify-content: space-between; min-height: 40px; padding: 0 14px; border-bottom: 1px solid #e2e3e1; color: #6d7b85; font: 500 10px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
-.ps-frame-options__head > span:first-child { display: inline-flex; align-items: center; gap: 12px; color: #1b3342; }
-.ps-frame-options__plus { font-size: 14px; line-height: 1; }
 .ps-frame-option { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 37px; padding: 0 16px; border: 0; border-bottom: 0; background: #fff; color: #1b3342; font: 500 11px/1.2 var(--sans); letter-spacing: .1em; text-align: left; text-transform: uppercase; cursor: pointer; }
 .ps-frame-option:last-child { border-bottom: 0; }
 .ps-frame-option:hover, .ps-frame-option:focus-visible, .ps-frame-option.is-selected { background: #f4f5f6; color: var(--ps-ink); outline: 0; }
