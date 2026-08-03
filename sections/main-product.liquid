@@ -3,6 +3,7 @@
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
+{% assign preview_media = product.media | where: 'media_type', 'image' | last %}
 
 <section class="ps-product" data-ps-product data-section-id="{{ section.id }}">
   <div class="ps-shell">
@@ -29,21 +30,21 @@
             <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--down" type="button" data-ps-thumbnail-scroll="1" aria-label="Show next thumbnails"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg></button>
           </div>
           <div class="ps-main-media">
-            <print-preview class="ps-print-preview" data-ps-art-preview data-orientation="portrait" data-media-id="{{ selected_media.id | default: product.media.first.id }}" style="--pdp-aspect: {% if selected_media %}{{ selected_media.preview_image.width }} / {{ selected_media.preview_image.height }}{% else %}800 / 1100{% endif %};">
+            <print-preview class="ps-print-preview" data-ps-art-preview data-orientation="portrait" data-media-id="{{ preview_media.id | default: product.media.first.id }}" style="--pdp-aspect: {% if preview_media %}{{ preview_media.preview_image.width }} / {{ preview_media.preview_image.height }}{% else %}800 / 1100{% endif %};">
               <div class="print-preview__inner" data-pdp-print-preview data-pdp-canvas data-ps-preview-canvas>
                 <div class="print-preview__bg" aria-hidden="true"></div>
-                {% if selected_media %}
+                {% if preview_media %}
                   <img
                     class="ps-main-media__image print-preview__layer print-preview__layer--art"
                     data-ps-main-image
                     data-pdp-print-art
-                    src="{{ selected_media.preview_image | image_url: width: 1800 }}"
-                    srcset="{{ selected_media.preview_image | image_url: width: 640 }} 640w, {{ selected_media.preview_image | image_url: width: 900 }} 900w, {{ selected_media.preview_image | image_url: width: 1200 }} 1200w, {{ selected_media.preview_image | image_url: width: 1600 }} 1600w, {{ selected_media.preview_image | image_url: width: 1800 }} 1800w"
+                    src="{{ preview_media.preview_image | image_url: width: 1800 }}"
+                    srcset="{{ preview_media.preview_image | image_url: width: 640 }} 640w, {{ preview_media.preview_image | image_url: width: 900 }} 900w, {{ preview_media.preview_image | image_url: width: 1200 }} 1200w, {{ preview_media.preview_image | image_url: width: 1600 }} 1600w, {{ preview_media.preview_image | image_url: width: 1800 }} 1800w"
                     sizes="(min-width: 901px) 58vw, 100vw"
-                    width="{{ selected_media.preview_image.width }}"
-                    height="{{ selected_media.preview_image.height }}"
+                    width="{{ preview_media.preview_image.width }}"
+                    height="{{ preview_media.preview_image.height }}"
                     loading="eager"
-                    alt="{{ selected_media.alt | default: product.title | escape }}"
+                    alt="{{ preview_media.alt | default: product.title | escape }}"
                   >
                 {% else %}
                   <img class="ps-main-media__image print-preview__layer print-preview__layer--art" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
