@@ -211,19 +211,23 @@
     choice.classList.add('is-selected');
     choice.setAttribute('aria-pressed', 'true');
     choice.setAttribute('aria-selected', 'true');
+    const choiceLabel = choice.dataset.psChoiceLabel || choice.dataset.psFrameName || choice.textContent.trim();
     const output = group.closest('.ps-config-group')?.querySelector('[data-ps-choice-output]');
-    if (output) output.textContent = choice.dataset.psFrameName || choice.textContent.trim();
-    const frameSelect = group.closest('[data-ps-frame-select]');
-    if (frameSelect) {
-      const value = frameSelect.querySelector('[data-ps-frame-select-value]');
-      const triggerPlus = frameSelect.querySelector('[data-ps-frame-trigger-plus]');
-      const triggerPrice = frameSelect.querySelector('[data-ps-frame-trigger-price]');
-      const trigger = frameSelect.querySelector('[data-ps-frame-trigger]');
-      const isNoFrame = choice.dataset.psPreviewValue === 'none';
-      if (value) value.textContent = isNoFrame ? 'Add frame' : (choice.dataset.psFrameName || choice.textContent.trim());
-      if (triggerPlus) triggerPlus.hidden = !isNoFrame;
-      if (triggerPrice) triggerPrice.textContent = choice.dataset.psFramePrice || (isNoFrame ? 'From €35,00' : '€45,00');
-      frameSelect.classList.remove('is-open');
+    if (output) output.textContent = choiceLabel;
+    const choiceSelect = group.closest('[data-ps-choice-select]');
+    if (choiceSelect) {
+      const value = choiceSelect.querySelector('[data-ps-choice-select-value], [data-ps-frame-select-value]');
+      const triggerPlus = choiceSelect.querySelector('[data-ps-choice-select-plus], [data-ps-frame-trigger-plus]');
+      const triggerPrice = choiceSelect.querySelector('[data-ps-choice-select-price], [data-ps-frame-trigger-price]');
+      const trigger = choiceSelect.querySelector('[data-ps-frame-trigger]');
+      const isEmpty = choice.dataset.psPreviewValue === 'none';
+      const emptyLabel = choiceSelect.dataset.psEmptyLabel || 'Add frame';
+      const emptyPrice = choiceSelect.dataset.psEmptyPrice || 'From €35,00';
+      const choicePrice = choice.dataset.psChoicePrice || choice.dataset.psFramePrice || (isEmpty ? emptyPrice : '');
+      if (value) value.textContent = isEmpty ? emptyLabel : choiceLabel;
+      if (triggerPlus) triggerPlus.hidden = !isEmpty;
+      if (triggerPrice) triggerPrice.textContent = choicePrice;
+      choiceSelect.classList.remove('is-open');
       trigger?.setAttribute('aria-expanded', 'false');
     }
     const previewTarget = group.dataset.psPreviewTarget;
@@ -240,11 +244,11 @@
       }
     }
   })));
-  root.querySelectorAll('[data-ps-frame-select]').forEach((select) => {
+  root.querySelectorAll('[data-ps-choice-select]').forEach((select) => {
     const trigger = select.querySelector('[data-ps-frame-trigger]');
     trigger?.addEventListener('click', () => {
       const open = !select.classList.contains('is-open');
-      root.querySelectorAll('[data-ps-frame-select].is-open').forEach((item) => {
+      root.querySelectorAll('[data-ps-choice-select].is-open').forEach((item) => {
         item.classList.remove('is-open');
         item.querySelector('[data-ps-frame-trigger]')?.setAttribute('aria-expanded', 'false');
       });
@@ -253,8 +257,8 @@
     });
   });
   document.addEventListener('click', (event) => {
-    if (event.target.closest('[data-ps-frame-select]')) return;
-    root.querySelectorAll('[data-ps-frame-select].is-open').forEach((select) => {
+    if (event.target.closest('[data-ps-choice-select]')) return;
+    root.querySelectorAll('[data-ps-choice-select].is-open').forEach((select) => {
       select.classList.remove('is-open');
       select.querySelector('[data-ps-frame-trigger]')?.setAttribute('aria-expanded', 'false');
     });

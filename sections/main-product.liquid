@@ -121,18 +121,24 @@
           {% endunless %}
           <div class="ps-config-group">
             <p class="ps-config-label">Passepartout: <strong data-ps-choice-output>None</strong></p>
-            <div class="ps-config-options" data-ps-choice-group data-ps-preview-target="mat">
-              <button type="button" class="is-selected" data-ps-choice data-ps-preview-value="none" aria-pressed="true">No passepartout</button>
-              <button type="button" data-ps-choice data-ps-preview-value="white" aria-pressed="false">White passepartout</button>
-              <button type="button" data-ps-choice data-ps-preview-value="black" aria-pressed="false">Black passepartout</button>
+            <div class="ps-frame-select ps-choice-select" data-ps-choice-select data-ps-empty-label="Add passepartout" data-ps-empty-price="From €15,00">
+              <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
+                <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-choice-select-value>Add passepartout</span></span>
+                <span class="ps-frame-trigger__price" data-ps-choice-select-price>From €15,00</span>
+              </button>
+              <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="mat" role="listbox" aria-label="Passepartout options">
+                <button type="button" class="ps-frame-option ps-mat-option--none is-selected" data-ps-choice data-ps-preview-value="none" data-ps-choice-label="No passepartout" data-ps-choice-price="From €15,00" aria-pressed="true" role="option" aria-selected="true"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">No passepartout</span></span></button>
+                <button type="button" class="ps-frame-option ps-mat-option--white" data-ps-choice data-ps-preview-value="white" data-ps-choice-label="White passepartout" data-ps-choice-price="€15,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">White passepartout</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€15,00</span></button>
+                <button type="button" class="ps-frame-option ps-mat-option--black" data-ps-choice data-ps-preview-value="black" data-ps-choice-label="Black passepartout" data-ps-choice-price="€15,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">Black passepartout</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€15,00</span></button>
+              </div>
             </div>
           </div>
           <div class="ps-config-group">
             <p class="ps-config-label">Frame: <strong data-ps-choice-output>No frame</strong></p>
-            <div class="ps-frame-select" data-ps-frame-select>
+            <div class="ps-frame-select" data-ps-frame-select data-ps-choice-select data-ps-empty-label="Add frame" data-ps-empty-price="From €35,00">
               <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
-                <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-frame-trigger-plus aria-hidden="true">+</span><span data-ps-frame-select-value>Add frame</span></span>
-                <span class="ps-frame-trigger__price" data-ps-frame-trigger-price>From €35,00</span>
+                <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-frame-trigger-plus data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-frame-select-value data-ps-choice-select-value>Add frame</span></span>
+                <span class="ps-frame-trigger__price" data-ps-frame-trigger-price data-ps-choice-select-price>From €35,00</span>
               </button>
               <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="frame" role="listbox" aria-label="Frame options">
                 <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-preview-value="none" data-ps-frame-name="No frame" data-ps-frame-price="From €35,00" aria-pressed="true" role="option" aria-selected="true"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">No frame</span></span></button>

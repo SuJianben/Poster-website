@@ -93,6 +93,9 @@
 .ps-frame-option--natural .ps-frame-option__swatch { background: linear-gradient(135deg, transparent 42%, #b8bbba 43%, #b8bbba 56%, transparent 57%), #f8f8f5; }
 .ps-frame-option--white .ps-frame-option__swatch { border-color: #aa7a45; background: #aa7a45; }
 .ps-frame-option--black .ps-frame-option__swatch { border-color: #202325; background: #202325; }
+.ps-mat-option--none .ps-frame-option__swatch { background: linear-gradient(135deg, transparent 42%, #b8bbba 43%, #b8bbba 56%, transparent 57%), #f8f8f5; }
+.ps-mat-option--white .ps-frame-option__swatch { border-color: #d4d6d5; background: #fff; }
+.ps-mat-option--black .ps-frame-option__swatch { border-color: #202325; background: #202325; }
 .ps-frame-option__details { display: inline-flex; align-items: baseline; gap: 12px; min-width: 0; flex: 1; }
 .ps-frame-option__name, .ps-frame-option__size, .ps-frame-option__price { white-space: nowrap; }
 .ps-frame-option__size { color: #6d7b85; }
