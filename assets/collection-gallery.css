@@ -35,7 +35,12 @@
 .cg-filter-trigger { display: inline-flex; min-width: 86px; height: 25px; align-items: center; justify-content: center; gap: 7px; border: 1px solid #bfc0bd; background: #fff; color: var(--cg-muted); font: 600 10px/1 var(--sans) !important; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; }
 .cg-filter-trigger svg { width: 13px; height: 13px; }
 
-.cg-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px var(--cg-gap); padding-top: 12px; }
+.cg-results { position: relative; min-height: 280px; }
+.cg-product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px var(--cg-gap); padding-top: 12px; transition: opacity .2s ease; }
+.cg-results.is-loading .cg-product-grid, .cg-results.is-loading .cg-pagination { opacity: .12; pointer-events: none; }
+.cg-results::after { position: absolute; top: 150px; left: 50%; color: #383b3b; content: '•••'; font: 600 17px/1 var(--sans); letter-spacing: 4px; opacity: 0; pointer-events: none; transform: translate(-50%, -50%); }
+.cg-results.is-loading::after { opacity: 1; animation: cg-loading-pulse .8s ease-in-out infinite alternate; }
+@keyframes cg-loading-pulse { from { opacity: .32; } to { opacity: 1; } }
 .cg-collection[data-columns='3'] .cg-product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .cg-collection[data-columns='6'] .cg-product-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 .cg-product { min-width: 0; }
@@ -102,6 +107,11 @@
 .cg-filter-actions a, .cg-filter-actions button { display: inline-flex; min-width: 102px; height: 42px; align-items: center; justify-content: center; padding: 0 18px; border: 1px solid #171717; background: #171717; color: #fff; font: 600 11px/1 var(--sans); letter-spacing: .05em; text-decoration: none; text-transform: uppercase; cursor: pointer; }
 .cg-filter-actions a { background: #fff; color: #171717; }
 body.cg-drawer-active { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cg-product-grid { transition: none; }
+  .cg-results.is-loading::after { animation: none; }
+}
 
 @media (max-width: 750px) {
   .cg-collection { padding: 92px 0 44px; }
