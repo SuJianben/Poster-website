@@ -1,2 +1,23 @@
-<section class="generic-page"><div class="page-width"><h1 class="display" style="font-size:clamp(44px,6vw,76px)">{{ 'search.title' | t }}</h1><form action="{{ routes.search_url }}" method="get"><input style="padding:14px;border:1px solid var(--line);min-width:260px" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}"><button class="button" type="submit">{{ 'general.search' | t }}</button></form>{% if search.performed %}<div class="product-grid">{% for item in search.results %}{% if item.object_type == 'product' %}{% render 'poster-card', product: item %}{% endif %}{% endfor %}</div>{% endif %}</div></section>
-{% schema %}{"name":"Main search","settings":[]}{% endschema %}
+{{ 'search-page.css' | asset_url | stylesheet_tag }}
+
+<section class="sp-search">
+  <div class="sp-search__shell">
+    <h1>{{ 'search.title' | t }}</h1>
+    <form class="sp-search__form" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="SearchPageInput">{{ 'search.placeholder' | t }}</label>
+      <input id="SearchPageInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'search.placeholder' | t }}" autocomplete="off">
+      <button type="submit" aria-label="{{ 'general.search' | t }}">{% render 'icon', name: 'search' %}</button>
+    </form>
+    {% if search.performed %}
+      {% if search.results_count > 0 %}
+        <div class="sp-search__results product-grid">
+          {% for item in search.results %}{% if item.object_type == 'product' %}{% render 'poster-card', product: item %}{% endif %}{% endfor %}
+        </div>
+      {% else %}<p class="sp-search__empty">No products found.</p>{% endif %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{"name":"Main search","settings":[]}
+{% endschema %}

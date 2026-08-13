@@ -1,60 +1,163 @@
-{{ 'collection-showcase.css' | asset_url | stylesheet_tag }}
-{{ 'collection-showcase-interactions.css' | asset_url | stylesheet_tag }}
-{{ 'collection-showcase-layout.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'collection-showcase.js' | asset_url }}" defer="defer"></script>
-{% liquid
-  assign story_images = 'figma-poster-n1.jpg,figma-poster-s2.jpg,figma-poster-c3.jpg,figma-poster-r4.jpg,figma-poster-t5.jpg' | split: ','
-  assign story_titles = 'Nordic Calm,Studio Colour,Cinematic Nights,Modern Rituals,Travel Notes' | split: ','
-  assign story_blocks = section.blocks | where: 'type', 'story'
-  assign faq_blocks = section.blocks | where: 'type', 'faq'
-  assign fallback_images = 'figma-poster-a1.jpg,figma-poster-a2.jpg,figma-poster-a3.jpg,figma-poster-a4.jpg,figma-poster-a5.jpg,figma-poster-c1.jpg,figma-poster-c2.jpg,figma-poster-c3.jpg,figma-poster-c4.jpg,figma-poster-c5.jpg,figma-poster-n1.jpg,figma-poster-n2.jpg' | split: ','
-  assign fallback_titles = 'Paper Bird,Midnight Transit,Wild Bloom,Fuji Street,Bicycle Stories,The Tramp,Silver Screen,Neon Marquee,Monster Nights,City Motion,Fjord Blue,Still Water' | split: ','
-  assign fallback_artists = 'Fons Heijnsbroek,Alex Mclean,Anika Reed,Aiko Tanaka,Marcel Kent,Smithsonian,Luthfian Alfajr,Christian Lue,Lilian Do Khac,Kaito Mori,Hendrik Schuette,Joakim Nådell' | split: ','
-  assign fallback_prices = '$199,$149,$189,$189,$175,$249,$189,$179,$159,$179,$199,$179' | split: ','
-  assign fallback_types = 'Art Print,Bath Mat,Bath Towel,Canvas Print,Carry All Pouch,Collage Set,Comforter,Desk Mat,Duvet Cover,Duvet Cover Set,Wall Tapestry,Throw Pillow' | split: ','
-  assign fallback_subjects = 'Nature,Abstract,Flowers,Plants,Shapes,Landscape,Animals,Lines,Tropical,Forest,City,People' | split: ','
-  assign fallback_colors = 'Cream,Sage,Black,Yellow,Orange,Green,Blue,Pink,Purple,Red,Cream,Blue' | split: ','
-  assign fallback_mediums = 'Graphic Design,Painting,Illustration,Drawing,Photography,Vector Art,Collage,Typography,digital-art,Painting,Photography,Illustration' | split: ','
-  assign fallback_styles = 'Vintage,Abstract,Retro,Modern,Minimalism,Boho,Geometric,Contemporary,Watercolor,Mid-Century Modern,Vintage,Modern' | split: ','
-  assign fallback_patterns = 'Floral,Botanical,Geometric,Stripes,Checks,Animal Print,Plaid,Dots,Swirl,Solid,Abstract,Collage' | split: ','
-  assign fallback_type_options = 'Art Print,Bath Mat,Bath Towel,Canvas Print,Carry All Pouch,Collage Set,Comforter,Desk Mat,Duvet Cover,Duvet Cover Set,Wall Tapestry,Throw Pillow'
-  assign fallback_type_counts = '40317,34183,30521,3192,32970,14,31253,26335,31378,13,6846,9234'
-  assign fallback_subject_options = 'Nature,Abstract,Flowers,Plants,Shapes,Landscape,Animals,Lines,Tropical,Forest,City,People'
-  assign fallback_subject_counts = '549222,471626,424172,209451,184680,163081,150771,146859,132825,104629,83711,71548'
-  assign fallback_color_options = 'Cream,Sage,Black,Yellow,Orange,Green,Blue,Pink,Purple,Red,Teal,Brown'
-  assign fallback_color_counts = '771905,307364,272832,235651,185931,135743,125184,117681,103840,78515,65304,48960'
-  assign fallback_medium_options = 'Graphic Design,Painting,Illustration,Drawing,Photography,Vector Art,Collage,Typography,digital-art,Printmaking,Ink,Textile'
-  assign fallback_medium_counts = '564144,428557,353472,242909,131341,90607,86712,60923,108,57402,38816,26175'
-  assign fallback_style_options = 'Vintage,Abstract,Retro,Modern,Minimalism,Boho,Geometric,Contemporary,Watercolor,Mid-Century Modern,Maximalist,Classic'
-  assign fallback_style_counts = '604897,471507,441293,391743,352322,324031,273874,257750,235878,186756,145230,120843'
-  assign fallback_pattern_options = 'Floral,Botanical,Geometric,Stripes,Checks,Animal Print,Plaid,Dots,Swirl,Solid,Abstract,Collage'
-  assign fallback_pattern_counts = '440616,383443,273872,157130,43630,31219,28107,24619,20616,18418,16112,12964'
-  assign mobile_sort_options = 'relevance,title-asc,title-desc,price-asc,price-desc' | split: ','
-%}
-<section class="collection-showcase" data-collection-showcase>
-  <button class="collection-showcase__mobile-drawer-scrim" type="button" data-mobile-drawer-scrim hidden aria-label="Close panel"></button>
-  <header class="collection-showcase__intro page-width">
-    <nav class="collection-showcase__breadcrumb" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span aria-hidden="true">/</span><span>{{ collection.title }}</span></nav>
-    <h1 class="display">{{ collection.title }}</h1><div class="collection-showcase__lede rte">{{ section.settings.intro }}</div>
-  </header>
-  <div class="collection-showcase__stories page-width" aria-label="Collection stories">
-    {% if story_blocks.size > 0 %}{% for block in story_blocks limit: 5 %}<a class="collection-story" href="{{ block.settings.link | default: collection.url }}" {{ block.shopify_attributes }}>{% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 960 | image_tag: loading: 'lazy', widths: '320,480,640,960', alt: block.settings.title }}{% else %}<img src="{{ story_images[forloop.index0] | asset_url }}" width="900" height="900" loading="lazy" alt="{{ block.settings.title | escape }}">{% endif %}<span>{{ block.settings.title }}</span></a>{% endfor %}{% else %}{% for story_title in story_titles %}<a class="collection-story" href="{{ collection.url }}"><img src="{{ story_images[forloop.index0] | asset_url }}" width="900" height="900" loading="lazy" alt="{{ story_title | escape }}"><span>{{ story_title }}</span></a>{% endfor %}{% endif %}
+{{ 'collection-gallery.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
+
+{% assign collection_count = collection.products_count %}
+{% assign category_labels = section.settings.category_labels | split: ',' %}
+{% assign seo_title = collection.metafields.custom.collection_seo_title.value | default: collection.title %}
+{% assign seo_intro = collection.metafields.custom.collection_seo_intro.value | default: section.settings.seo_intro %}
+{% assign seo_body = collection.metafields.custom.collection_seo_body.value | default: collection.description | default: section.settings.seo_body %}
+
+<section class="cg-collection" data-cg-collection data-cg-product-collection data-columns="4">
+  <div class="cg-shell">
+    <div class="cg-breadcrumb">{{ collection.title }}</div>
+    <header class="cg-heading">
+      <h1>{{ collection.title }} <span>({{ collection_count }})</span></h1>
+      {% if collection.description != blank %}
+        <div>{{ collection.description }}</div>
+      {% else %}
+        <p>{{ section.settings.fallback_description }}</p>
+      {% endif %}
+    </header>
+
+    <nav class="cg-category-nav" aria-label="Collection categories">
+      {% for label in category_labels %}
+        {% assign label_clean = label | strip %}
+        {% if label_clean != blank %}
+          <a class="{% if forloop.first %}is-current{% endif %}" href="{{ collection.url }}">{{ label_clean }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+
+    <div class="cg-toolbar">
+      <div class="cg-tool-group">
+        <span class="cg-toolbar-label">Gallery:</span>
+        <div class="cg-segment" aria-label="Gallery columns">
+          <button type="button" data-cg-columns="3">3</button>
+          <button type="button" class="is-active" data-cg-columns="4">4</button>
+          <button type="button" data-cg-columns="6">6</button>
+        </div>
+        <span class="cg-toolbar-label">View:</span>
+        <div class="cg-segment" aria-label="Gallery view">
+          <button type="button" class="is-active" data-cg-view="product">Product</button>
+          <button type="button" data-cg-view="lifestyle">Lifestyle</button>
+        </div>
+      </div>
+      <button class="cg-filter-trigger" type="button" data-cg-open-drawer aria-haspopup="dialog">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4h13M4.5 8h7M6.5 12h3" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+        Filters
+      </button>
+    </div>
+
+    <div class="cg-product-grid" aria-live="polite">
+      {% for product in collection.products %}
+        {% assign product_types = product.type | downcase | replace: ' ', '-' %}
+        {% assign product_tags = product.tags | join: '|' | downcase | replace: ' ', '-' %}
+        <article class="cg-product" data-cg-product data-cg-types="{{ product_types }}|{{ product_tags }}">
+          <a class="cg-product-media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+            {% if product.tags contains 'Bestseller' %}<span class="cg-badge">Bestseller</span>{% endif %}
+            {% if product.featured_media %}
+              {{ product.featured_media | image_url: width: 1200 | image_tag: class: 'cg-product-image', loading: 'lazy', widths: '320,480,640,800,1200', alt: product.title }}
+            {% endif %}
+            {% if product.images.size > 1 %}
+              {{ product.images[1] | image_url: width: 1200 | image_tag: class: 'cg-product-hover-image', loading: 'lazy', widths: '320,480,640,800,1200', alt: '' }}
+            {% endif %}
+          </a>
+          <button class="cg-heart" type="button" data-cg-heart aria-pressed="false" aria-label="Save {{ product.title | escape }}"></button>
+          <div class="cg-product-meta">
+            <a class="cg-product-title" href="{{ product.url }}">{{ product.title }}</a>
+            <span class="cg-product-price">From {{ product.price | money }}</span>
+            {% if product.vendor != blank %}<span class="cg-product-vendor">{{ product.vendor }}</span>{% endif %}
+          </div>
+        </article>
+      {% else %}
+        <p class="cg-product-grid__empty">No products are available in this collection yet.</p>
+      {% endfor %}
+    </div>
+
+    <nav class="cg-pagination" data-cg-pagination aria-label="Product pages">
+      <button class="is-current" type="button" data-cg-page="1" aria-current="page">1</button>
+      <button type="button" data-cg-page="2">2</button>
+      <button class="cg-pagination__next" type="button" data-cg-next aria-label="Next page">›</button>
+    </nav>
+
+    {% if section.settings.show_seo %}
+      <section class="cg-seo" aria-labelledby="cg-seo-title">
+        <h2 id="cg-seo-title">{{ seo_title }}</h2>
+        {% if seo_intro != blank %}<p class="cg-seo__lead">{{ seo_intro }}</p>{% endif %}
+        {% if seo_body != blank %}<div>{{ seo_body }}</div>{% endif %}
+      </section>
+    {% endif %}
   </div>
-  <div class="collection-showcase__catalog page-width" id="collection-products">
-    <aside class="collection-showcase__filters" id="collection-filters-{{ section.id }}" aria-label="Collection filters">
-      <p class="collection-showcase__filters-title">Refine</p>
-      <details class="collection-filter" open><summary>Product Type</summary>{% render 'collection-filter-list', options: fallback_type_options, counts: fallback_type_counts, filter_key: 'type', visible_limit: 10 %}</details>
-      <details class="collection-filter" open><summary>Subject</summary>{% render 'collection-filter-list', options: fallback_subject_options, counts: fallback_subject_counts, filter_key: 'subject', visible_limit: 10 %}</details>
-      <details class="collection-filter" open><summary>Color</summary>{% render 'collection-filter-list', options: fallback_color_options, counts: fallback_color_counts, filter_key: 'color', visible_limit: 10 %}</details>
-      <details class="collection-filter" open><summary>Art Medium</summary>{% render 'collection-filter-list', options: fallback_medium_options, counts: fallback_medium_counts, filter_key: 'medium', visible_limit: 10 %}</details>
-      <details class="collection-filter" open><summary>Style</summary>{% render 'collection-filter-list', options: fallback_style_options, counts: fallback_style_counts, filter_key: 'style', visible_limit: 10 %}</details>
-      <details class="collection-filter" open><summary>Pattern</summary>{% render 'collection-filter-list', options: fallback_pattern_options, counts: fallback_pattern_counts, filter_key: 'pattern', visible_limit: 10 %}</details>
-      <button class="collection-showcase__clear" type="button" data-collection-clear hidden>Clear filters</button>
+
+  <div class="cg-drawer" data-cg-drawer aria-hidden="true">
+    <button class="cg-drawer__scrim" type="button" data-cg-close-drawer aria-label="Close filters"></button>
+    <aside class="cg-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cg-filter-title">
+      <div class="cg-drawer__head">
+        <h2 id="cg-filter-title">Filters</h2>
+        <button class="cg-drawer-close" type="button" data-cg-close-drawer aria-label="Close filters">×</button>
+      </div>
+      {% if collection.all_types.size > 0 %}
+        <div class="cg-filter-group">
+          <h3>Product type</h3>
+          {% for type in collection.all_types %}
+            {% if type != blank %}
+              {% assign filter_value = type | downcase | replace: ' ', '-' %}
+              <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ type }}</label>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if collection.all_tags.size > 0 %}
+        <div class="cg-filter-group">
+          <h3>Style</h3>
+          {% for tag in collection.all_tags limit: 8 %}
+            {% assign filter_value = tag | downcase | replace: ' ', '-' %}
+            <label class="cg-filter-option"><input type="checkbox" value="{{ filter_value }}" data-cg-filter> {{ tag }}</label>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="cg-filter-actions">
+        <button type="button" data-cg-clear>Clear all</button>
+        <button type="button" data-cg-close-drawer>Show results</button>
+      </div>
     </aside>
-    <div class="collection-showcase__results"><div class="collection-showcase__mobile-controls"><button type="button" data-mobile-filter-toggle aria-controls="collection-filters-{{ section.id }}" aria-expanded="false">☷ <span>Filters</span></button><button type="button" data-mobile-sort-toggle aria-expanded="false">Relevance</button><div class="collection-showcase__mobile-sort-menu" data-mobile-sort-menu hidden>{% for option in mobile_sort_options %}<button class="{% if option == 'relevance' %}is-selected{% endif %}" type="button" data-mobile-sort-value="{{ option }}">{% case option %}{% when 'relevance' %}Relevance{% when 'title-asc' %}New to Old{% when 'title-desc' %}Old to New{% when 'price-asc' %}Price Low to High{% when 'price-desc' %}Price High to Low{% endcase %}</button>{% endfor %}</div></div><div class="collection-showcase__toolbar"><p data-collection-count>{{ fallback_titles.size }} pieces</p><label class="visually-hidden" for="collection-sort-{{ section.id }}">Sort products</label><select id="collection-sort-{{ section.id }}" data-collection-sort><option value="relevance">Sort by: Relevance</option><option value="title-asc">Title: A–Z</option><option value="title-desc">Title: Z–A</option><option value="price-asc">Price: Low to high</option><option value="price-desc">Price: High to low</option></select></div><div class="collection-showcase__grid" data-collection-grid>{% for fallback_title in fallback_titles %}<article class="poster-card collection-fallback-card" data-collection-card data-title="{{ fallback_title | escape }}" data-price="{{ fallback_prices[forloop.index0] | remove: '$' }}" data-type="{{ fallback_types[forloop.index0] }}" data-subject="{{ fallback_subjects[forloop.index0] }}" data-color="{{ fallback_colors[forloop.index0] }}" data-medium="{{ fallback_mediums[forloop.index0] }}" data-style="{{ fallback_styles[forloop.index0] }}" data-pattern="{{ fallback_patterns[forloop.index0] }}"><a class="poster-card__image" href="#collection-products"><img src="{{ fallback_images[forloop.index0] | asset_url }}" width="900" height="900" loading="lazy" alt="{{ fallback_title | escape }}"><span class="collection-fallback-card__quick-view" aria-hidden="true">Quick view</span></a><div class="poster-card__details"><p>By: {{ fallback_artists[forloop.index0] }}</p><a href="#collection-products">{{ fallback_title }}</a><p>Starting at {{ fallback_prices[forloop.index0] }}</p></div></article>{% endfor %}</div><p class="collection-showcase__empty" data-collection-empty hidden>No posters match these filters.</p></div>
   </div>
-  {% if faq_blocks.size > 0 %}<div class="collection-showcase__afterword page-width"><div class="collection-showcase__faq"><p class="eyebrow">Frequently asked questions</p>{% for block in faq_blocks %}<details {{ block.shopify_attributes }}><summary>{{ block.settings.question }}</summary><div class="rte">{{ block.settings.answer }}</div></details>{% endfor %}</div></div>{% endif %}
 </section>
+
 {% schema %}
-{"name":"Collection showcase","settings":[{"type":"richtext","id":"intro","label":"Introduction","default":"<p>Discover art and objects from independent artists, all in one place.</p>"},{"type":"checkbox","id":"use_fallback","label":"Use fallback product cards","default":true},{"type":"range","id":"products_per_page","label":"Products per page","min":4,"max":24,"step":4,"default":12},{"type":"checkbox","id":"show_description","label":"Show collection description","default":true},{"type":"richtext","id":"editorial_fallback","label":"Description fallback","default":"<p>Explore distinct points of view, selected to make a room feel personal and complete.</p>"}],"blocks":[{"type":"story","name":"Aesthetic story","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"title","label":"Title","default":"New aesthetic"},{"type":"url","id":"link","label":"Collection link"}]},{"type":"faq","name":"FAQ","settings":[{"type":"text","id":"question","label":"Question","default":"What makes this collection special?"},{"type":"richtext","id":"answer","label":"Answer","default":"<p>Every piece is selected to work beautifully together while leaving room for your own point of view.</p>"}]}],"max_blocks":12}
+{
+  "name": "Collection gallery",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "default": "A curated selection of art prints for the room that brings people together. Each piece is chosen to anchor the space with personality, warmth and lasting visual presence."
+    },
+    {
+      "type": "text",
+      "id": "category_labels",
+      "label": "Category navigation labels",
+      "default": "Living room, Bedroom, Kitchen, Bathroom, Home Office"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_seo",
+      "label": "Show collection SEO content",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "seo_intro",
+      "label": "SEO fallback intro",
+      "default": "Discover a curated selection created to bring a distinct point of view to your space."
+    },
+    {
+      "type": "richtext",
+      "id": "seo_body",
+      "label": "SEO fallback body",
+      "default": "<p>Explore art chosen for its character, colour and lasting visual presence. Each piece is designed to help make your room feel personal and complete.</p>"
+    }
+  ]
+}
 {% endschema %}

@@ -11,7 +11,7 @@
     const next = section.querySelector('[data-tilted-next]');
     const productTitle = section.querySelector('[data-tilted-title]');
     const productMeta = section.querySelector('[data-tilted-meta]');
-    const productLink = section.querySelector('[data-tilted-link]');
+    const collectionLink = section.querySelector('[data-tilted-link]');
     if (!viewport || !track || !slides.length) return;
     let activeIndex = Math.min(3, slides.length - 1);
     const centerActiveCard = () => {
@@ -27,14 +27,34 @@
       const activeSlide = slides[activeIndex];
       if (productTitle) productTitle.textContent = activeSlide.dataset.title || '';
       if (productMeta) productMeta.textContent = activeSlide.dataset.meta || '';
-      if (productLink) productLink.href = activeSlide.dataset.link || '#';
+      if (collectionLink) collectionLink.href = section.dataset.tiltedCollectionLink || '#';
       requestAnimationFrame(centerActiveCard);
     };
     const select = (index) => { activeIndex = Math.max(0, Math.min(index, slides.length - 1)); render(); };
-    slides.forEach((slide, index) => slide.querySelector('[data-tilted-select]')?.addEventListener('click', () => select(index)));
+    slides.forEach((slide, index) => slide.querySelector('[data-tilted-select]')?.addEventListener('click', () => {
+      if (index === activeIndex && slide.dataset.source === 'collection' && slide.dataset.link) {
+        window.location.assign(slide.dataset.link);
+        return;
+      }
+      select(index);
+    }));
     dots.forEach((dot, index) => dot.addEventListener('click', () => select(index)));
     previous?.addEventListener('click', () => select(activeIndex - 1));
     next?.addEventListener('click', () => select(activeIndex + 1));
+    let swipeStart = null;
+    viewport.addEventListener('pointerdown', (event) => {
+      if (!window.matchMedia('(max-width: 767px)').matches || !event.isPrimary) return;
+      swipeStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    }, { passive: true });
+    viewport.addEventListener('pointerup', (event) => {
+      if (!swipeStart || swipeStart.id !== event.pointerId) return;
+      const deltaX = event.clientX - swipeStart.x;
+      const deltaY = event.clientY - swipeStart.y;
+      swipeStart = null;
+      if (Math.abs(deltaX) < 32 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+      select(activeIndex + (deltaX < 0 ? 1 : -1));
+    }, { passive: true });
+    viewport.addEventListener('pointercancel', () => { swipeStart = null; }, { passive: true });
     section.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') select(activeIndex - 1); if (event.key === 'ArrowRight') select(activeIndex + 1); });
     window.addEventListener('resize', centerActiveCard, { passive:true });
     render();

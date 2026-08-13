@@ -1,0 +1,16 @@
+<aside class="cd-drawer" data-cart-drawer aria-hidden="true" aria-label="Shopping cart">
+  <button class="cd-drawer__backdrop" type="button" data-cart-drawer-close aria-label="Close cart"></button>
+  <section class="cd-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title" tabindex="-1">
+    <p class="cd-drawer__notice">Fast and secure shipping!</p>
+    <header class="cd-drawer__header">
+      <h2 id="cart-drawer-title">Your cart (<span data-cart-drawer-count>{{ cart.item_count }}</span>)</h2>
+      <button class="cd-drawer__close" type="button" data-cart-drawer-close aria-label="Close cart">×</button>
+    </header>
+    <div class="cd-drawer__body" data-cart-drawer-content aria-live="polite">
+      {% if cart.item_count == 0 %}
+        <div class="cd-drawer__empty"><p>Your cart is empty.</p><a href="{{ routes.all_products_collection_url }}" data-cart-drawer-close>Continue shopping</a></div>
+      {% endif %}
+    </div>
+    <footer class="cd-drawer__footer" data-cart-drawer-footer{% if cart.item_count == 0 %} hidden{% endif %}></footer>
+  </section>
+</aside>

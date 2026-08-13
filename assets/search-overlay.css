@@ -1,0 +1,261 @@
+.so-overlay {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #fff;
+  font-family: var(--sans, Arial, sans-serif);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .3s, visibility 0s linear .3s;
+}
+
+.so-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity .3s, visibility 0s linear 0s;
+}
+
+.so-overlay__bar,
+.so-overlay__form,
+.so-overlay__body {
+  background: #fff;
+}
+
+.so-overlay__bar {
+  position: relative;
+  z-index: 1;
+  height: 64px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.so-overlay__bar strong {
+  font-family: Georgia, serif;
+  font-size: 23px;
+  line-height: 1;
+}
+
+.so-overlay__bar button {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #252525;
+  font: 24px/16px Arial, sans-serif;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.so-overlay__form {
+  height: 86px;
+  box-sizing: border-box;
+  padding: 25px 25px 26px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.so-overlay__input-wrap {
+  width: 100%;
+  height: 35px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  background: #f2f2f2;
+}
+
+.so-overlay__form .so-overlay__search-icon {
+  position: static;
+  flex: 0 0 13px;
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: #8c8c8c;
+  stroke-linecap: round;
+  stroke-width: 1;
+}
+
+.so-overlay__form input,
+.so-overlay__form input[type='search'] {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  height: 12px;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  color: #313131;
+  font: 12px/12px var(--sans, Arial, sans-serif);
+  letter-spacing: .1em;
+}
+
+.so-overlay__form input::placeholder {
+  color: #737373;
+  opacity: 1;
+}
+
+.so-overlay__body {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 98px;
+  gap: 30px;
+  padding: 23px 25px 79px;
+}
+
+.so-overlay__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.so-overlay__nav p {
+  margin: 0 0 4px;
+  color: #777;
+  font: 16px/1 Georgia, serif;
+}
+
+.so-overlay__nav a {
+  color: #969696;
+  text-decoration: none;
+  font: 16px/1 Georgia, serif;
+}
+
+.so-overlay__nav a.is-active {
+  color: #161616;
+}
+
+.so-overlay__cards {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.so-overlay__cards.is-refreshing {
+  opacity: .25;
+  transition: opacity .16s;
+}
+
+.so-overlay__cards[hidden] {
+  display: none;
+}
+
+.so-overlay__image {
+  display: block;
+  aspect-ratio: .718;
+  background: #eee;
+}
+
+.so-overlay__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.so-overlay__card > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.so-overlay__card a {
+  color: #181818;
+  text-decoration: none;
+}
+
+.so-overlay__card span {
+  grid-row: 2;
+  color: #555;
+}
+
+.so-overlay__card strong {
+  font-weight: 500;
+}
+
+.so-overlay__content-card > div {
+  display: block;
+}
+
+.so-overlay__content-card > div a,
+.so-overlay__content-card > div span {
+  display: block;
+}
+
+.so-overlay__content-card > div span {
+  margin-top: 5px;
+  color: #555;
+}
+
+.so-overlay__all {
+  height: 28px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid #d4d6d557;
+  color: #151515;
+  text-align: center;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+}
+
+@media (max-width: 900px) {
+  .so-overlay {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .so-overlay__bar {
+    height: 56px;
+  }
+
+  .so-overlay__form {
+    height: 76px;
+    padding: 20px;
+  }
+
+  .so-overlay__body {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .so-overlay__nav,
+  .so-overlay__all {
+    display: none;
+  }
+
+  .so-overlay__cards {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .so-overlay__card {
+    flex: 0 0 62%;
+  }
+}

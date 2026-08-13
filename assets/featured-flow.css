@@ -1,9 +1,9 @@
 /* Exact CSS equivalent of the supplied Tailwind classes in tilted-carousel. */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
-.tilted-carousel { --tc-card-width:clamp(130px,16vw,312px); background-color:#ececec; font-family:"Bricolage Grotesque",sans-serif; overflow:hidden; padding:72px 0; position:relative; }
+.tilted-carousel { --tc-card-width:clamp(130px,16vw,312px); background-color:#f4f5f6; font-family:"Bricolage Grotesque",sans-serif; overflow:hidden; padding:72px 0; position:relative; }
 .tilted-carousel__app { color:#262626; display:grid; justify-items:center; padding:.5rem; user-select:none; }
 .tilted-carousel__heading { justify-self:center; margin:0 0 32px; text-align:center; }.tilted-carousel__heading p { color:var(--ink-tertiary); font-family:var(--sans); font-size:11px; letter-spacing:.11em; margin:0; text-transform:uppercase; }.tilted-carousel__heading h2 { font-family:var(--display); font-size:clamp(38px,4vw,52px); font-weight:500; letter-spacing:-.03em; line-height:1; margin:14px 0 0; }
-.tilted-carousel__viewport { justify-self:center; margin-top:0; overflow:visible; perspective:800px; width:var(--tc-card-width); }
+.tilted-carousel__viewport { justify-self:center; margin-top:0; overflow:visible; perspective:800px; touch-action:pan-y; width:var(--tc-card-width); }
 .tilted-carousel__track { display:flex; transform:translateX(0); transition:transform .8s cubic-bezier(.22,1,.36,1); width:max-content; }
 .tilted-carousel__slide { align-items:center; aspect-ratio:2 / 3; display:flex; flex:0 0 var(--tc-card-width); flex-direction:column; gap:.5rem; perspective:800px; width:var(--tc-card-width); }
 .tilted-carousel__image { appearance:none; aspect-ratio:2 / 3; background:transparent; border:0; border-radius:.5rem; cursor:pointer; display:block; height:100%; overflow:hidden; padding:0; transform:rotateY(calc((var(--tc-active) - var(--tc-index)) * 60deg)) scale(.85); transition:transform 1s cubic-bezier(.22,1,.36,1); will-change:transform,scale; width:100%; }
@@ -16,6 +16,6 @@
 .tilted-carousel__dot { appearance:none; background:rgb(64 64 64 / 30%); border:0; border-radius:9999px; cursor:pointer; height:.5rem; padding:0; transition:width .3s,background-color .3s; width:.5rem; }
 .tilted-carousel__dot.is-active { background:currentColor; width:1.75rem; }
 .tilted-carousel__image:focus-visible,.tilted-carousel__arrow:focus-visible,.tilted-carousel__dot:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
-@media (max-width:767px) { .tilted-carousel { --tc-card-width:clamp(128px,44vw,220px); padding:48px 0; } }
+@media (max-width:767px) { .tilted-carousel { --tc-card-width:clamp(128px,44vw,220px); padding:64px 0; } }
 @media (max-width:767px) { .tilted-carousel__heading { margin-bottom:24px; }.tilted-carousel__heading h2 { font-size:38px; }.tilted-carousel__product { margin-top:20px; }.tilted-carousel__controls { margin-top:28px; } }
 @media (prefers-reduced-motion:reduce) { .tilted-carousel__track,.tilted-carousel__image,.tilted-carousel__dot { transition:none; } }
