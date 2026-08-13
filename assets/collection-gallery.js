@@ -8,6 +8,7 @@
   const controls = root.querySelectorAll('[data-cg-columns], [data-cg-view]');
   const cards = root.querySelectorAll('[data-cg-product]');
   const categoryLinks = root.querySelectorAll('.cg-category-nav a');
+  const filterForm = root.querySelector('[data-cg-filter-form]');
 
   const setDrawer = (open) => {
     drawer.classList.toggle('is-open', open);
@@ -32,6 +33,16 @@
   root.querySelectorAll('[data-cg-heart]').forEach((button) => button.addEventListener('click', () => {
     button.setAttribute('aria-pressed', String(button.getAttribute('aria-pressed') !== 'true'));
   }));
+
+  if (filterForm) {
+    filterForm.addEventListener('change', (event) => {
+      if (!event.target.matches('input[type="checkbox"], input[type="radio"]')) return;
+
+      filterForm.setAttribute('aria-busy', 'true');
+      filterForm.requestSubmit();
+    });
+  }
+
   categoryLinks.forEach((link) => link.addEventListener('click', (event) => {
     event.preventDefault();
     categoryLinks.forEach((item) => item.classList.remove('is-current'));
