@@ -1,6 +1,8 @@
 <header class="site-header site-header--adaptive{% unless request.page_type == 'index' %} site-header--solid{% endunless %}" data-adaptive-header>
   <div class="page-width site-header__inner">
-    <a class="site-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">Poster<em>Store</em></a>
+    <a class="site-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
+      {% render 'site-logo' %}
+    </a>
     <nav class="site-nav" aria-label="Main navigation">
       {% if section.settings.menu != blank %}
         {% for link in section.settings.menu.links %}
@@ -22,7 +24,9 @@
     <button class="mobile-menu__backdrop" type="button" aria-label="Close menu" data-mobile-menu-close></button>
     <aside class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Main navigation" tabindex="-1">
       <div class="mobile-menu__head">
-        <span class="site-logo" aria-hidden="true">Poster<em>Store</em></span>
+        <span class="site-logo" aria-hidden="true">
+          {% render 'site-logo' %}
+        </span>
         <button class="mobile-menu__close" type="button" aria-label="Close menu" data-mobile-menu-close>×</button>
       </div>
       <nav class="mobile-menu__links" aria-label="Mobile navigation">

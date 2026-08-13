@@ -1,0 +1,15 @@
+{% if settings.logo != blank %}
+  {% assign logo_alt = settings.logo.alt | default: shop.name %}
+  <img
+    class="site-logo__image"
+    src="{{ settings.logo | image_url: width: 440 }}"
+    srcset="{{ settings.logo | image_url: width: 220 }} 220w, {{ settings.logo | image_url: width: 320 }} 320w, {{ settings.logo | image_url: width: 440 }} 440w"
+    sizes="(max-width: 749px) 160px, 220px"
+    width="{{ settings.logo.width }}"
+    height="{{ settings.logo.height }}"
+    alt="{{ logo_alt | escape }}"
+    loading="eager"
+  >
+{% else %}
+  <span class="site-logo__text">{{ shop.name | escape }}</span>
+{% endif %}
