@@ -9,13 +9,15 @@
  */
 {
   "current": {
+    "logo": "shopify://shop_images/posterlogo.png",
     "page_width": 1440,
     "color_background": "#FFFFFF",
     "color_surface": "#FAFAFA",
     "color_text": "#0A0A0A",
     "color_muted": "#666666",
     "color_border": "#EAEAEA",
-    "color_accent": "#0A0A0A"
+    "color_accent": "#0A0A0A",
+    "content_for_index": []
   },
   "presets": {
     "Default": {
