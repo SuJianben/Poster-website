@@ -45,7 +45,8 @@
     return variant?.options?.[sizeIndex >= 0 ? sizeIndex : 0] || '';
   };
   const rowsForSize = (kind) => {
-    const size = normalizeSize(currentPosterSize());
+    const targetSize = kind === 'frame' && selected.passepartout ? selected.passepartout.size : currentPosterSize();
+    const size = normalizeSize(targetSize);
     return (catalog[kind]?.variants || []).filter((variant) => (
       variant.available && normalizeSize(kind === 'passepartout' ? variant.fitsSize : variant.size) === size
     ));
@@ -93,6 +94,10 @@
     selected[kind] = variant;
     render(kind);
     updateTrigger(kind);
+    if (kind === 'passepartout') {
+      render('frame');
+      updateTrigger('frame');
+    }
     if (variant) root.dispatchEvent(new CustomEvent('product:show-custom-preview'));
     applyPreview();
   };
