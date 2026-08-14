@@ -31,9 +31,7 @@
 .ps-print-preview .print-preview__layer--frame { z-index: 3; }
 .ps-print-preview .print-preview__layer[hidden] { display: none !important; }
 .ps-print-preview .print-preview__inner[data-has-passepartout="true"] .print-preview__layer--art { transform: scale(.57); transition: none; }
-.ps-print-preview .print-preview__inner[data-has-frame="black"] .print-preview__layer--frame-black,
-.ps-print-preview .print-preview__inner[data-has-frame="oak"] .print-preview__layer--frame-oak { display: block; }
-.ps-print-preview .print-preview__inner[data-has-frame="black"] .print-preview__layer--frame-black { filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
+.ps-print-preview .print-preview__inner[data-has-frame="true"] .print-preview__layer--frame { display: block; filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
 .ps-print-preview .ps-main-media__image { width: 100%; height: 100%; max-height: none; }
 @media only screen and (min-width: 990px) {
   .ps-main-media { height: calc(100svh - var(--header-sticky-height, 60px)); max-height: calc(100svh - var(--header-sticky-height, 60px)); }
@@ -91,6 +89,7 @@
 .ps-frame-option:last-child { border-bottom: 0; }
 .ps-frame-option:hover, .ps-frame-option:focus-visible, .ps-frame-option.is-selected { background: #f4f5f6; color: var(--ps-ink); outline: 0; }
 .ps-frame-option__swatch { flex: 0 0 12px; width: 12px; height: 12px; border: 1px solid #d4d6d5; border-radius: 50%; background: #f8f8f5; }
+.ps-frame-option__swatch[style] { background: var(--ps-framing-swatch, #f8f8f5); }
 .ps-frame-option--natural .ps-frame-option__swatch { background: linear-gradient(135deg, transparent 42%, #b8bbba 43%, #b8bbba 56%, transparent 57%), #f8f8f5; }
 .ps-frame-option--white .ps-frame-option__swatch { border-color: #aa7a45; background: #aa7a45; }
 .ps-frame-option--black .ps-frame-option__swatch { border-color: #202325; background: #202325; }
@@ -101,6 +100,7 @@
 .ps-frame-option__name, .ps-frame-option__size, .ps-frame-option__price { white-space: nowrap; }
 .ps-frame-option__size { color: #6d7b85; }
 .ps-frame-option__price { margin-left: auto; color: #1b3342; }
+.ps-frame-options__empty { margin: 0; padding: 14px 16px; color: var(--ps-muted); font: 400 11px/1.4 var(--sans); }
 .ps-addon { display: flex; align-items: center; gap: 8px; color: var(--ps-ink); font: 600 12px/1.3 var(--sans); cursor: pointer; }
 .ps-addon input { position: absolute; opacity: 0; }
 .ps-addon span { width: 38px; height: 23px; border-radius: 999px; background: #cfd1d0; }

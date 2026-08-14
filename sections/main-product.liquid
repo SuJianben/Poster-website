@@ -1,5 +1,6 @@
 {{ 'product-showcase.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'product-showcase.js' | asset_url }}&psv=layered-preview-20260803" defer="defer"></script>
+<script src="{{ 'product-framing.js' | asset_url }}&psv=framing-addons-20260814" defer="defer"></script>
+<script src="{{ 'product-showcase.js' | asset_url }}&psv=framing-addons-20260814" defer="defer"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
@@ -51,9 +52,8 @@
                 {% else %}
                   <img class="ps-main-media__image print-preview__layer print-preview__layer--art" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
                 {% endif %}
-                <img class="print-preview__layer print-preview__layer--passepartout" data-pdp-print-passepartout src="{{ 'ps-print-passepartout-white.png' | asset_url }}" width="800" height="1100" alt="" hidden aria-hidden="true">
-                <img class="print-preview__layer print-preview__layer--frame print-preview__layer--frame-oak" data-pdp-print-frame="oak" src="{{ 'ps-print-frame-nature-oak.png' | asset_url }}" width="800" height="1100" alt="" hidden aria-hidden="true">
-                <img class="print-preview__layer print-preview__layer--frame print-preview__layer--frame-black" data-pdp-print-frame="black" src="{{ 'ps-print-frame-dark-oak.png' | asset_url }}" width="800" height="1100" alt="" hidden aria-hidden="true">
+                <img class="print-preview__layer print-preview__layer--passepartout" data-ps-framing-layer="passepartout" width="800" height="1100" alt="" hidden aria-hidden="true">
+                <img class="print-preview__layer print-preview__layer--frame" data-ps-framing-layer="frame" width="800" height="1100" alt="" hidden aria-hidden="true">
               </div>
             </print-preview>
             <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
@@ -123,30 +123,22 @@
           {% endunless %}
           <div class="ps-config-group">
             <p class="ps-config-label">Passepartout: <strong data-ps-choice-output>None</strong></p>
-            <div class="ps-frame-select ps-choice-select" data-ps-choice-select data-ps-empty-label="Add passepartout" data-ps-empty-price="From €15,00">
+            <div class="ps-frame-select ps-choice-select" data-ps-framing-select="passepartout">
               <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
                 <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-choice-select-value>Add passepartout</span></span>
-                <span class="ps-frame-trigger__price" data-ps-choice-select-price>From €15,00</span>
+                <span class="ps-frame-trigger__price" data-ps-choice-select-price>Loading…</span>
               </button>
-              <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="mat" role="listbox" aria-label="Passepartout options">
-                <button type="button" class="ps-frame-option ps-mat-option--none is-selected" data-ps-choice data-ps-preview-value="none" data-ps-choice-label="No passepartout" data-ps-choice-price="From €15,00" aria-pressed="true" role="option" aria-selected="true"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">No passepartout</span></span></button>
-                <button type="button" class="ps-frame-option ps-mat-option--white" data-ps-choice data-ps-preview-value="white" data-ps-choice-label="White passepartout" data-ps-choice-price="€15,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">White passepartout</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€15,00</span></button>
-                <button type="button" class="ps-frame-option ps-mat-option--black" data-ps-choice data-ps-preview-value="black" data-ps-choice-label="Black passepartout" data-ps-choice-price="€15,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">Black passepartout</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€15,00</span></button>
-              </div>
+              <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="Passepartout options"></div>
             </div>
           </div>
           <div class="ps-config-group">
             <p class="ps-config-label">Frame: <strong data-ps-choice-output>No frame</strong></p>
-            <div class="ps-frame-select" data-ps-frame-select data-ps-choice-select data-ps-empty-label="Add frame" data-ps-empty-price="From €35,00">
+            <div class="ps-frame-select" data-ps-framing-select="frame">
               <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
                 <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-frame-trigger-plus data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-frame-select-value data-ps-choice-select-value>Add frame</span></span>
-                <span class="ps-frame-trigger__price" data-ps-frame-trigger-price data-ps-choice-select-price>From €35,00</span>
+                <span class="ps-frame-trigger__price" data-ps-choice-select-price>Loading…</span>
               </button>
-              <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="frame" role="listbox" aria-label="Frame options">
-                <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-preview-value="none" data-ps-frame-name="No frame" data-ps-frame-price="From €35,00" aria-pressed="true" role="option" aria-selected="true"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">No frame</span></span></button>
-                <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-preview-value="oak" data-ps-frame-name="Oak frame" data-ps-frame-price="€45,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">Oak frame</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€45,00</span></button>
-                <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-preview-value="black" data-ps-frame-name="Black frame" data-ps-frame-price="€45,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">Black frame</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€45,00</span></button>
-              </div>
+              <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="Frame options"></div>
             </div>
           </div>
           <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
@@ -211,6 +203,7 @@
 <script type="application/json" data-ps-variants>
   {{ product.variants | json }}
 </script>
+{% render 'product-framing-catalog', section: section %}
 
 {% schema %}
 {
@@ -251,6 +244,16 @@
       "id": "shipping_returns_content",
       "label": "Shipping and returns content",
       "default": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>"
+    },
+    {
+      "type": "product",
+      "id": "passepartout_product",
+      "label": "Passepartout add-on product"
+    },
+    {
+      "type": "product",
+      "id": "frame_product",
+      "label": "Frame add-on product"
     }
   ]
 }

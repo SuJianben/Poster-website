@@ -7,6 +7,7 @@
   const content = drawer.querySelector('[data-cart-drawer-content]');
   const footer = drawer.querySelector('[data-cart-drawer-footer]');
   const count = drawer.querySelector('[data-cart-drawer-count]');
+  let latestCart = null;
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
   const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
 
@@ -27,17 +28,37 @@
     document.documentElement.classList.remove('is-cart-drawer-open');
   };
   const optionText = (item) => item.variant_title && item.variant_title !== 'Default Title' ? `<p class="cd-drawer__variant">${escapeHtml(item.variant_title)}</p>` : '';
-  const propertyText = (item) => Object.entries(item.properties || {}).filter(([, value]) => value).map(([key, value]) => `<p class="cd-drawer__properties">${escapeHtml(key)}: ${escapeHtml(value)}</p>`).join('');
+  const propertyText = (item) => Object.entries(item.properties || {})
+    .filter(([key, value]) => value && !key.startsWith('_') && !['Passepartout', 'Frame'].includes(key))
+    .map(([key, value]) => `<p class="cd-drawer__properties">${escapeHtml(key)}: ${escapeHtml(value)}</p>`).join('');
   const priceText = (item) => item.original_line_price > item.final_line_price ? `<s>${money(item.original_line_price)}</s><strong>${money(item.final_line_price)}</strong>` : money(item.final_line_price);
+  const isFramingComponent = (item) => Boolean(item.properties?._framing_component);
+  const visibleCount = (cart) => cart.items.filter((item) => !isFramingComponent(item)).reduce((total, item) => total + item.quantity, 0);
+  const childItems = (cart, parent) => {
+    const configurationId = parent.properties?._framing_config;
+    return configurationId ? cart.items.filter((item) => isFramingComponent(item) && item.properties?._framing_config === configurationId) : [];
+  };
+  const componentText = (children) => children.map((item) => {
+    const kind = item.properties?._framing_component === 'passepartout' ? 'Passepartout' : 'Frame';
+    const style = item.properties?._framing_style || item.product_title;
+    const size = item.properties?._framing_size || item.variant_title;
+    return `<div class="cd-drawer__component"><span><b>${escapeHtml(kind)}</b> · ${escapeHtml(style)} · ${escapeHtml(size)}</span><strong>${money(item.final_line_price)}</strong></div>`;
+  }).join('');
   const render = (cart) => {
-    if (count) count.textContent = cart.item_count;
-    document.querySelectorAll('.cart-count').forEach((badge) => { badge.textContent = cart.item_count; badge.hidden = cart.item_count === 0; });
-    if (!cart.item_count) {
+    latestCart = cart;
+    const displayCount = visibleCount(cart);
+    if (count) count.textContent = displayCount;
+    document.querySelectorAll('.cart-count').forEach((badge) => { badge.textContent = displayCount; badge.hidden = displayCount === 0; });
+    if (!displayCount) {
       content.innerHTML = '<div class="cd-drawer__empty"><p>Your cart is empty.</p><a href="/collections/all" data-cart-drawer-close>Continue shopping</a></div>';
       footer.hidden = true;
       return;
     }
-    content.innerHTML = cart.items.map((item) => `<article class="cd-drawer__item" data-cart-line="${escapeHtml(item.key)}"><img class="cd-drawer__image" src="${escapeHtml(item.image || '')}" alt="${escapeHtml(item.product_title)}"><div class="cd-drawer__item-copy"><a class="cd-drawer__item-title" href="${escapeHtml(item.url)}">${escapeHtml(item.product_title)}</a>${optionText(item)}${propertyText(item)}<div class="cd-drawer__item-bottom"><div class="cd-drawer__quantity"><button type="button" data-cart-quantity="-1" aria-label="Decrease quantity">−</button><output>${item.quantity}</output><button type="button" data-cart-quantity="1" aria-label="Increase quantity">+</button></div><div class="cd-drawer__price">${priceText(item)}</div></div></div><button class="cd-drawer__remove" type="button" data-cart-remove aria-label="Remove ${escapeHtml(item.product_title)}">×</button></article>`).join('');
+    content.innerHTML = cart.items.filter((item) => !isFramingComponent(item)).map((item) => {
+      const children = childItems(cart, item);
+      const configuredLinePrice = children.reduce((total, child) => total + child.final_line_price, item.final_line_price);
+      return `<article class="cd-drawer__item" data-cart-line="${escapeHtml(item.key)}"><img class="cd-drawer__image" src="${escapeHtml(item.image || '')}" alt="${escapeHtml(item.product_title)}"><div class="cd-drawer__item-copy"><a class="cd-drawer__item-title" href="${escapeHtml(item.url)}">${escapeHtml(item.product_title)}</a>${optionText(item)}${propertyText(item)}${componentText(children)}<div class="cd-drawer__item-bottom"><div class="cd-drawer__quantity"><button type="button" data-cart-quantity="-1" aria-label="Decrease quantity">−</button><output>${item.quantity}</output><button type="button" data-cart-quantity="1" aria-label="Increase quantity">+</button></div><div class="cd-drawer__price">${money(configuredLinePrice)}</div></div></div><button class="cd-drawer__remove" type="button" data-cart-remove aria-label="Remove ${escapeHtml(item.product_title)}">×</button></article>`;
+    }).join('');
     footer.hidden = false;
     footer.innerHTML = `<div class="cd-drawer__totals"><div class="cd-drawer__total-row"><span>Subtotal</span><span>${money(cart.total_price)}</span></div><div class="cd-drawer__total-row"><span>Shipping</span><span>Calculated at checkout</span></div></div><p class="cd-drawer__tax-note">Tax included. Shipping and discounts calculated at checkout.</p><a class="cd-drawer__checkout" href="/checkout"><span class="cd-drawer__lock" aria-hidden="true"></span><span class="cd-drawer__checkout-label">SECURE CHECKOUT</span></a><p class="cd-drawer__guarantee">Order without risk - 100% money-back guarantee</p><div class="cd-drawer__payments" aria-label="Accepted payment methods"><span class="cd-drawer__payment">Pay</span><span class="cd-drawer__payment cd-drawer__payment--amex">AMEX</span><span class="cd-drawer__payment cd-drawer__payment--mc">MC</span><span class="cd-drawer__payment">PayPal</span><span class="cd-drawer__payment cd-drawer__payment--visa">VISA</span><span class="cd-drawer__payment cd-drawer__payment--klarna">Klarna</span></div>`;
   };
@@ -45,10 +66,14 @@
   const changeLine = async (key, quantity) => {
     drawer.classList.add('is-busy');
     try {
-      const response = await fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ id: key, quantity }) });
+      const parent = latestCart?.items.find((item) => item.key === key);
+      const group = parent ? [parent, ...childItems(latestCart, parent)] : [];
+      const updates = Object.fromEntries((group.length ? group : [{ key }]).map((item) => [item.key, quantity]));
+      const response = await fetch('/cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ updates }) });
       if (!response.ok) throw new Error('Could not update cart');
       const cart = await response.json();
       render(cart);
+      window.dataLayer?.push({ event: 'cart_framing_quantity_changed', cart_line_key: key, quantity, component_count: Math.max(0, group.length - 1) });
       document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart } }));
     } finally { drawer.classList.remove('is-busy'); }
   };

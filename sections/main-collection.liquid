@@ -3,6 +3,7 @@
 <script src="{{ 'collection-filters.js' | asset_url }}" defer="defer"></script>
 
 {% assign collection_count = collection.products_count %}
+{% if collection.handle == 'all' %}{% assign collection_count = collection_count | minus: 2 %}{% endif %}
 {% assign seo_title = collection.metafields.custom.collection_seo_title.value | default: collection.title %}
 {% assign seo_intro = collection.metafields.custom.collection_seo_intro.value | default: section.settings.seo_intro %}
 {% assign seo_body = collection.metafields.custom.collection_seo_body.value | default: collection.description | default: section.settings.seo_body %}
@@ -68,6 +69,7 @@
     <div class="cg-results" data-cg-results aria-live="polite">
       <div class="cg-product-grid">
         {% for product in collection.products %}
+          {% if product.tags contains 'system:framing-addon' %}{% continue %}{% endif %}
           <article
             class="cg-product"
             data-cg-product

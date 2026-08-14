@@ -21,33 +21,12 @@
   const desktopDetailsAnchor = root.querySelector('[data-ps-details-desktop-anchor]');
   const mobileDetailsAnchor = root.querySelector('[data-ps-details-mobile-anchor]');
   const productMobileBreakpoint = window.matchMedia('(max-width: 900px)');
-  const mediaPreviewState = new Map();
   let activeMediaId = root.querySelector('[data-ps-media].is-active')?.dataset.mediaId || root.querySelector('[data-ps-media]')?.dataset.mediaId || '';
   // The source catalog keeps one clean artwork image as the final gallery item.
   // Custom framing is intentionally previewed only on that image, so regular
   // lifestyle/detail images never receive the visual treatment.
   const customPreviewMediaId = [...root.querySelectorAll('[data-ps-media]')].at(-1)?.dataset.mediaId || '';
   let mediaSwitchToken = 0;
-
-  const applyPreviewState = () => {
-    if (!artPreview) return;
-    const state = mediaPreviewState.get(activeMediaId) || { frame: 'none', mat: 'none' };
-    const canvas = artPreview.querySelector('[data-pdp-print-preview]');
-    const passepartout = artPreview.querySelector('[data-pdp-print-passepartout]');
-    const frameLayers = [...artPreview.querySelectorAll('[data-pdp-print-frame]')];
-    if (canvas) {
-      canvas.dataset.hasPassepartout = state.mat !== 'none' ? 'true' : 'false';
-      canvas.dataset.hasFrame = state.frame;
-    }
-    if (passepartout) {
-      passepartout.hidden = state.mat === 'none';
-      passepartout.style.filter = state.mat === 'black' ? 'brightness(.18) saturate(.25)' : '';
-    }
-    frameLayers.forEach((layer) => {
-      layer.hidden = layer.dataset.pdpPrintFrame !== state.frame;
-    });
-    fitArtPreview();
-  };
 
   const placeDetailsForViewport = () => {
     if (!details || !desktopDetailsAnchor || !mobileDetailsAnchor) return;
@@ -63,6 +42,7 @@
     const ratio = mainImage.naturalWidth / mainImage.naturalHeight;
     artPreview.style.setProperty('--pdp-aspect', `${mainImage.naturalWidth} / ${mainImage.naturalHeight}`);
     artPreview.dataset.psPreviewOrientation = ratio > 1.08 ? 'landscape' : ratio < .92 ? 'portrait' : 'square';
+    root.dispatchEvent(new CustomEvent('product:preview-orientation', { detail: { orientation: artPreview.dataset.psPreviewOrientation } }));
   };
 
   mainImage?.addEventListener('load', fitArtPreview);
@@ -98,7 +78,7 @@
       mainImage.src = thumbnail.dataset.mediaSrc;
       mainImage.alt = thumbnail.dataset.mediaAlt || '';
       mainImage.style.opacity = '1';
-      applyPreviewState();
+      root.dispatchEvent(new CustomEvent('product:media-change', { detail: { mediaId: activeMediaId, isCustomPreview: activeMediaId === customPreviewMediaId } }));
     };
     const preload = new Image();
     let committed = false;
@@ -148,6 +128,7 @@
     addLabel.textContent = variant.available ? 'Add to cart' : 'Sold out';
     status.textContent = variant.available ? '' : 'This variant is sold out.';
     if (variant.featured_media?.id) setMedia(variant.featured_media.id);
+    root.dispatchEvent(new CustomEvent('product:variant-change', { detail: { variant } }));
   };
 
   root.querySelectorAll('[data-ps-media]').forEach((thumbnail) => thumbnail.addEventListener('click', () => setMedia(thumbnail.dataset.mediaId)));
@@ -201,56 +182,11 @@
     const choiceLabel = choice.dataset.psChoiceLabel || choice.dataset.psFrameName || choice.textContent.trim();
     const output = group.closest('.ps-config-group')?.querySelector('[data-ps-choice-output]');
     if (output) output.textContent = choiceLabel;
-    const choiceSelect = group.closest('[data-ps-choice-select]');
-    if (choiceSelect) {
-      const value = choiceSelect.querySelector('[data-ps-choice-select-value], [data-ps-frame-select-value]');
-      const triggerPlus = choiceSelect.querySelector('[data-ps-choice-select-plus], [data-ps-frame-trigger-plus]');
-      const triggerPrice = choiceSelect.querySelector('[data-ps-choice-select-price], [data-ps-frame-trigger-price]');
-      const trigger = choiceSelect.querySelector('[data-ps-frame-trigger]');
-      const isEmpty = choice.dataset.psPreviewValue === 'none';
-      const emptyLabel = choiceSelect.dataset.psEmptyLabel || 'Add frame';
-      const emptyPrice = choiceSelect.dataset.psEmptyPrice || 'From €35,00';
-      const choicePrice = choice.dataset.psChoicePrice || choice.dataset.psFramePrice || (isEmpty ? emptyPrice : '');
-      if (value) value.textContent = isEmpty ? emptyLabel : choiceLabel;
-      if (triggerPlus) triggerPlus.hidden = !isEmpty;
-      if (triggerPrice) triggerPrice.textContent = choicePrice;
-      choiceSelect.classList.remove('is-open');
-      trigger?.setAttribute('aria-expanded', 'false');
-    }
-    const previewTarget = group.dataset.psPreviewTarget;
-    if (artPreview && previewTarget && choice.dataset.psPreviewValue) {
-      const previewMediaId = customPreviewMediaId || activeMediaId;
-      mediaPreviewState.set(previewMediaId, {
-        frame: previewTarget === 'frame' ? choice.dataset.psPreviewValue : (mediaPreviewState.get(previewMediaId)?.frame || 'none'),
-        mat: previewTarget === 'mat' ? choice.dataset.psPreviewValue : (mediaPreviewState.get(previewMediaId)?.mat || 'none')
-      });
-      if (activeMediaId !== previewMediaId) {
-        setMedia(previewMediaId);
-      } else {
-        applyPreviewState();
-      }
-    }
   })));
-  root.querySelectorAll('[data-ps-choice-select]').forEach((select) => {
-    const trigger = select.querySelector('[data-ps-frame-trigger]');
-    trigger?.addEventListener('click', () => {
-      const open = !select.classList.contains('is-open');
-      root.querySelectorAll('[data-ps-choice-select].is-open').forEach((item) => {
-        item.classList.remove('is-open');
-        item.querySelector('[data-ps-frame-trigger]')?.setAttribute('aria-expanded', 'false');
-      });
-      select.classList.toggle('is-open', open);
-      trigger.setAttribute('aria-expanded', String(open));
-    });
+  root.addEventListener('product:show-custom-preview', () => {
+    if (customPreviewMediaId && activeMediaId !== customPreviewMediaId) setMedia(customPreviewMediaId);
   });
-  document.addEventListener('click', (event) => {
-    if (event.target.closest('[data-ps-choice-select]')) return;
-    root.querySelectorAll('[data-ps-choice-select].is-open').forEach((select) => {
-      select.classList.remove('is-open');
-      select.querySelector('[data-ps-frame-trigger]')?.setAttribute('aria-expanded', 'false');
-    });
-  });
-  applyPreviewState();
+  root.dispatchEvent(new CustomEvent('product:media-change', { detail: { mediaId: activeMediaId, isCustomPreview: activeMediaId === customPreviewMediaId } }));
   root.querySelectorAll('[data-ps-quantity-change]').forEach((button) => button.addEventListener('click', () => { const input = root.querySelector('[data-ps-quantity] input'); if (input) input.value = Math.max(1, Number(input.value || 1) + Number(button.dataset.psQuantityChange)); }));
   const offerToggle = root.querySelector('[data-ps-offer-toggle]');
   const offerDetails = root.querySelector('[data-ps-offer-details]');
@@ -279,12 +215,28 @@
     // the refreshed cart payload.
     window.CartDrawer?.openLoading();
     try {
-      const response = await fetch('/cart/add.js', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+      const quantity = Math.max(1, Number(root.querySelector('[data-ps-quantity] input')?.value || 1));
+      const cartPayload = root.productFraming
+        ? root.productFraming.getCartItems(variantInput.value, quantity)
+        : { items: [{ id: Number(variantInput.value), quantity }] };
+      const response = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cartPayload.items }),
+      });
       if (!response.ok) throw new Error('Could not add this item to cart.');
       const cartResponse = await fetch('/cart.js', { headers: { Accept: 'application/json' } });
       if (!cartResponse.ok) throw new Error('Could not refresh cart.');
       const cart = await cartResponse.json();
       document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart } }));
+      window.dataLayer?.push({
+        event: 'framing_configuration_added',
+        product_variant_id: String(variantInput.value),
+        configuration_id: cartPayload.configurationId || null,
+        passepartout_variant_id: cartPayload.selected?.passepartout?.id || null,
+        frame_variant_id: cartPayload.selected?.frame?.id || null,
+        quantity,
+      });
       window.CartDrawer?.open(cart);
       addLabel.textContent = 'Added to cart';
     } catch (error) {
