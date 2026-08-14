@@ -3,7 +3,6 @@
 <script src="{{ 'collection-filters.js' | asset_url }}" defer="defer"></script>
 
 {% assign collection_count = collection.products_count %}
-{% assign category_labels = section.settings.category_labels | split: ',' %}
 {% assign seo_title = collection.metafields.custom.collection_seo_title.value | default: collection.title %}
 {% assign seo_intro = collection.metafields.custom.collection_seo_intro.value | default: section.settings.seo_intro %}
 {% assign seo_body = collection.metafields.custom.collection_seo_body.value | default: collection.description | default: section.settings.seo_body %}
@@ -27,14 +26,22 @@
       {% endif %}
     </header>
 
-    <nav class="cg-category-nav" aria-label="Collection categories">
-      {% for label in category_labels %}
-        {% assign label_clean = label | strip %}
-        {% if label_clean != blank %}
-          <a class="{% if forloop.first %}is-current{% endif %}" href="{{ collection.url }}">{{ label_clean }}</a>
-        {% endif %}
-      {% endfor %}
-    </nav>
+    {% if section.blocks.size > 0 %}
+      <nav class="cg-category-nav" aria-label="Room collections">
+        {% for block in section.blocks %}
+          {% assign navigation_collection = block.settings.collection %}
+          {% if navigation_collection != blank %}
+            {% assign navigation_label = block.settings.label | default: navigation_collection.title %}
+            <a
+              class="{% if navigation_collection.handle == collection.handle %}is-current{% endif %}"
+              href="{{ navigation_collection.url }}"
+              {% if navigation_collection.handle == collection.handle %}aria-current="page"{% endif %}
+              {{ block.shopify_attributes }}
+            >{{ navigation_label }}</a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    {% endif %}
 
     <div class="cg-toolbar">
       <div class="cg-tool-group">
@@ -176,12 +183,6 @@
       "default": "A curated selection of art prints for the room that brings people together. Each piece is chosen to anchor the space with personality, warmth and lasting visual presence."
     },
     {
-      "type": "text",
-      "id": "category_labels",
-      "label": "Category navigation labels",
-      "default": "Living room, Bedroom, Kitchen, Bathroom, Home Office"
-    },
-    {
       "type": "checkbox",
       "id": "show_seo",
       "label": "Show collection SEO content",
@@ -198,6 +199,26 @@
       "id": "seo_body",
       "label": "SEO fallback body",
       "default": "<p>Explore art chosen for its character, colour and lasting visual presence. Each piece is designed to help make your room feel personal and complete.</p>"
+    }
+  ],
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "collection_link",
+      "name": "Collection link",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Custom label",
+          "info": "Leave blank to use the collection title."
+        }
+      ]
     }
   ]
 }

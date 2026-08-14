@@ -6,7 +6,6 @@
   const triggers = root.querySelectorAll('[data-cg-open-drawer]');
   const closeButtons = root.querySelectorAll('[data-cg-close-drawer]');
   const controls = root.querySelectorAll('[data-cg-columns], [data-cg-view]');
-  const categoryLinks = root.querySelectorAll('.cg-category-nav a');
 
   const setDrawer = (open) => {
     drawer.classList.toggle('is-open', open);
@@ -43,9 +42,4 @@
     if (activeView) applyView(activeView);
   });
 
-  categoryLinks.forEach((link) => link.addEventListener('click', (event) => {
-    event.preventDefault();
-    categoryLinks.forEach((item) => item.classList.remove('is-current'));
-    link.classList.add('is-current');
-  }));
 })();
