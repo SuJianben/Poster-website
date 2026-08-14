@@ -58,6 +58,17 @@
   };
   const lowestPrice = (rows) => rows.length ? rows.reduce((lowest, row) => row.price < lowest.price ? row : lowest) : null;
   const optionLabel = (kind, variant) => kind === 'passepartout' ? `${variant.style} passepartout` : `${variant.style} frame`;
+  const publishPricing = () => {
+    const passepartoutPrice = Number(selected.passepartout?.price || 0);
+    const framePrice = Number(selected.frame?.price || 0);
+    root.dispatchEvent(new CustomEvent('product:framing-price-change', {
+      detail: {
+        addonPrice: passepartoutPrice + framePrice,
+        passepartoutPrice,
+        framePrice,
+      },
+    }));
+  };
 
   const updateTrigger = (kind) => {
     const select = root.querySelector(`[data-ps-framing-select="${kind}"]`);
@@ -113,6 +124,14 @@
     }
     if (variant) root.dispatchEvent(new CustomEvent('product:show-custom-preview'));
     applyPreview();
+    publishPricing();
+    window.dataLayer?.push({
+      event: 'framing_option_changed',
+      component: kind,
+      action: variant ? 'selected' : 'removed',
+      variant_id: variant?.id || null,
+      price: Number(variant?.price || 0),
+    });
   };
 
   const optionButton = (kind, variant) => {
@@ -184,6 +203,7 @@
     render('passepartout');
     render('frame');
     applyPreview();
+    publishPricing();
   });
   root.addEventListener('product:media-change', (event) => {
     isCustomPreviewActive = Boolean(event.detail?.isCustomPreview);
@@ -222,4 +242,5 @@
   render('passepartout');
   render('frame');
   applyPreview();
+  publishPricing();
 })();

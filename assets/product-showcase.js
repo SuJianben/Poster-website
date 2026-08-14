@@ -27,6 +27,7 @@
   // lifestyle/detail images never receive the visual treatment.
   const customPreviewMediaId = [...root.querySelectorAll('[data-ps-media]')].at(-1)?.dataset.mediaId || '';
   let mediaSwitchToken = 0;
+  let framingAddonPrice = 0;
 
   const placeDetailsForViewport = () => {
     if (!details || !desktopDetailsAnchor || !mobileDetailsAnchor) return;
@@ -50,6 +51,21 @@
   fitArtPreview();
 
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
+  const currentVariant = () => variants.find((item) => String(item.id) === String(variantInput?.value));
+  const renderPrice = (variant) => {
+    if (!variant || !currentPrice) return;
+    currentPrice.textContent = money(Number(variant.price || 0) + framingAddonPrice);
+    if (variant.compare_at_price > variant.price) {
+      comparePrice.textContent = money(Number(variant.compare_at_price || 0) + framingAddonPrice);
+      comparePrice.classList.remove('is-hidden');
+    } else {
+      comparePrice.classList.add('is-hidden');
+    }
+  };
+  root.addEventListener('product:framing-price-change', (event) => {
+    framingAddonPrice = Number(event.detail?.addonPrice || 0);
+    renderPrice(currentVariant());
+  });
   const selectedValues = () => {
     const activeVariant = variants.find((item) => String(item.id) === String(variantInput?.value));
     const values = [...(activeVariant?.options || [])];
@@ -117,13 +133,7 @@
       return;
     }
     variantInput.value = variant.id;
-    currentPrice.textContent = money(variant.price);
-    if (variant.compare_at_price > variant.price) {
-      comparePrice.textContent = money(variant.compare_at_price);
-      comparePrice.classList.remove('is-hidden');
-    } else {
-      comparePrice.classList.add('is-hidden');
-    }
+    renderPrice(variant);
     addButton.disabled = !variant.available;
     addLabel.textContent = variant.available ? 'Add to cart' : 'Sold out';
     status.textContent = variant.available ? '' : 'This variant is sold out.';
