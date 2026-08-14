@@ -31,12 +31,6 @@
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
-  const assetUrl = (baseUrl, kind, styleSlug, orientation) => {
-    if (!baseUrl) return '';
-    const prefix = kind === 'passepartout' ? 'ps-mat' : 'ps-frame';
-    return `${baseUrl}${prefix}-${styleSlug}-${orientation}.png`;
-  };
-
   const money = (price) => {
     const currency = globalThis.Shopify?.currency?.active || 'GBP';
     const locale = document.documentElement.lang || 'en-GB';
@@ -50,7 +44,7 @@
 
   const optionValue = (variant, position) => variant[`option${position}`] || variant.options?.[position - 1] || '';
 
-  const convertProduct = (kind, product, previewBaseUrl) => {
+  const convertProduct = (kind, product) => {
     const sizePosition = optionPosition(product, (name = '') => name.toLowerCase().includes('size'), 2);
     const stylePosition = optionPosition(product, (name = '') => !name.toLowerCase().includes('size'), 1);
     return {
@@ -71,10 +65,6 @@
           formattedPrice: money(variant.price),
           available: Boolean(variant.available),
           sku: variant.sku || '',
-          preview: Object.fromEntries(['portrait', 'landscape', 'square'].map((orientation) => [
-            orientation,
-            assetUrl(previewBaseUrl, kind, styleSlug, orientation),
-          ])),
         };
       }),
     };
@@ -115,9 +105,8 @@
         fetchProduct(handles.frame),
       ]);
       const catalog = {
-        previewBaseUrl: inline.previewBaseUrl || '',
-        passepartout: convertProduct('passepartout', passepartout, inline.previewBaseUrl),
-        frame: convertProduct('frame', frame, inline.previewBaseUrl),
+        passepartout: convertProduct('passepartout', passepartout),
+        frame: convertProduct('frame', frame),
         source: 'ajax-product-api',
       };
       if (!isComplete(catalog)) throw new Error('Shopify returned an incomplete framing catalog.');

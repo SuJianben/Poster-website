@@ -1,7 +1,9 @@
 {{ 'custom-product.css' | asset_url | stylesheet_tag }}
 {{ 'custom-artwork-upload.css' | asset_url | stylesheet_tag }}
+{{ 'custom-css-framing.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-css-framing.js' | asset_url }}&psv=css-framing-20260814" defer="defer"></script>
 <script src="{{ 'custom-framing-catalog.js' | asset_url }}&psv=framing-catalog-fallback-20260814" defer="defer"></script>
-<script src="{{ 'custom-framing.js' | asset_url }}&psv=framing-catalog-fallback-20260814" defer="defer"></script>
+<script src="{{ 'custom-framing.js' | asset_url }}&psv=css-framing-20260814" defer="defer"></script>
 <script src="{{ 'custom-artwork-upload.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
 <script src="{{ 'custom-product-cart.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
 <script src="{{ 'custom-product.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
@@ -27,24 +29,28 @@
             <print-preview class="ps-print-preview" data-ps-art-preview data-orientation="portrait" data-media-id="{{ preview_media.id | default: product.media.first.id }}" style="--pdp-aspect: {% if preview_media %}{{ preview_media.preview_image.width }} / {{ preview_media.preview_image.height }}{% else %}800 / 1100{% endif %};">
               <div class="print-preview__inner" data-pdp-print-preview data-pdp-canvas data-ps-preview-canvas>
                 <div class="print-preview__bg" aria-hidden="true"></div>
-                {% if preview_media %}
-                  <img
-                    class="ps-main-media__image print-preview__layer print-preview__layer--art"
-                    data-ps-main-image
-                    data-pdp-print-art
-                    src="{{ preview_media.preview_image | image_url: width: 1800 }}"
-                    srcset="{{ preview_media.preview_image | image_url: width: 640 }} 640w, {{ preview_media.preview_image | image_url: width: 900 }} 900w, {{ preview_media.preview_image | image_url: width: 1200 }} 1200w, {{ preview_media.preview_image | image_url: width: 1600 }} 1600w, {{ preview_media.preview_image | image_url: width: 1800 }} 1800w"
-                    sizes="(min-width: 901px) 58vw, 100vw"
-                    width="{{ preview_media.preview_image.width }}"
-                    height="{{ preview_media.preview_image.height }}"
-                    loading="eager"
-                    alt="{{ preview_media.alt | default: product.title | escape }}"
-                  >
-                {% else %}
-                  <img class="ps-main-media__image print-preview__layer print-preview__layer--art" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
-                {% endif %}
-                <img class="print-preview__layer print-preview__layer--passepartout" data-ps-framing-layer="passepartout" width="800" height="1100" alt="" hidden aria-hidden="true">
-                <img class="print-preview__layer print-preview__layer--frame" data-ps-framing-layer="frame" width="800" height="1100" alt="" hidden aria-hidden="true">
+                <div class="ps-css-frame" data-ps-css-frame data-has-frame="false">
+                  <div class="ps-css-mat" data-ps-css-mat data-has-mat="false">
+                    <div class="ps-css-artwork" data-ps-css-artwork>
+                      {% if preview_media %}
+                        <img
+                          class="ps-main-media__image"
+                          data-ps-main-image
+                          data-pdp-print-art
+                          src="{{ preview_media.preview_image | image_url: width: 1800 }}"
+                          srcset="{{ preview_media.preview_image | image_url: width: 640 }} 640w, {{ preview_media.preview_image | image_url: width: 900 }} 900w, {{ preview_media.preview_image | image_url: width: 1200 }} 1200w, {{ preview_media.preview_image | image_url: width: 1600 }} 1600w, {{ preview_media.preview_image | image_url: width: 1800 }} 1800w"
+                          sizes="(min-width: 901px) 58vw, 100vw"
+                          width="{{ preview_media.preview_image.width }}"
+                          height="{{ preview_media.preview_image.height }}"
+                          loading="eager"
+                          alt="{{ preview_media.alt | default: product.title | escape }}"
+                        >
+                      {% else %}
+                        <img class="ps-main-media__image" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
               </div>
             </print-preview>
             <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>

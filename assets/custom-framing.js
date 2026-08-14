@@ -10,11 +10,6 @@
   const variantNode = document.querySelector('[data-ps-variants]');
   const posterVariants = variantNode ? JSON.parse(variantNode.textContent) : [];
   const variantInput = root.querySelector('[data-ps-variant-input]');
-  const preview = root.querySelector('[data-ps-art-preview]');
-  const layers = {
-    passepartout: root.querySelector('[data-ps-framing-layer="passepartout"]'),
-    frame: root.querySelector('[data-ps-framing-layer="frame"]'),
-  };
   const selected = { passepartout: null, frame: null };
   let isCustomPreviewActive = false;
 
@@ -86,32 +81,11 @@
   };
 
   const applyPreview = () => {
-    const orientation = preview?.dataset.psPreviewOrientation || 'portrait';
-    for (const kind of ['passepartout', 'frame']) {
-      const layer = layers[kind];
-      const chosen = selected[kind];
-      if (!layer) continue;
-      if (!chosen || !isCustomPreviewActive) {
-        layer.hidden = true;
-        layer.removeAttribute('src');
-        continue;
-      }
-      layer.src = chosen.preview[orientation] || chosen.preview.portrait;
-      layer.hidden = false;
-      const updateLayerScale = () => {
-        const squareCanvasCompensation = orientation === 'square' && layer.naturalWidth > 0
-          ? layer.naturalHeight / layer.naturalWidth
-          : 1;
-        layer.style.setProperty('--ps-framing-layer-scale', String(squareCanvasCompensation));
-      };
-      layer.onload = updateLayerScale;
-      if (layer.complete) updateLayerScale();
-    }
-    const canvas = preview?.querySelector('[data-pdp-print-preview]');
-    if (canvas) {
-      canvas.dataset.hasPassepartout = selected.passepartout && isCustomPreviewActive ? 'true' : 'false';
-      canvas.dataset.hasFrame = selected.frame && isCustomPreviewActive ? 'true' : 'false';
-    }
+    root.productFramePreview?.update({
+      passepartout: selected.passepartout,
+      frame: selected.frame,
+      active: isCustomPreviewActive,
+    });
   };
 
   const selectVariant = (kind, variant) => {
