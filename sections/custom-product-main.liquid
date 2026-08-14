@@ -1,10 +1,13 @@
 {{ 'custom-product.css' | asset_url | stylesheet_tag }}
 {{ 'custom-artwork-upload.css' | asset_url | stylesheet_tag }}
-{{ 'custom-css-framing.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'custom-css-framing.js' | asset_url }}&psv=css-framing-20260814" defer="defer"></script>
-<script src="{{ 'custom-framing-catalog.js' | asset_url }}&psv=framing-catalog-fallback-20260814" defer="defer"></script>
-<script src="{{ 'custom-framing.js' | asset_url }}&psv=css-framing-20260814" defer="defer"></script>
-<script src="{{ 'custom-artwork-upload.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
+{{ 'custom-artwork-cropper.css' | asset_url | stylesheet_tag }}
+{{ 'custom-image-framing.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-artwork-cropper-geometry.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
+<script src="{{ 'custom-artwork-cropper.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
+<script src="{{ 'custom-framing-catalog.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
+<script src="{{ 'custom-image-framing.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
+<script src="{{ 'custom-framing.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
+<script src="{{ 'custom-artwork-upload.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
 <script src="{{ 'custom-product-cart.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
 <script src="{{ 'custom-product.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
 
@@ -34,7 +37,7 @@
                     <div class="ps-css-artwork" data-ps-css-artwork>
                       {% if preview_media %}
                         <img
-                          class="ps-main-media__image"
+                          class="ps-main-media__image print-preview__layer print-preview__layer--art"
                           data-ps-main-image
                           data-pdp-print-art
                           src="{{ preview_media.preview_image | image_url: width: 1800 }}"
@@ -46,11 +49,13 @@
                           alt="{{ preview_media.alt | default: product.title | escape }}"
                         >
                       {% else %}
-                        <img class="ps-main-media__image" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
+                        <img class="ps-main-media__image print-preview__layer print-preview__layer--art" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
                       {% endif %}
                     </div>
                   </div>
                 </div>
+                <img class="print-preview__layer print-preview__layer--passepartout" data-ps-framing-layer="passepartout" width="800" height="1100" alt="" hidden aria-hidden="true">
+                <img class="print-preview__layer print-preview__layer--frame" data-ps-framing-layer="frame" width="800" height="1100" alt="" hidden aria-hidden="true">
               </div>
             </print-preview>
             <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
@@ -94,6 +99,7 @@
         <p class="ps-shipping-note">{{ section.settings.shipping_note }}</p>
 
         {% render 'custom-artwork-upload', section: section, form_id: product_form_id %}
+        {% render 'custom-artwork-cropper', section: section %}
 
         <div class="ps-product-config" aria-label="Product configuration">
           <div class="ps-config-group">
@@ -241,6 +247,30 @@
       "id": "upload_help_text",
       "label": "Upload help text",
       "default": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels."
+    },
+    {
+      "type": "text",
+      "id": "crop_heading",
+      "label": "Crop dialog heading",
+      "default": "Crop your image"
+    },
+    {
+      "type": "text",
+      "id": "crop_help_text",
+      "label": "Crop dialog help text",
+      "default": "Choose a supported frame ratio, then position and resize the crop area."
+    },
+    {
+      "type": "text",
+      "id": "crop_cancel_label",
+      "label": "Crop cancel button",
+      "default": "Cancel"
+    },
+    {
+      "type": "text",
+      "id": "crop_confirm_label",
+      "label": "Crop confirm button",
+      "default": "Use crop"
     },
     {
       "type": "checkbox",

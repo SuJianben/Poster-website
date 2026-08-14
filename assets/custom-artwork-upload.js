@@ -83,6 +83,17 @@
     return '';
   };
 
+  const syncInputFile = (file) => {
+    if (!file) {
+      input.value = '';
+      return;
+    }
+    if (typeof DataTransfer !== 'function') return;
+    const transfer = new DataTransfer();
+    transfer.items.add(file);
+    input.files = transfer.files;
+  };
+
   const applyFile = async (file) => {
     const token = ++selectionToken;
     const basicError = validateFile(file);
@@ -92,7 +103,8 @@
       return;
     }
 
-    setStatus('Preparing preview…');
+    const previousFile = selectedFile;
+    setStatus('Preparing crop…');
     const nextUrl = URL.createObjectURL(file);
     try {
       const dimensions = await inspectImage(nextUrl);
@@ -107,10 +119,38 @@
         return;
       }
 
+      URL.revokeObjectURL(nextUrl);
+      const cropResult = root.productArtworkCropper
+        ? await root.productArtworkCropper.open(file)
+        : { file, orientation: dimensions.width > dimensions.height ? 'landscape' : dimensions.width < dimensions.height ? 'portrait' : 'square' };
+      if (token !== selectionToken) return;
+      if (!cropResult) {
+        syncInputFile(previousFile);
+        setStatus(previousFile ? 'Your existing image is unchanged.' : '', previousFile ? 'success' : '');
+        return;
+      }
+
+      const croppedFile = cropResult.file;
+      const croppedUrl = URL.createObjectURL(croppedFile);
+      const croppedDimensions = await inspectImage(croppedUrl);
+      if (token !== selectionToken) {
+        URL.revokeObjectURL(croppedUrl);
+        return;
+      }
+
       revokePreview();
-      previewUrl = nextUrl;
-      selectedFile = file;
-      selectedMetadata = { ...dimensions, size: file.size, type: file.type || 'image' };
+      previewUrl = croppedUrl;
+      selectedFile = croppedFile;
+      syncInputFile(croppedFile);
+      selectedMetadata = {
+        ...croppedDimensions,
+        size: croppedFile.size,
+        type: croppedFile.type || 'image',
+        orientation: cropResult.orientation,
+        ratio: cropResult.ratio,
+        sourceWidth: dimensions.width,
+        sourceHeight: dimensions.height,
+      };
       mainImage.removeAttribute('srcset');
       mainImage.removeAttribute('sizes');
       mainImage.alt = 'Your uploaded artwork preview';
@@ -120,7 +160,7 @@
         }));
       }, { once: true });
       mainImage.src = previewUrl;
-      fileOutput.textContent = `${file.name} · ${dimensions.width}×${dimensions.height}px · ${formatFileSize(file.size)}`;
+      fileOutput.textContent = `${croppedFile.name} · ${croppedDimensions.width}×${croppedDimensions.height}px · ${formatFileSize(croppedFile.size)}`;
       selection.hidden = false;
       component.dataset.state = 'ready';
       setStatus('Your image is now shown in the preview.', 'success');
@@ -131,11 +171,13 @@
         file_size_bytes: selectedMetadata.size,
         image_width: selectedMetadata.width,
         image_height: selectedMetadata.height,
+        crop_orientation: selectedMetadata.orientation,
+        crop_ratio: selectedMetadata.ratio,
       });
     } catch (error) {
       URL.revokeObjectURL(nextUrl);
       if (token !== selectionToken) return;
-      clearSelection({ announce: false });
+      syncInputFile(previousFile);
       setStatus(error.message || 'This image could not be read. Please choose another file.', 'error');
     }
   };
