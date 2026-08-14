@@ -17,29 +17,45 @@
   closeButtons.forEach((button) => button.addEventListener('click', () => setDrawer(false)));
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setDrawer(false); });
 
-  const applyView = (view) => {
-    root.querySelectorAll('[data-cg-product]').forEach((card, index) => {
-      card.classList.toggle('is-lifestyle', view === 'lifestyle' && index % 3 === 2);
+  const applyView = (view, track = false) => {
+    const previousView = root.dataset.view;
+    root.dataset.view = view;
+    root.querySelectorAll('[data-cg-view]').forEach((button) => {
+      const isActive = button.dataset.cgView === view;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
     });
+
+    if (!track || previousView === view) return;
+
+    root.dispatchEvent(new CustomEvent('cg:view-changed', {
+      bubbles: true,
+      detail: { collectionHandle: root.dataset.cgCollectionHandle, view }
+    }));
+
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({
+        event: 'collection_view_changed',
+        collection_handle: root.dataset.cgCollectionHandle,
+        gallery_view: view
+      });
+    }
   };
 
   controls.forEach((control) => control.addEventListener('click', () => {
     const group = control.hasAttribute('data-cg-columns') ? '[data-cg-columns]' : '[data-cg-view]';
-    root.querySelectorAll(group).forEach((button) => button.classList.remove('is-active'));
-    control.classList.add('is-active');
-    if (control.dataset.cgColumns) root.dataset.columns = control.dataset.cgColumns;
-    if (control.dataset.cgView) applyView(control.dataset.cgView);
+    if (control.dataset.cgColumns) {
+      root.querySelectorAll(group).forEach((button) => button.classList.remove('is-active'));
+      control.classList.add('is-active');
+      root.dataset.columns = control.dataset.cgColumns;
+    }
+    if (control.dataset.cgView) applyView(control.dataset.cgView, true);
   }));
 
   root.addEventListener('click', (event) => {
     const heart = event.target.closest?.('[data-cg-heart]');
     if (!heart) return;
     heart.setAttribute('aria-pressed', String(heart.getAttribute('aria-pressed') !== 'true'));
-  });
-
-  root.addEventListener('cg:results-updated', () => {
-    const activeView = root.querySelector('[data-cg-view].is-active')?.dataset.cgView;
-    if (activeView) applyView(activeView);
   });
 
 })();

@@ -14,6 +14,7 @@
   data-cg-section-id="{{ section.id }}"
   data-cg-collection-handle="{{ collection.handle }}"
   data-columns="4"
+  data-view="product"
 >
   <div class="cg-shell">
     <div class="cg-breadcrumb">{{ collection.title }}</div>
@@ -53,8 +54,8 @@
         </div>
         <span class="cg-toolbar-label">View:</span>
         <div class="cg-segment" aria-label="Gallery view">
-          <button type="button" class="is-active" data-cg-view="product">Product</button>
-          <button type="button" data-cg-view="lifestyle">Lifestyle</button>
+          <button type="button" class="is-active" data-cg-view="product" aria-pressed="true">Product</button>
+          <button type="button" data-cg-view="lifestyle" aria-pressed="false">Lifestyle</button>
         </div>
       </div>
       <button class="cg-filter-trigger" type="button" data-cg-open-drawer aria-haspopup="dialog">
@@ -67,7 +68,11 @@
     <div class="cg-results" data-cg-results aria-live="polite">
       <div class="cg-product-grid">
         {% for product in collection.products %}
-          <article class="cg-product" data-cg-product>
+          <article
+            class="cg-product"
+            data-cg-product
+            data-cg-has-lifestyle="{% if product.images.size > 1 %}true{% else %}false{% endif %}"
+          >
             <a class="cg-product-media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
               {% if product.tags contains 'Bestseller' %}<span class="cg-badge">Bestseller</span>{% endif %}
               {% if product.featured_media %}
