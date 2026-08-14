@@ -80,7 +80,7 @@
 .ps-frame-trigger__plus { font-size: 14px; line-height: 1; }
 .ps-frame-trigger__plus[hidden] { display: none; }
 .ps-frame-trigger__price { margin-left: 16px; color: #6d7b85; font-size: 10px; letter-spacing: .12em; white-space: nowrap; }
-.ps-frame-options { position: absolute; z-index: 8; top: 100%; right: 0; left: 0; display: none; max-height: 250px; overflow-y: auto; border: 1px solid #303536; border-top: 0; background: #fff; box-shadow: none; scrollbar-color: #909392 #fff; scrollbar-width: thin; }
+.ps-frame-options { position: absolute; z-index: 8; top: 100%; right: 0; left: 0; display: none; max-height: 250px; overflow-x: hidden; overflow-y: auto; border: 1px solid #303536; border-top: 0; background: #fff; box-shadow: none; scrollbar-color: #909392 #fff; scrollbar-width: thin; }
 .ps-frame-select.is-open .ps-frame-options { display: block; }
 .ps-frame-options::-webkit-scrollbar { width: 9px; }
 .ps-frame-options::-webkit-scrollbar-track { background: #fff; }
@@ -96,10 +96,11 @@
 .ps-mat-option--none .ps-frame-option__swatch { background: linear-gradient(135deg, transparent 42%, #b8bbba 43%, #b8bbba 56%, transparent 57%), #f8f8f5; }
 .ps-mat-option--white .ps-frame-option__swatch { border-color: #d4d6d5; background: #fff; }
 .ps-mat-option--black .ps-frame-option__swatch { border-color: #202325; background: #202325; }
-.ps-frame-option__details { display: inline-flex; align-items: baseline; gap: 12px; min-width: 0; flex: 1; }
+.ps-frame-option__details { display: inline-flex; align-items: baseline; gap: 12px; min-width: 0; flex: 1; overflow: hidden; }
 .ps-frame-option__name, .ps-frame-option__size, .ps-frame-option__price { white-space: nowrap; }
-.ps-frame-option__size { color: #6d7b85; }
-.ps-frame-option__price { margin-left: auto; color: #1b3342; }
+.ps-frame-option__name { flex: 0 0 auto; }
+.ps-frame-option__size { min-width: 0; flex: 1 1 auto; overflow: hidden; color: #6d7b85; text-overflow: ellipsis; }
+.ps-frame-option__price { flex: 0 0 auto; margin-left: 0; padding-left: 8px; color: #1b3342; }
 .ps-frame-options__empty { margin: 0; padding: 14px 16px; color: var(--ps-muted); font: 400 11px/1.4 var(--sans); }
 .ps-addon { display: flex; align-items: center; gap: 8px; color: var(--ps-ink); font: 600 12px/1.3 var(--sans); cursor: pointer; }
 .ps-addon input { position: absolute; opacity: 0; }
