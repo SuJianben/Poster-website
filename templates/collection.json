@@ -1,1 +1,64 @@
-{"sections":{"main":{"type":"main-collection","settings":{}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "living_room": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "living-room-art",
+            "label": "Living room"
+          }
+        },
+        "bedroom": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "bedroom-art",
+            "label": "Bedroom"
+          }
+        },
+        "kitchen": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "kitchen-art",
+            "label": "Kitchen"
+          }
+        },
+        "bathroom": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "bathroom-art",
+            "label": "Bathroom"
+          }
+        },
+        "home_office": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "home-office-art",
+            "label": "Home Office"
+          }
+        }
+      },
+      "block_order": [
+        "living_room",
+        "bedroom",
+        "kitchen",
+        "bathroom",
+        "home_office"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
