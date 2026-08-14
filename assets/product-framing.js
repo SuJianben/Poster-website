@@ -1,15 +1,11 @@
-(() => {
+(async () => {
   const root = document.querySelector('[data-ps-product]');
   const catalogNode = document.querySelector('[data-ps-framing-catalog]');
   if (!root || !catalogNode) return;
 
-  let catalog;
-  try {
-    catalog = JSON.parse(catalogNode.textContent);
-  } catch (error) {
-    console.error('Framing catalog could not be read.', error);
-    return;
-  }
+  const catalog = globalThis.PosterFramingCatalog
+    ? await globalThis.PosterFramingCatalog.load(catalogNode)
+    : JSON.parse(catalogNode.textContent);
 
   const variantNode = document.querySelector('[data-ps-variants]');
   const posterVariants = variantNode ? JSON.parse(variantNode.textContent) : [];
@@ -34,7 +30,13 @@
     white: '#ffffff', yellow: '#f4cf65',
   };
 
-  const normalizeSize = (value = '') => value.toLowerCase().replaceAll(',', '.').replace(/\s+/g, ' ').trim();
+  const normalizeSize = globalThis.PosterFramingCatalog?.normalizeSize || ((value = '') => value
+    .toLowerCase()
+    .replaceAll(',', '.')
+    .replace(/[×✕✖]/g, 'x')
+    .replace(/\s*x\s*/g, 'x')
+    .replace(/\s+/g, ' ')
+    .trim());
   const currentPosterVariant = () => posterVariants.find((variant) => String(variant.id) === String(variantInput?.value));
   const currentPosterSize = () => {
     const variant = currentPosterVariant();
@@ -198,6 +200,13 @@
       return { items, configurationId, selected: { ...selected } };
     },
   };
+
+  window.dataLayer?.push({
+    event: 'framing_catalog_loaded',
+    source: catalog.source || 'liquid',
+    passepartout_variant_count: catalog.passepartout?.variants?.length || 0,
+    frame_variant_count: catalog.frame?.variants?.length || 0,
+  });
 
   render('passepartout');
   render('frame');
