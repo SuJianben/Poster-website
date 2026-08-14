@@ -2,9 +2,14 @@
 
 <section class="ps-benefits ps-section" aria-label="{{ section.settings.accessibility_label | escape }}">
   {% for block in section.blocks %}
-    <div {{ block.shopify_attributes }}>
-      <strong>{{ block.settings.title }}</strong>
-      <span>{{ block.settings.text }}</span>
+    <div class="ps-benefit-item" {{ block.shopify_attributes }}>
+      <div class="ps-benefit-icon">
+        {% render 'product-benefit-icon', icon: block.settings.icon %}
+      </div>
+      <div class="ps-benefit-copy">
+        <strong>{{ block.settings.title }}</strong>
+        <span>{{ block.settings.text }}</span>
+      </div>
     </div>
   {% endfor %}
 </section>
@@ -27,6 +32,18 @@
       "name": "Benefit",
       "settings": [
         {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "quality",
+          "options": [
+            { "value": "quality", "label": "Premium quality" },
+            { "value": "guarantee", "label": "Money-back guarantee" },
+            { "value": "shipping", "label": "Free shipping" },
+            { "value": "returns", "label": "Returns" }
+          ]
+        },
+        {
           "type": "text",
           "id": "title",
           "label": "Title",
@@ -45,10 +62,38 @@
     {
       "name": "Product benefits",
       "blocks": [
-        { "type": "benefit" },
-        { "type": "benefit" },
-        { "type": "benefit" },
-        { "type": "benefit" }
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "quality",
+            "title": "Premium quality",
+            "text": "Made with carefully selected materials."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "guarantee",
+            "title": "Satisfied or money back",
+            "text": "Shop with confidence."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free shipping",
+            "text": "On qualifying orders."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "returns",
+            "title": "30 days return right",
+            "text": "Easy returns when eligible."
+          }
+        }
       ]
     }
   ]
