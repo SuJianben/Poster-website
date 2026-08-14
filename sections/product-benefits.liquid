@@ -1,0 +1,56 @@
+{{ 'product-showcase.css' | asset_url | stylesheet_tag }}
+
+<section class="ps-benefits ps-section" aria-label="{{ section.settings.accessibility_label | escape }}">
+  {% for block in section.blocks %}
+    <div {{ block.shopify_attributes }}>
+      <strong>{{ block.settings.title }}</strong>
+      <span>{{ block.settings.text }}</span>
+    </div>
+  {% endfor %}
+</section>
+
+{% schema %}
+{
+  "name": "Product benefits",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Shopping benefits"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Premium quality"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Made with carefully selected materials."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product benefits",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" }
+      ]
+    }
+  ]
+}
+{% endschema %}

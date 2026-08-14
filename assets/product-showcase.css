@@ -1,6 +1,7 @@
-.ps-product { --ps-ink: #222628; --ps-muted: #707679; --ps-line: #e2e3e1; --ps-sale: #c8382c; color: var(--ps-ink); padding: 92px 0 0; }
-.ps-product *, .ps-product *::before, .ps-product *::after { box-sizing: border-box; }
-.ps-product a { color: inherit; text-decoration: none; }
+.ps-section { --ps-ink: #222628; --ps-muted: #707679; --ps-line: #e2e3e1; --ps-sale: #c8382c; color: var(--ps-ink); }
+.ps-section *, .ps-section *::before, .ps-section *::after { box-sizing: border-box; }
+.ps-section a { color: inherit; text-decoration: none; }
+.ps-product { padding: 92px 0 0; }
 .ps-shell { width: min(100% - 40px, 1430px); margin: 0 auto; }
 .ps-breadcrumb { display: flex; gap: 9px; margin-bottom: 14px; overflow-x: auto; color: var(--ps-muted); font: 500 11px/1.3 var(--sans); white-space: nowrap; }
 .ps-breadcrumb a { color: var(--ps-ink); }
