@@ -229,15 +229,9 @@
       const cartPayload = root.productFraming
         ? root.productFraming.getCartItems(variantInput.value, quantity)
         : { items: [{ id: Number(variantInput.value), quantity }] };
-      const response = await fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cartPayload.items }),
-      });
-      if (!response.ok) throw new Error('Could not add this item to cart.');
-      const cartResponse = await fetch('/cart.js', { headers: { Accept: 'application/json' } });
-      if (!cartResponse.ok) throw new Error('Could not refresh cart.');
-      const cart = await cartResponse.json();
+      if (!window.CustomProductCart) throw new Error('The cart service is unavailable. Please refresh and try again.');
+      const cartResult = await window.CustomProductCart.add({ form, cartPayload, artwork: root.productArtwork });
+      const cart = cartResult.cart;
       document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart } }));
       window.dataLayer?.push({
         event: 'framing_configuration_added',
@@ -245,8 +239,20 @@
         configuration_id: cartPayload.configurationId || null,
         passepartout_variant_id: cartPayload.selected?.passepartout?.id || null,
         frame_variant_id: cartPayload.selected?.frame?.id || null,
+        artwork_uploaded: cartResult.hasArtwork,
         quantity,
       });
+      if (cartResult.hasArtwork) {
+        const artworkMetadata = root.productArtwork?.getMetadata?.();
+        window.dataLayer?.push({
+          event: 'custom_artwork_added_to_cart',
+          product_variant_id: String(variantInput.value),
+          file_type: artworkMetadata?.type || null,
+          file_size_bytes: artworkMetadata?.size || null,
+          image_width: artworkMetadata?.width || null,
+          image_height: artworkMetadata?.height || null,
+        });
+      }
       window.CartDrawer?.open(cart);
       addLabel.textContent = 'Added to cart';
     } catch (error) {

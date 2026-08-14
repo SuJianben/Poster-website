@@ -1,10 +1,14 @@
 {{ 'custom-product.css' | asset_url | stylesheet_tag }}
+{{ 'custom-artwork-upload.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'custom-framing-catalog.js' | asset_url }}&psv=framing-catalog-fallback-20260814" defer="defer"></script>
 <script src="{{ 'custom-framing.js' | asset_url }}&psv=framing-catalog-fallback-20260814" defer="defer"></script>
-<script src="{{ 'custom-product.js' | asset_url }}&psv=framing-addons-20260814" defer="defer"></script>
+<script src="{{ 'custom-artwork-upload.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
+<script src="{{ 'custom-product-cart.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
+<script src="{{ 'custom-product.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign preview_media = product.media | where: 'media_type', 'image' | last %}
+{% capture product_form_id %}custom-product-form-{{ section.id }}{% endcapture %}
 
 <section class="ps-product ps-section" data-ps-product data-section-id="{{ section.id }}">
   <div class="ps-shell">
@@ -83,6 +87,8 @@
         </div>
         <p class="ps-shipping-note">{{ section.settings.shipping_note }}</p>
 
+        {% render 'custom-artwork-upload', section: section, form_id: product_form_id %}
+
         <div class="ps-product-config" aria-label="Product configuration">
           <div class="ps-config-group">
             <p class="ps-config-label">Material: <strong data-ps-choice-output>Poster</strong></p>
@@ -129,7 +135,7 @@
           <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
         </div>
 
-        {% form 'product', product, class: 'ps-form', data_ps_form: '' %}
+        {% form 'product', product, id: product_form_id, class: 'ps-form', data_ps_form: '' %}
           <input type="hidden" name="id" value="{{ selected_variant.id }}" data-ps-variant-input>
           {% unless product.has_only_default_variant %}
             {% for option in product.options_with_values %}
@@ -211,6 +217,30 @@
       "id": "shipping_note",
       "label": "Shipping note",
       "default": "Free shipping on qualifying orders."
+    },
+    {
+      "type": "text",
+      "id": "upload_heading",
+      "label": "Upload heading",
+      "default": "Upload your image"
+    },
+    {
+      "type": "text",
+      "id": "upload_button_label",
+      "label": "Upload button label",
+      "default": "Choose image"
+    },
+    {
+      "type": "text",
+      "id": "upload_help_text",
+      "label": "Upload help text",
+      "default": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels."
+    },
+    {
+      "type": "checkbox",
+      "id": "require_artwork",
+      "label": "Require an image before add to cart",
+      "default": true
     },
     {
       "type": "text",
