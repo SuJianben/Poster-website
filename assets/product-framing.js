@@ -29,6 +29,9 @@
     petrol: '#577486', pink: '#ead0c2', plum: '#6e3e4c', red: '#c9584f',
     white: '#ffffff', yellow: '#f4cf65',
   };
+  const swatchFor = (styleSlug = '') => swatches[styleSlug]
+    || swatches[styleSlug.replace(/-(wood|alu)$/, '')]
+    || '#b8bbba';
 
   const normalizeSize = globalThis.PosterFramingCatalog?.normalizeSize || ((value = '') => value
     .toLowerCase()
@@ -84,6 +87,14 @@
       }
       layer.src = chosen.preview[orientation] || chosen.preview.portrait;
       layer.hidden = false;
+      const updateLayerScale = () => {
+        const squareCanvasCompensation = orientation === 'square' && layer.naturalWidth > 0
+          ? layer.naturalHeight / layer.naturalWidth
+          : 1;
+        layer.style.setProperty('--ps-framing-layer-scale', String(squareCanvasCompensation));
+      };
+      layer.onload = updateLayerScale;
+      if (layer.complete) updateLayerScale();
     }
     const canvas = preview?.querySelector('[data-pdp-print-preview]');
     if (canvas) {
@@ -113,7 +124,7 @@
     button.setAttribute('aria-selected', String(isSelected));
     button.setAttribute('aria-pressed', String(isSelected));
     button.dataset.psFramingVariant = String(variant.id);
-    button.innerHTML = `<span class="ps-frame-option__swatch" style="--ps-framing-swatch:${swatches[variant.styleSlug] || '#b8bbba'}"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name"></span><span class="ps-frame-option__size"></span></span><span class="ps-frame-option__price"></span>`;
+    button.innerHTML = `<span class="ps-frame-option__swatch" style="--ps-framing-swatch:${swatchFor(variant.styleSlug)}"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name"></span><span class="ps-frame-option__size"></span></span><span class="ps-frame-option__price"></span>`;
     button.querySelector('.ps-frame-option__name').textContent = optionLabel(kind, variant);
     button.querySelector('.ps-frame-option__size').textContent = kind === 'passepartout' ? `${variant.size} | fits: ${variant.fitsSize}` : variant.size;
     button.querySelector('.ps-frame-option__price').textContent = variant.formattedPrice;
