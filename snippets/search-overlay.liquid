@@ -22,11 +22,13 @@
     </nav>
     <div class="so-overlay__cards" data-search-overlay-panel-content="bestsellers">
       {% for product in search_overlay_products limit: 5 %}
+        {% if product.tags contains 'system:framing-addon' %}{% continue %}{% endif %}
         <article class="so-overlay__card so-overlay__product-card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
       {% endfor %}
     </div>
     <div class="so-overlay__cards" data-search-overlay-panel-content="new-arrivals" hidden>
       {% for product in search_overlay_products offset: 3 limit: 5 %}
+        {% if product.tags contains 'system:framing-addon' %}{% continue %}{% endif %}
         <article class="so-overlay__card so-overlay__product-card"><a href="{{ product.url }}" class="so-overlay__image">{% if product.featured_image %}{{ product.featured_image | image_url: width: 620 | image_tag: widths: '260, 420, 620', alt: product.title }}{% endif %}</a><div><a href="{{ product.url }}">{{ product.title }}</a><strong>From {{ product.price | money }}</strong></div></article>
       {% endfor %}
     </div>

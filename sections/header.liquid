@@ -1,3 +1,5 @@
+{%- assign visible_cart_count = 0 -%}
+{%- for item in cart.items -%}{%- if item.properties._framing_component == blank -%}{%- assign visible_cart_count = visible_cart_count | plus: item.quantity -%}{%- endif -%}{%- endfor -%}
 <header class="site-header site-header--adaptive{% unless request.page_type == 'index' %} site-header--solid{% endunless %}" data-adaptive-header>
   <div class="page-width site-header__inner">
     <a class="site-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
@@ -17,7 +19,7 @@
         <span class="mobile-menu-trigger__lines" aria-hidden="true"></span>
       </button>
       <a class="icon-button" aria-label="{{ 'general.search' | t }}" href="{{ routes.search_url }}" data-search-overlay-open>{% render 'icon', name: 'search' %}</a>
-      <a class="icon-button" aria-label="{{ 'general.cart' | t }}" href="{{ routes.cart_url }}" data-cart-drawer-open>{% render 'icon', name: 'bag' %}<span class="cart-count"{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span></a>
+      <a class="icon-button" aria-label="{{ 'general.cart' | t }}" href="{{ routes.cart_url }}" data-cart-drawer-open>{% render 'icon', name: 'bag' %}<span class="cart-count"{% if visible_cart_count == 0 %} hidden{% endif %}>{{ visible_cart_count }}</span></a>
     </div>
   </div>
   <div id="mobile-menu" class="mobile-menu" data-mobile-menu aria-hidden="true">

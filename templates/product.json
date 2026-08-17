@@ -11,7 +11,10 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {}
+      "settings": {
+        "passepartout_product": "system-passepartout-addon",
+        "frame_product": "system-frame-addon"
+      }
     },
     "benefits": {
       "type": "product-benefits",
