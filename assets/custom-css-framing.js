@@ -89,5 +89,10 @@
     fit: scheduleFit,
   };
 
+  window.dataLayer?.push({
+    event: 'custom_css_framing_initialized',
+    render_mode: root.dataset.psFramingRenderMode || 'css',
+  });
+
   render();
 })();

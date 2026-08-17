@@ -3,7 +3,7 @@
     "main": {
       "type": "custom-product-main",
       "settings": {
-        "framing_render_mode": "image",
+        "framing_render_mode": "css",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }

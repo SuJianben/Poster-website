@@ -1,11 +1,20 @@
 {{ 'custom-product.css' | asset_url | stylesheet_tag }}
 {{ 'custom-artwork-upload.css' | asset_url | stylesheet_tag }}
 {{ 'custom-artwork-cropper.css' | asset_url | stylesheet_tag }}
-{{ 'custom-image-framing.css' | asset_url | stylesheet_tag }}
+{% assign framing_render_mode = section.settings.framing_render_mode | default: 'image' %}
+{% if framing_render_mode == 'css' %}
+  {{ 'custom-css-framing.css' | asset_url | stylesheet_tag }}
+{% else %}
+  {{ 'custom-image-framing.css' | asset_url | stylesheet_tag }}
+{% endif %}
 <script src="{{ 'custom-artwork-cropper-geometry.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
 <script src="{{ 'custom-artwork-cropper.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
 <script src="{{ 'custom-framing-catalog.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
-<script src="{{ 'custom-image-framing.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
+{% if framing_render_mode == 'css' %}
+  <script src="{{ 'custom-css-framing.js' | asset_url }}&psv=css-framing-20260817" defer="defer"></script>
+{% else %}
+  <script src="{{ 'custom-image-framing.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
+{% endif %}
 <script src="{{ 'custom-framing.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
 <script src="{{ 'custom-artwork-upload.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
 <script src="{{ 'custom-product-cart.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
@@ -15,7 +24,7 @@
 {% assign preview_media = product.media | where: 'media_type', 'image' | last %}
 {% capture product_form_id %}custom-product-form-{{ section.id }}{% endcapture %}
 
-<section class="ps-product ps-section" data-ps-product data-section-id="{{ section.id }}">
+<section class="ps-product ps-section" data-ps-product data-section-id="{{ section.id }}" data-ps-framing-render-mode="{{ framing_render_mode }}">
   <div class="ps-shell">
     {% if section.settings.show_breadcrumb %}
       <nav class="ps-breadcrumb" aria-label="Breadcrumb">
@@ -212,6 +221,22 @@
 {
   "name": "Custom product main",
   "settings": [
+    {
+      "type": "select",
+      "id": "framing_render_mode",
+      "label": "Frame preview rendering",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image assets"
+        },
+        {
+          "value": "css",
+          "label": "CSS rendering"
+        }
+      ],
+      "default": "image"
+    },
     {
       "type": "checkbox",
       "id": "show_breadcrumb",
