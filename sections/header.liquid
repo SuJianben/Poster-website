@@ -5,11 +5,30 @@
     <a class="site-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
       {% render 'site-logo' %}
     </a>
-    <nav class="site-nav" aria-label="Main navigation">
+    <nav class="site-nav" aria-label="Main navigation" data-header-navigation="desktop">
       {% if section.settings.menu != blank %}
-        {% for link in section.settings.menu.links %}
-          <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
-        {% endfor %}
+        <ul class="site-nav__list" role="list">
+          {% for link in section.settings.menu.links %}
+            <li class="site-nav__item{% if link.links != blank %} site-nav__item--has-children{% endif %}">
+              {% if link.links != blank %}
+                {% assign submenu_id = 'HeaderSubmenu-' | append: section.id | append: '-' | append: forloop.index %}
+                <button class="site-nav__control site-nav__toggle" type="button" aria-expanded="false" aria-controls="{{ submenu_id }}" aria-haspopup="true" data-header-submenu-toggle data-menu-title="{{ link.title | escape }}">
+                  <span>{{ link.title | escape }}</span>
+                  <span class="site-nav__chevron" aria-hidden="true"></span>
+                </button>
+                <div class="site-nav__submenu" id="{{ submenu_id }}" data-header-submenu hidden>
+                  <ul role="list">
+                    {% for child_link in link.links %}
+                      <li><a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %} data-header-submenu-link data-parent-menu="{{ link.title | escape }}">{{ child_link.title | escape }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% else %}
+                <a class="site-nav__control" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
       {% else %}
         <a href="#categories">Shop</a><a href="#categories">Collections</a><a href="#categories">About</a><a href="#categories">Journal</a>
       {% endif %}
@@ -31,11 +50,30 @@
         </span>
         <button class="mobile-menu__close" type="button" aria-label="Close menu" data-mobile-menu-close>×</button>
       </div>
-      <nav class="mobile-menu__links" aria-label="Mobile navigation">
+      <nav class="mobile-menu__links" aria-label="Mobile navigation" data-header-navigation="mobile">
         {% if section.settings.menu != blank %}
-          {% for link in section.settings.menu.links %}
-            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
-          {% endfor %}
+          <ul class="mobile-nav__list" role="list">
+            {% for link in section.settings.menu.links %}
+              <li class="mobile-nav__item{% if link.links != blank %} mobile-nav__item--has-children{% endif %}">
+                {% if link.links != blank %}
+                  {% assign mobile_submenu_id = 'MobileHeaderSubmenu-' | append: section.id | append: '-' | append: forloop.index %}
+                  <button class="mobile-nav__toggle" type="button" aria-expanded="false" aria-controls="{{ mobile_submenu_id }}" data-header-submenu-toggle data-menu-title="{{ link.title | escape }}">
+                    <span>{{ link.title | escape }}</span>
+                    <span class="mobile-nav__chevron" aria-hidden="true"></span>
+                  </button>
+                  <div class="mobile-nav__submenu" id="{{ mobile_submenu_id }}" data-header-submenu hidden>
+                    <ul role="list">
+                      {% for child_link in link.links %}
+                        <li><a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %} data-header-submenu-link data-parent-menu="{{ link.title | escape }}">{{ child_link.title | escape }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% else %}
+                  <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
         {% else %}
           <a href="#categories">Shop</a><a href="#categories">Collections</a><a href="#categories">About</a><a href="#categories">Journal</a>
         {% endif %}
