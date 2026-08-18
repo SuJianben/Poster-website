@@ -74,9 +74,9 @@
   left: calc(0px - var(--ps-css-frame-width, 0px));
   height: var(--ps-css-frame-width, 0px);
   clip-path: polygon(0 0, 100% 0, calc(100% - var(--ps-css-frame-width, 0px)) 100%, var(--ps-css-frame-width, 0px) 100%);
-  background-position: var(--ps-css-frame-texture-top-position, center);
-  background-repeat: var(--ps-css-frame-texture-top-repeat, no-repeat);
-  background-size: var(--ps-css-frame-texture-top-size, cover);
+  background-position: center, var(--ps-css-frame-texture-top-position, center);
+  background-repeat: no-repeat, var(--ps-css-frame-texture-top-repeat, no-repeat);
+  background-size: cover, var(--ps-css-frame-texture-top-size, cover);
 }
 
 .ps-section .ps-css-frame__rail--right {
@@ -85,9 +85,9 @@
   bottom: calc(0px - var(--ps-css-frame-width, 0px));
   width: var(--ps-css-frame-width, 0px);
   clip-path: polygon(100% 0, 100% 100%, 0 calc(100% - var(--ps-css-frame-width, 0px)), 0 var(--ps-css-frame-width, 0px));
-  background-position: var(--ps-css-frame-texture-right-position, center);
-  background-repeat: var(--ps-css-frame-texture-right-repeat, no-repeat);
-  background-size: var(--ps-css-frame-texture-right-size, cover);
+  background-position: center, var(--ps-css-frame-texture-right-position, center);
+  background-repeat: no-repeat, var(--ps-css-frame-texture-right-repeat, no-repeat);
+  background-size: cover, var(--ps-css-frame-texture-right-size, cover);
 }
 
 .ps-section .ps-css-frame__rail--bottom {
@@ -96,9 +96,9 @@
   left: calc(0px - var(--ps-css-frame-width, 0px));
   height: var(--ps-css-frame-width, 0px);
   clip-path: polygon(var(--ps-css-frame-width, 0px) 0, calc(100% - var(--ps-css-frame-width, 0px)) 0, 100% 100%, 0 100%);
-  background-position: var(--ps-css-frame-texture-bottom-position, center);
-  background-repeat: var(--ps-css-frame-texture-bottom-repeat, no-repeat);
-  background-size: var(--ps-css-frame-texture-bottom-size, cover);
+  background-position: center, var(--ps-css-frame-texture-bottom-position, center);
+  background-repeat: no-repeat, var(--ps-css-frame-texture-bottom-repeat, no-repeat);
+  background-size: cover, var(--ps-css-frame-texture-bottom-size, cover);
 }
 
 .ps-section .ps-css-frame__rail--left {
@@ -107,9 +107,28 @@
   left: calc(0px - var(--ps-css-frame-width, 0px));
   width: var(--ps-css-frame-width, 0px);
   clip-path: polygon(0 0, 100% var(--ps-css-frame-width, 0px), 100% calc(100% - var(--ps-css-frame-width, 0px)), 0 100%);
-  background-position: var(--ps-css-frame-texture-left-position, center);
-  background-repeat: var(--ps-css-frame-texture-left-repeat, no-repeat);
-  background-size: var(--ps-css-frame-texture-left-size, cover);
+  background-position: center, var(--ps-css-frame-texture-left-position, center);
+  background-repeat: no-repeat, var(--ps-css-frame-texture-left-repeat, no-repeat);
+  background-size: cover, var(--ps-css-frame-texture-left-size, cover);
+}
+
+.ps-section .ps-css-frame[data-frame-style="oak"] {
+  --ps-css-frame-texture-top: url('./ps-css-frame-oak-texture-horizontal.webp');
+  --ps-css-frame-texture-right: url('./ps-css-frame-oak-texture-vertical.webp');
+  --ps-css-frame-texture-bottom: url('./ps-css-frame-oak-texture-horizontal.webp');
+  --ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-vertical.webp');
+  --ps-css-frame-texture-top-position: 0 center;
+  --ps-css-frame-texture-right-position: center 0;
+  --ps-css-frame-texture-bottom-position: 47px center;
+  --ps-css-frame-texture-left-position: center 53px;
+  --ps-css-frame-texture-top-repeat: repeat;
+  --ps-css-frame-texture-right-repeat: repeat;
+  --ps-css-frame-texture-bottom-repeat: repeat;
+  --ps-css-frame-texture-left-repeat: repeat;
+  --ps-css-frame-texture-top-size: 100px 100px;
+  --ps-css-frame-texture-right-size: 100px 100px;
+  --ps-css-frame-texture-bottom-size: 100px 100px;
+  --ps-css-frame-texture-left-size: 100px 100px;
 }
 
 .ps-section .ps-css-frame[data-frame-material="wood"] .ps-css-frame__rail--top {
