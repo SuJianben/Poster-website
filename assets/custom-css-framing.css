@@ -125,10 +125,10 @@
   --ps-css-frame-texture-right-repeat: repeat;
   --ps-css-frame-texture-bottom-repeat: repeat;
   --ps-css-frame-texture-left-repeat: repeat;
-  --ps-css-frame-texture-top-size: var(--ps-css-oak-texture-size, 100px) var(--ps-css-oak-texture-size, 100px);
-  --ps-css-frame-texture-right-size: var(--ps-css-oak-texture-size, 100px) var(--ps-css-oak-texture-size, 100px);
-  --ps-css-frame-texture-bottom-size: var(--ps-css-oak-texture-size, 100px) var(--ps-css-oak-texture-size, 100px);
-  --ps-css-frame-texture-left-size: var(--ps-css-oak-texture-size, 100px) var(--ps-css-oak-texture-size, 100px);
+  --ps-css-frame-texture-top-size: calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px)) var(--ps-css-oak-texture-size, 100px);
+  --ps-css-frame-texture-right-size: var(--ps-css-oak-texture-size, 100px) calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px));
+  --ps-css-frame-texture-bottom-size: calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px)) var(--ps-css-oak-texture-size, 100px);
+  --ps-css-frame-texture-left-size: var(--ps-css-oak-texture-size, 100px) calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px));
 }
 
 .ps-section .ps-css-frame[data-frame-material="wood"] .ps-css-frame__rail--top {

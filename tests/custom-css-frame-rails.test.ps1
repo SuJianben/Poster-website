@@ -64,7 +64,10 @@ Assert-Contains $styles "--ps-css-frame-texture-left: url('./ps-css-frame-oak-te
 Assert-Contains $section '--ps-css-oak-texture-size: {{ css_oak_texture_scale }}px' 'The section must expose the Oak texture scale as a scoped CSS variable.'
 Assert-Contains $section '--ps-css-oak-texture-bottom-offset: {{ css_oak_texture_bottom_offset }}px' 'The bottom texture offset must scale with the texture.'
 Assert-Contains $section '--ps-css-oak-texture-left-offset: {{ css_oak_texture_left_offset }}px' 'The left texture offset must scale with the texture.'
-Assert-Contains $styles '--ps-css-frame-texture-top-size: var(--ps-css-oak-texture-size, 100px)' 'Oak rails must read the configurable texture size.'
+Assert-Contains $styles '--ps-css-frame-texture-top-size: calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px)) var(--ps-css-oak-texture-size, 100px)' 'Oak horizontal rails must preserve the source texture aspect ratio.'
+Assert-Contains $styles '--ps-css-frame-texture-right-size: var(--ps-css-oak-texture-size, 100px) calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px))' 'Oak vertical rails must preserve the source texture aspect ratio.'
+Assert-Contains $styles '--ps-css-frame-texture-bottom-size: calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px)) var(--ps-css-oak-texture-size, 100px)' 'Oak bottom rail must preserve the horizontal source texture aspect ratio.'
+Assert-Contains $styles '--ps-css-frame-texture-left-size: var(--ps-css-oak-texture-size, 100px) calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px))' 'Oak left rail must preserve the vertical source texture aspect ratio.'
 Assert-Contains $styles '--ps-css-frame-texture-bottom-position: var(--ps-css-oak-texture-bottom-offset, 47px) center' 'Oak bottom offset must read the scaled value.'
 Assert-Contains $styles '--ps-css-frame-texture-left-position: center var(--ps-css-oak-texture-left-offset, 53px)' 'Oak left offset must read the scaled value.'
 
