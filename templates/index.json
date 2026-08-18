@@ -56,65 +56,73 @@
         "film": {
           "type": "category",
           "settings": {
-            "title": "Film",
+            "title": "Abstract",
+            "image": "shopify://shop_images/gallery_07_e45a9371-fbdd-4f79-b548-59a7637104ad.webp",
             "asset_name": "figma-poster-c1.jpg",
-            "link": ""
+            "link": "shopify://collections/abstract-geometric-prints"
           }
         },
         "music": {
           "type": "category",
           "settings": {
-            "title": "Music",
+            "title": "Figurative",
+            "image": "shopify://shop_images/gallery_07_19152f2d-f6b6-4ae4-9e72-092efe62f94a.webp",
             "asset_name": "figma-poster-m1.jpg",
-            "link": ""
+            "link": "shopify://collections/figurative-fashion-prints"
           }
         },
         "sports": {
           "type": "category",
           "settings": {
-            "title": "Sports",
+            "title": "Botanical",
+            "image": "shopify://shop_images/gallery_06_8d521c67-482f-4d71-a5fa-a3ccbd596932.webp",
             "asset_name": "figma-poster-s2.jpg",
-            "link": ""
+            "link": "shopify://collections/botanical-floral-prints"
           }
         },
         "nordic": {
           "type": "category",
           "settings": {
-            "title": "Nordic",
+            "title": "Animals",
+            "image": "shopify://shop_images/gallery_04_b1b3030d-34dc-496b-8bf7-7f80b1c9da4c.webp",
             "asset_name": "figma-poster-n1.jpg",
-            "link": ""
+            "link": "shopify://collections/animals-prints"
           }
         },
         "vintage": {
           "type": "category",
           "settings": {
-            "title": "Vintage",
+            "title": "Photography",
+            "image": "shopify://shop_images/gallery_04_497e68e3-0fa3-4dae-a1f9-8afeeb7b9a63.webp",
             "asset_name": "figma-poster-r1.jpg",
-            "link": ""
+            "link": "shopify://collections/photography-landscape-prints"
           }
         },
         "anime": {
           "type": "category",
           "settings": {
-            "title": "Anime",
+            "title": "Minimal",
+            "image": "shopify://shop_images/gallery_04.jpg",
             "asset_name": "figma-poster-a2.jpg",
-            "link": ""
+            "link": "shopify://collections/minimal-neutral-prints"
           }
         },
         "art": {
           "type": "category",
           "settings": {
-            "title": "Art",
+            "title": "Food",
+            "image": "shopify://shop_images/gallery_06_5aeccecb-7998-4e11-a86b-c2edcec9cd5a.webp",
             "asset_name": "figma-poster-t1.jpg",
-            "link": ""
+            "link": "shopify://collections/food-kitchen-art-prints"
           }
         },
         "new": {
           "type": "category",
           "settings": {
-            "title": "New Arrivals",
+            "title": "Typography",
+            "image": "shopify://shop_images/gallery_06_dbe81187-2617-406c-845e-2fb79252edc3.webp",
             "asset_name": "figma-poster-a2.jpg",
-            "link": ""
+            "link": "shopify://collections/typography-quotes-prints"
           }
         }
       },
