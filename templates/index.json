@@ -124,14 +124,6 @@
             "asset_name": "figma-poster-a2.jpg",
             "link": "shopify://collections/typography-quotes-prints"
           }
-        },
-        "category_Xg9qTB": {
-          "type": "category",
-          "settings": {
-            "title": "Film",
-            "asset_name": "",
-            "link": ""
-          }
         }
       },
       "block_order": [
@@ -142,8 +134,7 @@
         "vintage",
         "anime",
         "art",
-        "new",
-        "category_Xg9qTB"
+        "new"
       ],
       "settings": {
         "eyebrow": "Shop by category",
@@ -165,9 +156,9 @@
           "type": "poster",
           "settings": {
             "asset_name": "figma-poster-n1.jpg",
-            "title": "Fjord Blue",
+            "title": "Langosta",
             "meta": "Hendrik Schuette · $199",
-            "link": ""
+            "link": "shopify://products/langosta"
           }
         },
         "n2": {
