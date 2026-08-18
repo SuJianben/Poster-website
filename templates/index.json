@@ -124,6 +124,14 @@
             "asset_name": "figma-poster-a2.jpg",
             "link": "shopify://collections/typography-quotes-prints"
           }
+        },
+        "category_Xg9qTB": {
+          "type": "category",
+          "settings": {
+            "title": "Film",
+            "asset_name": "",
+            "link": ""
+          }
         }
       },
       "block_order": [
@@ -134,7 +142,8 @@
         "vintage",
         "anime",
         "art",
-        "new"
+        "new",
+        "category_Xg9qTB"
       ],
       "settings": {
         "eyebrow": "Shop by category",
@@ -145,7 +154,7 @@
     "featured": {
       "type": "featured-products",
       "settings": {
-        "collection": "figurative-fashion-prints",
+        "collection": "best-sellers",
         "max_products": 12
       }
     },
