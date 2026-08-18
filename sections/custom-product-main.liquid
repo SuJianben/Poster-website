@@ -22,9 +22,20 @@
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign preview_media = product.media | where: 'media_type', 'image' | last %}
+{% assign css_oak_texture_scale = section.settings.css_oak_texture_scale | default: 100 %}
+{% assign css_oak_texture_bottom_offset = css_oak_texture_scale | times: 47 | divided_by: 100 %}
+{% assign css_oak_texture_left_offset = css_oak_texture_scale | times: 53 | divided_by: 100 %}
 {% capture product_form_id %}custom-product-form-{{ section.id }}{% endcapture %}
 
-<section class="ps-product ps-section" data-ps-product data-section-id="{{ section.id }}" data-ps-framing-render-mode="{{ framing_render_mode }}">
+<section
+  class="ps-product ps-section"
+  data-ps-product
+  data-section-id="{{ section.id }}"
+  data-ps-framing-render-mode="{{ framing_render_mode }}"
+  {% if framing_render_mode == 'css' %}
+    style="--ps-css-oak-texture-size: {{ css_oak_texture_scale }}px; --ps-css-oak-texture-bottom-offset: {{ css_oak_texture_bottom_offset }}px; --ps-css-oak-texture-left-offset: {{ css_oak_texture_left_offset }}px;"
+  {% endif %}
+>
   <div class="ps-shell">
     {% if section.settings.show_breadcrumb %}
       <nav class="ps-breadcrumb" aria-label="Breadcrumb">
@@ -242,6 +253,21 @@
         }
       ],
       "default": "image"
+    },
+    {
+      "type": "header",
+      "content": "CSS frame texture"
+    },
+    {
+      "type": "range",
+      "id": "css_oak_texture_scale",
+      "min": 40,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "label": "Oak texture scale",
+      "info": "Lower values make the wood grain smaller and denser.",
+      "default": 100
     },
     {
       "type": "checkbox",

@@ -8,6 +8,10 @@ $cssTemplate = Get-Content -LiteralPath (Join-Path $themeRoot 'templates\product
 $defaultSection = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\main-product.liquid') -Raw
 $oakVerticalTexture = Join-Path $themeRoot 'assets\ps-css-frame-oak-texture-vertical.webp'
 $oakHorizontalTexture = Join-Path $themeRoot 'assets\ps-css-frame-oak-texture-horizontal.webp'
+$fixture = Get-Content -LiteralPath (Join-Path $themeRoot 'tests\fixtures\custom-css-frame-rails.html') -Raw
+$schemaMatch = [regex]::Match($section, '\{% schema %\}(?<schema>[\s\S]*?)\{% endschema %\}')
+if (-not $schemaMatch.Success) { throw 'Custom product section schema is missing.' }
+$schema = $schemaMatch.Groups['schema'].Value | ConvertFrom-Json
 
 function Assert-Contains([string]$Value, [string]$Expected, [string]$Message) {
   if (-not $Value.Contains($Expected)) { throw $Message }
@@ -57,5 +61,21 @@ Assert-Contains $styles "--ps-css-frame-texture-top: url('./ps-css-frame-oak-tex
 Assert-Contains $styles "--ps-css-frame-texture-bottom: url('./ps-css-frame-oak-texture-horizontal.webp')" 'Oak bottom rail must use the horizontal texture.'
 Assert-Contains $styles "--ps-css-frame-texture-right: url('./ps-css-frame-oak-texture-vertical.webp')" 'Oak right rail must use the vertical texture.'
 Assert-Contains $styles "--ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-vertical.webp')" 'Oak left rail must use the vertical texture.'
+Assert-Contains $section '--ps-css-oak-texture-size: {{ css_oak_texture_scale }}px' 'The section must expose the Oak texture scale as a scoped CSS variable.'
+Assert-Contains $section '--ps-css-oak-texture-bottom-offset: {{ css_oak_texture_bottom_offset }}px' 'The bottom texture offset must scale with the texture.'
+Assert-Contains $section '--ps-css-oak-texture-left-offset: {{ css_oak_texture_left_offset }}px' 'The left texture offset must scale with the texture.'
+Assert-Contains $styles '--ps-css-frame-texture-top-size: var(--ps-css-oak-texture-size, 100px)' 'Oak rails must read the configurable texture size.'
+Assert-Contains $styles '--ps-css-frame-texture-bottom-position: var(--ps-css-oak-texture-bottom-offset, 47px) center' 'Oak bottom offset must read the scaled value.'
+Assert-Contains $styles '--ps-css-frame-texture-left-position: center var(--ps-css-oak-texture-left-offset, 53px)' 'Oak left offset must read the scaled value.'
+
+$scaleSetting = $schema.settings | Where-Object { $_.id -eq 'css_oak_texture_scale' }
+if (-not $scaleSetting) { throw 'Oak texture scale theme-editor setting is missing.' }
+if ($scaleSetting.type -ne 'range') { throw 'Oak texture scale must use a range setting.' }
+if ($scaleSetting.min -ne 40 -or $scaleSetting.max -ne 200 -or $scaleSetting.step -ne 5) {
+  throw 'Oak texture scale range must support 40% to 200% in 5% steps.'
+}
+if ($scaleSetting.default -ne 100) { throw 'Oak texture scale must default to 100%.' }
+Assert-Contains $fixture 'data-test-texture-scale="60"' 'The visual fixture must cover a smaller Oak texture scale.'
+Assert-Contains $fixture 'data-test-texture-scale="140"' 'The visual fixture must cover a larger Oak texture scale.'
 
 Write-Output 'Custom CSS four-rail framing checks passed.'

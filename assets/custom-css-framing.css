@@ -119,16 +119,16 @@
   --ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-vertical.webp');
   --ps-css-frame-texture-top-position: 0 center;
   --ps-css-frame-texture-right-position: center 0;
-  --ps-css-frame-texture-bottom-position: 47px center;
-  --ps-css-frame-texture-left-position: center 53px;
+  --ps-css-frame-texture-bottom-position: var(--ps-css-oak-texture-bottom-offset, 47px) center;
+  --ps-css-frame-texture-left-position: center var(--ps-css-oak-texture-left-offset, 53px);
   --ps-css-frame-texture-top-repeat: repeat;
   --ps-css-frame-texture-right-repeat: repeat;
   --ps-css-frame-texture-bottom-repeat: repeat;
   --ps-css-frame-texture-left-repeat: repeat;
-  --ps-css-frame-texture-top-size: 100px 100px;
-  --ps-css-frame-texture-right-size: 100px 100px;
-  --ps-css-frame-texture-bottom-size: 100px 100px;
-  --ps-css-frame-texture-left-size: 100px 100px;
+  --ps-css-frame-texture-top-size: var(--ps-css-oak-texture-size, 100px) var(--ps-css-oak-texture-size, 100px);
+  --ps-css-frame-texture-right-size: var(--ps-css-oak-texture-size, 100px) var(--ps-css-oak-texture-size, 100px);
+  --ps-css-frame-texture-bottom-size: var(--ps-css-oak-texture-size, 100px) var(--ps-css-oak-texture-size, 100px);
+  --ps-css-frame-texture-left-size: var(--ps-css-oak-texture-size, 100px) var(--ps-css-oak-texture-size, 100px);
 }
 
 .ps-section .ps-css-frame[data-frame-material="wood"] .ps-css-frame__rail--top {
