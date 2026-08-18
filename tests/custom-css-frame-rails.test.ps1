@@ -62,6 +62,7 @@ Assert-Contains $styles "--ps-css-frame-texture-bottom: url('./ps-css-frame-oak-
 Assert-Contains $styles "--ps-css-frame-texture-right: url('./ps-css-frame-oak-texture-v2-vertical.webp')" 'Oak right rail must use the versioned vertical texture.'
 Assert-Contains $styles "--ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-v2-vertical.webp')" 'Oak left rail must use the versioned vertical texture.'
 Assert-Contains $section '--ps-css-oak-texture-size: {{ css_oak_texture_scale }}px' 'The section must expose the Oak texture scale as a scoped CSS variable.'
+Assert-Contains $section "asset_url }}&psv=oak-texture-v2-20260818" 'The CSS custom template must version its framing stylesheet to invalidate stale storefront caches.'
 Assert-Contains $section '--ps-css-oak-texture-bottom-offset: {{ css_oak_texture_bottom_offset }}px' 'The bottom texture offset must scale with the texture.'
 Assert-Contains $section '--ps-css-oak-texture-left-offset: {{ css_oak_texture_left_offset }}px' 'The left texture offset must scale with the texture.'
 Assert-Contains $styles '--ps-css-frame-texture-top-size: calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px)) var(--ps-css-oak-texture-size, 100px)' 'Oak horizontal rails must preserve the source texture aspect ratio.'
