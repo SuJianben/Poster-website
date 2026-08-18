@@ -43,6 +43,12 @@
                 <div class="print-preview__bg" aria-hidden="true"></div>
                 <div class="ps-css-frame" data-ps-css-frame data-has-frame="false">
                   <div class="ps-css-mat" data-ps-css-mat data-has-mat="false">
+                    {% if framing_render_mode == 'css' %}
+                      <span class="ps-css-frame__rail ps-css-frame__rail--top" data-ps-css-frame-rail="top" aria-hidden="true"></span>
+                      <span class="ps-css-frame__rail ps-css-frame__rail--right" data-ps-css-frame-rail="right" aria-hidden="true"></span>
+                      <span class="ps-css-frame__rail ps-css-frame__rail--bottom" data-ps-css-frame-rail="bottom" aria-hidden="true"></span>
+                      <span class="ps-css-frame__rail ps-css-frame__rail--left" data-ps-css-frame-rail="left" aria-hidden="true"></span>
+                    {% endif %}
                     <div class="ps-css-artwork" data-ps-css-artwork>
                       {% if preview_media %}
                         <img
