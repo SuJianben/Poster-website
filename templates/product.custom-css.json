@@ -13,7 +13,7 @@
       "type": "custom-product-main",
       "settings": {
         "framing_render_mode": "css",
-        "css_oak_texture_scale": 80,
+        "css_oak_texture_scale": 40,
         "show_breadcrumb": true,
         "review_label": "Verified reviews",
         "shipping_note": "Free shipping on qualifying orders.",
