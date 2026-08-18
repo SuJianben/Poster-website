@@ -17,7 +17,8 @@
           "settings": {
             "asset_name": "reference-gallery-01.jpg",
             "title": "Into the Pines",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna. Nam eros purus, congue pulvinar turpis pretium, vulputate interdum turpis. Vivamus non arcu."
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna. Nam eros purus, congue pulvinar turpis pretium, vulputate interdum turpis. Vivamus non arcu.",
+            "link": ""
           }
         },
         "high_country": {
@@ -26,7 +27,8 @@
             "image": "shopify://shop_images/20260818-110331.jpg",
             "asset_name": "reference-gallery-02.jpg",
             "title": "The High Country",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "link": "shopify://collections/abstract-geometric-prints"
           }
         },
         "offshore": {
@@ -34,7 +36,8 @@
           "settings": {
             "asset_name": "reference-gallery-03.jpg",
             "title": "Last Light Offshore",
-            "text": "Praesent vel orci orci. Nam sed eleifend felis. Duis eget risus vel nisl feugiat semper eu ut ligula. Morbi eget lorem porttitor, gravida diam lobortis."
+            "text": "Praesent vel orci orci. Nam sed eleifend felis. Duis eget risus vel nisl feugiat semper eu ut ligula. Morbi eget lorem porttitor, gravida diam lobortis.",
+            "link": ""
           }
         }
       },
