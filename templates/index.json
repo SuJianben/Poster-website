@@ -145,8 +145,8 @@
     "featured": {
       "type": "featured-products",
       "settings": {
-        "collection": "animals-prints",
-        "max_products": 6
+        "collection": "figurative-fashion-prints",
+        "max_products": 12
       }
     },
     "editorial_1": {
