@@ -1,9 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "custom-product-main",
       "settings": {
         "framing_render_mode": "css",
+        "css_oak_texture_scale": 135,
+        "show_breadcrumb": true,
+        "review_label": "Verified reviews",
+        "shipping_note": "Free shipping on qualifying orders.",
+        "upload_heading": "Upload your image",
+        "upload_button_label": "Choose image",
+        "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.",
+        "crop_heading": "Crop your image",
+        "crop_help_text": "Choose a supported frame ratio, then position and resize the crop area.",
+        "crop_cancel_label": "Cancel",
+        "crop_confirm_label": "Use crop",
+        "require_artwork": true,
+        "product_details_heading": "Product details",
+        "shipping_returns_heading": "Shipping and returns",
+        "shipping_returns_content": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
@@ -50,7 +74,9 @@
         "free_shipping",
         "returns"
       ],
-      "settings": {}
+      "settings": {
+        "accessibility_label": "Shopping benefits"
+      }
     },
     "lifestyle": {
       "type": "custom-product-lifestyle",
@@ -63,7 +89,9 @@
           "type": "tab",
           "settings": {
             "label": "Description",
-            "content_source": "product_description"
+            "content_source": "product_description",
+            "heading": "",
+            "content": "<p>Add information for this tab.</p>"
           }
         },
         "fair_pricing": {
@@ -80,7 +108,8 @@
           "settings": {
             "label": "Artist Information",
             "content_source": "artist_information",
-            "heading": "Artist information"
+            "heading": "Artist information",
+            "content": "<p>Add information for this tab.</p>"
           }
         },
         "material": {
@@ -119,7 +148,9 @@
         "shipping",
         "security"
       ],
-      "settings": {}
+      "settings": {
+        "accessibility_label": "Product information"
+      }
     }
   },
   "order": [
