@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hero banner link interaction check</title>
+    <link rel="stylesheet" href="/assets/gallery-hero.css">
+  </head>
+  <body>
+    <section data-poster-hero-gallery tabindex="0">
+      <article class="phg__item is-active" data-phg-item data-title="First" data-text="First slide" aria-hidden="false">
+        <div class="phg__slide">
+          <a class="phg__thumb-button" href="#target-one" data-phg-go data-phg-link tabindex="0" aria-label="View First"></a>
+        </div>
+      </article>
+      <article class="phg__item" data-phg-item data-title="Second" data-text="Second slide" aria-hidden="true">
+        <div class="phg__slide">
+          <a class="phg__thumb-button" href="#target-two" data-phg-go data-phg-link tabindex="-1" aria-label="View Second"></a>
+        </div>
+      </article>
+      <article class="phg__item" data-phg-item data-title="Third" data-text="Third slide" aria-hidden="true">
+        <div class="phg__slide">
+          <button class="phg__thumb-button" type="button" data-phg-go tabindex="-1" aria-label="Show Third"></button>
+        </div>
+      </article>
+
+      <div data-phg-copy>
+        <p data-phg-counter></p>
+        <h1 data-phg-title></h1>
+        <p data-phg-text></p>
+      </div>
+      <button type="button" data-phg-prev>Previous</button>
+      <button type="button" data-phg-next>Next</button>
+    </section>
+
+    <div id="target-one">First target</div>
+    <div id="target-two">Second target</div>
+
+    <script>
+      document.addEventListener('poster:hero-link-click', (event) => {
+        document.body.dataset.heroLinkCount = String(Number(document.body.dataset.heroLinkCount || 0) + 1);
+        document.body.dataset.heroLinkUrl = event.detail.url;
+      });
+    </script>
+    <script src="/assets/gallery-hero.js" defer></script>
+  </body>
+</html>

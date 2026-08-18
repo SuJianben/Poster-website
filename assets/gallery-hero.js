@@ -16,7 +16,11 @@
     const getThumbIndexes = () => items.map((_, index) => index).filter((index) => index !== activeIndex);
     const setThumbOffsets = () => {
       const thumbIndexes = getThumbIndexes();
-      items.forEach((item) => item.querySelector('.phg__slide')?.style.removeProperty('filter'));
+      items.forEach((item, index) => {
+        item.querySelector('.phg__slide')?.style.removeProperty('filter');
+        const link = item.querySelector('[data-phg-link]');
+        if (link) link.tabIndex = index === activeIndex ? 0 : -1;
+      });
       items[activeIndex].style.removeProperty('--phg-offset');
       items[activeIndex].querySelector('.phg__slide')?.style.setProperty('filter', 'brightness(1)', 'important');
       thumbIndexes.forEach((index) => items[index].style.setProperty('--phg-offset', String(index - 1)));
@@ -43,7 +47,22 @@
       setThumbOffsets(); updateCopy(items[activeIndex], activeIndex);
       section.dispatchEvent(new CustomEvent('poster:hero-change', { bubbles:true, detail:{ image:items[activeIndex].querySelector('img') } }));
     };
-    items.forEach((item, index) => item.querySelector('[data-phg-go]')?.addEventListener('click', () => goTo(index)));
+    items.forEach((item, index) => {
+      const trigger = item.querySelector('[data-phg-go]');
+      trigger?.addEventListener('click', (event) => {
+        if (index !== activeIndex) {
+          event.preventDefault();
+          goTo(index);
+          return;
+        }
+        if (trigger.matches('[data-phg-link]')) {
+          section.dispatchEvent(new CustomEvent('poster:hero-link-click', {
+            bubbles:true,
+            detail:{ index, title:item.dataset.title || '', url:trigger.href }
+          }));
+        }
+      });
+    });
     previous?.addEventListener('click', () => goTo(activeIndex - 1));
     next?.addEventListener('click', () => goTo(activeIndex + 1));
     section.addEventListener('keydown', (event) => { if (event.key === 'ArrowLeft') { event.preventDefault(); previous?.click(); } if (event.key === 'ArrowRight') { event.preventDefault(); next?.click(); } });
