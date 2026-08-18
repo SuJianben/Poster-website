@@ -35,6 +35,7 @@
     .replace(/\s*x\s*/g, 'x')
     .replace(/\s+/g, ' ')
     .trim());
+  const isFramingOptionVisible = globalThis.PosterFramingVisibility?.isVisible || (() => true);
   const currentPosterVariant = () => posterVariants.find((variant) => String(variant.id) === String(variantInput?.value));
   const currentPosterSize = () => {
     const variant = currentPosterVariant();
@@ -48,7 +49,9 @@
     const targetSize = kind === 'frame' && selected.passepartout ? selected.passepartout.size : currentPosterSize();
     const size = normalizeSize(targetSize);
     return (catalog[kind]?.variants || []).filter((variant) => (
-      variant.available && normalizeSize(kind === 'passepartout' ? variant.fitsSize : variant.size) === size
+      variant.available
+      && isFramingOptionVisible(kind, variant)
+      && normalizeSize(kind === 'passepartout' ? variant.fitsSize : variant.size) === size
     ));
   };
   const lowestPrice = (rows) => rows.length ? rows.reduce((lowest, row) => row.price < lowest.price ? row : lowest) : null;
@@ -211,6 +214,8 @@
     source: catalog.source || 'liquid',
     passepartout_variant_count: catalog.passepartout?.variants?.length || 0,
     frame_variant_count: catalog.frame?.variants?.length || 0,
+    visible_passepartout_variant_count: (catalog.passepartout?.variants || []).filter((variant) => isFramingOptionVisible('passepartout', variant)).length,
+    visible_frame_variant_count: (catalog.frame?.variants || []).filter((variant) => isFramingOptionVisible('frame', variant)).length,
   });
 
   render('passepartout');
