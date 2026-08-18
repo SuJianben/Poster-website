@@ -139,7 +139,7 @@
       "settings": {
         "eyebrow": "Shop by category",
         "link_label": "View all",
-        "link": "/collections/all"
+        "link": "shopify://collections/all-art-prints"
       }
     },
     "featured": {
