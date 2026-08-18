@@ -20,7 +20,7 @@
 
 .ps-section .ps-css-frame[data-has-frame="true"] {
   background-color: var(--ps-css-frame-color, #111);
-  box-shadow: 0 10px 18px rgb(25 20 16 / 22%), inset 0 0 0 1px rgb(255 255 255 / 18%), inset 0 0 0 2px rgb(0 0 0 / 16%);
+  box-shadow: 0 10px 18px rgb(25 20 16 / 22%);
 }
 
 .ps-section[data-ps-framing-render-mode="css"] .ps-css-frame[data-has-frame="true"]::before {
@@ -188,6 +188,7 @@
   inset: calc(0px - var(--ps-css-frame-width, 0px));
   background: linear-gradient(45deg, transparent calc(50% - 1.25px), rgb(18 13 9 / 55%) calc(50% - .5px), rgb(255 255 255 / 28%) calc(50% + .5px), transparent calc(50% + 1.25px)) top left / var(--ps-css-frame-width, 0px) var(--ps-css-frame-width, 0px) no-repeat, linear-gradient(135deg, transparent calc(50% - 1.25px), rgb(18 13 9 / 55%) calc(50% - .5px), rgb(255 255 255 / 28%) calc(50% + .5px), transparent calc(50% + 1.25px)) top right / var(--ps-css-frame-width, 0px) var(--ps-css-frame-width, 0px) no-repeat, linear-gradient(135deg, transparent calc(50% - 1.25px), rgb(18 13 9 / 55%) calc(50% - .5px), rgb(255 255 255 / 28%) calc(50% + .5px), transparent calc(50% + 1.25px)) bottom left / var(--ps-css-frame-width, 0px) var(--ps-css-frame-width, 0px) no-repeat, linear-gradient(45deg, transparent calc(50% - 1.25px), rgb(18 13 9 / 55%) calc(50% - .5px), rgb(255 255 255 / 28%) calc(50% + .5px), transparent calc(50% + 1.25px)) bottom right / var(--ps-css-frame-width, 0px) var(--ps-css-frame-width, 0px) no-repeat;
   content: '';
+  opacity: .45;
   pointer-events: none;
 }
 

@@ -62,7 +62,12 @@ Assert-Contains $styles "--ps-css-frame-texture-bottom: url('./ps-css-frame-oak-
 Assert-Contains $styles "--ps-css-frame-texture-right: url('./ps-css-frame-oak-texture-v3-vertical.webp')" 'Oak right rail must use the current versioned vertical texture.'
 Assert-Contains $styles "--ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-v3-vertical.webp')" 'Oak left rail must use the current versioned vertical texture.'
 Assert-Contains $section '--ps-css-oak-texture-size: {{ css_oak_texture_scale }}px' 'The section must expose the Oak texture scale as a scoped CSS variable.'
-Assert-Contains $section "asset_url }}&psv=oak-texture-v3-20260818" 'The CSS custom template must version its framing stylesheet to invalidate stale storefront caches.'
+Assert-Contains $section "asset_url }}&psv=frame-finish-v2-20260818" 'The CSS custom template must version its framing stylesheet to invalidate stale storefront caches.'
+Assert-Contains $styles 'box-shadow: 0 10px 18px rgb(25 20 16 / 22%);' 'The CSS frame must retain its exterior drop shadow without engraved inset strokes.'
+if ($styles.Contains('inset 0 0 0 1px rgb(255 255 255 / 18%)') -or $styles.Contains('inset 0 0 0 2px rgb(0 0 0 / 16%)')) {
+  throw 'The CSS frame must not restore the engraved inset outline.'
+}
+Assert-Contains $styles 'opacity: .45;' 'The CSS frame miter overlay must stay visually subdued.'
 Assert-Contains $section '--ps-css-oak-texture-bottom-offset: {{ css_oak_texture_bottom_offset }}px' 'The bottom texture offset must scale with the texture.'
 Assert-Contains $section '--ps-css-oak-texture-left-offset: {{ css_oak_texture_left_offset }}px' 'The left texture offset must scale with the texture.'
 Assert-Contains $styles '--ps-css-frame-texture-top-size: calc(var(--ps-css-oak-texture-size, 100px) + var(--ps-css-oak-texture-size, 100px)) var(--ps-css-oak-texture-size, 100px)' 'Oak horizontal rails must preserve the source texture aspect ratio.'
