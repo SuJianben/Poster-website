@@ -54,6 +54,48 @@
     };
   };
 
+  const resizeCropFree = (crop, corner, pointer, bounds, minimumSize = 72) => {
+    const fixed = {
+      nw: { x: crop.x + crop.width, y: crop.y + crop.height },
+      ne: { x: crop.x, y: crop.y + crop.height },
+      sw: { x: crop.x + crop.width, y: crop.y },
+      se: { x: crop.x, y: crop.y },
+    }[corner];
+    if (!fixed) return crop;
+
+    const horizontalDirection = corner.endsWith('e') ? 1 : -1;
+    const verticalDirection = corner.startsWith('s') ? 1 : -1;
+    const maximumWidth = horizontalDirection > 0
+      ? bounds.x + bounds.width - fixed.x
+      : fixed.x - bounds.x;
+    const maximumHeight = verticalDirection > 0
+      ? bounds.y + bounds.height - fixed.y
+      : fixed.y - bounds.y;
+    const width = clamp(Math.abs(pointer.x - fixed.x), Math.min(minimumSize, maximumWidth), maximumWidth);
+    const height = clamp(Math.abs(pointer.y - fixed.y), Math.min(minimumSize, maximumHeight), maximumHeight);
+
+    return {
+      x: horizontalDirection > 0 ? fixed.x : fixed.x - width,
+      y: verticalDirection > 0 ? fixed.y : fixed.y - height,
+      width,
+      height,
+    };
+  };
+
+  const matchRatio = (ratio, candidates, tolerance = 0.01) => {
+    if (!Number.isFinite(ratio) || ratio <= 0) return '';
+    let closest = '';
+    let closestDifference = Number.POSITIVE_INFINITY;
+    Object.entries(candidates || {}).forEach(([name, candidate]) => {
+      if (!Number.isFinite(candidate) || candidate <= 0) return;
+      const difference = Math.abs(ratio - candidate) / candidate;
+      if (difference >= closestDifference) return;
+      closest = name;
+      closestDifference = difference;
+    });
+    return closestDifference <= tolerance ? closest : '';
+  };
+
   const toSourceRect = (crop, displayedImage, naturalWidth, naturalHeight) => {
     const scaleX = naturalWidth / displayedImage.width;
     const scaleY = naturalHeight / displayedImage.height;
@@ -65,5 +107,5 @@
     };
   };
 
-  globalThis.PosterCropGeometry = { clamp, fitCrop, moveCrop, resizeCrop, toSourceRect };
+  globalThis.PosterCropGeometry = { clamp, fitCrop, moveCrop, resizeCrop, resizeCropFree, matchRatio, toSourceRect };
 })();

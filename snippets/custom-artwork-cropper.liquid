@@ -4,7 +4,13 @@
     <header class="ps-cropper__header">
       <div>
         <h2 id="ps-cropper-heading-{{ section.id }}">{{ section.settings.crop_heading }}</h2>
-        <p>{{ section.settings.crop_help_text }}</p>
+        <p>
+          {% if section.settings.framing_render_mode == 'css' %}
+            Choose a preset ratio or freely adjust the crop area.
+          {% else %}
+            {{ section.settings.crop_help_text }}
+          {% endif %}
+        </p>
       </div>
       <button class="ps-cropper__close" type="button" data-ps-cropper-cancel aria-label="Close image cropper">×</button>
     </header>
@@ -28,7 +34,13 @@
       </button>
     </div>
 
-    <p class="ps-cropper__instruction">Drag to reposition. Drag a corner to resize while keeping the selected ratio.</p>
+    <p class="ps-cropper__instruction">
+      {% if section.settings.framing_render_mode == 'css' %}
+        Drag to reposition. Drag any corner to resize freely.
+      {% else %}
+        Drag to reposition. Drag a corner to resize while keeping the selected ratio.
+      {% endif %}
+    </p>
     <footer class="ps-cropper__actions">
       <button class="ps-cropper__button ps-cropper__button--secondary" type="button" data-ps-cropper-cancel>{{ section.settings.crop_cancel_label }}</button>
       <button class="ps-cropper__button ps-cropper__button--primary" type="button" data-ps-cropper-confirm>{{ section.settings.crop_confirm_label }}</button>

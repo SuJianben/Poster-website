@@ -13,6 +13,8 @@
   if (!workspace || !canvas || !context || !confirmButton || !ratioButtons.length) return;
 
   const ratios = { landscape: Math.SQRT2, square: 1, portrait: 1 / Math.SQRT2 };
+  const freeformResize = root.dataset.psFramingRenderMode === 'css';
+  const ratioMatchTolerance = 0.01;
   const handles = ['nw', 'ne', 'sw', 'se'];
   let state = null;
   let resolver = null;
@@ -95,18 +97,30 @@
 
   const resetCrop = () => {
     if (!state) return;
-    state.crop = geometry.fitCrop(displayedImageRect(), ratios[state.orientation], 0.72);
+    const currentRatio = state.crop?.width && state.crop?.height ? state.crop.width / state.crop.height : 1;
+    state.crop = geometry.fitCrop(displayedImageRect(), ratios[state.orientation] || currentRatio, 0.72);
     draw();
   };
 
-  const setRatio = (orientation, { track = true } = {}) => {
-    if (!ratios[orientation] || !state) return;
+  const syncRatioSelection = (orientation = '') => {
+    if (!state) return;
     state.orientation = orientation;
     ratioButtons.forEach((button) => {
       const selected = button.dataset.psCropperRatio === orientation;
       button.classList.toggle('is-selected', selected);
       button.setAttribute('aria-checked', String(selected));
     });
+  };
+
+  const syncFreeformRatioSelection = () => {
+    if (!freeformResize || !state?.crop) return;
+    const cropRatio = state.crop.width / state.crop.height;
+    syncRatioSelection(geometry.matchRatio(cropRatio, ratios, ratioMatchTolerance));
+  };
+
+  const setRatio = (orientation, { track = true } = {}) => {
+    if (!ratios[orientation] || !state) return;
+    syncRatioSelection(orientation);
     resetCrop();
     if (track) window.dataLayer?.push({ event: 'custom_artwork_crop_ratio_selected', orientation, ratio: ratios[orientation] });
   };
@@ -132,6 +146,8 @@
 
   const outputFile = () => new Promise((resolve, reject) => {
     const source = geometry.toSourceRect(state.crop, displayedImageRect(), state.image.naturalWidth, state.image.naturalHeight);
+    const cropRatio = state.crop.width / state.crop.height;
+    const outputOrientation = state.orientation || 'custom';
     const longest = Math.max(source.width, source.height);
     const outputScale = Math.min(1, 3200 / longest);
     const outputWidth = Math.max(1, Math.round(source.width * outputScale));
@@ -149,8 +165,8 @@
       }
       const extension = requestedType === 'image/png' ? 'png' : requestedType === 'image/webp' ? 'webp' : 'jpg';
       const baseName = state.file.name.replace(/\.[^.]+$/, '') || 'custom-artwork';
-      const file = new File([blob], `${baseName}-${state.orientation}.${extension}`, { type: blob.type || requestedType, lastModified: Date.now() });
-      resolve({ file, orientation: state.orientation, ratio: ratios[state.orientation], width: outputWidth, height: outputHeight });
+      const file = new File([blob], `${baseName}-${outputOrientation}.${extension}`, { type: blob.type || requestedType, lastModified: Date.now() });
+      resolve({ file, orientation: outputOrientation, ratio: cropRatio, width: outputWidth, height: outputHeight });
     }, requestedType, requestedType === 'image/jpeg' || requestedType === 'image/webp' ? 0.92 : undefined);
   });
 
@@ -199,7 +215,11 @@
       resetCrop();
       ratioButtons.find((button) => button.classList.contains('is-selected'))?.focus();
     });
-    window.dataLayer?.push({ event: 'custom_artwork_crop_opened', suggested_orientation: suggestedOrientation });
+    window.dataLayer?.push({
+      event: 'custom_artwork_crop_opened',
+      suggested_orientation: suggestedOrientation,
+      crop_mode: freeformResize ? 'freeform' : 'fixed',
+    });
     return new Promise((resolve) => { resolver = resolve; });
   };
 
@@ -211,7 +231,14 @@
     const point = pointFromEvent(event);
     const handle = hitHandle(point);
     if (!handle && !isInsideCrop(point)) return;
-    pointerState = { id: event.pointerId, mode: handle ? 'resize' : 'move', handle, point, crop: { ...state.crop } };
+    pointerState = {
+      id: event.pointerId,
+      mode: handle ? 'resize' : 'move',
+      handle,
+      point,
+      crop: { ...state.crop },
+      startingOrientation: state.orientation,
+    };
     canvas.setPointerCapture(event.pointerId);
     canvas.style.cursor = handle ? `${handle}-resize` : 'grabbing';
   });
@@ -226,6 +253,9 @@
     if (pointerState.id !== event.pointerId) return;
     if (pointerState.mode === 'move') {
       state.crop = geometry.moveCrop(pointerState.crop, point.x - pointerState.point.x, point.y - pointerState.point.y, displayedImageRect());
+    } else if (freeformResize) {
+      state.crop = geometry.resizeCropFree(pointerState.crop, pointerState.handle, point, displayedImageRect());
+      syncFreeformRatioSelection();
     } else {
       state.crop = geometry.resizeCrop(pointerState.crop, pointerState.handle, point, displayedImageRect(), ratios[state.orientation]);
     }
@@ -233,6 +263,15 @@
   });
   const releasePointer = (event) => {
     if (!pointerState || pointerState.id !== event.pointerId) return;
+    if (pointerState.mode === 'resize' && freeformResize) {
+      window.dataLayer?.push({
+        event: 'custom_artwork_crop_resized',
+        crop_mode: 'freeform',
+        crop_ratio: state.crop.width / state.crop.height,
+        matched_orientation: state.orientation || 'custom',
+        preset_selection_changed: pointerState.startingOrientation !== state.orientation,
+      });
+    }
     pointerState = null;
     canvas.style.cursor = 'move';
   };
