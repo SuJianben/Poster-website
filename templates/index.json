@@ -22,15 +22,6 @@
             "link": "shopify://collections/figurative-fashion-prints"
           }
         },
-        "pines": {
-          "type": "slide",
-          "settings": {
-            "asset_name": "reference-gallery-01.jpg",
-            "title": "Into the Pines",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna. Nam eros purus, congue pulvinar turpis pretium, vulputate interdum turpis. Vivamus non arcu.",
-            "link": ""
-          }
-        },
         "high_country": {
           "type": "slide",
           "settings": {
@@ -40,12 +31,22 @@
             "text": "A Day in Form Geometric studies from morning to midnight.",
             "link": "shopify://collections/abstract-geometric-prints"
           }
+        },
+        "pines": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20260818-140942.jpg",
+            "asset_name": "reference-gallery-01.jpg",
+            "title": "Into the Pines",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna. Nam eros purus, congue pulvinar turpis pretium, vulputate interdum turpis. Vivamus non arcu.",
+            "link": "shopify://collections/botanical-floral-prints"
+          }
         }
       },
       "block_order": [
         "offshore",
-        "pines",
-        "high_country"
+        "high_country",
+        "pines"
       ],
       "settings": {}
     },
