@@ -12,6 +12,13 @@
     "main": {
       "type": "main-product",
       "settings": {
+        "show_breadcrumb": true,
+        "show_thumbnail_navigation": false,
+        "review_label": "Verified reviews",
+        "shipping_note": "Free shipping on qualifying orders.",
+        "product_details_heading": "Product details",
+        "shipping_returns_heading": "Shipping and returns",
+        "shipping_returns_content": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
@@ -58,7 +65,9 @@
         "free_shipping",
         "returns"
       ],
-      "settings": {}
+      "settings": {
+        "accessibility_label": "Shopping benefits"
+      }
     },
     "lifestyle": {
       "type": "product-lifestyle",
@@ -71,7 +80,9 @@
           "type": "tab",
           "settings": {
             "label": "Description",
-            "content_source": "product_description"
+            "content_source": "product_description",
+            "heading": "",
+            "content": "<p>Add information for this tab.</p>"
           }
         },
         "fair_pricing": {
@@ -88,7 +99,8 @@
           "settings": {
             "label": "Artist Information",
             "content_source": "artist_information",
-            "heading": "Artist information"
+            "heading": "Artist information",
+            "content": "<p>Add information for this tab.</p>"
           }
         },
         "material": {
@@ -127,7 +139,9 @@
         "shipping",
         "security"
       ],
-      "settings": {}
+      "settings": {
+        "accessibility_label": "Product information"
+      }
     }
   },
   "order": [
