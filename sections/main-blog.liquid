@@ -52,7 +52,7 @@
             <div class="cg-product-meta">
               <a class="cg-product-title" href="{{ blog.url }}">{{ fallback_titles[fallback_index] }}</a>
               <span class="cg-product-price">Journal</span>
-              <span class="cg-product-vendor">Poster Store</span>
+              <span class="cg-product-vendor">{{ shop.name | escape }}</span>
             </div>
           </article>
         {% endfor %}
