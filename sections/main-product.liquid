@@ -21,7 +21,9 @@
       <div class="ps-left">
         <div class="ps-media-stage">
           <div class="ps-thumbnail-rail">
-            <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--up" type="button" data-ps-thumbnail-scroll="-1" aria-label="Show previous thumbnails"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 15l6-6 6 6" /></svg></button>
+            {% if section.settings.show_thumbnail_navigation %}
+              <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--up" type="button" data-ps-thumbnail-scroll="-1" aria-label="Show previous thumbnails"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 15l6-6 6 6" /></svg></button>
+            {% endif %}
             <div class="ps-thumbnails" data-ps-thumbnail-rail aria-label="Product media">
               {% for media in product.media %}
                 {% if media.media_type == 'image' %}
@@ -31,7 +33,9 @@
                 {% endif %}
               {% endfor %}
             </div>
-            <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--down" type="button" data-ps-thumbnail-scroll="1" aria-label="Show next thumbnails"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg></button>
+            {% if section.settings.show_thumbnail_navigation %}
+              <button class="ps-thumbnail-rail__control ps-thumbnail-rail__control--down" type="button" data-ps-thumbnail-scroll="1" aria-label="Show next thumbnails"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" /></svg></button>
+            {% endif %}
           </div>
           <div class="ps-main-media">
             <print-preview class="ps-print-preview" data-ps-art-preview data-orientation="portrait" data-media-id="{{ preview_media.id | default: product.media.first.id }}" style="--pdp-aspect: {% if preview_media %}{{ preview_media.preview_image.width }} / {{ preview_media.preview_image.height }}{% else %}800 / 1100{% endif %};">
@@ -212,6 +216,13 @@
       "type": "checkbox",
       "id": "show_breadcrumb",
       "label": "Show breadcrumb",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_thumbnail_navigation",
+      "label": "Show thumbnail navigation arrows",
+      "info": "Turn off when the product has only a few images.",
       "default": true
     },
     {
