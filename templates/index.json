@@ -12,6 +12,16 @@
     "hero": {
       "type": "hero-poster",
       "blocks": {
+        "offshore": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/20260818-112647.jpg",
+            "asset_name": "reference-gallery-03.jpg",
+            "title": "FIGURATIVE & FASHION",
+            "text": "Art in Motion Expressive figures, fluid lines and colour in movement.",
+            "link": "shopify://collections/figurative-fashion-prints"
+          }
+        },
         "pines": {
           "type": "slide",
           "settings": {
@@ -30,22 +40,12 @@
             "text": "A Day in Form Geometric studies from morning to midnight.",
             "link": "shopify://collections/abstract-geometric-prints"
           }
-        },
-        "offshore": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/20260818-111843.jpg",
-            "asset_name": "reference-gallery-03.jpg",
-            "title": "FIGURATIVE & FASHION",
-            "text": "Art in Motion Expressive figures, fluid lines and colour in movement.",
-            "link": "shopify://collections/figurative-fashion-prints"
-          }
         }
       },
       "block_order": [
+        "offshore",
         "pines",
-        "high_country",
-        "offshore"
+        "high_country"
       ],
       "settings": {}
     },
