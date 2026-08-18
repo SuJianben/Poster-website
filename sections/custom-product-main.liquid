@@ -3,7 +3,7 @@
 {{ 'custom-artwork-cropper.css' | asset_url | stylesheet_tag }}
 {% assign framing_render_mode = section.settings.framing_render_mode | default: 'image' %}
 {% if framing_render_mode == 'css' %}
-  <link rel="stylesheet" href="{{ 'custom-css-framing.css' | asset_url }}&psv=frame-finish-v2-20260818">
+  <link rel="stylesheet" href="{{ 'custom-css-framing.css' | asset_url }}&psv=plain-frame-finish-v1-20260818">
 {% else %}
   {{ 'custom-image-framing.css' | asset_url | stylesheet_tag }}
 {% endif %}
