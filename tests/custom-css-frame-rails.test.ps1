@@ -6,8 +6,8 @@ $styles = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\custom-css-fram
 $imageTemplate = Get-Content -LiteralPath (Join-Path $themeRoot 'templates\product.custom.json') -Raw | ConvertFrom-Json
 $cssTemplate = Get-Content -LiteralPath (Join-Path $themeRoot 'templates\product.custom-css.json') -Raw | ConvertFrom-Json
 $defaultSection = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\main-product.liquid') -Raw
-$oakVerticalTexture = Join-Path $themeRoot 'assets\ps-css-frame-oak-texture-vertical.webp'
-$oakHorizontalTexture = Join-Path $themeRoot 'assets\ps-css-frame-oak-texture-horizontal.webp'
+$oakVerticalTexture = Join-Path $themeRoot 'assets\ps-css-frame-oak-texture-v2-vertical.webp'
+$oakHorizontalTexture = Join-Path $themeRoot 'assets\ps-css-frame-oak-texture-v2-horizontal.webp'
 $fixture = Get-Content -LiteralPath (Join-Path $themeRoot 'tests\fixtures\custom-css-frame-rails.html') -Raw
 $schemaMatch = [regex]::Match($section, '\{% schema %\}(?<schema>[\s\S]*?)\{% endschema %\}')
 if (-not $schemaMatch.Success) { throw 'Custom product section schema is missing.' }
@@ -57,10 +57,10 @@ foreach ($texture in @($oakVerticalTexture, $oakHorizontalTexture)) {
 }
 
 Assert-Contains $styles 'data-frame-style="oak"' 'Oak-specific texture mapping is missing.'
-Assert-Contains $styles "--ps-css-frame-texture-top: url('./ps-css-frame-oak-texture-horizontal.webp')" 'Oak top rail must use the horizontal texture.'
-Assert-Contains $styles "--ps-css-frame-texture-bottom: url('./ps-css-frame-oak-texture-horizontal.webp')" 'Oak bottom rail must use the horizontal texture.'
-Assert-Contains $styles "--ps-css-frame-texture-right: url('./ps-css-frame-oak-texture-vertical.webp')" 'Oak right rail must use the vertical texture.'
-Assert-Contains $styles "--ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-vertical.webp')" 'Oak left rail must use the vertical texture.'
+Assert-Contains $styles "--ps-css-frame-texture-top: url('./ps-css-frame-oak-texture-v2-horizontal.webp')" 'Oak top rail must use the versioned horizontal texture.'
+Assert-Contains $styles "--ps-css-frame-texture-bottom: url('./ps-css-frame-oak-texture-v2-horizontal.webp')" 'Oak bottom rail must use the versioned horizontal texture.'
+Assert-Contains $styles "--ps-css-frame-texture-right: url('./ps-css-frame-oak-texture-v2-vertical.webp')" 'Oak right rail must use the versioned vertical texture.'
+Assert-Contains $styles "--ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-v2-vertical.webp')" 'Oak left rail must use the versioned vertical texture.'
 Assert-Contains $section '--ps-css-oak-texture-size: {{ css_oak_texture_scale }}px' 'The section must expose the Oak texture scale as a scoped CSS variable.'
 Assert-Contains $section '--ps-css-oak-texture-bottom-offset: {{ css_oak_texture_bottom_offset }}px' 'The bottom texture offset must scale with the texture.'
 Assert-Contains $section '--ps-css-oak-texture-left-offset: {{ css_oak_texture_left_offset }}px' 'The left texture offset must scale with the texture.'

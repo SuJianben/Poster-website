@@ -113,10 +113,10 @@
 }
 
 .ps-section .ps-css-frame[data-frame-style="oak"] {
-  --ps-css-frame-texture-top: url('./ps-css-frame-oak-texture-horizontal.webp');
-  --ps-css-frame-texture-right: url('./ps-css-frame-oak-texture-vertical.webp');
-  --ps-css-frame-texture-bottom: url('./ps-css-frame-oak-texture-horizontal.webp');
-  --ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-vertical.webp');
+  --ps-css-frame-texture-top: url('./ps-css-frame-oak-texture-v2-horizontal.webp');
+  --ps-css-frame-texture-right: url('./ps-css-frame-oak-texture-v2-vertical.webp');
+  --ps-css-frame-texture-bottom: url('./ps-css-frame-oak-texture-v2-horizontal.webp');
+  --ps-css-frame-texture-left: url('./ps-css-frame-oak-texture-v2-vertical.webp');
   --ps-css-frame-texture-top-position: 0 center;
   --ps-css-frame-texture-right-position: center 0;
   --ps-css-frame-texture-bottom-position: var(--ps-css-oak-texture-bottom-offset, 47px) center;
