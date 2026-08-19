@@ -256,10 +256,10 @@
       "settings": {
         "fallback_image_asset": "figma-lifestyle-cinematic.jpg",
         "image_position": "right",
-        "eyebrow": "Editorial / Vol. 04",
-        "heading": "Cinematic Nights.",
-        "text": "From cult classics to new-wave posters—stories worth framing, for the room where the lights go down.",
-        "link_label": "Enter the reel",
+        "eyebrow": "THE ART EDIT",
+        "heading": "Find the piece that stays with you.",
+        "text": "From quiet abstracts to bold statements, explore our complete collection and discover art that feels at home in your space.",
+        "link_label": "EXPLORE ALL ART",
         "link": "shopify://collections/all-art-prints",
         "collection": "selected-series-2"
       }
