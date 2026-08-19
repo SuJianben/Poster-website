@@ -30,7 +30,15 @@
 ## 自检
 
 - Shopify Admin GraphQL 更新返回 0 个 `userErrors`。
-- 待完成：新 URL、旧 URL 跳转、页面 Meta 标签、购买状态与首页内部链接真实链路检查。
+- 新 URL `/products/custom-poster` 返回 200。
+- 旧 URL `/products/custom-poster-css-frame-test` 已自动跳转到新 URL。
+- 无缓存 HTML 检查确认页面只有 1 个 `<title>`，内容为 `Custom Poster | PosterAndForm`。
+- 页面只有 1 个 Meta Description，内容与 Shopify 后台 SEO 描述完全一致。
+- 页面只有 1 个 Canonical，目标为 `https://posterandform.com/products/custom-poster`。
+- 产品正文与页面主要内容不再包含 `CSS Frame Test` 或 `rendered with CSS`。
+- 真实产品页的 `Add to cart` 按钮保持可用。
+- 首页内部链接直接指向新 Handle，旧 Handle 出现次数为 0。
+- 全量回归测试通过；Shopify Theme Check 检查 60 个文件，0 条问题。
 
 ## 遗留问题
 
