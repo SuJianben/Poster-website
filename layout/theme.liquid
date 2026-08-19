@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="{{ settings.color_accent }}">
+    <title>{% if page_title == blank %}{{ shop.name }}{% else %}{{ page_title }}{% unless page_title contains shop.name %} | {{ shop.name }}{% endunless %}{% endif %}</title>
+    {% if page_description != blank %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
     {% if settings.favicon != blank %}
       <link rel="icon" sizes="32x32" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
       <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">

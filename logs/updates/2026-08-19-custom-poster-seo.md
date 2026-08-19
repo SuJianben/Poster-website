@@ -18,6 +18,8 @@
 - Shopify 已启用 `redirectNewHandle`，旧产品 URL 自动跳转到新 URL。
 - 首页内部链接同步指向 `shopify://products/custom-poster`，避免先经过旧链接跳转。
 - 新增首页内部链接回归测试，防止后续重新写回历史测试 Handle。
+- 排查发现主题此前未输出 `<title>` 与 Meta Description；已在 `layout/theme.liquid` 接入 Shopify 的 `page_title`、`page_description` 与 `canonical_url`，让后台 SEO 数据真正进入前台 HTML。
+- 新增全站 SEO Head 回归测试，防止基础 SEO 标签再次缺失。
 
 ## 影响范围
 
