@@ -9,11 +9,17 @@
     const dots = [...section.querySelectorAll('[data-tilted-dot]')];
     const previous = section.querySelector('[data-tilted-previous]');
     const next = section.querySelector('[data-tilted-next]');
-    const productTitle = section.querySelector('[data-tilted-title]');
-    const productMeta = section.querySelector('[data-tilted-meta]');
-    const collectionLink = section.querySelector('[data-tilted-link]');
     if (!viewport || !track || !slides.length) return;
     let activeIndex = Math.min(3, slides.length - 1);
+    const trackEvent = (name, slide, index) => {
+      const detail = {
+        component: 'featured_products',
+        productHandle: slide.dataset.productHandle || '',
+        position: index + 1
+      };
+      window.dataLayer?.push({ event: name, ...detail });
+      section.dispatchEvent(new CustomEvent(`posterandform:${name}`, { bubbles: true, detail }));
+    };
     const centerActiveCard = () => {
       const activeSlide = slides[activeIndex];
       const targetOffset = activeSlide.offsetLeft + (activeSlide.offsetWidth / 2) - (viewport.clientWidth / 2);
@@ -24,20 +30,21 @@
       section.style.setProperty('--tc-active', String(activeIndex));
       slides.forEach((slide, index) => { const isActive = index === activeIndex; slide.classList.toggle('is-active', isActive); slide.setAttribute('aria-current', String(isActive)); slide.style.setProperty('--tc-index', String(index)); });
       dots.forEach((dot, index) => { const isActive = index === activeIndex; dot.classList.toggle('is-active', isActive); dot.setAttribute('aria-current', String(isActive)); });
-      const activeSlide = slides[activeIndex];
-      if (productTitle) productTitle.textContent = activeSlide.dataset.title || '';
-      if (productMeta) productMeta.textContent = activeSlide.dataset.meta || '';
-      if (collectionLink) collectionLink.href = section.dataset.tiltedCollectionLink || '#';
       requestAnimationFrame(centerActiveCard);
     };
     const select = (index) => { activeIndex = Math.max(0, Math.min(index, slides.length - 1)); render(); };
-    slides.forEach((slide, index) => slide.querySelector('[data-tilted-select]')?.addEventListener('click', () => {
-      if (index === activeIndex && slide.dataset.source === 'collection' && slide.dataset.link) {
-        window.location.assign(slide.dataset.link);
-        return;
-      }
-      select(index);
-    }));
+    slides.forEach((slide, index) => {
+      slide.querySelector('[data-tilted-select]')?.addEventListener('click', (event) => {
+        if (index === activeIndex && slide.dataset.source === 'collection' && slide.dataset.link) return;
+        event.preventDefault();
+        select(index);
+      });
+      slide.addEventListener('pointerenter', () => {
+        if (!slide.classList.contains('has-hover-image') || slide.dataset.hoverTracked === 'true') return;
+        slide.dataset.hoverTracked = 'true';
+        trackEvent('featured_product_hover_image', slide, index);
+      }, { passive: true });
+    });
     dots.forEach((dot, index) => dot.addEventListener('click', () => select(index)));
     previous?.addEventListener('click', () => select(activeIndex - 1));
     next?.addEventListener('click', () => select(activeIndex + 1));
@@ -63,3 +70,4 @@
   document.addEventListener('shopify:section:load', (event) => event.target.querySelectorAll?.('[data-tilted-carousel]').forEach(initCarousel));
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialise, { once:true }); else initialise();
 })();
+

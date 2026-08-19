@@ -1,21 +1,276 @@
-/* Exact CSS equivalent of the supplied Tailwind classes in tilted-carousel. */
+/* Featured product carousel: card motion, media swap, and product information. */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
-.tilted-carousel { --tc-card-width:clamp(130px,16vw,312px); background-color:#f4f5f6; font-family:"Bricolage Grotesque",sans-serif; overflow:hidden; padding:72px 0; position:relative; }
-.tilted-carousel__app { color:#262626; display:grid; justify-items:center; padding:.5rem; user-select:none; }
-.tilted-carousel__heading { justify-self:center; margin:0 0 32px; text-align:center; }.tilted-carousel__heading p { color:var(--ink-tertiary); font-family:var(--sans); font-size:11px; letter-spacing:.11em; margin:0; text-transform:uppercase; }.tilted-carousel__heading h2 { font-family:var(--display); font-size:clamp(38px,4vw,52px); font-weight:500; letter-spacing:-.03em; line-height:1; margin:14px 0 0; }
-.tilted-carousel__viewport { justify-self:center; margin-top:0; overflow:visible; perspective:800px; touch-action:pan-y; width:var(--tc-card-width); }
-.tilted-carousel__track { display:flex; transform:translateX(0); transition:transform .8s cubic-bezier(.22,1,.36,1); width:max-content; }
-.tilted-carousel__slide { align-items:center; aspect-ratio:2 / 3; display:flex; flex:0 0 var(--tc-card-width); flex-direction:column; gap:.5rem; perspective:800px; width:var(--tc-card-width); }
-.tilted-carousel__image { appearance:none; aspect-ratio:2 / 3; background:transparent; border:0; border-radius:.5rem; cursor:pointer; display:block; height:100%; overflow:hidden; padding:0; transform:rotateY(calc((var(--tc-active) - var(--tc-index)) * 60deg)) scale(.85); transition:transform 1s cubic-bezier(.22,1,.36,1); will-change:transform,scale; width:100%; }
-.tilted-carousel__slide.is-active .tilted-carousel__image { transform:rotateY(0deg) scale(1); }
-.tilted-carousel__image img { display:block; height:100%; object-fit:cover; width:100%; }
-.tilted-carousel__product { justify-self:center; margin-top:24px; text-align:center; width:var(--tc-card-width); }.tilted-carousel__product h3 { font-family:var(--display); font-size:23px; font-weight:500; letter-spacing:-.02em; margin:0; }.tilted-carousel__product p { color:var(--ink-secondary); font-family:var(--sans); font-size:14px; margin:4px 0 0; }.tilted-carousel__link { align-items:center; background:#0d0d0d; color:#fff; display:inline-flex; font-family:var(--sans); font-size:12px; gap:.5rem; justify-content:center; letter-spacing:.06em; margin-top:16px; min-height:48px; padding:0 26px; text-transform:uppercase; }.tilted-carousel__link:hover { opacity:.88; }
-.tilted-carousel__controls { align-items:center; backdrop-filter:blur(4px); background:rgb(229 229 229 / 50%); border:1px solid rgb(229 229 229 / 80%); border-radius:9999px; box-shadow:0 1px 2px rgb(0 0 0 / 5%); color:#404040; display:flex; gap:1rem; justify-content:center; margin:32px auto 0; padding-inline:.5rem; position:relative; width:fit-content; z-index:20; }
-.tilted-carousel__arrow { appearance:none; background:transparent; border:0; color:inherit; cursor:pointer; font-size:2rem; font-weight:300; height:2.5rem; line-height:1; padding:.25rem .5rem .45rem; }
-.tilted-carousel__dots { align-items:center; display:flex; gap:.5rem; justify-content:center; width:180px; }
-.tilted-carousel__dot { appearance:none; background:rgb(64 64 64 / 30%); border:0; border-radius:9999px; cursor:pointer; height:.5rem; padding:0; transition:width .3s,background-color .3s; width:.5rem; }
-.tilted-carousel__dot.is-active { background:currentColor; width:1.75rem; }
-.tilted-carousel__image:focus-visible,.tilted-carousel__arrow:focus-visible,.tilted-carousel__dot:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
-@media (max-width:767px) { .tilted-carousel { --tc-card-width:clamp(128px,44vw,220px); padding:64px 0; } }
-@media (max-width:767px) { .tilted-carousel__heading { margin-bottom:24px; }.tilted-carousel__heading h2 { font-size:38px; }.tilted-carousel__product { margin-top:20px; }.tilted-carousel__controls { margin-top:28px; } }
-@media (prefers-reduced-motion:reduce) { .tilted-carousel__track,.tilted-carousel__image,.tilted-carousel__dot { transition:none; } }
+
+.tilted-carousel {
+  --tc-card-width: clamp(130px, 16vw, 312px);
+  background-color: #f4f5f6;
+  font-family: "Bricolage Grotesque", sans-serif;
+  overflow: hidden;
+  padding: 72px 0;
+  position: relative;
+}
+
+.tilted-carousel__app {
+  color: #262626;
+  display: grid;
+  justify-items: center;
+  padding: .5rem;
+  user-select: none;
+}
+
+.tilted-carousel__heading {
+  justify-self: center;
+  margin: 0 0 32px;
+  text-align: center;
+}
+
+.tilted-carousel__heading p {
+  color: var(--ink-tertiary);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .11em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.tilted-carousel__heading h2 {
+  font-family: var(--display);
+  font-size: clamp(38px, 4vw, 52px);
+  font-weight: 500;
+  letter-spacing: -.03em;
+  line-height: 1;
+  margin: 14px 0 0;
+}
+
+.tilted-carousel__viewport {
+  justify-self: center;
+  overflow: visible;
+  perspective: 800px;
+  touch-action: pan-y;
+  width: var(--tc-card-width);
+}
+
+.tilted-carousel__track {
+  display: flex;
+  transform: translateX(0);
+  transition: transform .8s cubic-bezier(.22, 1, .36, 1);
+  width: max-content;
+}
+
+.tilted-carousel__slide {
+  display: block;
+  flex: 0 0 var(--tc-card-width);
+  perspective: 800px;
+  width: var(--tc-card-width);
+}
+
+.tilted-carousel__image {
+  appearance: none;
+  aspect-ratio: 2 / 3;
+  background: var(--bg-soft, #ececeb);
+  border: 0;
+  border-radius: .5rem;
+  box-shadow: 0 14px 24px rgb(0 0 0 / 14%);
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  transform: rotateY(calc((var(--tc-active) - var(--tc-index)) * 60deg)) scale(.85);
+  transition: box-shadow .35s ease, transform 1s cubic-bezier(.22, 1, .36, 1);
+  width: 100%;
+  will-change: transform;
+}
+
+.tilted-carousel__slide.is-active .tilted-carousel__image {
+  transform: rotateY(0deg) scale(1);
+}
+
+.tilted-carousel__image img {
+  display: block;
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  transition: opacity .45s ease, transform .55s cubic-bezier(.22, 1, .36, 1);
+  width: 100%;
+}
+
+.tilted-carousel__primary-image {
+  opacity: 1;
+  z-index: 1;
+}
+
+.tilted-carousel__hover-image {
+  opacity: 0;
+  z-index: 2;
+}
+
+.tilted-carousel__details {
+  padding: 14px 4px 0;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.tilted-carousel__artist {
+  color: var(--ink-tertiary, #7c7c78);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .04em;
+  margin: 0 0 5px;
+  text-transform: uppercase;
+}
+
+.tilted-carousel__details h3 {
+  font-family: var(--display);
+  font-size: clamp(15px, 1.15vw, 18px);
+  font-weight: 500;
+  letter-spacing: -.015em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.tilted-carousel__details a {
+  color: inherit;
+}
+
+.tilted-carousel__price {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: var(--sans);
+  font-size: 13px;
+  gap: 6px;
+  margin: 6px 0 0;
+}
+
+.tilted-carousel__price span {
+  color: #d43b3b;
+  font-weight: 600;
+}
+
+.tilted-carousel__price s {
+  color: var(--ink-tertiary, #7c7c78);
+  font-size: 12px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tilted-carousel__slide:hover .tilted-carousel__image {
+    box-shadow: 0 20px 34px rgb(0 0 0 / 18%);
+  }
+
+  .tilted-carousel__slide.has-hover-image:hover .tilted-carousel__primary-image {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+
+  .tilted-carousel__slide.has-hover-image:hover .tilted-carousel__hover-image {
+    opacity: 1;
+    transform: scale(1.015);
+  }
+}
+
+.tilted-carousel__controls {
+  align-items: center;
+  backdrop-filter: blur(4px);
+  background: rgb(229 229 229 / 50%);
+  border: 1px solid rgb(229 229 229 / 80%);
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+  color: #404040;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 32px auto 0;
+  padding-inline: .5rem;
+  position: relative;
+  width: fit-content;
+  z-index: 20;
+}
+
+.tilted-carousel__arrow {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 300;
+  height: 2.5rem;
+  line-height: 1;
+  padding: .25rem .5rem .45rem;
+}
+
+.tilted-carousel__dots {
+  align-items: center;
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  width: 180px;
+}
+
+.tilted-carousel__dot {
+  appearance: none;
+  background: rgb(64 64 64 / 30%);
+  border: 0;
+  border-radius: 9999px;
+  cursor: pointer;
+  height: .5rem;
+  padding: 0;
+  transition: width .3s, background-color .3s;
+  width: .5rem;
+}
+
+.tilted-carousel__dot.is-active {
+  background: currentColor;
+  width: 1.75rem;
+}
+
+.tilted-carousel__image:focus-visible,
+.tilted-carousel__details a:focus-visible,
+.tilted-carousel__arrow:focus-visible,
+.tilted-carousel__dot:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (max-width: 767px) {
+  .tilted-carousel {
+    --tc-card-width: clamp(148px, 44vw, 220px);
+    padding: 64px 0;
+  }
+
+  .tilted-carousel__heading {
+    margin-bottom: 24px;
+  }
+
+  .tilted-carousel__heading h2 {
+    font-size: 38px;
+  }
+
+  .tilted-carousel__details {
+    padding: 12px 3px 0;
+  }
+
+  .tilted-carousel__details h3 {
+    font-size: 15px;
+  }
+
+  .tilted-carousel__price {
+    font-size: 12px;
+  }
+
+  .tilted-carousel__controls {
+    margin-top: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilted-carousel__track,
+  .tilted-carousel__image,
+  .tilted-carousel__image img,
+  .tilted-carousel__dot {
+    transition: none;
+  }
+}
+

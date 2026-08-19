@@ -16,32 +16,47 @@
       <div class="tilted-carousel__track" data-tilted-track>
       {% if selected_collection != blank and selected_collection.products_count > 0 %}
         {% for product in selected_collection.products limit: section.settings.max_products %}
-          {% capture product_meta %}{% if product.vendor != blank %}{{ product.vendor }} · {% endif %}{{ product.price | money }}{% endcapture %}
-          <article class="tilted-carousel__slide" data-tilted-slide data-title="{{ product.title | escape }}" data-meta="{{ product_meta | strip | escape }}" data-link="{{ product.url }}" data-source="collection" aria-current="false">
-            <button class="tilted-carousel__image" type="button" data-tilted-select aria-label="Show {{ product.title | escape }}">
+          {% assign product_artist = product.metafields.custom.artist.value | default: product.metafields.custom.artist | default: product.type | default: product.vendor %}
+          {% assign hover_media = blank %}
+          {% if product.media.size > 1 and product.media[1].media_type == 'image' %}
+            {% assign hover_media = product.media[1] %}
+          {% endif %}
+          <article class="tilted-carousel__slide{% if hover_media != blank %} has-hover-image{% endif %}" data-tilted-slide data-product-handle="{{ product.handle | escape }}" data-link="{{ product.url }}" data-source="collection" aria-current="false">
+            <a class="tilted-carousel__image" href="{{ product.url }}" data-tilted-select aria-label="View {{ product.title | escape }}">
               {% if product.featured_media %}
-                {{ product.featured_media | image_url: width: 900 | image_tag: alt: product.title, widths: '320,480,640,900', loading: 'lazy' }}
+                {{ product.featured_media | image_url: width: 900 | image_tag: class: 'tilted-carousel__primary-image', alt: product.title, widths: '320,480,640,900', loading: 'lazy' }}
               {% endif %}
-            </button>
+              {% if hover_media != blank %}
+                {{ hover_media | image_url: width: 900 | image_tag: class: 'tilted-carousel__hover-image', alt: product.title, widths: '320,480,640,900', loading: 'lazy' }}
+              {% endif %}
+            </a>
+            <div class="tilted-carousel__details">
+              {% if product_artist != blank %}<p class="tilted-carousel__artist">{{ product_artist }}</p>{% endif %}
+              <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <p class="tilted-carousel__price">
+                <span>From {{ product.price_min | money }}</span>
+                {% if product.compare_at_price_max > product.price_min %}<s>{{ product.compare_at_price_max | money }}</s>{% endif %}
+              </p>
+            </div>
           </article>
         {% endfor %}
       {% else %}
         {% for asset_name in tilted_assets %}
           {% assign title = tilted_titles[forloop.index0] %}
           {% assign meta = tilted_meta[forloop.index0] %}
-          <article class="tilted-carousel__slide" data-tilted-slide data-title="{{ title | escape }}" data-meta="{{ meta | escape }}" data-link="#" data-source="mock" aria-current="false">
-            <button class="tilted-carousel__image" type="button" data-tilted-select aria-label="Show {{ title | escape }}">
-              <img src="{{ asset_name | asset_url }}" alt="{{ title | escape }}" width="500" height="667"{% unless forloop.index0 == 3 %} loading="lazy"{% endunless %}>
-            </button>
+          <article class="tilted-carousel__slide" data-tilted-slide data-product-handle="mock-{{ forloop.index }}" data-link="#" data-source="mock" aria-current="false">
+            <a class="tilted-carousel__image" href="#" data-tilted-select aria-label="View {{ title | escape }}">
+              <img class="tilted-carousel__primary-image" src="{{ asset_name | asset_url }}" alt="{{ title | escape }}" width="500" height="667"{% unless forloop.index0 == 3 %} loading="lazy"{% endunless %}>
+            </a>
+            <div class="tilted-carousel__details">
+              <p class="tilted-carousel__artist">PosterAndForm</p>
+              <h3><a href="#">{{ title }}</a></h3>
+              <p class="tilted-carousel__price"><span>{{ meta }}</span></p>
+            </div>
           </article>
         {% endfor %}
       {% endif %}
       </div>
-    </div>
-    <div class="tilted-carousel__product" data-tilted-product>
-      <h3 data-tilted-title>{{ tilted_titles[3] }}</h3>
-      <p data-tilted-meta>{{ tilted_meta[3] }}</p>
-      <a class="tilted-carousel__link" data-tilted-link href="{% if selected_collection != blank %}{{ selected_collection.url }}{% else %}#{% endif %}">View poster <span aria-hidden="true">→</span></a>
     </div>
   </div>
 
@@ -71,3 +86,4 @@
   ]
 }
 {% endschema %}
+
