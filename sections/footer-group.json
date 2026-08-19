@@ -1,1 +1,47 @@
-{"type":"footer","name":"Footer group","sections":{"footer":{"type":"footer","blocks":{"shop":{"type":"link_column","settings":{"heading":"Shop","menu":"footer"}},"about":{"type":"link_column","settings":{"heading":"About","menu":"footer"}}},"block_order":["shop","about"],"settings":{"show_newsletter":true,"newsletter_heading":"Newsletter","newsletter_text":"Get 10% off your first order.","bottom_text":"Curated art prints for considered spaces."}}},"order":["footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop": {
+          "type": "link_column",
+          "settings": {
+            "heading": "About",
+            "menu": "footer"
+          }
+        },
+        "about": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Customer Service",
+            "menu": "customer-service"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "about"
+      ],
+      "settings": {
+        "show_newsletter": true,
+        "newsletter_heading": "Newsletter",
+        "newsletter_text": "Get 10% off your first order.",
+        "bottom_text": "Curated art prints for considered spaces."
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
