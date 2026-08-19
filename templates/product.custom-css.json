@@ -100,14 +100,14 @@
             "label": "Fair Pricing",
             "content_source": "custom",
             "heading": "Fair pricing",
-            "content": "<p>We keep pricing clear and considered, so you can choose a piece you love with confidence. Every order is made with carefully selected materials and prepared with lasting quality in mind.</p>"
+            "content": "<p><strong>Thoughtful art, fairly priced.</strong></p><p>We believe beautiful art should feel special without being out of reach. Our prices reflect the quality of the print, the materials selected, and the care involved in preparing every order.</p><p>By keeping our collection focused and our process straightforward, we can offer considered designs at honest prices—without unnecessary markups.</p><ul><li>Carefully curated artwork  </li><li>Quality materials and detailed production  </li><li>Clear pricing with no hidden product costs</li></ul>"
           }
         },
         "artist": {
           "type": "tab",
           "settings": {
             "label": "Artist Information",
-            "content_source": "artist_information",
+            "content_source": "custom",
             "heading": "Artist information",
             "content": "<p><strong>Art chosen for the way it makes a space feel.</strong></p><p>Every artwork in the PosterAndForm collection is selected for its distinctive visual character, thoughtful composition, and ability to bring personality into a room.</p><p>From expressive forms and subtle textures to confident colour and quiet minimalism, our collection brings together different creative perspectives. Each piece is chosen not only for how it looks on its own, but for how naturally it can become part of your everyday surroundings.</p><p>We believe the right artwork does more than complete a wall—it creates atmosphere, invites attention, and makes a space feel more personal.</p>"
           }
@@ -118,7 +118,7 @@
             "label": "Material & Workmanship",
             "content_source": "custom",
             "heading": "Material & workmanship",
-            "content": "<p>Made with carefully selected materials, precise printing and thoughtful finishing. Every piece is prepared for a clean presentation and long-lasting everyday enjoyment.</p>"
+            "content": "<p><strong>Made to be enjoyed, every day.</strong></p><p>Each poster is produced with close attention to colour, clarity, and finish. The artwork is carefully prepared for print so that its original details and tonal balance are preserved across the available sizes.</p><p>A smooth matte surface helps reduce unwanted reflections and gives the artwork a refined, gallery-inspired appearance. Every print is inspected before it is carefully packed for delivery.</p><ul><li>High-resolution art reproduction  </li><li>Refined matte appearance  </li><li>Clear details and balanced colour  </li><li>Carefully checked and securely packaged</li></ul>"
           }
         },
         "shipping": {
@@ -127,7 +127,7 @@
             "label": "Shipping and Returns",
             "content_source": "custom",
             "heading": "Shipping and returns",
-            "content": "<p>Orders are prepared with care and securely packed for delivery. Shipping details are shown before checkout, and eligible returns can be requested within the applicable return period.</p>"
+            "content": "<p><strong>Carefully packed, from us to your door.</strong></p><p>Your order is prepared and packaged with care to help protect the artwork throughout its journey. Available delivery methods, shipping costs, and estimated delivery times are shown during checkout based on your destination.</p><p>Once your order has been dispatched, tracking information will be provided whenever the selected delivery service supports it.</p><p>If your order arrives damaged or there is a problem with an item, please contact us as soon as possible so we can review the issue and help make it right.</p><p>Returns are handled in accordance with our return policy. Personalised products may have different return conditions because they are created specifically for you.</p>"
           }
         },
         "security": {
@@ -136,7 +136,7 @@
             "label": "Security",
             "content_source": "custom",
             "heading": "Security",
-            "content": "<p>Your order is handled through Shopify’s secure checkout. We use protected payment processing and securely packaged delivery so you can shop with confidence.</p>"
+            "content": "<p><strong>A secure and protected checkout.</strong></p><p>Your checkout is securely processed through Shopify and the payment providers available in your region. Payment details are encrypted during the transaction and are not stored directly by PosterAndForm.</p><p>We only use the information required to process your order, arrange delivery, and provide customer support. Your personal details will never be sold.</p><ul><li>Secure Shopify checkout  </li><li>Encrypted payment processing  </li><li>Trusted payment providers  </li><li>Responsible handling of personal information</li></ul>"
           }
         }
       },
