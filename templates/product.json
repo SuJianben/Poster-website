@@ -12,6 +12,7 @@
     "main": {
       "type": "main-product",
       "settings": {
+        "enable_css_framing_preview": true,
         "show_breadcrumb": true,
         "show_thumbnail_navigation": false,
         "review_label": "Verified reviews",
