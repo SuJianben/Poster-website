@@ -263,6 +263,52 @@
         "link": "shopify://collections/all-art-prints",
         "collection": "selected-series-2"
       }
+    },
+    "customer_reviews": {
+      "type": "home-customer-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "label": "Customer feedback",
+            "text": "Beautifully made and carefully packaged.",
+            "author": ""
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "label": "Customer feedback",
+            "text": "A simple way to bring more character into a room.",
+            "author": ""
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "stars": 5,
+            "label": "Customer feedback",
+            "text": "Thoughtful presentation with a clean, modern finish.",
+            "author": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
+      "settings": {
+        "heading": "What our customers say",
+        "score": "4.8",
+        "summary_stars": 5,
+        "summary_label": "Highly rated",
+        "summary_note": "Customer feedback shared with PosterAndForm.",
+        "link_label": "View more reviews",
+        "link": ""
+      }
     }
   },
   "order": [
@@ -270,6 +316,7 @@
     "categories",
     "featured",
     "editorial_1",
-    "editorial_2"
+    "editorial_2",
+    "customer_reviews"
   ]
 }
