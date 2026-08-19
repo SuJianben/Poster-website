@@ -1,19 +1,44 @@
 {{ 'editorial-depth-cards.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'editorial-depth-cards.js' | asset_url }}" defer="defer"></script>
+{% if section.settings.enable_personalizer %}
+  {{ 'custom-artwork-cropper.css' | asset_url | stylesheet_tag }}
+  {{ 'home-personalizer.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'custom-artwork-cropper-geometry.js' | asset_url }}&psv=home-personalizer-v1-20260819" defer="defer"></script>
+  <script src="{{ 'custom-artwork-cropper-mode.js' | asset_url }}&psv=home-personalizer-v1-20260819" defer="defer"></script>
+  <script src="{{ 'home-personalizer.js' | asset_url }}&psv=home-personalizer-v1-20260819" defer="defer"></script>
+{% endif %}
 
-<section class="section editorial-products" data-editorial-depth-section>
+<section
+  class="section editorial-products{% if section.settings.enable_personalizer %} home-personalizer{% endif %}"
+  data-editorial-depth-section
+  {% if section.settings.enable_personalizer %}data-home-personalizer data-home-personalizer-id="{{ section.id }}"{% endif %}
+>
   <div class="page-width editorial {% if section.settings.image_position == 'right' %}editorial--reverse{% endif %}">
-    <div class="editorial__image">
+    <div class="editorial__image{% if section.settings.enable_personalizer %} home-personalizer__scene{% endif %}"{% if section.settings.enable_personalizer %} data-home-personalizer-scene{% endif %}>
       {% if section.settings.image != blank %}
         {{ section.settings.image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '500,750,1000,1500', alt: section.settings.heading }}
       {% else %}
         <img src="{{ section.settings.fallback_image_asset | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1400" height="1750" loading="lazy">
+      {% endif %}
+      {% if section.settings.enable_personalizer %}
+        <div
+          class="home-personalizer__wall-preview"
+          data-home-personalizer-preview
+          data-preview-width="{{ section.settings.preview_width }}"
+          style="--home-preview-left: {{ section.settings.preview_left }}%; --home-preview-top: {{ section.settings.preview_top }}%; --home-preview-width: {{ section.settings.preview_width }}%;"
+          hidden
+        >
+          <img data-home-personalizer-preview-image alt="Your uploaded poster preview" width="1200" height="1697">
+        </div>
       {% endif %}
     </div>
     <div class="editorial__copy">
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
       <h2>{{ section.settings.heading }}</h2>
       <p>{{ section.settings.text }}</p>
+      {% if section.settings.enable_personalizer %}
+        {% render 'home-personalizer-upload', section: section %}
+      {% endif %}
       {% if section.settings.link_label != blank %}
         <a class="text-link" href="{{ section.settings.link }}">{{ section.settings.link_label }} →</a>
       {% endif %}
@@ -53,6 +78,10 @@
       </div>
     </div>
   {% endif %}
+
+  {% if section.settings.enable_personalizer %}
+    {% render 'home-personalizer-cropper', section: section %}
+  {% endif %}
 </section>
 
 {% schema %}
@@ -67,7 +96,19 @@
     {"type":"textarea","id":"text","label":"Text","default":"Muted palettes, clean lines, and Scandinavian wisdom—prints that make any room breathe."},
     {"type":"text","id":"link_label","label":"Link label","default":"Explore the series"},
     {"type":"url","id":"link","label":"Link"},
-    {"type":"collection","id":"collection","label":"Products collection"}
+    {"type":"collection","id":"collection","label":"Products collection"},
+    {"type":"header","content":"Homepage personalizer"},
+    {"type":"checkbox","id":"enable_personalizer","label":"Enable upload preview","default":false},
+    {"type":"text","id":"upload_heading","label":"Upload heading","default":"Upload your image"},
+    {"type":"text","id":"upload_button_label","label":"Upload button label","default":"Choose image"},
+    {"type":"text","id":"upload_help_text","label":"Upload help text","default":"JPEG, PNG or WebP · maximum 20 MB and 20 megapixels."},
+    {"type":"text","id":"crop_heading","label":"Crop dialog heading","default":"Crop your image"},
+    {"type":"textarea","id":"crop_help_text","label":"Crop dialog help text","default":"Choose one of the three fixed poster ratios, then position and resize the crop area."},
+    {"type":"text","id":"crop_cancel_label","label":"Crop cancel label","default":"Cancel"},
+    {"type":"text","id":"crop_confirm_label","label":"Crop confirm label","default":"Use crop"},
+    {"type":"range","id":"preview_left","label":"Preview horizontal position","min":10,"max":90,"step":1,"unit":"%","default":57},
+    {"type":"range","id":"preview_top","label":"Preview vertical position","min":10,"max":90,"step":1,"unit":"%","default":32},
+    {"type":"range","id":"preview_width","label":"Preview width","min":20,"max":75,"step":1,"unit":"%","default":50}
   ],
   "blocks": [
     {"type":"poster","name":"Figma poster","settings":[
@@ -81,3 +122,4 @@
   "presets": [{"name":"Editorial with products"}]
 }
 {% endschema %}
+
