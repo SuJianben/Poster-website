@@ -3,8 +3,15 @@ $ErrorActionPreference = 'Stop'
 $themeRoot = Split-Path -Parent $PSScriptRoot
 $section = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\custom-product-main.liquid') -Raw
 $styles = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\custom-css-framing.css') -Raw
-$imageTemplate = Get-Content -LiteralPath (Join-Path $themeRoot 'templates\product.custom.json') -Raw | ConvertFrom-Json
-$cssTemplate = Get-Content -LiteralPath (Join-Path $themeRoot 'templates\product.custom-css.json') -Raw | ConvertFrom-Json
+
+function Read-ShopifyJson([string]$Path) {
+  $content = Get-Content -LiteralPath $Path -Raw
+  $json = [regex]::Replace($content, '^\s*/\*[\s\S]*?\*/\s*', '')
+  return $json | ConvertFrom-Json
+}
+
+$imageTemplate = Read-ShopifyJson (Join-Path $themeRoot 'templates\product.custom.json')
+$cssTemplate = Read-ShopifyJson (Join-Path $themeRoot 'templates\product.custom-css.json')
 $defaultSection = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\main-product.liquid') -Raw
 $oakVerticalTexture = Join-Path $themeRoot 'assets\ps-css-frame-oak-texture-v3-vertical.webp'
 $oakHorizontalTexture = Join-Path $themeRoot 'assets\ps-css-frame-oak-texture-v3-horizontal.webp'

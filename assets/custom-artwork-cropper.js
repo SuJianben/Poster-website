@@ -2,7 +2,8 @@
   const root = document.querySelector('[data-ps-product]');
   const modal = root?.querySelector('[data-ps-cropper]');
   const geometry = globalThis.PosterCropGeometry;
-  if (!root || !modal || !geometry) return;
+  const cropMode = globalThis.PosterCropMode;
+  if (!root || !modal || !geometry || !cropMode) return;
 
   const workspace = modal.querySelector('[data-ps-cropper-workspace]');
   const canvas = modal.querySelector('[data-ps-cropper-canvas]');
@@ -10,11 +11,11 @@
   const confirmButton = modal.querySelector('[data-ps-cropper-confirm]');
   const cancelButtons = [...modal.querySelectorAll('[data-ps-cropper-cancel]')];
   const ratioButtons = [...modal.querySelectorAll('[data-ps-cropper-ratio]')];
+  const instruction = modal.querySelector('[data-ps-cropper-instruction]');
   if (!workspace || !canvas || !context || !confirmButton || !ratioButtons.length) return;
 
-  const ratios = { landscape: Math.SQRT2, square: 1, portrait: 1 / Math.SQRT2 };
-  const freeformResize = root.dataset.psFramingRenderMode === 'css';
-  const ratioMatchTolerance = 0.01;
+  const ratios = cropMode.ratios;
+  const supportsFreeform = root.dataset.psFramingRenderMode === 'css';
   const handles = ['nw', 'ne', 'sw', 'se'];
   let state = null;
   let resolver = null;
@@ -102,27 +103,53 @@
     draw();
   };
 
-  const syncRatioSelection = (orientation = '') => {
+  const syncInstruction = () => {
+    if (!instruction || !state) return;
+    instruction.textContent = cropMode.isFreeform(state)
+      ? instruction.dataset.freeformText
+      : instruction.dataset.fixedText;
+  };
+
+  const syncRatioSelection = () => {
     if (!state) return;
-    state.orientation = orientation;
+    const selectedOption = cropMode.selectedOption(state);
     ratioButtons.forEach((button) => {
-      const selected = button.dataset.psCropperRatio === orientation;
+      const selected = button.dataset.psCropperRatio === selectedOption;
       button.classList.toggle('is-selected', selected);
       button.setAttribute('aria-checked', String(selected));
     });
+    syncInstruction();
   };
 
-  const syncFreeformRatioSelection = () => {
-    if (!freeformResize || !state?.crop) return;
-    const cropRatio = state.crop.width / state.crop.height;
-    syncRatioSelection(geometry.matchRatio(cropRatio, ratios, ratioMatchTolerance));
-  };
+  const setCropOption = (option, { track = true } = {}) => {
+    if (!state) return;
+    const selection = cropMode.select(option, supportsFreeform);
+    if (!selection) return;
+    state.cropMode = selection.cropMode;
+    state.orientation = selection.orientation;
+    syncRatioSelection();
 
-  const setRatio = (orientation, { track = true } = {}) => {
-    if (!ratios[orientation] || !state) return;
-    syncRatioSelection(orientation);
-    resetCrop();
-    if (track) window.dataLayer?.push({ event: 'custom_artwork_crop_ratio_selected', orientation, ratio: ratios[orientation] });
+    if (selection.cropMode === 'fixed') {
+      resetCrop();
+      if (track) {
+        window.dataLayer?.push({
+          event: 'custom_artwork_crop_ratio_selected',
+          orientation: selection.orientation,
+          ratio: ratios[selection.orientation],
+          crop_mode: 'fixed',
+        });
+      }
+      return;
+    }
+
+    draw();
+    if (track) {
+      window.dataLayer?.push({
+        event: 'custom_artwork_crop_mode_selected',
+        crop_mode: 'freeform',
+        starting_ratio: state.crop.width / state.crop.height,
+      });
+    }
   };
 
   const close = (result) => {
@@ -147,7 +174,7 @@
   const outputFile = () => new Promise((resolve, reject) => {
     const source = geometry.toSourceRect(state.crop, displayedImageRect(), state.image.naturalWidth, state.image.naturalHeight);
     const cropRatio = state.crop.width / state.crop.height;
-    const outputOrientation = state.orientation || 'custom';
+    const outputOrientation = cropMode.outputOrientation(state);
     const longest = Math.max(source.width, source.height);
     const outputScale = Math.min(1, 3200 / longest);
     const outputWidth = Math.max(1, Math.round(source.width * outputScale));
@@ -206,11 +233,11 @@
     });
     const suggestedOrientation = image.naturalWidth / image.naturalHeight > 1.08
       ? 'landscape' : image.naturalWidth / image.naturalHeight < 0.92 ? 'portrait' : 'square';
-    state = { file, url, image, orientation: suggestedOrientation, crop: null };
+    state = { file, url, image, cropMode: 'fixed', orientation: suggestedOrientation, crop: null };
     previousFocus = document.activeElement;
     modal.hidden = false;
     document.body.classList.add('ps-cropper-open');
-    setRatio(suggestedOrientation, { track: false });
+    setCropOption(suggestedOrientation, { track: false });
     requestAnimationFrame(() => {
       resetCrop();
       ratioButtons.find((button) => button.classList.contains('is-selected'))?.focus();
@@ -218,12 +245,13 @@
     window.dataLayer?.push({
       event: 'custom_artwork_crop_opened',
       suggested_orientation: suggestedOrientation,
-      crop_mode: freeformResize ? 'freeform' : 'fixed',
+      crop_mode: state.cropMode,
+      free_crop_available: supportsFreeform,
     });
     return new Promise((resolve) => { resolver = resolve; });
   };
 
-  ratioButtons.forEach((button) => button.addEventListener('click', () => setRatio(button.dataset.psCropperRatio)));
+  ratioButtons.forEach((button) => button.addEventListener('click', () => setCropOption(button.dataset.psCropperRatio)));
   cancelButtons.forEach((button) => button.addEventListener('click', cancel));
   confirmButton.addEventListener('click', confirm);
   canvas.addEventListener('pointerdown', (event) => {
@@ -237,7 +265,6 @@
       handle,
       point,
       crop: { ...state.crop },
-      startingOrientation: state.orientation,
     };
     canvas.setPointerCapture(event.pointerId);
     canvas.style.cursor = handle ? `${handle}-resize` : 'grabbing';
@@ -253,9 +280,8 @@
     if (pointerState.id !== event.pointerId) return;
     if (pointerState.mode === 'move') {
       state.crop = geometry.moveCrop(pointerState.crop, point.x - pointerState.point.x, point.y - pointerState.point.y, displayedImageRect());
-    } else if (freeformResize) {
+    } else if (supportsFreeform && cropMode.isFreeform(state)) {
       state.crop = geometry.resizeCropFree(pointerState.crop, pointerState.handle, point, displayedImageRect());
-      syncFreeformRatioSelection();
     } else {
       state.crop = geometry.resizeCrop(pointerState.crop, pointerState.handle, point, displayedImageRect(), ratios[state.orientation]);
     }
@@ -263,13 +289,13 @@
   });
   const releasePointer = (event) => {
     if (!pointerState || pointerState.id !== event.pointerId) return;
-    if (pointerState.mode === 'resize' && freeformResize) {
+    if (pointerState.mode === 'resize' && supportsFreeform && cropMode.isFreeform(state)) {
+      const cropRatio = state.crop.width / state.crop.height;
       window.dataLayer?.push({
         event: 'custom_artwork_crop_resized',
         crop_mode: 'freeform',
-        crop_ratio: state.crop.width / state.crop.height,
-        matched_orientation: state.orientation || 'custom',
-        preset_selection_changed: pointerState.startingOrientation !== state.orientation,
+        crop_ratio: cropRatio,
+        matched_orientation: geometry.matchRatio(cropRatio, ratios) || 'custom',
       });
     }
     pointerState = null;

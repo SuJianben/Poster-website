@@ -9,6 +9,7 @@
 .ps-cropper__workspace { position: relative; width: 100%; min-height: 360px; overflow: hidden; background: #292b2b; touch-action: none; }
 .ps-cropper__canvas { display: block; width: 100%; height: min(52svh, 470px); cursor: move; touch-action: none; }
 .ps-cropper__ratio-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ps-cropper__ratio-group--with-freeform { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .ps-cropper__ratio { display: grid; min-height: 82px; grid-template-columns: 48px minmax(0, 1fr); grid-template-rows: auto auto; align-items: center; column-gap: 12px; padding: 12px 14px; border: 1px solid #d6d8d7; background: #fff; color: var(--ps-ink, #222628); cursor: pointer; font: 600 11px/1.2 var(--sans); text-align: left; }
 .ps-cropper__ratio:hover, .ps-cropper__ratio:focus-visible { border-color: #696e6e; outline: 0; }
 .ps-cropper__ratio.is-selected { border-color: var(--ps-ink, #222628); box-shadow: inset 0 0 0 1px var(--ps-ink, #222628); }
@@ -17,6 +18,7 @@
 .ps-cropper__ratio-shape--landscape { width: 44px; aspect-ratio: 1.414 / 1; }
 .ps-cropper__ratio-shape--square { width: 34px; aspect-ratio: 1 / 1; }
 .ps-cropper__ratio-shape--portrait { height: 42px; aspect-ratio: 1 / 1.414; }
+.ps-cropper__ratio-shape--freeform { width: 42px; height: 31px; border-style: dashed; }
 .ps-cropper__instruction { margin: -4px 0 0; color: var(--ps-muted, #707679); font: 400 11px/1.4 var(--sans); text-align: center; }
 .ps-cropper__actions { display: flex; justify-content: flex-end; gap: 10px; }
 .ps-cropper__button { min-width: 130px; min-height: 42px; padding: 0 18px; border: 1px solid var(--ps-ink, #222628); cursor: pointer; font: 700 10px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
@@ -32,11 +34,13 @@ body.ps-cropper-open { overflow: hidden; }
   .ps-cropper__workspace { min-height: 300px; }
   .ps-cropper__canvas { height: min(48svh, 420px); }
   .ps-cropper__ratio { min-height: 72px; grid-template-columns: 1fr; grid-template-rows: 35px auto; justify-items: center; gap: 5px; padding: 9px 5px; text-align: center; }
+  .ps-cropper__ratio-group--with-freeform { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ps-cropper__ratio small { display: none; }
   .ps-cropper__ratio-shape { grid-row: 1; grid-column: 1; }
   .ps-cropper__ratio-shape--landscape { width: 40px; }
   .ps-cropper__ratio-shape--square { width: 30px; }
   .ps-cropper__ratio-shape--portrait { height: 35px; }
+  .ps-cropper__ratio-shape--freeform { width: 38px; height: 29px; }
   .ps-cropper__actions { display: grid; grid-template-columns: 1fr 1fr; }
   .ps-cropper__button { min-width: 0; }
 }

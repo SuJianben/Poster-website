@@ -4,9 +4,12 @@ const path = require('node:path');
 
 const themeRoot = path.resolve(__dirname, '..');
 require(path.join(themeRoot, 'assets', 'custom-artwork-cropper-geometry.js'));
+require(path.join(themeRoot, 'assets', 'custom-artwork-cropper-mode.js'));
 
 const geometry = globalThis.PosterCropGeometry;
+const cropMode = globalThis.PosterCropMode;
 assert.ok(geometry, 'Crop geometry API must be available.');
+assert.ok(cropMode, 'Crop mode API must be available.');
 
 const bounds = { x: 10, y: 20, width: 500, height: 400 };
 const crop = { x: 100, y: 100, width: 200, height: 150 };
@@ -21,6 +24,15 @@ assert.deepEqual(geometry.resizeCropFree(crop, 'se', { x: 102, y: 102 }, bounds)
 const fixedCrop = geometry.resizeCrop(crop, 'se', { x: 420, y: 380 }, bounds, Math.SQRT2);
 assert.ok(Math.abs(fixedCrop.width / fixedCrop.height - Math.SQRT2) < 1e-9, 'Fixed resize must remain available for image framing.');
 
+assert.deepEqual(cropMode.select('landscape', true), { cropMode: 'fixed', orientation: 'landscape' });
+assert.deepEqual(cropMode.select('square', true), { cropMode: 'fixed', orientation: 'square' });
+assert.deepEqual(cropMode.select('portrait', true), { cropMode: 'fixed', orientation: 'portrait' });
+assert.deepEqual(cropMode.select('freeform', true), { cropMode: 'freeform', orientation: 'custom' });
+assert.equal(cropMode.select('freeform', false), null, 'PNG framing must not enable free crop.');
+assert.equal(cropMode.selectedOption({ cropMode: 'fixed', orientation: 'square' }), 'square');
+assert.equal(cropMode.selectedOption({ cropMode: 'freeform', orientation: 'custom' }), 'freeform');
+assert.equal(cropMode.outputOrientation({ cropMode: 'freeform', orientation: 'landscape' }), 'custom');
+
 const ratios = { landscape: Math.SQRT2, square: 1, portrait: 1 / Math.SQRT2 };
 assert.equal(geometry.matchRatio(Math.SQRT2, ratios), 'landscape');
 assert.equal(geometry.matchRatio(1.005, ratios), 'square');
@@ -30,11 +42,16 @@ const cropper = fs.readFileSync(path.join(themeRoot, 'assets', 'custom-artwork-c
 const section = fs.readFileSync(path.join(themeRoot, 'sections', 'custom-product-main.liquid'), 'utf8');
 const snippet = fs.readFileSync(path.join(themeRoot, 'snippets', 'custom-artwork-cropper.liquid'), 'utf8');
 
-assert.match(cropper, /root\.dataset\.psFramingRenderMode === 'css'/, 'Free resize must be scoped to the CSS custom template.');
-assert.match(cropper, /geometry\.resizeCropFree/, 'CSS crop interactions must call the free resize geometry.');
-assert.match(cropper, /syncFreeformRatioSelection/, 'Free resize must update preset selection state.');
-assert.equal((snippet.match(/data-ps-cropper-ratio=/g) || []).length, 3, 'All three crop presets must remain visible.');
-assert.match(snippet, /Drag any corner to resize freely\./, 'CSS crop instructions must describe free resizing.');
-assert.match(section, /freeform-crop-v1-20260818/g, 'Cropper assets must use the freeform cache version.');
+assert.match(cropper, /root\.dataset\.psFramingRenderMode === 'css'/, 'Free crop must be scoped to the CSS custom template.');
+assert.match(cropper, /cropMode\.isFreeform\(state\)/, 'Free resize must require the explicit free crop mode.');
+assert.match(cropper, /geometry\.resizeCropFree/, 'Free crop interactions must call the free resize geometry.');
+assert.match(cropper, /geometry\.resizeCrop\(/, 'Preset crop interactions must keep using fixed-ratio geometry.');
+assert.equal((snippet.match(/data-ps-cropper-ratio=/g) || []).length, 4, 'Three presets and one Free crop option must be rendered in the CSS template source.');
+assert.match(snippet, /data-ps-cropper-ratio="freeform"/, 'The Free crop option is missing.');
+assert.match(snippet, /section\.settings\.framing_render_mode == 'css'/, 'The Free crop option must be conditionally scoped to CSS rendering.');
+assert.match(snippet, /Drag a corner to resize while keeping the selected ratio\./, 'Preset instructions must describe locked resizing.');
+assert.match(snippet, /Drag any corner to resize freely\./, 'Free crop instructions must describe free resizing.');
+assert.match(section, /custom-artwork-cropper-mode\.js/, 'The crop mode module must load before the cropper controller.');
+assert.match(section, /crop-modes-v2-20260819/g, 'Cropper assets must use the new cache version.');
 
-console.log('Custom artwork cropper freeform checks passed.');
+console.log('Custom artwork cropper mode checks passed.');

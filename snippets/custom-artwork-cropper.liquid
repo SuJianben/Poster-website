@@ -6,7 +6,7 @@
         <h2 id="ps-cropper-heading-{{ section.id }}">{{ section.settings.crop_heading }}</h2>
         <p>
           {% if section.settings.framing_render_mode == 'css' %}
-            Choose a preset ratio or freely adjust the crop area.
+            Choose a fixed ratio, or select Free crop to adjust the shape freely.
           {% else %}
             {{ section.settings.crop_help_text }}
           {% endif %}
@@ -19,7 +19,7 @@
       <canvas class="ps-cropper__canvas" data-ps-cropper-canvas></canvas>
     </div>
 
-    <div class="ps-cropper__ratio-group" role="radiogroup" aria-label="Artwork ratio">
+    <div class="ps-cropper__ratio-group{% if section.settings.framing_render_mode == 'css' %} ps-cropper__ratio-group--with-freeform{% endif %}" role="radiogroup" aria-label="Artwork ratio">
       <button class="ps-cropper__ratio is-selected" type="button" data-ps-cropper-ratio="landscape" role="radio" aria-checked="true">
         <span class="ps-cropper__ratio-shape ps-cropper__ratio-shape--landscape" aria-hidden="true"></span>
         <span>Landscape</span><small>1.414 : 1</small>
@@ -32,11 +32,22 @@
         <span class="ps-cropper__ratio-shape ps-cropper__ratio-shape--portrait" aria-hidden="true"></span>
         <span>Portrait</span><small>1 : 1.414</small>
       </button>
+      {% if section.settings.framing_render_mode == 'css' %}
+        <button class="ps-cropper__ratio" type="button" data-ps-cropper-ratio="freeform" role="radio" aria-checked="false">
+          <span class="ps-cropper__ratio-shape ps-cropper__ratio-shape--freeform" aria-hidden="true"></span>
+          <span>Free crop</span><small>Any ratio</small>
+        </button>
+      {% endif %}
     </div>
 
-    <p class="ps-cropper__instruction">
+    <p
+      class="ps-cropper__instruction"
+      data-ps-cropper-instruction
+      data-fixed-text="Drag to reposition. Drag a corner to resize while keeping the selected ratio."
+      data-freeform-text="Drag to reposition. Drag any corner to resize freely."
+    >
       {% if section.settings.framing_render_mode == 'css' %}
-        Drag to reposition. Drag any corner to resize freely.
+        Drag to reposition. Drag a corner to resize while keeping the selected ratio.
       {% else %}
         Drag to reposition. Drag a corner to resize while keeping the selected ratio.
       {% endif %}
