@@ -196,6 +196,7 @@
         "n5"
       ],
       "settings": {
+        "image": "shopify://shop_images/20260819-095255.jpg",
         "fallback_image_asset": "figma-lifestyle-nordic.jpg",
         "image_position": "left",
         "eyebrow": "Editorial / Vol. 03",
