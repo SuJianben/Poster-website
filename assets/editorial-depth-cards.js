@@ -1,7 +1,24 @@
 (() => {
-  const setupDepthCard = (card) => {
+  const trackHoverPreview = (card, index) => {
+    if (!card.classList.contains('has-hover-image') || card.dataset.hoverTracked === 'true') return;
+    card.dataset.hoverTracked = 'true';
+    const detail = {
+      event: 'editorial_product_hover_image',
+      product_handle: card.dataset.productHandle || '',
+      card_position: index + 1
+    };
+    window.dataLayer?.push(detail);
+    document.dispatchEvent(new CustomEvent('posterandform:analytics', { detail }));
+  };
+
+  const setupDepthCard = (card, index) => {
+    if (card.dataset.depthReady === 'true') return;
+    card.dataset.depthReady = 'true';
     const surface = card.querySelector('.editorial-depth-card__surface');
-    if (!surface || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!surface) return;
+
+    card.addEventListener('pointerenter', () => trackHoverPreview(card, index), { passive: true });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     let leaveTimer;
     const reset = () => {
@@ -30,7 +47,15 @@
     card.addEventListener('blur', reset);
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-depth-card]').forEach(setupDepthCard);
-  });
+  const setupCards = (scope = document) => {
+    scope.querySelectorAll('[data-depth-card]').forEach(setupDepthCard);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setupCards(), { once: true });
+  } else {
+    setupCards();
+  }
+  document.addEventListener('shopify:section:load', (event) => setupCards(event.target));
 })();
+
