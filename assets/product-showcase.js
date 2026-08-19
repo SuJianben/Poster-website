@@ -22,10 +22,9 @@
   const mobileDetailsAnchor = root.querySelector('[data-ps-details-mobile-anchor]');
   const productMobileBreakpoint = window.matchMedia('(max-width: 900px)');
   let activeMediaId = root.querySelector('[data-ps-media].is-active')?.dataset.mediaId || root.querySelector('[data-ps-media]')?.dataset.mediaId || '';
-  // The source catalog keeps one clean artwork image as the final gallery item.
-  // Custom framing is intentionally previewed only on that image, so regular
-  // lifestyle/detail images never receive the visual treatment.
-  const customPreviewMediaId = [...root.querySelectorAll('[data-ps-media]')].at(-1)?.dataset.mediaId || '';
+  // Liquid identifies the featured clean artwork. Reuse that declared media
+  // role instead of coupling framing behavior to a gallery position.
+  const customPreviewMediaId = artPreview?.dataset.mediaId || activeMediaId;
   let mediaSwitchToken = 0;
   let framingAddonPrice = 0;
 
@@ -258,3 +257,4 @@
     }
   });
 })();
+

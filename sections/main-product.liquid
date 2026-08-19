@@ -12,11 +12,15 @@
   <script src="{{ 'custom-css-framing.js' | asset_url }}&psv=default-product-toggle-v1-20260819" defer="defer"></script>
 {% endif %}
 <script src="{{ 'product-framing.js' | asset_url }}&psv=default-product-toggle-v1-20260819" defer="defer"></script>
-<script src="{{ 'product-showcase.js' | asset_url }}&psv=framing-addons-20260814" defer="defer"></script>
+<script src="{{ 'product-showcase.js' | asset_url }}&psv=featured-media-v1-20260819" defer="defer"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
-{% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
-{% assign preview_media = product.media | where: 'media_type', 'image' | last %}
+{% assign image_media = product.media | where: 'media_type', 'image' %}
+{% assign preview_media = selected_variant.featured_media | default: product.featured_media | default: image_media.first %}
+{% unless preview_media.media_type == 'image' %}
+  {% assign preview_media = image_media.first %}
+{% endunless %}
+{% assign selected_media = preview_media %}
 
 <section class="ps-product ps-section" data-ps-product data-ps-product-context="default" data-ps-framing-render-mode="{{ framing_render_mode }}" data-section-id="{{ section.id }}">
   <div class="ps-shell">
@@ -282,3 +286,4 @@
   ]
 }
 {% endschema %}
+
