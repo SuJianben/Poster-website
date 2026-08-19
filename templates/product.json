@@ -99,7 +99,7 @@
           "type": "tab",
           "settings": {
             "label": "Artist Information",
-            "content_source": "artist_information",
+            "content_source": "custom",
             "heading": "Artist information",
             "content": "<p><strong>Behind every artwork is a distinct creative point of view.</strong></p><p>Every artwork in the PosterAndForm collection is selected for its distinctive visual character, thoughtful composition, and ability to bring personality into a room.</p><p>From expressive forms and subtle textures to confident colour and quiet minimalism, our collection brings together different creative perspectives. Each piece is chosen not only for how it looks on its own, but for how naturally it can become part of your everyday surroundings.</p><p>We believe the right artwork does more than complete a wall—it creates atmosphere, invites attention, and makes a space feel more personal.</p>"
           }
