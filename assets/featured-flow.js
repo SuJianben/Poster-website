@@ -70,4 +70,3 @@
   document.addEventListener('shopify:section:load', (event) => event.target.querySelectorAll?.('[data-tilted-carousel]').forEach(initCarousel));
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialise, { once:true }); else initialise();
 })();
-
