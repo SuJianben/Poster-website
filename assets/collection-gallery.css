@@ -52,9 +52,6 @@
 .cg-collection[data-view='lifestyle'] .cg-product[data-cg-has-lifestyle='true'] .cg-product-image { opacity: 0; }
 .cg-collection[data-view='lifestyle'] .cg-product[data-cg-has-lifestyle='true'] .cg-product-hover-image { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: normal; opacity: 1; }
 .cg-badge { position: absolute; z-index: 1; top: 8px; left: 8px; padding: 4px 6px; background: #fff; color: #707372; font-size: 8px; font-weight: 600; line-height: 1; text-transform: capitalize; }
-.cg-heart { position: absolute; z-index: 1; top: 8px; right: 8px; width: 20px; height: 20px; border: 0; background: transparent; color: #c4c6c4; cursor: pointer; }
-.cg-heart::before { content: '♥'; font-size: 16px; }
-.cg-heart[aria-pressed='true'] { color: #151515; }
 .cg-product-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 8px; padding: 8px 7px 0; font-size: 10px; line-height: 1.25; }
 .cg-product-title { overflow: hidden; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
 .cg-product-price { color: #3f4443; white-space: nowrap; }
@@ -135,6 +132,6 @@ body.cg-drawer-active { overflow: hidden; }
   .cg-seo h2 { font-size: 28px; }
   .cg-seo__lead, .cg-seo p { font-size: 12px; }
   .cg-badge { top: 6px; left: 6px; font-size: 7px; }
-  .cg-heart { top: 4px; right: 3px; }
   .cg-drawer__panel { width: min(90vw, 390px); padding: 22px; }
 }
+

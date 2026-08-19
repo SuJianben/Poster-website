@@ -84,7 +84,6 @@
                 {{ product.images[1] | image_url: width: 1200 | image_tag: class: 'cg-product-hover-image', loading: 'lazy', widths: '320,480,640,800,1200', alt: '' }}
               {% endif %}
             </a>
-            <button class="cg-heart" type="button" data-cg-heart aria-pressed="false" aria-label="Save {{ product.title | escape }}"></button>
             <div class="cg-product-meta">
               <a class="cg-product-title" href="{{ product.url }}">{{ product.title }}</a>
               <span class="cg-product-price">From {{ product.price | money }}</span>
@@ -230,3 +229,4 @@
   ]
 }
 {% endschema %}
+

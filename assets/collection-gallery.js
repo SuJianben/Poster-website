@@ -52,10 +52,5 @@
     if (control.dataset.cgView) applyView(control.dataset.cgView, true);
   }));
 
-  root.addEventListener('click', (event) => {
-    const heart = event.target.closest?.('[data-cg-heart]');
-    if (!heart) return;
-    heart.setAttribute('aria-pressed', String(heart.getAttribute('aria-pressed') !== 'true'));
-  });
-
 })();
+
