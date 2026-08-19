@@ -30,7 +30,7 @@
 .ps-print-preview .print-preview__layer--passepartout { z-index: 2; transform: scale(var(--ps-framing-layer-scale, 1)); }
 .ps-print-preview .print-preview__layer--frame { z-index: 3; transform: scale(var(--ps-framing-layer-scale, 1)); }
 .ps-print-preview .print-preview__layer[hidden] { display: none !important; }
-.ps-print-preview .print-preview__inner[data-has-passepartout="true"] .print-preview__layer--art { transform: scale(.57); transition: none; }
+.ps-section[data-ps-framing-render-mode="image"] .ps-print-preview .print-preview__inner[data-has-passepartout="true"] .print-preview__layer--art { transform: scale(.57); transition: none; }
 .ps-print-preview .print-preview__inner[data-has-frame="true"] .print-preview__layer--frame { display: block; filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
 .ps-print-preview .ps-main-media__image { width: 100%; height: 100%; max-height: none; }
 @media only screen and (min-width: 990px) {

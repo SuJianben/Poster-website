@@ -5,6 +5,7 @@ $section = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\main-product
 $customSection = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\custom-product-main.liquid') -Raw
 $controller = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\product-framing.js') -Raw
 $renderer = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\custom-css-framing.js') -Raw
+$productStyles = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\product-showcase.css') -Raw
 $artworkSnippet = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\product-preview-artwork.liquid') -Raw
 $railsSnippet = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\css-frame-rails.liquid') -Raw
 
@@ -47,6 +48,10 @@ Assert-Contains $controller 'layer.removeAttribute(''src'');' 'CSS mode must cle
 Assert-Contains $controller 'render_mode: renderMode' 'Framing analytics must record the active rendering mode.'
 Assert-Contains $renderer "event: 'css_framing_preview_initialized'" 'Shared CSS renderer must emit a generic initialization event.'
 Assert-Contains $renderer 'product_context: productContext' 'CSS renderer analytics must identify the product context.'
+Assert-Contains $productStyles '.ps-section[data-ps-framing-render-mode="image"] .ps-print-preview .print-preview__inner[data-has-passepartout="true"] .print-preview__layer--art' 'Legacy passepartout artwork scaling must be limited to image rendering.'
+if ($productStyles -match '(?m)^\s*\.ps-print-preview \.print-preview__inner\[data-has-passepartout="true"\] \.print-preview__layer--art') {
+  throw 'CSS rendering must not inherit the legacy 57% image-layer scale.'
+}
 Assert-Contains $section 'data-ps-framing-layer="passepartout"' 'Image-mode passepartout layer must remain available.'
 Assert-Contains $section 'data-ps-framing-layer="frame"' 'Image-mode frame layer must remain available.'
 
