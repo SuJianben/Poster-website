@@ -204,7 +204,18 @@
         "text": "Turn your favourite photo into a personalised poster. Choose the size and frame, preview every detail, and create something made for your space.",
         "link_label": "CREATE YOUR POSTSTER",
         "link": "shopify://products/custom-poster",
-        "collection": "selected-series-1"
+        "collection": "selected-series-1",
+        "enable_personalizer": true,
+        "upload_heading": "Upload your image",
+        "upload_button_label": "Choose image",
+        "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.",
+        "crop_heading": "Crop your image",
+        "crop_help_text": "Choose one of the three fixed poster ratios, then position and resize the crop area.",
+        "crop_cancel_label": "Cancel",
+        "crop_confirm_label": "Use crop",
+        "preview_left": 57,
+        "preview_top": 32,
+        "preview_width": 50
       }
     },
     "editorial_2": {

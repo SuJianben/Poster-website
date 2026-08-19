@@ -406,4 +406,3 @@
     upload.dataset.state = 'empty';
   });
 })();
-
