@@ -196,7 +196,7 @@
         "n5"
       ],
       "settings": {
-        "image": "shopify://shop_images/20260819-095255.jpg",
+        "image": "shopify://shop_images/custom-1.jpg",
         "fallback_image_asset": "figma-lifestyle-nordic.jpg",
         "image_position": "left",
         "eyebrow": "PERSONALISED ART",
@@ -272,7 +272,18 @@
         "text": "From quiet abstracts to bold statements, explore our complete collection and discover art that feels at home in your space.",
         "link_label": "EXPLORE ALL ART",
         "link": "shopify://collections/all-art-prints",
-        "collection": "selected-series-2"
+        "collection": "selected-series-2",
+        "enable_personalizer": false,
+        "upload_heading": "Upload your image",
+        "upload_button_label": "Choose image",
+        "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.",
+        "crop_heading": "Crop your image",
+        "crop_help_text": "Choose one of the three fixed poster ratios, then position and resize the crop area.",
+        "crop_cancel_label": "Cancel",
+        "crop_confirm_label": "Use crop",
+        "preview_left": 57,
+        "preview_top": 32,
+        "preview_width": 50
       }
     },
     "customer_reviews": {
