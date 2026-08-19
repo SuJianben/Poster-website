@@ -1,0 +1,16 @@
+{% if preview_media %}
+  <img
+    class="ps-main-media__image print-preview__layer print-preview__layer--art"
+    data-ps-main-image
+    data-pdp-print-art
+    src="{{ preview_media.preview_image | image_url: width: 1800 }}"
+    srcset="{{ preview_media.preview_image | image_url: width: 640 }} 640w, {{ preview_media.preview_image | image_url: width: 900 }} 900w, {{ preview_media.preview_image | image_url: width: 1200 }} 1200w, {{ preview_media.preview_image | image_url: width: 1600 }} 1600w, {{ preview_media.preview_image | image_url: width: 1800 }} 1800w"
+    sizes="(min-width: 901px) 58vw, 100vw"
+    width="{{ preview_media.preview_image.width }}"
+    height="{{ preview_media.preview_image.height }}"
+    loading="eager"
+    alt="{{ preview_media.alt | default: product.title | escape }}"
+  >
+{% else %}
+  <img class="ps-main-media__image print-preview__layer print-preview__layer--art" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
+{% endif %}

@@ -16,6 +16,8 @@
     frame: root.querySelector('[data-ps-framing-layer="frame"]'),
   };
   const selected = { passepartout: null, frame: null };
+  const renderMode = root.dataset.psFramingRenderMode || 'image';
+  const usesCssPreview = renderMode === 'css';
   let isCustomPreviewActive = false;
 
   const labels = {
@@ -90,6 +92,19 @@
 
   const applyPreview = () => {
     const orientation = preview?.dataset.psPreviewOrientation || 'portrait';
+    if (usesCssPreview) {
+      for (const layer of Object.values(layers)) {
+        if (!layer) continue;
+        layer.hidden = true;
+        layer.removeAttribute('src');
+      }
+      root.productFramePreview?.update({
+        passepartout: selected.passepartout,
+        frame: selected.frame,
+        active: isCustomPreviewActive,
+      });
+      return;
+    }
     for (const kind of ['passepartout', 'frame']) {
       const layer = layers[kind];
       const chosen = selected[kind];
@@ -242,6 +257,7 @@
     frame_variant_count: catalog.frame?.variants?.length || 0,
     visible_passepartout_variant_count: (catalog.passepartout?.variants || []).filter((variant) => isFramingOptionVisible('passepartout', variant)).length,
     visible_frame_variant_count: (catalog.frame?.variants || []).filter((variant) => isFramingOptionVisible('frame', variant)).length,
+    render_mode: renderMode,
   });
 
   render('passepartout');

@@ -1,14 +1,24 @@
+{% assign framing_render_mode = 'image' %}
+{% if section.settings.enable_css_framing_preview %}
+  {% assign framing_render_mode = 'css' %}
+{% endif %}
 {{ 'product-showcase.css' | asset_url | stylesheet_tag }}
+{% if framing_render_mode == 'css' %}
+  <link rel="stylesheet" href="{{ 'custom-css-framing.css' | asset_url }}&psv=default-product-toggle-v1-20260819">
+{% endif %}
 <script src="{{ 'framing-option-visibility.js' | asset_url }}&psv=framing-visibility-20260818" defer="defer"></script>
 <script src="{{ 'product-framing-catalog.js' | asset_url }}&psv=framing-catalog-fallback-20260814" defer="defer"></script>
-<script src="{{ 'product-framing.js' | asset_url }}&psv=framing-visibility-20260818" defer="defer"></script>
+{% if framing_render_mode == 'css' %}
+  <script src="{{ 'custom-css-framing.js' | asset_url }}&psv=default-product-toggle-v1-20260819" defer="defer"></script>
+{% endif %}
+<script src="{{ 'product-framing.js' | asset_url }}&psv=default-product-toggle-v1-20260819" defer="defer"></script>
 <script src="{{ 'product-showcase.js' | asset_url }}&psv=framing-addons-20260814" defer="defer"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
 {% assign preview_media = product.media | where: 'media_type', 'image' | last %}
 
-<section class="ps-product ps-section" data-ps-product data-section-id="{{ section.id }}">
+<section class="ps-product ps-section" data-ps-product data-ps-product-context="default" data-ps-framing-render-mode="{{ framing_render_mode }}" data-section-id="{{ section.id }}">
   <div class="ps-shell">
     {% if section.settings.show_breadcrumb %}
       <nav class="ps-breadcrumb" aria-label="Breadcrumb">
@@ -42,21 +52,17 @@
             <print-preview class="ps-print-preview" data-ps-art-preview data-orientation="portrait" data-media-id="{{ preview_media.id | default: product.media.first.id }}" style="--pdp-aspect: {% if preview_media %}{{ preview_media.preview_image.width }} / {{ preview_media.preview_image.height }}{% else %}800 / 1100{% endif %};">
               <div class="print-preview__inner" data-pdp-print-preview data-pdp-canvas data-ps-preview-canvas>
                 <div class="print-preview__bg" aria-hidden="true"></div>
-                {% if preview_media %}
-                  <img
-                    class="ps-main-media__image print-preview__layer print-preview__layer--art"
-                    data-ps-main-image
-                    data-pdp-print-art
-                    src="{{ preview_media.preview_image | image_url: width: 1800 }}"
-                    srcset="{{ preview_media.preview_image | image_url: width: 640 }} 640w, {{ preview_media.preview_image | image_url: width: 900 }} 900w, {{ preview_media.preview_image | image_url: width: 1200 }} 1200w, {{ preview_media.preview_image | image_url: width: 1600 }} 1600w, {{ preview_media.preview_image | image_url: width: 1800 }} 1800w"
-                    sizes="(min-width: 901px) 58vw, 100vw"
-                    width="{{ preview_media.preview_image.width }}"
-                    height="{{ preview_media.preview_image.height }}"
-                    loading="eager"
-                    alt="{{ preview_media.alt | default: product.title | escape }}"
-                  >
+                {% if framing_render_mode == 'css' %}
+                  <div class="ps-css-frame" data-ps-css-frame data-has-frame="false">
+                    <div class="ps-css-mat" data-ps-css-mat data-has-mat="false">
+                      {% render 'css-frame-rails' %}
+                      <div class="ps-css-artwork" data-ps-css-artwork>
+                        {% render 'product-preview-artwork', preview_media: preview_media, product: product %}
+                      </div>
+                    </div>
+                  </div>
                 {% else %}
-                  <img class="ps-main-media__image print-preview__layer print-preview__layer--art" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
+                  {% render 'product-preview-artwork', preview_media: preview_media, product: product %}
                 {% endif %}
                 <img class="print-preview__layer print-preview__layer--passepartout" data-ps-framing-layer="passepartout" width="800" height="1100" alt="" hidden aria-hidden="true">
                 <img class="print-preview__layer print-preview__layer--frame" data-ps-framing-layer="frame" width="800" height="1100" alt="" hidden aria-hidden="true">
@@ -213,6 +219,13 @@
 {
   "name": "Main product",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_css_framing_preview",
+      "label": "Use CSS frame preview rendering",
+      "info": "When disabled, frame and passepartout previews use image assets.",
+      "default": false
+    },
     {
       "type": "checkbox",
       "id": "show_breadcrumb",

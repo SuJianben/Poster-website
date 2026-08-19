@@ -89,10 +89,18 @@
     fit: scheduleFit,
   };
 
+  const productContext = root.dataset.psProductContext || 'custom';
   window.dataLayer?.push({
-    event: 'custom_css_framing_initialized',
+    event: 'css_framing_preview_initialized',
+    product_context: productContext,
     render_mode: root.dataset.psFramingRenderMode || 'css',
   });
+  if (productContext === 'custom') {
+    window.dataLayer?.push({
+      event: 'custom_css_framing_initialized',
+      render_mode: root.dataset.psFramingRenderMode || 'css',
+    });
+  }
 
   render();
 })();
