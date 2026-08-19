@@ -11,7 +11,7 @@ function Assert-Contains([string]$Value, [string]$Expected, [string]$Message) {
   if (-not $Value.Contains($Expected)) { throw $Message }
 }
 
-Assert-Contains $section "'home-customer-reviews.css' | asset_url | stylesheet_tag" 'Customer reviews must load their independent stylesheet.'
+Assert-Contains $section "'home-customer-reviews.css' | asset_url }}&hrw=reviews-scrollbar-v1-20260819" 'Customer reviews must load their independent stylesheet with a cache version.'
 Assert-Contains $section 'data-home-customer-reviews' 'Customer reviews must expose a stable section hook.'
 Assert-Contains $section 'data-review-content-source="theme-editor"' 'Review copy must expose its traceable theme-editor source.'
 Assert-Contains $section 'section.settings.summary_stars' 'Overall star count must be theme-editor configurable.'

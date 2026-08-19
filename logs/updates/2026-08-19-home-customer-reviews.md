@@ -16,6 +16,7 @@
 - `sections/home-customer-reviews.liquid`：评论区结构与主题编辑器配置。
 - `assets/home-customer-reviews.css`：桌面四列布局、平板和手机横向卡片轨道，并隐藏移动端原生滚动条。
 - `tests/home-customer-reviews.test.ps1`：验证首页顺序、可配置字段、样式作用域及参考站内容未被误复制。
+- 评论区 CSS 使用独立缓存版本参数，避免外部浏览器继续命中修改前的 Shopify CDN 资源。
 
 ## 可配置内容
 
