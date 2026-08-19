@@ -22,6 +22,7 @@ Assert-Contains $section 'block.settings.author' 'Each review author must be the
 Assert-Contains $section 'block.shopify_attributes' 'Review blocks must remain selectable in the theme editor.'
 Assert-Contains $styles '.hrw-section' 'Customer review CSS must use the hrw namespace.'
 Assert-Contains $styles 'scroll-snap-type: x mandatory' 'Review cards must use a mobile-friendly horizontal rail.'
+Assert-Contains $styles 'scrollbar-width: none' 'The mobile review rail must hide the browser scrollbar while remaining swipeable.'
 
 if ($section -match '(?i)verified buyer|70[,.]934|Rosanne|Belinda|Charles') {
   throw 'Reference-site review claims or identities must not be copied into the theme.'

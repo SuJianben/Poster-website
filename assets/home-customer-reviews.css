@@ -131,8 +131,12 @@
     overflow-x: auto;
     padding-bottom: 8px;
     scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
+    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .hrw-section__cards::-webkit-scrollbar {
+    display: none;
   }
 
   .hrw-card {
