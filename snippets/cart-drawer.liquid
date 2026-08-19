@@ -14,5 +14,8 @@
       {% endif %}
     </div>
     <footer class="cd-drawer__footer" data-cart-drawer-footer{% if visible_cart_count == 0 %} hidden{% endif %}></footer>
+    <template data-cart-drawer-payment-icons>
+      {% render 'shopify-payment-icons', context: 'cart', label: 'Accepted payment methods' %}
+    </template>
   </section>
 </aside>

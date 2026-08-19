@@ -1,0 +1,20 @@
+{% liquid
+  assign payment_context = context | default: 'default' | handle
+  assign payment_label = label | default: 'Accepted payment methods'
+%}
+
+{% if shop.enabled_payment_types != empty %}
+  <ul
+    class="shopify-payment-icons shopify-payment-icons--{{ payment_context }}"
+    role="list"
+    aria-label="{{ payment_label | escape }}"
+    data-shopify-payment-icons
+    data-payment-source="shop.enabled_payment_types"
+  >
+    {% for payment_type in shop.enabled_payment_types %}
+      <li class="shopify-payment-icons__item">
+        {{ payment_type | payment_type_svg_tag: class: 'shopify-payment-icons__icon' }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

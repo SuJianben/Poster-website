@@ -15,13 +15,14 @@
     {{ 'header-adaptive.css' | asset_url | stylesheet_tag }}
     {{ 'mobile-menu.css' | asset_url | stylesheet_tag }}
     {{ 'header-navigation.css' | asset_url | stylesheet_tag }}
-    {{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="{{ 'cart-drawer.css' | asset_url }}&psv=shopify-payment-icons-v1-20260819">
+    <link rel="stylesheet" href="{{ 'shopify-payment-icons.css' | asset_url }}&psv=shopify-payment-icons-v1-20260819">
     {{ 'search-overlay.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'poster-theme.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-adaptive.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'header-navigation.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'cart-drawer.js' | asset_url }}&drawer_build=20260728" defer="defer"></script>
+    <script src="{{ 'cart-drawer.js' | asset_url }}&drawer_build=shopify-payment-icons-v1-20260819" defer="defer"></script>
     <script src="{{ 'search-overlay.js' | asset_url }}" defer="defer"></script>
   </head>
   <body class="store-root template-{{ request.page_type | handle }}">

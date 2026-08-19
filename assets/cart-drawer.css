@@ -44,9 +44,6 @@ html.is-cart-drawer-open { overflow: hidden; }
 .cd-drawer__lock { width: 13px; height: 14px; display: inline-block; border: 2px solid currentColor; border-radius: 2px; }
 .cd-drawer__lock::before { position: absolute; left: 50%; bottom: 9px; width: 7px; height: 7px; border: 2px solid currentColor; border-bottom: 0; border-radius: 7px 7px 0 0; content: ''; transform: translateX(-50%); }
 .cd-drawer__guarantee { margin: 12px 0 8px; color: #1b1b1b; font: 500 11px/1.2 var(--sans, Arial, sans-serif); text-align: center; }
-.cd-drawer__payments { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; }
-.cd-drawer__payment { min-height: 23px; display: grid; place-items: center; border: 1px solid #dedede; border-radius: 3px; background: #fff; color: #111; font: 700 9px/1 Arial, sans-serif; }
-.cd-drawer__payment--amex { background: #0679c8; color: #fff; }.cd-drawer__payment--mc { background: #151515; color: #ff564a; }.cd-drawer__payment--visa { background: #173c9f; color: #fff; }.cd-drawer__payment--klarna { background: #ffb3cc; }
 .cd-drawer.is-busy .cd-drawer__panel { cursor: progress; }
 .cd-drawer.is-busy .cd-drawer__body { opacity: .62; pointer-events: none; }
 @media (max-width: 600px) { .cd-drawer__panel { width: min(100%, 430px); }.cd-drawer__header { padding: 0 20px; }.cd-drawer__body { padding: 23px 20px; }.cd-drawer__footer { padding: 22px 20px 16px; }.cd-drawer__item { grid-template-columns: 92px minmax(0, 1fr); gap: 14px; }.cd-drawer__image { width: 92px; height: 92px; } }
