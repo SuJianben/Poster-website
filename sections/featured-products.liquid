@@ -22,12 +22,12 @@
             {% assign hover_media = product.media[1] %}
           {% endif %}
           <article class="tilted-carousel__slide{% if hover_media != blank %} has-hover-image{% endif %}" data-tilted-slide data-product-handle="{{ product.handle | escape }}" data-link="{{ product.url }}" data-source="collection" aria-current="false">
-            <a class="tilted-carousel__image" href="{{ product.url }}" data-tilted-select aria-label="View {{ product.title | escape }}">
+            <a class="tilted-carousel__image" href="{{ product.url }}" draggable="false" data-tilted-select aria-label="View {{ product.title | escape }}">
               {% if product.featured_media %}
-                {{ product.featured_media | image_url: width: 900 | image_tag: class: 'tilted-carousel__primary-image', alt: product.title, widths: '320,480,640,900', loading: 'lazy' }}
+                {{ product.featured_media | image_url: width: 900 | image_tag: class: 'tilted-carousel__primary-image', alt: product.title, widths: '320,480,640,900', loading: 'lazy', draggable: false }}
               {% endif %}
               {% if hover_media != blank %}
-                {{ hover_media | image_url: width: 900 | image_tag: class: 'tilted-carousel__hover-image', alt: product.title, widths: '320,480,640,900', loading: 'lazy' }}
+                {{ hover_media | image_url: width: 900 | image_tag: class: 'tilted-carousel__hover-image', alt: product.title, widths: '320,480,640,900', loading: 'lazy', draggable: false }}
               {% endif %}
             </a>
             <div class="tilted-carousel__details">
@@ -45,8 +45,8 @@
           {% assign title = tilted_titles[forloop.index0] %}
           {% assign meta = tilted_meta[forloop.index0] %}
           <article class="tilted-carousel__slide" data-tilted-slide data-product-handle="mock-{{ forloop.index }}" data-link="#" data-source="mock" aria-current="false">
-            <a class="tilted-carousel__image" href="#" data-tilted-select aria-label="View {{ title | escape }}">
-              <img class="tilted-carousel__primary-image" src="{{ asset_name | asset_url }}" alt="{{ title | escape }}" width="500" height="667"{% unless forloop.index0 == 3 %} loading="lazy"{% endunless %}>
+            <a class="tilted-carousel__image" href="#" draggable="false" data-tilted-select aria-label="View {{ title | escape }}">
+              <img class="tilted-carousel__primary-image" src="{{ asset_name | asset_url }}" alt="{{ title | escape }}" width="500" height="667" draggable="false"{% unless forloop.index0 == 3 %} loading="lazy"{% endunless %}>
             </a>
             <div class="tilted-carousel__details">
               <p class="tilted-carousel__artist">PosterAndForm</p>
