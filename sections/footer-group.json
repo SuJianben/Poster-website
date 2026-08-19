@@ -14,6 +14,20 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "link_column_7dYcWE": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Shop",
+            "menu": "shop"
+          }
+        },
+        "link_column_9DQ9pY": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Collections",
+            "menu": "collections"
+          }
+        },
         "shop": {
           "type": "link_column",
           "settings": {
@@ -30,6 +44,8 @@
         }
       },
       "block_order": [
+        "link_column_7dYcWE",
+        "link_column_9DQ9pY",
         "shop",
         "about"
       ],
