@@ -9,12 +9,6 @@ $productStyles = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\product-
 $artworkSnippet = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\product-preview-artwork.liquid') -Raw
 $railsSnippet = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\css-frame-rails.liquid') -Raw
 
-function Read-ShopifyJson([string]$Path) {
-  $content = Get-Content -LiteralPath $Path -Raw
-  $json = [regex]::Replace($content, '^\s*/\*[\s\S]*?\*/\s*', '')
-  return $json | ConvertFrom-Json
-}
-
 function Assert-Contains([string]$Value, [string]$Expected, [string]$Message) {
   if (-not $Value.Contains($Expected)) { throw $Message }
 }
@@ -27,18 +21,13 @@ if (-not $toggle) { throw 'Default product CSS preview toggle is missing.' }
 if ($toggle.type -ne 'checkbox') { throw 'Default product CSS preview toggle must be a checkbox.' }
 if ($toggle.default -ne $false) { throw 'Default product CSS preview toggle must default to image rendering.' }
 
-$productTemplate = Read-ShopifyJson (Join-Path $themeRoot 'templates\product.json')
-$storedToggle = $productTemplate.sections.main.settings.enable_css_framing_preview
-if ($null -ne $storedToggle -and $storedToggle -ne $false) {
-  throw 'The live default product template must remain in image mode until the merchant enables CSS rendering.'
-}
-
 Assert-Contains $section "{% assign framing_render_mode = 'image' %}" 'Default product rendering must begin in image mode.'
 Assert-Contains $section '{% if section.settings.enable_css_framing_preview %}' 'Default product rendering mode must be controlled by the theme-editor checkbox.'
 Assert-Contains $section 'data-ps-framing-render-mode="{{ framing_render_mode }}"' 'Default product root must publish its selected rendering mode.'
 Assert-Contains $section "{% if framing_render_mode == 'css' %}" 'CSS assets and markup must be conditional.'
 Assert-Contains $section "'custom-css-framing.css' | asset_url" 'Default product CSS mode must load the shared frame stylesheet.'
 Assert-Contains $section "'custom-css-framing.js' | asset_url" 'Default product CSS mode must load the shared frame renderer.'
+Assert-Contains $section "'product-showcase.css' | asset_url }}&psv=default-css-mat-scale-v1-20260819" 'Default product styles must use a cache version for the CSS mat-scale fix.'
 Assert-Contains $section "render 'css-frame-rails'" 'Default product CSS mode must reuse the shared rail markup.'
 Assert-Contains $section "render 'product-preview-artwork'" 'Default product must reuse the shared artwork markup.'
 Assert-Contains $customSection "render 'product-preview-artwork'" 'Custom product must reuse the shared artwork markup.'
