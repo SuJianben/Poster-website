@@ -19,6 +19,10 @@
   transform: translate(-50%, -50%);
 }
 
+.editorial-hotspot.is-open {
+  z-index: 9;
+}
+
 .editorial-hotspot__trigger {
   display: grid;
   width: 26px;

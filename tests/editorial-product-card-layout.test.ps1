@@ -50,8 +50,9 @@ Assert-Contains $styles 'object-fit: cover;' 'The second product image must cove
 Assert-Contains $styles 'inset #ebebeb 0 0 0 1px' 'Editorial cards must retain one #ebebeb inner frame.'
 Assert-Contains $styles 'background: #8dc29c;' 'The discount badge must use the approved green background.'
 Assert-Contains $styles 'color: #fff;' 'The discount badge text must remain white against the approved green background.'
-Assert-Contains $styles 'rgba(0, 0, 0, .14) 0 14px 28px 0' 'Hover must reveal only a subtle outer shadow.'
-Assert-Contains $styles 'box-shadow .55s ease-out' 'The hover shadow must fade out smoothly when the pointer leaves.'
+if ($styles.Contains('rgba(0, 0, 0, .14)') -or $styles.Contains('0 14px 28px')) {
+  throw 'Editorial cards must not render an outer drop shadow in any state.'
+}
 if ($styles.Contains('inset #333 0 0 0 5px')) {
   throw 'Editorial cards must not render the removed thick black frame.'
 }

@@ -40,7 +40,7 @@
   color: inherit;
   transform: rotateY(var(--depth-rotate-y, 0deg)) rotateX(var(--depth-rotate-x, 0deg));
   transform-style: preserve-3d;
-  transition: transform 1s var(--depth-return-easing), box-shadow .55s ease-out;
+  transition: transform 1s var(--depth-return-easing);
 }
 
 .editorial-depth-card__media {
@@ -133,8 +133,7 @@
 
 .editorial-depth-card.is-pointer-hovered .editorial-depth-card__surface,
 .editorial-depth-card:focus-within .editorial-depth-card__surface {
-  box-shadow: rgba(0, 0, 0, .14) 0 14px 28px 0, inset #ebebeb 0 0 0 1px;
-  transition: transform .6s var(--depth-hover-easing), box-shadow .4s ease-in;
+  transition: transform .6s var(--depth-hover-easing);
 }
 
 .editorial-depth-card.is-pointer-hovered .editorial-depth-card__image,

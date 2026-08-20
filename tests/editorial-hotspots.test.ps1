@@ -27,6 +27,8 @@ Assert-Contains $script 'editorial_hotspot_opened' 'Hotspot opening must be trac
 Assert-Contains $script 'editorial_hotspot_added_to_cart' 'Successful quick add must be tracked.'
 Assert-Contains $script 'dataset.editorialSectionId' 'Hotspot analytics must read the configured section ID.'
 Assert-Contains $styles '.editorial-hotspot__panel' 'Hotspot quick view must have scoped panel styles.'
+Assert-Contains $styles '.editorial-hotspot.is-open {' 'The open hotspot wrapper must establish a stacking layer above sibling hotspot triggers.'
+Assert-Contains $styles 'z-index: 9;' 'The open hotspot wrapper must keep sibling hotspot triggers beneath its quick-view panel.'
 Assert-Contains $styles '.editorial-products .editorial__image[data-editorial-hotspots]' 'Hotspot coordinates must be anchored to the editorial image container.'
 Assert-Contains $styles '@media (max-width: 750px)' 'Hotspot panel must have a mobile layout.'
 Assert-Contains $styles 'transform: none;' 'Mobile hotspot wrappers must not create a containing block for the fixed quick-view panel.'

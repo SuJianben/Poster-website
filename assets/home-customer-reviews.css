@@ -27,8 +27,7 @@
 
 .hrw-section__heading {
   margin: 0;
-  font: 700 clamp(28px, 2.35vw, 36px)/1.15 var(--font-chrome, Inter, Arial, sans-serif);
-  letter-spacing: -0.025em;
+  font: 500 32px var(--display);
 }
 
 .hrw-section__link {
@@ -152,10 +151,6 @@
   .hrw-section__header {
     align-items: flex-start;
     margin-bottom: 22px;
-  }
-
-  .hrw-section__heading {
-    font-size: 27px;
   }
 
   .hrw-section__link {
