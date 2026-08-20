@@ -24,3 +24,4 @@
 
   globalThis.PosterHomePersonalizerScene = { initialize };
 })();
+
