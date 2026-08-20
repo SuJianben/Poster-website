@@ -53,8 +53,14 @@
           {% for product in section.settings.collection.products limit: 4 %}
             {% assign product_artist = product.metafields.custom.artist.value | default: product.metafields.custom.artist | default: product.vendor %}
             {% assign hover_media = blank %}
+            {% assign discount_badge = section.settings.discount_badge_text %}
             {% if product.media.size > 1 and product.media[1].media_type == 'image' %}
               {% assign hover_media = product.media[1] %}
+            {% endif %}
+            {% if product.compare_at_price_max > product.price_min and product.compare_at_price_max > 0 %}
+              {% assign discount_saving = product.compare_at_price_max | minus: product.price_min %}
+              {% assign discount_percentage = discount_saving | times: 100.0 | divided_by: product.compare_at_price_max | round %}
+              {% assign discount_badge = 'Discount ' | append: discount_percentage | append: '%' %}
             {% endif %}
             <article
               class="editorial-depth-card{% if hover_media != blank %} has-hover-image{% endif %}"
@@ -66,10 +72,11 @@
                   {% if product.featured_media %}
                     {{ product.featured_media | image_url: width: 1200 | image_tag: class: 'editorial-depth-card__image editorial-depth-card__image--primary', loading: 'lazy', widths: '400,600,800,1200', alt: product.title }}
                   {% endif %}
-                  {% if hover_media != blank %}
-                    {{ hover_media | image_url: width: 1200 | image_tag: class: 'editorial-depth-card__image editorial-depth-card__image--hover', loading: 'lazy', widths: '400,600,800,1200', alt: '' }}
-                  {% endif %}
                 </span>
+                {% if hover_media != blank %}
+                  {{ hover_media | image_url: width: 1200 | image_tag: class: 'editorial-depth-card__image editorial-depth-card__image--hover', loading: 'lazy', widths: '400,600,800,1200', alt: '' }}
+                {% endif %}
+                {% if discount_badge != blank %}<span class="editorial-depth-card__badge">{{ discount_badge }}</span>{% endif %}
               </a>
               <div class="editorial-depth-card__content">
                 {% if product_artist != blank %}<p class="editorial-depth-card__eyebrow">{{ product_artist }}</p>{% endif %}
@@ -123,6 +130,7 @@
     {"type":"url","id":"link","label":"Link"},
     {"type":"collection","id":"collection","label":"Products collection"},
     {"type":"range","id":"card_artwork_padding","label":"Product card artwork margin","min":0,"max":20,"step":1,"unit":"%","default":9},
+    {"type":"text","id":"discount_badge_text","label":"Discount badge before compare-at pricing","default":"Discount"},
     {"type":"header","content":"Homepage personalizer"},
     {"type":"checkbox","id":"enable_personalizer","label":"Enable upload preview","default":false},
     {"type":"text","id":"upload_heading","label":"Upload heading","default":"Upload your image"},
@@ -148,5 +156,6 @@
   "presets": [{"name":"Editorial with products"}]
 }
 {% endschema %}
+
 
 
