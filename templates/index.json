@@ -263,7 +263,7 @@
         "hotspot_pink_flowers": {
           "type": "hotspot",
           "settings": {
-            "product": "pink-flowers",
+            "product": "flowers-on-blue-table",
             "position_x": 42,
             "position_y": 31
           }
@@ -271,7 +271,7 @@
         "hotspot_you": {
           "type": "hotspot",
           "settings": {
-            "product": "you",
+            "product": "the-dream",
             "position_x": 63,
             "position_y": 48
           }
@@ -279,7 +279,7 @@
         "hotspot_blue": {
           "type": "hotspot",
           "settings": {
-            "product": "composition-01",
+            "product": "12pm",
             "position_x": 80,
             "position_y": 56
           }
@@ -375,4 +375,3 @@
     "customer_reviews"
   ]
 }
-
