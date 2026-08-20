@@ -189,9 +189,20 @@
 }
 
 @media (max-width: 750px) {
+  .editorial-hotspot {
+    transform: none;
+  }
+
   .editorial-hotspot__trigger {
     width: 30px;
     height: 30px;
+    transform: translate(-50%, -50%);
+  }
+
+  .editorial-hotspot__trigger:hover,
+  .editorial-hotspot__trigger:focus-visible,
+  .editorial-hotspot.is-open .editorial-hotspot__trigger {
+    transform: translate(-50%, -50%) scale(1.08);
   }
 
   .editorial-hotspot__panel,

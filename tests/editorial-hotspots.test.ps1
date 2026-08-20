@@ -29,6 +29,8 @@ Assert-Contains $script 'dataset.editorialSectionId' 'Hotspot analytics must rea
 Assert-Contains $styles '.editorial-hotspot__panel' 'Hotspot quick view must have scoped panel styles.'
 Assert-Contains $styles '.editorial-products .editorial__image[data-editorial-hotspots]' 'Hotspot coordinates must be anchored to the editorial image container.'
 Assert-Contains $styles '@media (max-width: 750px)' 'Hotspot panel must have a mobile layout.'
+Assert-Contains $styles 'transform: none;' 'Mobile hotspot wrappers must not create a containing block for the fixed quick-view panel.'
+Assert-Contains $styles 'transform: translate(-50%, -50%);' 'Mobile hotspot buttons must retain visual centering after the wrapper transform is removed.'
 
 $secondEditorial = $homeTemplate.sections.editorial_2
 $hotspots = @($secondEditorial.blocks.PSObject.Properties.Value | Where-Object { $_.type -eq 'hotspot' })
