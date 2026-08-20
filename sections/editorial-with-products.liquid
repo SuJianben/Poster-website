@@ -11,7 +11,7 @@
 <section
   class="section editorial-products{% if section.settings.enable_personalizer %} home-personalizer{% endif %}"
   data-editorial-depth-section
-  style="--depth-artwork-padding: {{ section.settings.card_artwork_padding | default: 9 }}%;"
+  style="--depth-artwork-padding: {{ section.settings.card_artwork_padding | default: 12 }}%;"
   {% if section.settings.enable_personalizer %}data-home-personalizer data-home-personalizer-id="{{ section.id }}"{% endif %}
 >
   <div class="page-width editorial {% if section.settings.image_position == 'right' %}editorial--reverse{% endif %}">
@@ -129,7 +129,7 @@
     {"type":"text","id":"link_label","label":"Link label","default":"Explore the series"},
     {"type":"url","id":"link","label":"Link"},
     {"type":"collection","id":"collection","label":"Products collection"},
-    {"type":"range","id":"card_artwork_padding","label":"Product card artwork margin","min":0,"max":20,"step":1,"unit":"%","default":9},
+    {"type":"range","id":"card_artwork_padding","label":"Product card artwork margin","min":1,"max":20,"step":1,"unit":"%","default":12},
     {"type":"text","id":"discount_badge_text","label":"Discount badge before compare-at pricing","default":"Discount"},
     {"type":"header","content":"Homepage personalizer"},
     {"type":"checkbox","id":"enable_personalizer","label":"Enable upload preview","default":false},
@@ -156,6 +156,7 @@
   "presets": [{"name":"Editorial with products"}]
 }
 {% endschema %}
+
 
 
 

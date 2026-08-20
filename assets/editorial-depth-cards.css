@@ -45,7 +45,7 @@
 
 .editorial-depth-card__media {
   position: absolute;
-  inset: var(--depth-artwork-padding, 9%);
+  inset: max(0%, calc(var(--depth-artwork-padding, 12%) - 1%)) var(--depth-artwork-padding, 12%);
   display: block;
   pointer-events: none;
 }
@@ -204,6 +204,7 @@
     transition: none;
   }
 }
+
 
 
 
