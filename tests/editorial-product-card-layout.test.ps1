@@ -35,6 +35,10 @@ Assert-Contains $styles '.editorial-depth-card.has-hover-image:hover .editorial-
 Assert-Contains $styles '.editorial-depth-card__content {' 'The content-below layout must have a dedicated static content block.'
 Assert-Contains $styles 'inset: var(--depth-artwork-padding, 9%);' 'Artwork must keep an adjustable margin inside the image card.'
 Assert-Contains $styles 'object-fit: contain;' 'Landscape and portrait artwork must remain fully visible without cropping.'
+Assert-Contains $styles 'inset rgba(0, 0, 0, .1) 0 0 0 1px' 'Editorial cards must retain one subtle inner frame.'
+if ($styles.Contains('inset #333 0 0 0 5px')) {
+  throw 'Editorial cards must not render the removed thick black frame.'
+}
 if ($styles.Contains('object-fit: cover;')) {
   throw 'Editorial artwork must not revert to cover cropping.'
 }
