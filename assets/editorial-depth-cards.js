@@ -80,3 +80,4 @@
   document.addEventListener('shopify:section:load', (event) => setupCards(event.target));
 })();
 
+

@@ -133,3 +133,4 @@
   }
   document.addEventListener('shopify:section:load', (event) => setup(event.target));
 })();
+
