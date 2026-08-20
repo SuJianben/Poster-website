@@ -54,8 +54,11 @@ if (-not $surfaceRule.Success) {
   throw 'Editorial card surface rule is missing.'
 }
 if ($surfaceRule.Groups['body'].Value -match 'box-shadow\s*:') {
-  throw 'Editorial card surface must not render an inset or outer box shadow.'
+  throw 'Editorial card surface must not render a shadow in its default state.'
 }
+Assert-Contains $styles 'box-shadow: rgba(0, 0, 0, .14) 0 14px 28px 0;' 'Editorial cards must restore the original subtle outer shadow on hover and focus.'
+Assert-Contains $styles 'box-shadow .4s ease-in' 'The hover shadow must fade in smoothly.'
+Assert-Contains $styles 'box-shadow .55s ease-out' 'The hover shadow must fade out smoothly after the delayed pointer reset.'
 if ($styles.Contains('inset #333 0 0 0 5px')) {
   throw 'Editorial cards must not render the removed thick black frame.'
 }
