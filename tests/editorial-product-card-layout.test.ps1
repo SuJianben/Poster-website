@@ -47,11 +47,14 @@ Assert-Contains $styles '.editorial-depth-card__content {' 'The content-below la
 Assert-Contains $styles 'inset: max(0%, calc(var(--depth-artwork-padding, 12%) - 1%)) var(--depth-artwork-padding, 12%);' 'Artwork must match the collection grid 76% by 78% media size at the default setting.'
 Assert-Contains $styles 'object-fit: contain;' 'Landscape and portrait artwork must remain fully visible without cropping.'
 Assert-Contains $styles 'object-fit: cover;' 'The second product image must cover the complete card on hover.'
-Assert-Contains $styles 'inset #ebebeb 0 0 0 1px' 'Editorial cards must retain one #ebebeb inner frame.'
 Assert-Contains $styles 'background: #8dc29c;' 'The discount badge must use the approved green background.'
 Assert-Contains $styles 'color: #fff;' 'The discount badge text must remain white against the approved green background.'
-if ($styles.Contains('rgba(0, 0, 0, .14)') -or $styles.Contains('0 14px 28px')) {
-  throw 'Editorial cards must not render an outer drop shadow in any state.'
+$surfaceRule = [regex]::Match($styles, '(?s)\.editorial-depth-card__surface\s*\{(?<body>.*?)\}')
+if (-not $surfaceRule.Success) {
+  throw 'Editorial card surface rule is missing.'
+}
+if ($surfaceRule.Groups['body'].Value -match 'box-shadow\s*:') {
+  throw 'Editorial card surface must not render an inset or outer box shadow.'
 }
 if ($styles.Contains('inset #333 0 0 0 5px')) {
   throw 'Editorial cards must not render the removed thick black frame.'

@@ -36,7 +36,6 @@
   overflow: hidden;
   border-radius: var(--depth-card-radius);
   background: var(--bg-soft, #ececeb);
-  box-shadow: inset #ebebeb 0 0 0 1px;
   color: inherit;
   transform: rotateY(var(--depth-rotate-y, 0deg)) rotateX(var(--depth-rotate-x, 0deg));
   transform-style: preserve-3d;
