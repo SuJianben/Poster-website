@@ -11,6 +11,7 @@
 <section
   class="section editorial-products{% if section.settings.enable_personalizer %} home-personalizer{% endif %}"
   data-editorial-depth-section
+  style="--depth-artwork-padding: {{ section.settings.card_artwork_padding | default: 9 }}%;"
   {% if section.settings.enable_personalizer %}data-home-personalizer data-home-personalizer-id="{{ section.id }}"{% endif %}
 >
   <div class="page-width editorial {% if section.settings.image_position == 'right' %}editorial--reverse{% endif %}">
@@ -61,12 +62,14 @@
               data-product-handle="{{ product.handle | escape }}"
             >
               <a class="editorial-depth-card__surface" href="{{ product.url }}" aria-label="View {{ product.title | escape }}">
-                {% if product.featured_media %}
-                  {{ product.featured_media | image_url: width: 1200 | image_tag: class: 'editorial-depth-card__image editorial-depth-card__image--primary', loading: 'lazy', widths: '400,600,800,1200', alt: product.title }}
-                {% endif %}
-                {% if hover_media != blank %}
-                  {{ hover_media | image_url: width: 1200 | image_tag: class: 'editorial-depth-card__image editorial-depth-card__image--hover', loading: 'lazy', widths: '400,600,800,1200', alt: '' }}
-                {% endif %}
+                <span class="editorial-depth-card__media">
+                  {% if product.featured_media %}
+                    {{ product.featured_media | image_url: width: 1200 | image_tag: class: 'editorial-depth-card__image editorial-depth-card__image--primary', loading: 'lazy', widths: '400,600,800,1200', alt: product.title }}
+                  {% endif %}
+                  {% if hover_media != blank %}
+                    {{ hover_media | image_url: width: 1200 | image_tag: class: 'editorial-depth-card__image editorial-depth-card__image--hover', loading: 'lazy', widths: '400,600,800,1200', alt: '' }}
+                  {% endif %}
+                </span>
               </a>
               <div class="editorial-depth-card__content">
                 {% if product_artist != blank %}<p class="editorial-depth-card__eyebrow">{{ product_artist }}</p>{% endif %}
@@ -82,7 +85,9 @@
           {% for block in section.blocks %}
             <article class="editorial-depth-card" data-depth-card {{ block.shopify_attributes }}>
               <a class="editorial-depth-card__surface" href="{{ block.settings.link }}" aria-label="View {{ block.settings.title | escape }}">
-                <img class="editorial-depth-card__image editorial-depth-card__image--primary" src="{{ block.settings.asset_name | asset_url }}" alt="{{ block.settings.title | escape }}" width="900" height="1350" loading="lazy">
+                <span class="editorial-depth-card__media">
+                  <img class="editorial-depth-card__image editorial-depth-card__image--primary" src="{{ block.settings.asset_name | asset_url }}" alt="{{ block.settings.title | escape }}" width="900" height="1350" loading="lazy">
+                </span>
               </a>
               <div class="editorial-depth-card__content">
                 {% if block.settings.meta != blank %}<p class="editorial-depth-card__eyebrow">{{ block.settings.meta }}</p>{% endif %}
@@ -117,6 +122,7 @@
     {"type":"text","id":"link_label","label":"Link label","default":"Explore the series"},
     {"type":"url","id":"link","label":"Link"},
     {"type":"collection","id":"collection","label":"Products collection"},
+    {"type":"range","id":"card_artwork_padding","label":"Product card artwork margin","min":0,"max":20,"step":1,"unit":"%","default":9},
     {"type":"header","content":"Homepage personalizer"},
     {"type":"checkbox","id":"enable_personalizer","label":"Enable upload preview","default":false},
     {"type":"text","id":"upload_heading","label":"Upload heading","default":"Upload your image"},
@@ -142,4 +148,5 @@
   "presets": [{"name":"Editorial with products"}]
 }
 {% endschema %}
+
 
