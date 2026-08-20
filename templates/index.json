@@ -15,31 +15,31 @@
         "offshore": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/FIGURATIVE_FASHION.jpg",
+            "image": "shopify://shop_images/FIGURATIVE_FASHION.jpg",
             "asset_name": "reference-gallery-03.jpg",
             "title": "FIGURATIVE & FASHION",
             "text": "Art in Motion Expressive figures, fluid lines and colour in movement.",
-            "link": "shopify:\/\/collections\/figurative-fashion-prints"
+            "link": "shopify://collections/figurative-fashion-prints"
           }
         },
         "high_country": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/THE_ART_OF_PROCESS.jpg",
+            "image": "shopify://shop_images/THE_ART_OF_PROCESS.jpg",
             "asset_name": "reference-gallery-02.jpg",
             "title": "THE ART OF PROCESS",
             "text": "A Day in Form Geometric studies from morning to midnight.",
-            "link": "shopify:\/\/collections\/abstract-geometric-prints"
+            "link": "shopify://collections/abstract-geometric-prints"
           }
         },
         "pines": {
           "type": "slide",
           "settings": {
-            "image": "shopify:\/\/shop_images\/BOTANICAL_FLORAL.jpg",
+            "image": "shopify://shop_images/BOTANICAL_FLORAL.jpg",
             "asset_name": "BOTANICAL & FLORAL",
             "title": "Into the Pines",
             "text": "Vases in Bloom Painterly botanicals for rooms that need colour.",
-            "link": "shopify:\/\/collections\/botanical-floral-prints"
+            "link": "shopify://collections/botanical-floral-prints"
           }
         }
       },
@@ -57,72 +57,72 @@
           "type": "category",
           "settings": {
             "title": "Abstract",
-            "image": "shopify:\/\/shop_images\/gallery_07_e45a9371-fbdd-4f79-b548-59a7637104ad.webp",
+            "image": "shopify://shop_images/gallery_07_e45a9371-fbdd-4f79-b548-59a7637104ad.webp",
             "asset_name": "figma-poster-c1.jpg",
-            "link": "shopify:\/\/collections\/abstract-geometric-prints"
+            "link": "shopify://collections/abstract-geometric-prints"
           }
         },
         "music": {
           "type": "category",
           "settings": {
             "title": "Figurative",
-            "image": "shopify:\/\/shop_images\/gallery_07_19152f2d-f6b6-4ae4-9e72-092efe62f94a.webp",
+            "image": "shopify://shop_images/gallery_07_19152f2d-f6b6-4ae4-9e72-092efe62f94a.webp",
             "asset_name": "figma-poster-m1.jpg",
-            "link": "shopify:\/\/collections\/figurative-fashion-prints"
+            "link": "shopify://collections/figurative-fashion-prints"
           }
         },
         "sports": {
           "type": "category",
           "settings": {
             "title": "Botanical",
-            "image": "shopify:\/\/shop_images\/gallery_06_8d521c67-482f-4d71-a5fa-a3ccbd596932.webp",
+            "image": "shopify://shop_images/gallery_06_8d521c67-482f-4d71-a5fa-a3ccbd596932.webp",
             "asset_name": "figma-poster-s2.jpg",
-            "link": "shopify:\/\/collections\/botanical-floral-prints"
+            "link": "shopify://collections/botanical-floral-prints"
           }
         },
         "nordic": {
           "type": "category",
           "settings": {
             "title": "Animals",
-            "image": "shopify:\/\/shop_images\/gallery_04_b1b3030d-34dc-496b-8bf7-7f80b1c9da4c.webp",
+            "image": "shopify://shop_images/gallery_04_b1b3030d-34dc-496b-8bf7-7f80b1c9da4c.webp",
             "asset_name": "figma-poster-n1.jpg",
-            "link": "shopify:\/\/collections\/animals-prints"
+            "link": "shopify://collections/animals-prints"
           }
         },
         "vintage": {
           "type": "category",
           "settings": {
             "title": "Photography",
-            "image": "shopify:\/\/shop_images\/gallery_04_497e68e3-0fa3-4dae-a1f9-8afeeb7b9a63.webp",
+            "image": "shopify://shop_images/gallery_04_497e68e3-0fa3-4dae-a1f9-8afeeb7b9a63.webp",
             "asset_name": "figma-poster-r1.jpg",
-            "link": "shopify:\/\/collections\/photography-landscape-prints"
+            "link": "shopify://collections/photography-landscape-prints"
           }
         },
         "anime": {
           "type": "category",
           "settings": {
             "title": "Minimal",
-            "image": "shopify:\/\/shop_images\/gallery_04.jpg",
+            "image": "shopify://shop_images/gallery_04.jpg",
             "asset_name": "figma-poster-a2.jpg",
-            "link": "shopify:\/\/collections\/minimal-neutral-prints"
+            "link": "shopify://collections/minimal-neutral-prints"
           }
         },
         "art": {
           "type": "category",
           "settings": {
             "title": "Food",
-            "image": "shopify:\/\/shop_images\/gallery_06_5aeccecb-7998-4e11-a86b-c2edcec9cd5a.webp",
+            "image": "shopify://shop_images/gallery_06_5aeccecb-7998-4e11-a86b-c2edcec9cd5a.webp",
             "asset_name": "figma-poster-t1.jpg",
-            "link": "shopify:\/\/collections\/food-kitchen-art-prints"
+            "link": "shopify://collections/food-kitchen-art-prints"
           }
         },
         "new": {
           "type": "category",
           "settings": {
             "title": "Typography",
-            "image": "shopify:\/\/shop_images\/gallery_06_dbe81187-2617-406c-845e-2fb79252edc3.webp",
+            "image": "shopify://shop_images/gallery_06_dbe81187-2617-406c-845e-2fb79252edc3.webp",
             "asset_name": "figma-poster-a2.jpg",
-            "link": "shopify:\/\/collections\/typography-quotes-prints"
+            "link": "shopify://collections/typography-quotes-prints"
           }
         }
       },
@@ -139,7 +139,7 @@
       "settings": {
         "eyebrow": "Shop by category",
         "link_label": "View all",
-        "link": "shopify:\/\/collections\/all-art-prints"
+        "link": "shopify://collections/all-art-prints"
       }
     },
     "featured": {
@@ -158,7 +158,7 @@
             "asset_name": "figma-poster-n1.jpg",
             "title": "Langosta",
             "meta": "Hendrik Schuette · $199",
-            "link": "shopify:\/\/products\/langosta"
+            "link": "shopify://products/langosta"
           }
         },
         "n2": {
@@ -196,17 +196,19 @@
         "n5"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/custom-1.jpg",
+        "image": "shopify://shop_images/custom-1.jpg",
         "fallback_image_asset": "figma-lifestyle-nordic.jpg",
         "image_position": "left",
         "eyebrow": "PERSONALISED ART",
         "heading": "Your memories, beautifully framed.",
         "text": "Turn your favourite photo into a personalised poster. Choose the size and frame, preview every detail, and create something made for your space.",
         "link_label": "CREATE YOUR POSTSTER",
-        "link": "shopify:\/\/products\/custom-poster",
+        "link": "shopify://products/custom-poster",
         "collection": "selected-series-1",
+        "card_artwork_padding": 12,
+        "discount_badge_text": "Discount",
         "enable_personalizer": true,
-        "personalizer_scene_image": "shopify:\/\/shop_images\/home-personalizer-scene-after-upload.jpg",
+        "personalizer_scene_image": "shopify://shop_images/home-personalizer-scene-after-upload.jpg",
         "upload_heading": "Upload your image",
         "upload_button_label": "Choose image",
         "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.",
@@ -266,14 +268,17 @@
         "c3"
       ],
       "settings": {
+        "image": "shopify://shop_images/20260820-142026.jpg",
         "fallback_image_asset": "figma-lifestyle-cinematic.jpg",
         "image_position": "right",
         "eyebrow": "THE ART EDIT",
         "heading": "Find the piece that stays with you.",
         "text": "From quiet abstracts to bold statements, explore our complete collection and discover art that feels at home in your space.",
         "link_label": "EXPLORE ALL ART",
-        "link": "shopify:\/\/collections\/all-art-prints",
+        "link": "shopify://collections/all-art-prints",
         "collection": "selected-series-2",
+        "card_artwork_padding": 12,
+        "discount_badge_text": "Discount",
         "enable_personalizer": false,
         "upload_heading": "Upload your image",
         "upload_button_label": "Choose image",
@@ -343,4 +348,3 @@
     "customer_reviews"
   ]
 }
-
