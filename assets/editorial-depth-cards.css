@@ -1,5 +1,5 @@
 .editorial-products {
-  --depth-card-radius: 10px;
+  --depth-card-radius: 0;
   --depth-hover-easing: cubic-bezier(.23, 1, .32, 1);
   --depth-return-easing: cubic-bezier(.445, .05, .55, .95);
 }
@@ -204,8 +204,4 @@
     transition: none;
   }
 }
-
-
-
-
 
