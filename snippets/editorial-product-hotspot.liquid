@@ -1,0 +1,70 @@
+{% liquid
+  assign hotspot_product = block.settings.product
+  assign selected_variant = hotspot_product.selected_or_first_available_variant
+  assign panel_id = 'EditorialHotspot-' | append: section.id | append: '-' | append: block.id
+%}
+
+{% if hotspot_product != blank %}
+  <div
+    class="editorial-hotspot"
+    data-editorial-hotspot
+    data-product-handle="{{ hotspot_product.handle | escape }}"
+    style="--hotspot-x: {{ block.settings.position_x }}%; --hotspot-y: {{ block.settings.position_y }}%;"
+    {{ block.shopify_attributes }}
+  >
+    <button
+      class="editorial-hotspot__trigger"
+      type="button"
+      data-editorial-hotspot-trigger
+      aria-label="Quick view {{ hotspot_product.title | escape }}"
+      aria-expanded="false"
+      aria-controls="{{ panel_id }}"
+    >
+      <span aria-hidden="true">+</span>
+    </button>
+
+    <div class="editorial-hotspot__panel" id="{{ panel_id }}" data-editorial-hotspot-panel role="dialog" aria-label="{{ hotspot_product.title | escape }}" hidden>
+      <button class="editorial-hotspot__close" type="button" data-editorial-hotspot-close aria-label="Close quick view">×</button>
+
+      <a class="editorial-hotspot__product-image" href="{{ hotspot_product.url }}" aria-label="View {{ hotspot_product.title | escape }}">
+        {% if hotspot_product.featured_image %}
+          {{ hotspot_product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '240,360,520,700', alt: hotspot_product.title }}
+        {% endif %}
+      </a>
+
+      <div class="editorial-hotspot__copy">
+        <p class="editorial-hotspot__title">{{ hotspot_product.title }}</p>
+
+        <form class="editorial-hotspot__form" method="post" action="{{ routes.cart_add_url }}" data-editorial-hotspot-form>
+          <label class="editorial-hotspot__variant-label" for="HotspotVariant-{{ section.id }}-{{ block.id }}">Choose an option</label>
+          <select class="editorial-hotspot__variant" id="HotspotVariant-{{ section.id }}-{{ block.id }}" name="id" data-editorial-hotspot-variant>
+            {% for variant in hotspot_product.variants %}
+              {% assign variant_image = variant.featured_image | default: hotspot_product.featured_image %}
+              <option
+                value="{{ variant.id }}"
+                data-price="{{ variant.price | money | escape }}"
+                {% if variant_image %}data-image="{{ variant_image | image_url: width: 700 }}"{% endif %}
+                {% if variant.id == selected_variant.id %}selected{% endif %}
+                {% unless variant.available %}disabled{% endunless %}
+              >
+                {{ variant.title }}{% unless variant.available %} — Sold out{% endunless %}
+              </option>
+            {% endfor %}
+          </select>
+
+          <input type="hidden" name="quantity" value="1">
+          <div class="editorial-hotspot__total">
+            <span>Total:</span>
+            <strong data-editorial-hotspot-price>{{ selected_variant.price | money }}</strong>
+          </div>
+          <button class="editorial-hotspot__add" type="submit" data-editorial-hotspot-add {% unless selected_variant.available %}disabled{% endunless %}>
+            <span data-editorial-hotspot-add-label>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
+          </button>
+          <p class="editorial-hotspot__status" data-editorial-hotspot-status role="status" aria-live="polite"></p>
+        </form>
+
+        <a class="editorial-hotspot__view" href="{{ hotspot_product.url }}">View product</a>
+      </div>
+    </div>
+  </div>
+{% endif %}

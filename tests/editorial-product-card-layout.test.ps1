@@ -41,20 +41,25 @@ if ($surfaceStart -lt 0 -or $surfaceEnd -lt 0 -or $contentStart -lt 0 -or $conte
 if ($styles.Contains('.editorial-depth-card__surface::after') -or $styles.Contains('linear-gradient')) {
   throw 'Editorial image cards must not render the old dark overlay.'
 }
-Assert-Contains $styles '.editorial-depth-card.has-hover-image:hover .editorial-depth-card__image--primary' 'Hover must hide the primary product image.'
-Assert-Contains $styles '.editorial-depth-card.has-hover-image:hover .editorial-depth-card__image--hover' 'Hover must reveal the second product image.'
+Assert-Contains $styles '.editorial-depth-card.has-hover-image.is-pointer-hovered .editorial-depth-card__image--primary' 'The delayed pointer-hover state must hide the primary product image.'
+Assert-Contains $styles '.editorial-depth-card.has-hover-image.is-pointer-hovered .editorial-depth-card__image--hover' 'The delayed pointer-hover state must reveal the second product image.'
 Assert-Contains $styles '.editorial-depth-card__content {' 'The content-below layout must have a dedicated static content block.'
 Assert-Contains $styles 'inset: max(0%, calc(var(--depth-artwork-padding, 12%) - 1%)) var(--depth-artwork-padding, 12%);' 'Artwork must match the collection grid 76% by 78% media size at the default setting.'
 Assert-Contains $styles 'object-fit: contain;' 'Landscape and portrait artwork must remain fully visible without cropping.'
 Assert-Contains $styles 'object-fit: cover;' 'The second product image must cover the complete card on hover.'
 Assert-Contains $styles 'inset #ebebeb 0 0 0 1px' 'Editorial cards must retain one #ebebeb inner frame.'
 Assert-Contains $styles 'background: #8dc29c;' 'The discount badge must use the approved green background.'
+Assert-Contains $styles 'color: #fff;' 'The discount badge text must remain white against the approved green background.'
 Assert-Contains $styles 'rgba(0, 0, 0, .14) 0 14px 28px 0' 'Hover must reveal only a subtle outer shadow.'
 Assert-Contains $styles 'box-shadow .55s ease-out' 'The hover shadow must fade out smoothly when the pointer leaves.'
 if ($styles.Contains('inset #333 0 0 0 5px')) {
   throw 'Editorial cards must not render the removed thick black frame.'
 }
 Assert-Contains $script 'editorial_product_hover_image' 'Second-image hover must emit a traceable analytics event.'
+Assert-Contains $script 'const POINTER_RETURN_DELAY = 500;' 'Pointer hover effects must wait 500ms before returning to rest.'
+Assert-Contains $script "card.classList.add('is-pointer-hovered');" 'Pointer entry must activate the dedicated hover state immediately.'
+Assert-Contains $script "card.classList.remove('is-pointer-hovered');" 'The delayed reset must clear the dedicated hover state.'
+Assert-Contains $styles '.editorial-depth-card:focus-within .editorial-depth-card__surface' 'Keyboard focus must activate the card effect without relying on pointer state.'
 
 if ($featuredSection.Contains('tilted-carousel__details') -or $featuredSection.Contains('tilted-carousel__hover-image')) {
   throw 'The unrelated tilted carousel must remain restored to its previous implementation.'

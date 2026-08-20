@@ -80,7 +80,7 @@
   min-height: 22px;
   padding: 4px 9px;
   background: #8dc29c;
-  color: #111;
+  color: #fff;
   font-size: 10px;
   font-weight: 600;
   line-height: 1;
@@ -131,23 +131,23 @@
   font-weight: 400;
 }
 
-.editorial-depth-card:hover .editorial-depth-card__surface,
+.editorial-depth-card.is-pointer-hovered .editorial-depth-card__surface,
 .editorial-depth-card:focus-within .editorial-depth-card__surface {
   box-shadow: rgba(0, 0, 0, .14) 0 14px 28px 0, inset #ebebeb 0 0 0 1px;
   transition: transform .6s var(--depth-hover-easing), box-shadow .4s ease-in;
 }
 
-.editorial-depth-card:hover .editorial-depth-card__image,
+.editorial-depth-card.is-pointer-hovered .editorial-depth-card__image,
 .editorial-depth-card:focus-within .editorial-depth-card__image {
   transition: transform .6s var(--depth-hover-easing), opacity .35s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .editorial-depth-card.has-hover-image:hover .editorial-depth-card__image--primary {
+  .editorial-depth-card.has-hover-image.is-pointer-hovered .editorial-depth-card__image--primary {
     opacity: 0;
   }
 
-  .editorial-depth-card.has-hover-image:hover .editorial-depth-card__image--hover {
+  .editorial-depth-card.has-hover-image.is-pointer-hovered .editorial-depth-card__image--hover {
     opacity: 1;
   }
 }

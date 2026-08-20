@@ -259,13 +259,40 @@
             "meta": "Lilian Do Khac · $159",
             "link": ""
           }
+        },
+        "hotspot_pink_flowers": {
+          "type": "hotspot",
+          "settings": {
+            "product": "pink-flowers",
+            "position_x": 42,
+            "position_y": 31
+          }
+        },
+        "hotspot_you": {
+          "type": "hotspot",
+          "settings": {
+            "product": "you",
+            "position_x": 63,
+            "position_y": 48
+          }
+        },
+        "hotspot_blue": {
+          "type": "hotspot",
+          "settings": {
+            "product": "composition-01",
+            "position_x": 80,
+            "position_y": 56
+          }
         }
       },
       "block_order": [
         "c2",
         "c1",
         "c4",
-        "c3"
+        "c3",
+        "hotspot_pink_flowers",
+        "hotspot_you",
+        "hotspot_blue"
       ],
       "settings": {
         "image": "shopify://shop_images/20260820-142026.jpg",
