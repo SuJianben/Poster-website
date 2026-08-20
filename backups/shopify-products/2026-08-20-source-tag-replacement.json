@@ -1,0 +1,1418 @@
+{
+  "generatedAt": "2026-08-20T17:00:00+08:00",
+  "store": {
+    "name": "PosterAndForm",
+    "domain": "posterandform.com"
+  },
+  "operation": "replace exact product source tag",
+  "oldTag": "source:the_poster_club",
+  "newTag": "source:posterandform",
+  "affectedCount": 78,
+  "preservedTag": "import_batch:poster-club-2026-08-13",
+  "products": [
+    {
+      "id": "gid://shopify/Product/8589875642402",
+      "title": "12PM",
+      "handle": "12pm",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589875773474",
+      "title": "1 - 2 - Many",
+      "handle": "1-2-many",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589875871778",
+      "title": "10AM",
+      "handle": "10am",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589875904546",
+      "title": "6AM",
+      "handle": "6am",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589875970082",
+      "title": "8AM",
+      "handle": "8am",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876035618",
+      "title": "9PM",
+      "handle": "9pm",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876068386",
+      "title": "Babylon Buket",
+      "handle": "babylon-buket",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876101154",
+      "title": "Bauhaus Beige",
+      "handle": "bauhaus-beige",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:minimal_neutral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:minimal_neutral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876166690",
+      "title": "Bleu",
+      "handle": "bleu",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876232226",
+      "title": "Blue Stripe At Concorde",
+      "handle": "blue-stripe-at-concorde",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876330530",
+      "title": "Cat and Flora",
+      "handle": "cat-and-flora",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:animals",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:animals",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876592674",
+      "title": "Chair with Fruit",
+      "handle": "chair-with-fruit",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:food_kitchen_art",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:food_kitchen_art",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876690978",
+      "title": "Check",
+      "handle": "check",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876756514",
+      "title": "Coffee Alone At Place De Clichy",
+      "handle": "coffee-alone-at-place-de-clichy",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876789282",
+      "title": "Composition 01",
+      "handle": "composition-01",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876822050",
+      "title": "Cover",
+      "handle": "cover",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876887586",
+      "title": "Cuillin Ridge VII",
+      "handle": "cuillin-ridge-vii",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:photography_landscape",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:photography_landscape",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876953122",
+      "title": "Cut up Stripes",
+      "handle": "cut-up-stripes",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589876985890",
+      "title": "Daisies",
+      "handle": "daisies",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877018658",
+      "title": "Dancer 02",
+      "handle": "dancer-02",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877051426",
+      "title": "Dancing",
+      "handle": "dancing",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877116962",
+      "title": "Dancing Dots",
+      "handle": "dancing-dots",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877149730",
+      "title": "Deep Blue",
+      "handle": "deep-blue",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877215266",
+      "title": "Dorset",
+      "handle": "dorset",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:photography_landscape",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:photography_landscape",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877280802",
+      "title": "Fashion Diva 01",
+      "handle": "fashion-diva-01",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877313570",
+      "title": "Fleurs Jaunes",
+      "handle": "fleurs-jaunes",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877346338",
+      "title": "Flowers on Blue Table",
+      "handle": "flowers-on-blue-table",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877477410",
+      "title": "Ginkgo Leaf",
+      "handle": "ginkgo-leaf",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877542946",
+      "title": "Green Ocean",
+      "handle": "green-ocean",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877608482",
+      "title": "Hold You - Blue",
+      "handle": "hold-you-blue",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877641250",
+      "title": "Horse Stories",
+      "handle": "horse-stories",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:animals",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:animals",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877674018",
+      "title": "Improvise",
+      "handle": "improvise",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877739554",
+      "title": "In My Head",
+      "handle": "in-my-head",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877772322",
+      "title": "Jazzy Flower",
+      "handle": "jazzy-flower",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877805090",
+      "title": "Langosta",
+      "handle": "langosta",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:animals",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:animals",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877903394",
+      "title": "Layered",
+      "handle": "layered",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589877968930",
+      "title": "Le Monde",
+      "handle": "le-monde",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878001698",
+      "title": "Little Blue",
+      "handle": "little-blue",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878231074",
+      "title": "Little Green",
+      "handle": "little-green",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878263842",
+      "title": "Maroon",
+      "handle": "maroon",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878362146",
+      "title": "Me",
+      "handle": "me",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878394914",
+      "title": "Meet Me at Jaurès",
+      "handle": "meet-me-at-jaures",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878460450",
+      "title": "Moka 01",
+      "handle": "moka-01",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878525986",
+      "title": "Moon No. 01",
+      "handle": "moon-no-01",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878591522",
+      "title": "Motljus",
+      "handle": "motljus",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878657058",
+      "title": "Murmurations Sort Sol",
+      "handle": "murmurations-sort-sol",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:animals",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:animals",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878722594",
+      "title": "NG 03",
+      "handle": "ng-03",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878755362",
+      "title": "11PM",
+      "handle": "nord-projects-11pm",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878853666",
+      "title": "One Soul",
+      "handle": "one-soul",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878886434",
+      "title": "One Way",
+      "handle": "one-way",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589878951970",
+      "title": "Painted Surface",
+      "handle": "painted-surface",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879050274",
+      "title": "Pesce",
+      "handle": "pesce",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:animals",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:animals",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879083042",
+      "title": "Pink Flowers",
+      "handle": "pink-flowers",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879148578",
+      "title": "Pink Interstellar",
+      "handle": "pink-interstellar",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879246882",
+      "title": "Purple Poppies",
+      "handle": "purple-poppies",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879345186",
+      "title": "Red Chair",
+      "handle": "red-chair",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879443490",
+      "title": "Rhythm of Flowers",
+      "handle": "rhythm-of-flowers",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879541794",
+      "title": "Rosa",
+      "handle": "rosa",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879574562",
+      "title": "Sam on the Hill",
+      "handle": "sam-on-the-hill",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:photography_landscape",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:photography_landscape",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879607330",
+      "title": "Santa Monica Man",
+      "handle": "santa-monica-man",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:photography_landscape",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:photography_landscape",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879672866",
+      "title": "Sea Lavender",
+      "handle": "sea-lavender",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879738402",
+      "title": "Secret Notes",
+      "handle": "secret-notes",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879836706",
+      "title": "Serene Stripes",
+      "handle": "serene-stripes",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879869474",
+      "title": "Shapescape 08",
+      "handle": "shapescape-08",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589879902242",
+      "title": "Sketchbook",
+      "handle": "sketchbook",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589880000546",
+      "title": "Still Waiting",
+      "handle": "still-waiting",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589880033314",
+      "title": "The Cat's In The Bag",
+      "handle": "the-cat-s-in-the-bag",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:animals",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:animals",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589880066082",
+      "title": "The Dream",
+      "handle": "the-dream",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589880164386",
+      "title": "The Eye",
+      "handle": "the-eye",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589880197154",
+      "title": "The Line no. 07",
+      "handle": "the-line-no-07",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589880492066",
+      "title": "The Line no. 09",
+      "handle": "the-line-no-09",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589880885282",
+      "title": "The Togo",
+      "handle": "the-togo",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589881147426",
+      "title": "To Life",
+      "handle": "to-life",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:typography_quotes",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:typography_quotes",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589881442338",
+      "title": "Velvet Peak III",
+      "handle": "velvet-peak-iii",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:photography_landscape",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:photography_landscape",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589881671714",
+      "title": "Waiting",
+      "handle": "waiting",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589881933858",
+      "title": "Waiting At Art Et Métiers",
+      "handle": "waiting-at-art-et-metiers",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:figurative_fashion",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:figurative_fashion",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589882196002",
+      "title": "White Flowers in Striped Vase",
+      "handle": "white-flowers-in-striped-vase",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:botanical_floral",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:botanical_floral",
+        "type:print"
+      ]
+    },
+    {
+      "id": "gid://shopify/Product/8589882458146",
+      "title": "You",
+      "handle": "you",
+      "status": "ACTIVE",
+      "tagsBefore": [
+        "import_batch:poster-club-2026-08-13",
+        "source:the_poster_club",
+        "style:abstract_geometric",
+        "type:print"
+      ],
+      "tagsAfter": [
+        "import_batch:poster-club-2026-08-13",
+        "source:posterandform",
+        "style:abstract_geometric",
+        "type:print"
+      ]
+    }
+  ]
+}
