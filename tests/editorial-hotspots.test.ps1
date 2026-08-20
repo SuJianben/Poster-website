@@ -27,6 +27,7 @@ Assert-Contains $script 'editorial_hotspot_opened' 'Hotspot opening must be trac
 Assert-Contains $script 'editorial_hotspot_added_to_cart' 'Successful quick add must be tracked.'
 Assert-Contains $script 'dataset.editorialSectionId' 'Hotspot analytics must read the configured section ID.'
 Assert-Contains $styles '.editorial-hotspot__panel' 'Hotspot quick view must have scoped panel styles.'
+Assert-Contains $styles '.editorial-products .editorial__image[data-editorial-hotspots]' 'Hotspot coordinates must be anchored to the editorial image container.'
 Assert-Contains $styles '@media (max-width: 750px)' 'Hotspot panel must have a mobile layout.'
 
 $secondEditorial = $homeTemplate.sections.editorial_2

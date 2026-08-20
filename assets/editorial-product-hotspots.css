@@ -3,6 +3,10 @@
   --editorial-hotspot-paper: #f7f4ef;
 }
 
+.editorial-products .editorial__image[data-editorial-hotspots] {
+  position: relative;
+}
+
 .editorial-hotspot {
   position: absolute;
   z-index: 5;
