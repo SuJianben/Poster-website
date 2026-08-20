@@ -1,12 +1,6 @@
 {{ 'product-showcase.css' | asset_url | stylesheet_tag }}
 
-<div class="ps-lifestyle ps-section">
-  {% if section.settings.image %}
-    {{ section.settings.image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: product.title }}
-  {% else %}
-    <img src="{{ 'figma-lifestyle-hero.jpg' | asset_url }}" width="2200" height="1240" loading="lazy" alt="{{ product.title | escape }} in a styled interior">
-  {% endif %}
-</div>
+{% render 'product-series-lifestyle', product: product, section: section %}
 
 {% schema %}
 {
@@ -15,9 +9,23 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Lifestyle image"
+      "label": "Fallback lifestyle image"
     }
   ],
+  "blocks": [
+    {
+      "type": "series",
+      "name": "Product series",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Series collection"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
   "presets": [
     {
       "name": "Product lifestyle image"
@@ -25,3 +33,4 @@
   ]
 }
 {% endschema %}
+

@@ -1,0 +1,51 @@
+{% liquid
+  assign matched_series = blank
+
+  for block in section.blocks
+    assign configured_series = block.settings.collection
+    if configured_series != blank
+      for product_collection in product.collections
+        if product_collection.id == configured_series.id
+          assign matched_series = configured_series
+          break
+        endif
+      endfor
+    endif
+
+    if matched_series != blank
+      break
+    endif
+  endfor
+
+  assign series_image = blank
+  if matched_series != blank
+    assign series_image = matched_series.image | default: matched_series.featured_image
+  endif
+
+  assign fallback_image = section.settings.image
+  assign lifestyle_source = 'bundled_fallback'
+  assign lifestyle_alt = product.title | append: ' in a styled interior'
+
+  if series_image != blank
+    assign lifestyle_source = 'series'
+    assign lifestyle_alt = matched_series.title | append: ' collection'
+  elsif fallback_image != blank
+    assign lifestyle_source = 'section_fallback'
+  endif
+%}
+
+<div
+  class="ps-lifestyle ps-section"
+  data-product-series-lifestyle
+  data-lifestyle-source="{{ lifestyle_source }}"
+  {% if matched_series != blank %}data-series-handle="{{ matched_series.handle | escape }}"{% endif %}
+>
+  {% if series_image != blank %}
+    {{ series_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: lifestyle_alt }}
+  {% elsif fallback_image != blank %}
+    {{ fallback_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: lifestyle_alt }}
+  {% else %}
+    <img src="{{ 'figma-lifestyle-hero.jpg' | asset_url }}" width="2200" height="1240" loading="lazy" alt="{{ lifestyle_alt | escape }}">
+  {% endif %}
+</div>
+
