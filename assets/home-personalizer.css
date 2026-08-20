@@ -11,9 +11,35 @@
   isolation: isolate;
 }
 
-.home-personalizer__scene > img {
+.home-personalizer__scene-layer {
   position: relative;
   z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity .28s ease;
+}
+
+.home-personalizer__scene-layer--personalized {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.home-personalizer__scene-layer img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-personalizer.is-personalizer-scene-active .home-personalizer__scene-layer--initial {
+  opacity: 0;
+}
+
+.home-personalizer.is-personalizer-scene-active .home-personalizer__scene-layer--personalized {
+  opacity: 1;
 }
 
 .home-personalizer__wall-preview {
@@ -218,7 +244,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .home-personalizer__dropzone,
-  .home-personalizer__upload-button {
+  .home-personalizer__upload-button,
+  .home-personalizer__scene-layer {
     transition: none;
   }
 }

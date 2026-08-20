@@ -5,7 +5,8 @@
   {{ 'home-personalizer.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'custom-artwork-cropper-geometry.js' | asset_url }}&psv=home-personalizer-v1-20260819" defer="defer"></script>
   <script src="{{ 'custom-artwork-cropper-mode.js' | asset_url }}&psv=home-personalizer-v1-20260819" defer="defer"></script>
-  <script src="{{ 'home-personalizer.js' | asset_url }}&psv=home-personalizer-v1-20260819" defer="defer"></script>
+  <script src="{{ 'home-personalizer-scene.js' | asset_url }}&psv=home-personalizer-scene-v1-20260820" defer="defer"></script>
+  <script src="{{ 'home-personalizer.js' | asset_url }}&psv=home-personalizer-v2-20260820" defer="defer"></script>
 {% endif %}
 
 <section
@@ -16,12 +17,19 @@
 >
   <div class="page-width editorial {% if section.settings.image_position == 'right' %}editorial--reverse{% endif %}">
     <div class="editorial__image{% if section.settings.enable_personalizer %} home-personalizer__scene{% endif %}"{% if section.settings.enable_personalizer %} data-home-personalizer-scene{% endif %}>
-      {% if section.settings.image != blank %}
-        {{ section.settings.image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '500,750,1000,1500', alt: section.settings.heading }}
-      {% else %}
-        <img src="{{ section.settings.fallback_image_asset | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1400" height="1750" loading="lazy">
-      {% endif %}
+      <div{% if section.settings.enable_personalizer %} class="home-personalizer__scene-layer home-personalizer__scene-layer--initial" data-home-personalizer-scene-initial{% endif %}>
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '500,750,1000,1500', alt: section.settings.heading }}
+        {% else %}
+          <img src="{{ section.settings.fallback_image_asset | asset_url }}" alt="{{ section.settings.heading | escape }}" width="1400" height="1750" loading="lazy">
+        {% endif %}
+      </div>
       {% if section.settings.enable_personalizer %}
+        {% if section.settings.personalizer_scene_image != blank %}
+          <div class="home-personalizer__scene-layer home-personalizer__scene-layer--personalized" data-home-personalizer-scene-personalized aria-hidden="true">
+            {{ section.settings.personalizer_scene_image | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '500,750,1000,1500', alt: section.settings.heading }}
+          </div>
+        {% endif %}
         <div
           class="home-personalizer__wall-preview"
           data-home-personalizer-preview
@@ -133,6 +141,7 @@
     {"type":"text","id":"discount_badge_text","label":"Discount badge before compare-at pricing","default":"Discount"},
     {"type":"header","content":"Homepage personalizer"},
     {"type":"checkbox","id":"enable_personalizer","label":"Enable upload preview","default":false},
+    {"type":"image_picker","id":"personalizer_scene_image","label":"Scene image after upload","info":"Shown after the customer confirms the crop."},
     {"type":"text","id":"upload_heading","label":"Upload heading","default":"Upload your image"},
     {"type":"text","id":"upload_button_label","label":"Upload button label","default":"Choose image"},
     {"type":"text","id":"upload_help_text","label":"Upload help text","default":"JPEG, PNG or WebP · maximum 20 MB and 20 megapixels."},
@@ -140,9 +149,9 @@
     {"type":"textarea","id":"crop_help_text","label":"Crop dialog help text","default":"Choose one of the three fixed poster ratios, then position and resize the crop area."},
     {"type":"text","id":"crop_cancel_label","label":"Crop cancel label","default":"Cancel"},
     {"type":"text","id":"crop_confirm_label","label":"Crop confirm label","default":"Use crop"},
-    {"type":"range","id":"preview_left","label":"Preview horizontal position","min":10,"max":90,"step":1,"unit":"%","default":57},
-    {"type":"range","id":"preview_top","label":"Preview vertical position","min":10,"max":90,"step":1,"unit":"%","default":32},
-    {"type":"range","id":"preview_width","label":"Preview width","min":20,"max":75,"step":1,"unit":"%","default":50}
+    {"type":"range","id":"preview_left","label":"Uploaded poster horizontal position","min":10,"max":90,"step":1,"unit":"%","default":60},
+    {"type":"range","id":"preview_top","label":"Uploaded poster vertical position","min":10,"max":90,"step":1,"unit":"%","default":31},
+    {"type":"range","id":"preview_width","label":"Uploaded poster width","min":20,"max":75,"step":1,"unit":"%","default":38}
   ],
   "blocks": [
     {"type":"poster","name":"Figma poster","settings":[

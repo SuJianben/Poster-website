@@ -1,6 +1,7 @@
 (() => {
   const geometry = globalThis.PosterCropGeometry;
   const cropMode = globalThis.PosterCropMode;
+  const sceneFactory = globalThis.PosterHomePersonalizerScene;
   if (!geometry || !cropMode) return;
 
   const allowedTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
@@ -301,6 +302,7 @@
     let previewUrl = '';
 
     const track = (event, detail = {}) => window.dataLayer?.push({ event, section_id: sectionId, ...detail });
+    const sceneController = sceneFactory?.initialize(root);
     const cropper = initializeCropper(root, modal, track);
     if (!cropper) return;
 
@@ -324,6 +326,7 @@
       preview.hidden = true;
       preview.removeAttribute('data-orientation');
       previewImage.removeAttribute('src');
+      sceneController?.showInitial();
       revokePreview();
       setStatus(announce ? 'Image removed.' : '', announce ? 'success' : '');
       if (announce) track('home_personalizer_image_removed');
@@ -371,6 +374,7 @@
         preview.dataset.orientation = result.orientation;
         previewImage.src = previewUrl;
         preview.hidden = false;
+        const sceneChanged = sceneController?.showPersonalized() || false;
         fileName.textContent = `${result.file.name} · ${result.width}×${result.height}px · ${formatFileSize(result.file.size)}`;
         selection.hidden = false;
         upload.dataset.state = 'ready';
@@ -380,6 +384,7 @@
           ratio: result.ratio,
           output_width: result.width,
           output_height: result.height,
+          scene_state: sceneChanged ? 'personalized' : 'initial',
         });
       } catch (error) {
         URL.revokeObjectURL(inspectionUrl);
@@ -403,6 +408,7 @@
       if (file) applyFile(file, 'drag_drop');
     });
     window.addEventListener('beforeunload', revokePreview, { once: true });
+    sceneController?.showInitial();
     upload.dataset.state = 'empty';
   });
 })();

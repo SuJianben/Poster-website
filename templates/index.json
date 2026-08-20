@@ -206,6 +206,7 @@
         "link": "shopify:\/\/products\/custom-poster",
         "collection": "selected-series-1",
         "enable_personalizer": true,
+        "personalizer_scene_image": "shopify:\/\/shop_images\/home-personalizer-scene-after-upload.jpg",
         "upload_heading": "Upload your image",
         "upload_button_label": "Choose image",
         "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.",
@@ -213,9 +214,9 @@
         "crop_help_text": "Choose one of the three fixed poster ratios, then position and resize the crop area.",
         "crop_cancel_label": "Cancel",
         "crop_confirm_label": "Use crop",
-        "preview_left": 57,
-        "preview_top": 32,
-        "preview_width": 50
+        "preview_left": 60,
+        "preview_top": 31,
+        "preview_width": 38
       }
     },
     "editorial_2": {
