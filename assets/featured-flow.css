@@ -20,3 +20,4 @@
 @media (max-width:767px) { .tilted-carousel__heading { margin-bottom:24px; }.tilted-carousel__heading h2 { font-size:38px; }.tilted-carousel__product { margin-top:20px; }.tilted-carousel__controls { margin-top:28px; } }
 @media (prefers-reduced-motion:reduce) { .tilted-carousel__track,.tilted-carousel__image,.tilted-carousel__dot { transition:none; } }
 
+
