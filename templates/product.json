@@ -72,7 +72,9 @@
     },
     "lifestyle": {
       "type": "product-lifestyle",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/20260820-092911.png"
+      }
     },
     "information": {
       "type": "product-information-tabs",
