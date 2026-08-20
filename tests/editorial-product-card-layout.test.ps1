@@ -19,6 +19,16 @@ Assert-Contains $section 'product.metafields.custom.artist' 'Editorial cards mus
 Assert-Contains $section 'editorial-depth-card__media' 'Editorial cards must render artwork inside a dedicated padded media layer.'
 Assert-Contains $section 'card_artwork_padding' 'Editorial card artwork margin must be configurable in the theme editor.'
 Assert-Contains $section '--depth-artwork-padding: {{ section.settings.card_artwork_padding | default: 9 }}%;' 'The configured artwork margin must flow into the card CSS variable.'
+Assert-Contains $section 'editorial-depth-card__badge' 'Editorial product cards must render the discount badge.'
+Assert-Contains $section 'discount_badge_text' 'The pre-compare-at discount badge label must remain configurable.'
+Assert-Contains $section "assign discount_percentage = discount_saving | times: 100.0 | divided_by: product.compare_at_price_max | round" 'Compare-at pricing must automatically produce a real discount percentage.'
+
+$productMediaStart = $section.IndexOf('<span class="editorial-depth-card__media">', $section.IndexOf('for product in section.settings.collection.products'))
+$productMediaEnd = $section.IndexOf('</span>', $productMediaStart)
+$productHoverStart = $section.IndexOf("class: 'editorial-depth-card__image editorial-depth-card__image--hover'", $productMediaStart)
+if ($productMediaStart -lt 0 -or $productMediaEnd -lt 0 -or $productHoverStart -lt $productMediaEnd) {
+  throw 'The second product image must sit outside the padded artwork layer so it can cover the complete card.'
+}
 
 $surfaceStart = $section.IndexOf('class="editorial-depth-card__surface"', $section.IndexOf('for product in section.settings.collection.products'))
 $surfaceEnd = $section.IndexOf('</a>', $surfaceStart)
@@ -35,12 +45,13 @@ Assert-Contains $styles '.editorial-depth-card.has-hover-image:hover .editorial-
 Assert-Contains $styles '.editorial-depth-card__content {' 'The content-below layout must have a dedicated static content block.'
 Assert-Contains $styles 'inset: var(--depth-artwork-padding, 9%);' 'Artwork must keep an adjustable margin inside the image card.'
 Assert-Contains $styles 'object-fit: contain;' 'Landscape and portrait artwork must remain fully visible without cropping.'
-Assert-Contains $styles 'inset rgba(0, 0, 0, .1) 0 0 0 1px' 'Editorial cards must retain one subtle inner frame.'
+Assert-Contains $styles 'object-fit: cover;' 'The second product image must cover the complete card on hover.'
+Assert-Contains $styles 'inset #ebebeb 0 0 0 1px' 'Editorial cards must retain one #ebebeb inner frame.'
+Assert-Contains $styles 'background: #8dc29c;' 'The discount badge must use the approved green background.'
+Assert-Contains $styles 'rgba(0, 0, 0, .14) 0 14px 28px 0' 'Hover must reveal only a subtle outer shadow.'
+Assert-Contains $styles 'box-shadow .55s ease-out' 'The hover shadow must fade out smoothly when the pointer leaves.'
 if ($styles.Contains('inset #333 0 0 0 5px')) {
   throw 'Editorial cards must not render the removed thick black frame.'
-}
-if ($styles.Contains('object-fit: cover;')) {
-  throw 'Editorial artwork must not revert to cover cropping.'
 }
 Assert-Contains $script 'editorial_product_hover_image' 'Second-image hover must emit a traceable analytics event.'
 
