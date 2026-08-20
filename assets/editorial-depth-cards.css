@@ -36,7 +36,7 @@
   overflow: hidden;
   border-radius: var(--depth-card-radius);
   background: var(--bg-soft, #ececeb);
-  box-shadow: rgba(0, 0, 0, .5) 0 22px 42px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, .55) 0 0 0 6px;
+  box-shadow: rgba(0, 0, 0, .32) 0 18px 34px 0, inset rgba(0, 0, 0, .1) 0 0 0 1px;
   color: inherit;
   transform: rotateY(var(--depth-rotate-y, 0deg)) rotateX(var(--depth-rotate-x, 0deg));
   transform-style: preserve-3d;
@@ -112,7 +112,7 @@
 
 .editorial-depth-card:hover .editorial-depth-card__surface,
 .editorial-depth-card:focus-within .editorial-depth-card__surface {
-  box-shadow: rgba(255, 255, 255, .2) 0 0 40px 5px, rgba(255, 255, 255, 1) 0 0 0 1px, rgba(0, 0, 0, .66) 0 30px 60px 0, inset #333 0 0 0 5px, inset #fff 0 0 0 6px;
+  box-shadow: rgba(255, 255, 255, .2) 0 0 40px 5px, rgba(0, 0, 0, .5) 0 26px 52px 0, inset rgba(0, 0, 0, .1) 0 0 0 1px;
   transition: transform .6s var(--depth-hover-easing), box-shadow 2s var(--depth-hover-easing);
 }
 
@@ -175,5 +175,6 @@
     transition: none;
   }
 }
+
 
 
