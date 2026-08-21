@@ -4,8 +4,15 @@
 
   const responseError = async (response, fallback) => {
     const payload = await response.json().catch(() => ({}));
-    return new Error(payload.description || payload.message || fallback);
+    const error = new Error(payload.description || payload.message || fallback);
+    error.status = response.status;
+    return error;
   };
+
+  const attachAddonsToExistingParent = (items, parentLineKey) => items.map((item) => {
+    const { parent_id: _parentVariantId, ...addon } = item;
+    return { ...addon, parent_line_key: parentLineKey };
+  });
 
   const addJsonItems = async (items) => {
     const response = await fetch(endpoint('cart/add.js'), {
@@ -61,7 +68,9 @@
       const parentResponse = await addParentWithArtwork(form, parentItem);
       const parentLine = parentResponse.items?.[0] || parentResponse;
       try {
-        if (addonItems.length) await addJsonItems(addonItems);
+        if (addonItems.length) {
+          await addJsonItems(attachAddonsToExistingParent(addonItems, parentLine.key));
+        }
       } catch (error) {
         const rolledBack = await removeAddedParent(parentLine.key).catch(() => false);
         if (!rolledBack) error.message = `${error.message} The main item may still be in your cart.`;

@@ -256,8 +256,15 @@
       window.CartDrawer?.open(cart);
       addLabel.textContent = 'Added to cart';
     } catch (error) {
+      window.CartDrawer?.openError();
       status.textContent = error.message || 'Could not add this item to cart.';
       addLabel.textContent = 'Try again';
+      window.dataLayer?.push({
+        event: 'custom_product_cart_add_failed',
+        product_variant_id: String(variantInput.value),
+        artwork_uploaded: Boolean(root.productArtwork?.getFile?.()),
+        http_status: error.status || null,
+      });
     } finally {
       addButton.disabled = false;
       window.setTimeout(() => updateVariant(), 900);

@@ -24,6 +24,11 @@
     footer.hidden = true;
     open();
   };
+  const showError = () => {
+    content.innerHTML = '<div class="cd-drawer__empty cd-drawer__error" role="alert"><p>We couldn’t add this item to your cart. Please try again.</p><button type="button" data-cart-drawer-close>Close</button></div>';
+    footer.hidden = true;
+    open();
+  };
   const close = () => {
     drawer.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
@@ -90,6 +95,9 @@
     openLoading() {
       showLoading();
     },
+    openError() {
+      showError();
+    },
     refresh: async () => {
       const cart = await fetchCart();
       render(cart);
@@ -111,7 +119,7 @@
     if (!trigger) return;
     event.preventDefault();
     showLoading();
-    try { render(await fetchCart()); } catch (error) { console.error(error); }
+    try { render(await fetchCart()); } catch (error) { console.error(error); showError(); }
   });
   document.addEventListener('cart:updated', (event) => { if (event.detail?.cart) window.CartDrawer.open(event.detail.cart); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && drawer.classList.contains('is-open')) close(); });
