@@ -37,30 +37,68 @@
     <div class="cp-body cp-contact__body">
       {% if page.content != blank %}<div class="rte cp-contact__intro">{{ page.content }}</div>{% endif %}
 
-      {% form 'contact', class: 'cp-contact__form' %}
-        {% if form.posted_successfully? %}
-          <p class="cp-contact__success" role="status">Thanks for getting in touch. We’ll get back to you shortly.</p>
-        {% endif %}
-        {{ form.errors | default_errors }}
+      <div class="cp-contact__layout{% unless section.settings.show_company_information %} cp-contact__layout--form-only{% endunless %}">
+        {% if section.settings.show_company_information %}
+          <aside class="cp-contact__details" aria-labelledby="ContactInformation-{{ section.id }}">
+            <h2 id="ContactInformation-{{ section.id }}">{{ section.settings.information_heading | escape }}</h2>
+            <dl class="cp-contact__details-list">
+              {% if section.settings.company_name != blank %}
+                <div>
+                  <dt>Company</dt>
+                  <dd>{{ section.settings.company_name | escape }}</dd>
+                </div>
+              {% endif %}
 
-        <div class="cp-contact__field">
-          <label for="ContactFormName">Name</label>
-          <input id="ContactFormName" type="text" name="contact[name]" autocomplete="name" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
-        </div>
-        <div class="cp-contact__field">
-          <label for="ContactFormEmail">Email <span aria-hidden="true">*</span></label>
-          <input id="ContactFormEmail" type="email" name="contact[email]" autocomplete="email" autocorrect="off" autocapitalize="off" required value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
-        </div>
-        <div class="cp-contact__field">
-          <label for="ContactFormPhone">Phone</label>
-          <input id="ContactFormPhone" type="tel" name="contact[phone]" autocomplete="tel" value="{% if form.phone %}{{ form.phone }}{% endif %}">
-        </div>
-        <div class="cp-contact__field">
-          <label for="ContactFormMessage">Message <span aria-hidden="true">*</span></label>
-          <textarea id="ContactFormMessage" name="contact[body]" rows="7" required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
-        </div>
-        <button class="cp-contact__submit" type="submit">Send message</button>
-      {% endform %}
+              {% if section.settings.company_address != blank %}
+                <div>
+                  <dt>Address</dt>
+                  <dd>{{ section.settings.company_address | escape | newline_to_br }}</dd>
+                </div>
+              {% endif %}
+
+              {% if section.settings.company_phone != blank %}
+                {% assign company_phone_href = section.settings.company_phone | remove: ' ' %}
+                <div>
+                  <dt>Phone</dt>
+                  <dd><a href="tel:{{ company_phone_href | escape }}">{{ section.settings.company_phone | escape }}</a></dd>
+                </div>
+              {% endif %}
+
+              {% if section.settings.company_email != blank %}
+                <div>
+                  <dt>Email</dt>
+                  <dd><a href="mailto:{{ section.settings.company_email | escape }}">{{ section.settings.company_email | escape }}</a></dd>
+                </div>
+              {% endif %}
+            </dl>
+          </aside>
+        {% endif %}
+
+        {% form 'contact', class: 'cp-contact__form' %}
+          {% if form.posted_successfully? %}
+            <p class="cp-contact__success" role="status">Thanks for getting in touch. We’ll get back to you shortly.</p>
+          {% endif %}
+          {{ form.errors | default_errors }}
+
+          <div class="cp-contact__field">
+            <label for="ContactFormName">Name</label>
+            <input id="ContactFormName" type="text" name="contact[name]" autocomplete="name" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          </div>
+          <div class="cp-contact__field">
+            <label for="ContactFormEmail">Email <span aria-hidden="true">*</span></label>
+            <input id="ContactFormEmail" type="email" name="contact[email]" autocomplete="email" autocorrect="off" autocapitalize="off" required value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+          </div>
+          <div class="cp-contact__field">
+            <label for="ContactFormPhone">Phone</label>
+            <input id="ContactFormPhone" type="tel" name="contact[phone]" autocomplete="tel" value="{% if form.phone %}{{ form.phone }}{% endif %}">
+          </div>
+          <div class="cp-contact__field">
+            <label for="ContactFormMessage">Message <span aria-hidden="true">*</span></label>
+            <textarea id="ContactFormMessage" name="contact[body]" rows="7" required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+          <button class="cp-contact__submit" type="submit">Send message</button>
+        {% endform %}
+      </div>
 
       {% if section.settings.image %}
         {{ section.settings.image | image_url: width: 1600 | image_tag: class: 'cp-contact__image', loading: 'lazy', widths: '640,900,1200,1600', alt: section.settings.image.alt | default: page.title }}
@@ -76,6 +114,46 @@
   "name": "Contact page",
   "settings": [
     {
+      "type": "header",
+      "content": "Company information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_company_information",
+      "label": "Show company information",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "information_heading",
+      "label": "Heading",
+      "default": "Contact information"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Company name",
+      "default": "ZHILINK GLOBAL LTD"
+    },
+    {
+      "type": "textarea",
+      "id": "company_address",
+      "label": "Company address",
+      "default": "Suite 302 4 Station Square, Cambridge, United Kingdom CB1 2GE"
+    },
+    {
+      "type": "text",
+      "id": "company_phone",
+      "label": "Phone",
+      "default": "+44 7529279167"
+    },
+    {
+      "type": "text",
+      "id": "company_email",
+      "label": "Email",
+      "default": "support@posterandform.com"
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Image below form"
@@ -83,3 +161,4 @@
   ]
 }
 {% endschema %}
+
