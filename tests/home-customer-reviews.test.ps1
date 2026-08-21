@@ -24,6 +24,8 @@ Assert-Contains $section 'block.shopify_attributes' 'Review blocks must remain s
 Assert-Contains $styles '.hrw-section' 'Customer review CSS must use the hrw namespace.'
 Assert-Contains $styles 'scroll-snap-type: x mandatory' 'Review cards must use a mobile-friendly horizontal rail.'
 Assert-Contains $styles 'scrollbar-width: none' 'The mobile review rail must hide the browser scrollbar while remaining swipeable.'
+Assert-Contains $styles 'padding: 34px 0;' 'Customer reviews must use 34px vertical padding on mobile.'
+Assert-Contains $styles 'padding: 72px 0 80px;' 'Customer reviews must retain their desktop padding.'
 Assert-Contains $themeStyles '.newsletter h2 { margin: 0; font: 500 32px var(--display); }' 'Footer newsletter heading must retain its shared display typography declaration.'
 Assert-Contains $styles 'font: 500 32px var(--display);' 'Customer review heading must reuse the exact Footer Newsletter font shorthand and display-family token.'
 
@@ -36,6 +38,10 @@ if ($reviewHeadingRule.Groups['body'].Value -match 'letter-spacing\s*:') {
 }
 if ($styles -match '(?s)@media\s*\(max-width:\s*749px\).*?\.hrw-section__heading\s*\{') {
   throw 'Customer review heading must not diverge from Footer Newsletter typography on mobile.'
+}
+
+if ($styles.Contains('padding: 52px 0 60px;')) {
+  throw 'The old asymmetric mobile customer-review padding must be removed.'
 }
 
 if ($section -match '(?i)verified buyer|70[,.]934|Rosanne|Belinda|Charles') {
