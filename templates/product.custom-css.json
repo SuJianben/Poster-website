@@ -11,20 +11,185 @@
   "sections": {
     "main": {
       "type": "custom-product-main",
+      "blocks": {
+        "sale_badge": {
+          "type": "sale_badge",
+          "settings": {
+            "label": "Save"
+          }
+        },
+        "reviews": {
+          "type": "reviews",
+          "settings": {
+            "label": "Verified reviews"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "vendor": {
+          "type": "vendor",
+          "settings": {
+            "label": "Artist:"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "shipping_note": {
+          "type": "shipping_note",
+          "settings": {
+            "text": "Free shipping on qualifying orders."
+          }
+        },
+        "artwork_upload": {
+          "type": "artwork_upload",
+          "settings": {
+            "upload_heading": "Upload your image",
+            "drop_label": "Drag and drop your image here",
+            "or_label": "or",
+            "upload_button_label": "Choose image",
+            "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.",
+            "remove_label": "Remove",
+            "require_artwork": true,
+            "crop_heading": "Crop your image",
+            "crop_help_text": "Choose a supported frame ratio, then position and resize the crop area.",
+            "crop_css_help_text": "Choose a fixed ratio, or select Free crop to adjust the shape freely.",
+            "crop_close_label": "Close image cropper",
+            "landscape_label": "Landscape",
+            "square_label": "Square",
+            "portrait_label": "Portrait",
+            "free_crop_label": "Free crop",
+            "any_ratio_label": "Any ratio",
+            "fixed_instruction": "Drag to reposition. Drag a corner to resize while keeping the selected ratio.",
+            "freeform_instruction": "Drag to reposition. Drag any corner to resize freely.",
+            "crop_cancel_label": "Cancel",
+            "crop_confirm_label": "Use crop"
+          }
+        },
+        "material": {
+          "type": "material",
+          "settings": {
+            "label": "Material:",
+            "value": "Poster"
+          }
+        },
+        "size_selector": {
+          "type": "size_selector",
+          "settings": {
+            "label": "Size:",
+            "guide_label": "Size guide"
+          }
+        },
+        "variant_options": {
+          "type": "variant_options",
+          "settings": {}
+        },
+        "passepartout": {
+          "type": "passepartout",
+          "settings": {
+            "label": "Passepartout:",
+            "empty_value": "None",
+            "add_label": "Add passepartout",
+            "loading_label": "Loading…",
+            "options_label": "Passepartout options"
+          }
+        },
+        "frame": {
+          "type": "frame",
+          "settings": {
+            "label": "Frame:",
+            "empty_value": "No frame",
+            "add_label": "Add frame",
+            "loading_label": "Loading…",
+            "options_label": "Frame options"
+          }
+        },
+        "hanging_kit": {
+          "type": "hanging_kit",
+          "settings": {
+            "label": "Canvas print hanging kit",
+            "price_text": "(+ $5.81)"
+          }
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {
+            "label": "Quantity",
+            "decrease_label": "Decrease quantity",
+            "increase_label": "Increase quantity"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "add_label": "Add to cart",
+            "sold_out_label": "Sold out",
+            "unavailable_label": "Unavailable"
+          }
+        },
+        "quantity_offer": {
+          "type": "quantity_offer",
+          "settings": {
+            "heading": "SUMMER OFFER",
+            "summary": "BUY3+ Save 15%",
+            "toggle_label": "more",
+            "default_open": false,
+            "column_one_heading": "Buy quantity",
+            "column_two_heading": "Discount",
+            "row_1_label": "Buy 1",
+            "row_1_value": "Standard price",
+            "row_2_label": "Buy 2",
+            "row_2_value": "Save 10%",
+            "row_3_label": "Buy 3+",
+            "row_3_value": "Save 15%"
+          }
+        },
+        "assurances": {
+          "type": "assurances",
+          "settings": {
+            "item_1": "Immediately ready to hang",
+            "item_2": "Free shipping within the UK",
+            "item_3": "Secure payment",
+            "item_4": "",
+            "item_5": ""
+          }
+        },
+        "payment_methods": {
+          "type": "payment_methods",
+          "settings": {
+            "heading": "Securely packaged & paid",
+            "accessibility_label": "Accepted payment methods",
+            "note": "♢ Special packaging for art galleries"
+          }
+        }
+      },
+      "block_order": [
+        "sale_badge",
+        "reviews",
+        "title",
+        "vendor",
+        "price",
+        "shipping_note",
+        "artwork_upload",
+        "material",
+        "size_selector",
+        "variant_options",
+        "passepartout",
+        "frame",
+        "hanging_kit",
+        "quantity",
+        "buy_buttons",
+        "quantity_offer",
+        "assurances",
+        "payment_methods"
+      ],
       "settings": {
         "framing_render_mode": "css",
         "css_oak_texture_scale": 100,
         "show_breadcrumb": true,
-        "review_label": "Verified reviews",
-        "shipping_note": "Free shipping on qualifying orders.",
-        "upload_heading": "Upload your image",
-        "upload_button_label": "Choose image",
-        "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.",
-        "crop_heading": "Crop your image",
-        "crop_help_text": "Choose a supported frame ratio, then position and resize the crop area.",
-        "crop_cancel_label": "Cancel",
-        "crop_confirm_label": "Use crop",
-        "require_artwork": true,
         "customer_notice_heading": "Customer Notice",
         "customer_notice_content": "<ul><li>By uploading an image, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>",
         "shipping_returns_heading": "Shipping and returns",
@@ -82,14 +247,54 @@
     "lifestyle": {
       "type": "custom-product-lifestyle",
       "blocks": {
-        "series_abstract": { "type": "series", "settings": { "collection": "abstract-geometric-prints" } },
-        "series_figurative": { "type": "series", "settings": { "collection": "figurative-fashion-prints" } },
-        "series_botanical": { "type": "series", "settings": { "collection": "botanical-floral-prints" } },
-        "series_animals": { "type": "series", "settings": { "collection": "animals-prints" } },
-        "series_photography": { "type": "series", "settings": { "collection": "photography-landscape-prints" } },
-        "series_minimal": { "type": "series", "settings": { "collection": "minimal-neutral-prints" } },
-        "series_food": { "type": "series", "settings": { "collection": "food-kitchen-art-prints" } },
-        "series_typography": { "type": "series", "settings": { "collection": "typography-quotes-prints" } }
+        "series_abstract": {
+          "type": "series",
+          "settings": {
+            "collection": "abstract-geometric-prints"
+          }
+        },
+        "series_figurative": {
+          "type": "series",
+          "settings": {
+            "collection": "figurative-fashion-prints"
+          }
+        },
+        "series_botanical": {
+          "type": "series",
+          "settings": {
+            "collection": "botanical-floral-prints"
+          }
+        },
+        "series_animals": {
+          "type": "series",
+          "settings": {
+            "collection": "animals-prints"
+          }
+        },
+        "series_photography": {
+          "type": "series",
+          "settings": {
+            "collection": "photography-landscape-prints"
+          }
+        },
+        "series_minimal": {
+          "type": "series",
+          "settings": {
+            "collection": "minimal-neutral-prints"
+          }
+        },
+        "series_food": {
+          "type": "series",
+          "settings": {
+            "collection": "food-kitchen-art-prints"
+          }
+        },
+        "series_typography": {
+          "type": "series",
+          "settings": {
+            "collection": "typography-quotes-prints"
+          }
+        }
       },
       "block_order": [
         "series_abstract",
@@ -181,4 +386,3 @@
     "information"
   ]
 }
-
