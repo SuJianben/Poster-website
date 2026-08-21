@@ -112,7 +112,7 @@ body.cg-drawer-active { overflow: hidden; }
 }
 
 @media (max-width: 750px) {
-  .cg-collection { padding: 92px 0 44px; }
+  .cg-collection { padding: 44px 0; }
   .cg-shell { width: min(100% - 28px, 1600px); }
   .cg-heading { padding: 12px 0 18px; }
   .cg-heading h1 { font-size: 34px; }
@@ -135,5 +135,6 @@ body.cg-drawer-active { overflow: hidden; }
   .cg-badge { top: 8px; left: 8px; min-height: 19px; padding: 3px 7px; font-size: 9px; }
   .cg-drawer__panel { width: min(90vw, 390px); padding: 22px; }
 }
+
 
 
