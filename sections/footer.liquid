@@ -40,8 +40,35 @@
       </div>
     {% endif %}
 
-    {% if section.blocks.size > 0 %}
-      <div class="footer-links">
+    {% if section.settings.show_brand_info or section.blocks.size > 0 %}
+      <div class="footer-links{% if section.settings.show_brand_info %} footer-links--with-brand{% endif %}">
+        {% if section.settings.show_brand_info %}
+          <div class="footer-brand" style="--footer-brand-logo-width: {{ section.settings.brand_logo_width }}px;">
+            {% if section.settings.brand_logo != blank %}
+              <a class="footer-brand__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
+                {{
+                  section.settings.brand_logo
+                  | image_url: width: 600
+                  | image_tag:
+                    widths: '120, 180, 240, 360, 480, 600',
+                    sizes: '(min-width: 1101px) 240px, 180px',
+                    loading: 'lazy',
+                    alt: section.settings.brand_logo.alt,
+                    class: 'footer-brand__logo-image'
+                }}
+              </a>
+            {% endif %}
+
+            {% if section.settings.brand_heading != blank %}
+              <h3 class="footer-brand__heading">{{ section.settings.brand_heading | escape }}</h3>
+            {% endif %}
+
+            {% if section.settings.brand_content != blank %}
+              <div class="footer-brand__content rte">{{ section.settings.brand_content }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
+
         {% for block in section.blocks %}
           <div {{ block.shopify_attributes }}>
             {% if block.settings.heading != blank %}
@@ -64,6 +91,94 @@
     </div>
   </div>
 </footer>
-{% schema %}{"name":"Footer","settings":[{"type":"checkbox","id":"show_newsletter","label":"Show newsletter","default":true},{"type":"text","id":"newsletter_heading","label":"Newsletter heading","default":"Newsletter"},{"type":"text","id":"newsletter_text","label":"Newsletter text","default":"Get 10% off your first order."},{"type":"text","id":"bottom_text","label":"Bottom text","default":"Curated art prints for considered spaces."}],"blocks":[{"type":"link_column","name":"Link column","settings":[{"type":"text","id":"heading","label":"Heading","default":"Shop"},{"type":"link_list","id":"menu","label":"Menu"}]}],"max_blocks":4}{% endschema %}
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Get 10% off your first order."
+    },
+    {
+      "type": "header",
+      "content": "Brand information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_info",
+      "label": "Show brand information",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "brand_logo_width",
+      "min": 80,
+      "max": 240,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 160
+    },
+    {
+      "type": "text",
+      "id": "brand_heading",
+      "label": "Heading",
+      "default": "PosterAndForm"
+    },
+    {
+      "type": "richtext",
+      "id": "brand_content",
+      "label": "Content",
+      "default": "<p>Curated art prints for considered spaces.</p>"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Curated art prints for considered spaces."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4
+}
+{% endschema %}
+
 
 
