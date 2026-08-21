@@ -30,7 +30,7 @@
       assign lifestyle_seed = product.id | divided_by: 1000
       assign series_image_index = lifestyle_seed | modulo: series_image_count
       assign series_image_number = series_image_index | plus: 1
-      assign series_image = series_images[series_image_index]
+      assign series_image = series_images | slice: series_image_index, 1 | first
       assign series_image_source = 'series_metafield'
     else
       assign series_image = matched_series.image | default: matched_series.featured_image
