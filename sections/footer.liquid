@@ -41,7 +41,7 @@
     {% endif %}
 
     {% if section.settings.show_brand_info or section.blocks.size > 0 %}
-      <div class="footer-links{% if section.settings.show_brand_info %} footer-links--with-brand{% endif %}">
+      <div class="footer-links{% if section.settings.show_brand_info %} footer-links--with-brand{% endif %}{% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %} footer-links--with-payments{% endif %}">
         {% if section.settings.show_brand_info %}
           <div class="footer-brand" style="--footer-brand-logo-width: {{ section.settings.brand_logo_width }}px;">
             {% if section.settings.brand_logo != blank %}
@@ -82,6 +82,12 @@
             {% endif %}
           </div>
         {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %}
+      <div class="footer-payments">
+        {% render 'shopify-payment-icons', context: 'footer', label: 'Accepted payment methods' %}
       </div>
     {% endif %}
 
@@ -151,6 +157,16 @@
       "default": "<p>Curated art prints for considered spaces.</p>"
     },
     {
+      "type": "header",
+      "content": "Payment methods"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "bottom_text",
       "label": "Bottom text",
@@ -179,6 +195,7 @@
   "max_blocks": 4
 }
 {% endschema %}
+
 
 
 
