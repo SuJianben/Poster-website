@@ -72,6 +72,30 @@ assert.match(content.innerHTML, /View cart/i, 'The refresh fallback must provide
 assert.equal(count.textContent, 3, 'The success fallback must update the visible parent-product count without counting hidden add-ons.');
 assert.equal(footer.hidden, true, 'The regular totals footer must remain hidden until a full cart payload is available.');
 
+const uploadedArtworkUrl = 'https://cdn.shopify.com/s/files/uploaded-artwork.jpg';
+context.window.CartDrawer.open({
+  item_count: 1,
+  total_price: 3700,
+  items: [{
+    key: 'custom-poster-line',
+    quantity: 1,
+    product_title: 'CUSTOM POSTER',
+    variant_title: 'A4',
+    url: '/products/custom-poster',
+    image: 'https://cdn.shopify.com/s/files/default-product.jpg',
+    properties: { 'Custom artwork': uploadedArtworkUrl, _framing_config: 'config-1' },
+    original_line_price: 3700,
+    final_line_price: 3700,
+  }],
+});
+assert.match(content.innerHTML, new RegExp(`src="${uploadedArtworkUrl}"`), 'The uploaded artwork must replace the generic product thumbnail.');
+assert.doesNotMatch(content.innerHTML, /Custom artwork:/, 'The internal artwork URL must not be rendered as customer-facing item text.');
+assert.doesNotMatch(content.innerHTML, /default-product\.jpg/, 'The generic product image must not win when uploaded artwork exists.');
+
+const mainCartSource = fs.readFileSync(path.join(__dirname, '..', 'sections', 'main-cart.liquid'), 'utf8');
+assert.match(mainCartSource, /item\.properties\['Custom artwork'\]/, 'The full cart page must read the uploaded artwork property.');
+assert.match(mainCartSource, /src="\{\{ custom_artwork \| escape \}\}"/, 'The full cart page must use uploaded artwork as the line thumbnail.');
+
 const customProductSource = fs.readFileSync(path.join(__dirname, '..', 'assets', 'custom-product.js'), 'utf8');
 assert.match(customProductSource, /CartDrawer\?\.openError\(\)/, 'Custom product failures must leave the loading state.');
 assert.match(customProductSource, /CartDrawer\?\.openAdded\(quantity\)/, 'Confirmed adds with a delayed refresh must use the success fallback.');
