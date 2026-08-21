@@ -52,5 +52,22 @@
     if (control.dataset.cgView) applyView(control.dataset.cgView, true);
   }));
 
+  const hoverMediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+  root.querySelectorAll('[data-cg-product][data-cg-has-lifestyle="true"]').forEach((card) => {
+    card.addEventListener('pointerenter', () => {
+      if (!hoverMediaQuery.matches || root.dataset.view !== 'product' || card.dataset.cgHoverTracked === 'true') return;
+      card.dataset.cgHoverTracked = 'true';
+
+      if (Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({
+          event: 'collection_product_hover_image',
+          collection_handle: root.dataset.cgCollectionHandle,
+          product_handle: card.dataset.productHandle
+        });
+      }
+    }, { passive: true });
+  });
+
 })();
+
 

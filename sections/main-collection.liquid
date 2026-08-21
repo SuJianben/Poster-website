@@ -70,13 +70,20 @@
       <div class="cg-product-grid">
         {% for product in collection.products %}
           {% if product.tags contains 'system:framing-addon' %}{% continue %}{% endif %}
+          {% assign discount_badge = section.settings.discount_badge_text %}
+          {% if product.compare_at_price_max > product.price_min and product.compare_at_price_max > 0 %}
+            {% assign discount_saving = product.compare_at_price_max | minus: product.price_min %}
+            {% assign discount_percentage = discount_saving | times: 100.0 | divided_by: product.compare_at_price_max | round %}
+            {% assign discount_badge = 'Discount ' | append: discount_percentage | append: '%' %}
+          {% endif %}
           <article
             class="cg-product"
             data-cg-product
             data-cg-has-lifestyle="{% if product.images.size > 1 %}true{% else %}false{% endif %}"
+            data-product-handle="{{ product.handle | escape }}"
           >
             <a class="cg-product-media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
-              {% if product.tags contains 'Bestseller' %}<span class="cg-badge">Bestseller</span>{% endif %}
+              {% if discount_badge != blank %}<span class="cg-badge">{{ discount_badge }}</span>{% endif %}
               {% if product.featured_media %}
                 {{ product.featured_media | image_url: width: 1200 | image_tag: class: 'cg-product-image', loading: 'lazy', widths: '320,480,640,800,1200', alt: product.title }}
               {% endif %}
@@ -195,6 +202,12 @@
       "default": true
     },
     {
+      "type": "text",
+      "id": "discount_badge_text",
+      "label": "Discount badge before compare-at pricing",
+      "default": "Discount"
+    },
+    {
       "type": "textarea",
       "id": "seo_intro",
       "label": "SEO fallback intro",
@@ -229,4 +242,5 @@
   ]
 }
 {% endschema %}
+
 
