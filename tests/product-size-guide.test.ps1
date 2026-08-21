@@ -7,6 +7,7 @@ $script = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\product-size-gu
 $defaultSection = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\main-product.liquid') -Raw
 $defaultPurchaseBlocks = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\product-purchase-block.liquid') -Raw
 $customSection = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\custom-product-main.liquid') -Raw
+$customPurchaseBlocks = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\custom-product-purchase-block.liquid') -Raw
 
 function Assert-Contains([string]$Value, [string]$Expected, [string]$Message) {
   if (-not $Value.Contains($Expected)) { throw $Message }
@@ -19,7 +20,8 @@ foreach ($section in @($defaultSection, $customSection)) {
 }
 
 Assert-Contains $defaultPurchaseBlocks 'data-ps-size-guide-open' 'The default product Size guide block must expose the shared open hook.'
-Assert-Contains $customSection 'data-ps-size-guide-open' 'The custom product Size guide button must expose the shared open hook.'
+Assert-Contains $customPurchaseBlocks "render 'product-purchase-block'" 'Custom products must delegate shared purchase controls to the common renderer.'
+Assert-Contains $defaultPurchaseBlocks 'data-ps-size-guide-open' 'The shared Size guide block must expose the open hook used by custom products.'
 
 Assert-Contains $snippet 'product.options_with_values' 'The size guide must read the current product option values.'
 Assert-Contains $snippet "normalized_option_name contains 'size'" 'The size guide must select the current product Size option.'

@@ -49,8 +49,10 @@ assert.match(cropper, /geometry\.resizeCrop\(/, 'Preset crop interactions must k
 assert.equal((snippet.match(/data-ps-cropper-ratio=/g) || []).length, 4, 'Three presets and one Free crop option must be rendered in the CSS template source.');
 assert.match(snippet, /data-ps-cropper-ratio="freeform"/, 'The Free crop option is missing.');
 assert.match(snippet, /section\.settings\.framing_render_mode == 'css'/, 'The Free crop option must be conditionally scoped to CSS rendering.');
-assert.match(snippet, /Drag a corner to resize while keeping the selected ratio\./, 'Preset instructions must describe locked resizing.');
-assert.match(snippet, /Drag any corner to resize freely\./, 'Free crop instructions must describe free resizing.');
+assert.match(snippet, /block\.settings\.fixed_instruction/, 'Preset instructions must come from the artwork block.');
+assert.match(snippet, /block\.settings\.freeform_instruction/, 'Free crop instructions must come from the artwork block.');
+assert.match(section, /Drag to reposition\. Drag a corner to resize while keeping the selected ratio\./, 'The artwork block schema must preserve the fixed-ratio instruction default.');
+assert.match(section, /Drag to reposition\. Drag any corner to resize freely\./, 'The artwork block schema must preserve the free-crop instruction default.');
 assert.match(section, /custom-artwork-cropper-mode\.js/, 'The crop mode module must load before the cropper controller.');
 assert.match(section, /crop-modes-v2-20260819/g, 'Cropper assets must use the new cache version.');
 
