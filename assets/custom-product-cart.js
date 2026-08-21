@@ -24,10 +24,11 @@
     return response.json();
   };
 
-  const addParentWithArtwork = async (form, parentItem) => {
+  const addParentWithArtwork = async (form, parentItem, artworkFile) => {
     const formData = new FormData(form);
     formData.set('id', String(parentItem.id));
     formData.set('quantity', String(parentItem.quantity));
+    formData.set('properties[Custom artwork]', artworkFile, artworkFile.name);
     Object.entries(parentItem.properties || {}).forEach(([key, value]) => {
       formData.set(`properties[${key}]`, String(value));
     });
@@ -65,7 +66,7 @@
       }
 
       const [parentItem, ...addonItems] = cartPayload.items;
-      const parentResponse = await addParentWithArtwork(form, parentItem);
+      const parentResponse = await addParentWithArtwork(form, parentItem, file);
       const parentLine = parentResponse.items?.[0] || parentResponse;
       try {
         if (addonItems.length) {
@@ -80,3 +81,4 @@
     },
   };
 })();
+
