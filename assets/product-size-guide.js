@@ -139,4 +139,3 @@
   initializeWithin(document);
   document.addEventListener('shopify:section:load', (event) => initializeWithin(event.target));
 })();
-
