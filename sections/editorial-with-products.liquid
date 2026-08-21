@@ -1,5 +1,6 @@
 {% assign hotspot_blocks = section.blocks | where: 'type', 'hotspot' %}
 {% assign poster_blocks = section.blocks | where: 'type', 'poster' %}
+{% assign mobile_description = section.settings.mobile_text | default: section.settings.text %}
 
 {{ 'editorial-depth-cards.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'editorial-depth-cards.js' | asset_url }}" defer="defer"></script>
@@ -50,9 +51,9 @@
       {% for block in hotspot_blocks %}
         {% render 'editorial-product-hotspot', block: block, section: section %}
       {% endfor %}
-      {% if section.settings.enable_personalizer and section.settings.text != blank %}
+      {% if section.settings.enable_personalizer and mobile_description != blank %}
         <div class="home-personalizer__mobile-description">
-          <p>{{ section.settings.text }}</p>
+          <p>{{ mobile_description }}</p>
         </div>
       {% endif %}
     </div>
@@ -158,6 +159,7 @@
     {"type":"text","id":"discount_badge_text","label":"Discount badge before compare-at pricing","default":"Discount"},
     {"type":"header","content":"Homepage personalizer"},
     {"type":"checkbox","id":"enable_personalizer","label":"Enable upload preview","default":false},
+    {"type":"textarea","id":"mobile_text","label":"Mobile description","info":"Optional. When left blank, the Text setting above is used."},
     {"type":"image_picker","id":"personalizer_scene_image","label":"Scene image after upload","info":"Shown after the customer confirms the crop."},
     {"type":"text","id":"upload_heading","label":"Upload heading","default":"Upload your image"},
     {"type":"text","id":"upload_button_label","label":"Upload button label","default":"Choose image"},
@@ -187,6 +189,7 @@
   "presets": [{"name":"Editorial with products"}]
 }
 {% endschema %}
+
 
 
 
