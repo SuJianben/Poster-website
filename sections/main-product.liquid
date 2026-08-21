@@ -3,6 +3,7 @@
   {% assign framing_render_mode = 'css' %}
 {% endif %}
 <link rel="stylesheet" href="{{ 'product-showcase.css' | asset_url }}&psv=default-css-mat-scale-v1-20260819">
+{{ 'product-size-guide.css' | asset_url | stylesheet_tag }}
 {% if framing_render_mode == 'css' %}
   <link rel="stylesheet" href="{{ 'custom-css-framing.css' | asset_url }}&psv=default-product-toggle-v1-20260819">
 {% endif %}
@@ -13,6 +14,7 @@
 {% endif %}
 <script src="{{ 'product-framing.js' | asset_url }}&psv=default-product-toggle-v1-20260819" defer="defer"></script>
 <script src="{{ 'product-showcase.js' | asset_url }}&psv=featured-media-v1-20260819" defer="defer"></script>
+<script src="{{ 'product-size-guide.js' | asset_url }}&psv=size-guide-v1-20260821" defer="defer"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign image_media = product.media | where: 'media_type', 'image' %}
@@ -124,7 +126,7 @@
               {% assign option_name = option.name | downcase %}
               {% if option_name contains 'size' %}
                 <fieldset class="ps-config-group ps-option-group" data-ps-option-group data-option-position="{{ option.position }}" aria-label="{{ option.name | escape }}">
-                  <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong data-ps-option-label>{{ option.selected_value }}</strong></p><button type="button" class="ps-size-guide">Size guide</button></div>
+                  <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong data-ps-option-label>{{ option.selected_value }}</strong></p><button type="button" class="ps-size-guide" data-ps-size-guide-open aria-haspopup="dialog" aria-controls="ProductSizeGuide-{{ section.id }}">Size guide</button></div>
                   <div class="ps-config-options ps-config-options--size">
                     {% for value in option.values %}
                       <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
@@ -212,6 +214,7 @@
 
   </div>
 
+  {% render 'product-size-guide', product: product, section: section %}
 </section>
 
 <script type="application/json" data-ps-variants>
@@ -286,4 +289,5 @@
   ]
 }
 {% endschema %}
+
 

@@ -1,0 +1,56 @@
+{% liquid
+  assign size_option = nil
+  for option in product.options_with_values
+    assign normalized_option_name = option.name | downcase
+    if normalized_option_name contains 'size'
+      assign size_option = option
+      break
+    endif
+  endfor
+%}
+
+{% if size_option != nil and size_option.values.size > 0 %}
+  <div class="ps-size-guide-modal" data-ps-size-guide-modal hidden>
+    <button class="ps-size-guide-modal__backdrop" type="button" data-ps-size-guide-close aria-label="Close size guide"></button>
+    <section
+      class="ps-size-guide-modal__dialog"
+      id="ProductSizeGuide-{{ section.id }}"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="ProductSizeGuideHeading-{{ section.id }}"
+      aria-describedby="ProductSizeGuideDescription-{{ section.id }}"
+      tabindex="-1"
+    >
+      <header class="ps-size-guide-modal__header">
+        <div>
+          <p class="ps-size-guide-modal__eyebrow">{{ product.title | escape }}</p>
+          <h2 id="ProductSizeGuideHeading-{{ section.id }}">Size guide</h2>
+        </div>
+        <button class="ps-size-guide-modal__close" type="button" data-ps-size-guide-close aria-label="Close size guide">
+          <span aria-hidden="true">×</span>
+        </button>
+      </header>
+
+      <p class="ps-size-guide-modal__description" id="ProductSizeGuideDescription-{{ section.id }}">
+        Compare the sizes available for this product. The shapes are shown in relative scale.
+      </p>
+
+      <div class="ps-size-guide-modal__sizes" data-ps-size-guide-sizes>
+        {% for value in size_option.values %}
+          <article class="ps-size-guide-modal__item" data-ps-size-guide-item data-size-label="{{ value | escape }}">
+            <div class="ps-size-guide-modal__visual" aria-hidden="true">
+              <div class="ps-size-guide-modal__poster" data-ps-size-guide-shape>
+                <span class="ps-size-guide-modal__poster-art"></span>
+              </div>
+            </div>
+            <div class="ps-size-guide-modal__item-copy">
+              <strong>{{ value }}</strong>
+              <span data-ps-size-guide-current hidden>Current size</span>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+{% endif %}
+
