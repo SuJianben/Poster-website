@@ -1,0 +1,153 @@
+{% comment %}
+  Renders one configurable block inside the default product purchase form.
+  Keep product data native; block settings only control labels and optional content.
+{% endcomment %}
+
+{% case block.type %}
+  {% when 'sale_badge' %}
+    {% if product.compare_at_price_max > product.price %}
+      <span class="ps-sale-badge" {{ block.shopify_attributes }}>{{ block.settings.label }} {{ product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max }}%</span>
+    {% endif %}
+
+  {% when 'reviews' %}
+    <p class="ps-review-line" {{ block.shopify_attributes }}>★★★★★ <span>{{ block.settings.label }}</span></p>
+
+  {% when 'title' %}
+    <h1 {{ block.shopify_attributes }}>{{ product.title }}</h1>
+
+  {% when 'vendor' %}
+    {% if product.vendor != blank %}
+      <p class="ps-vendor" {{ block.shopify_attributes }}>{{ block.settings.label }} <strong>{{ product.vendor }}</strong></p>
+    {% endif %}
+
+  {% when 'price' %}
+    <div class="ps-price" data-ps-price {{ block.shopify_attributes }}>
+      <span class="ps-price__current">{{ selected_variant.price | money }}</span>
+      <s class="ps-price__compare {% unless selected_variant.compare_at_price > selected_variant.price %}is-hidden{% endunless %}" data-ps-compare>{{ selected_variant.compare_at_price | money }}</s>
+    </div>
+
+  {% when 'shipping_note' %}
+    {% if block.settings.text != blank %}<p class="ps-shipping-note" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>{% endif %}
+
+  {% when 'material' %}
+    <div class="ps-config-group" {{ block.shopify_attributes }}>
+      <p class="ps-config-label">{{ block.settings.label }} <strong data-ps-choice-output>{{ block.settings.value }}</strong></p>
+      <div class="ps-config-options" data-ps-choice-group>
+        <button type="button" class="is-selected" data-ps-choice aria-pressed="true">{{ block.settings.value }}</button>
+      </div>
+    </div>
+
+  {% when 'size_selector' %}
+    {% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}
+        {% assign option_name = option.name | downcase %}
+        {% if option_name contains 'size' %}
+          <fieldset class="ps-config-group ps-option-group" data-ps-option-group data-option-position="{{ option.position }}" aria-label="{{ option.name | escape }}" {{ block.shopify_attributes }}>
+            <div class="ps-config-label-row">
+              <p class="ps-config-label">{{ block.settings.label }} <strong data-ps-option-label>{{ option.selected_value }}</strong></p>
+              <button type="button" class="ps-size-guide" data-ps-size-guide-open aria-haspopup="dialog" aria-controls="ProductSizeGuide-{{ section.id }}">{{ block.settings.guide_label }}</button>
+            </div>
+            <div class="ps-config-options ps-config-options--size">
+              {% for value in option.values %}
+                <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
+              {% endfor %}
+            </div>
+          </fieldset>
+        {% endif %}
+      {% endfor %}
+    {% endunless %}
+
+  {% when 'variant_options' %}
+    {% unless product.has_only_default_variant %}
+      <div class="ps-variant-options" {{ block.shopify_attributes }}>
+        {% for option in product.options_with_values %}
+          {% assign option_name = option.name | downcase %}
+          {% unless option_name contains 'size' %}
+            <fieldset class="ps-option-group" data-ps-option-group data-option-position="{{ option.position }}">
+              <legend>{{ option.name }}: <span data-ps-option-label>{{ option.selected_value }}</span></legend>
+              <div class="ps-option-values">
+                {% for value in option.values %}
+                  <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                  <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
+                {% endfor %}
+              </div>
+            </fieldset>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    {% endunless %}
+
+  {% when 'passepartout' %}
+    <div class="ps-config-group" {{ block.shopify_attributes }}>
+      <p class="ps-config-label">{{ block.settings.label }} <strong data-ps-choice-output>{{ block.settings.empty_value }}</strong></p>
+      <div class="ps-frame-select ps-choice-select" data-ps-framing-select="passepartout">
+        <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
+          <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-choice-select-value>{{ block.settings.add_label }}</span></span>
+          <span class="ps-frame-trigger__price" data-ps-choice-select-price>{{ block.settings.loading_label }}</span>
+        </button>
+        <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="{{ block.settings.options_label | escape }}"></div>
+      </div>
+    </div>
+
+  {% when 'frame' %}
+    <div class="ps-config-group" {{ block.shopify_attributes }}>
+      <p class="ps-config-label">{{ block.settings.label }} <strong data-ps-choice-output>{{ block.settings.empty_value }}</strong></p>
+      <div class="ps-frame-select" data-ps-framing-select="frame">
+        <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
+          <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-frame-trigger-plus data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-frame-select-value data-ps-choice-select-value>{{ block.settings.add_label }}</span></span>
+          <span class="ps-frame-trigger__price" data-ps-choice-select-price>{{ block.settings.loading_label }}</span>
+        </button>
+        <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="{{ block.settings.options_label | escape }}"></div>
+      </div>
+    </div>
+
+  {% when 'hanging_kit' %}
+    <label class="ps-addon" {{ block.shopify_attributes }}><input type="checkbox"><span></span>{{ block.settings.label }}{% if block.settings.price_text != blank %} <small>{{ block.settings.price_text }}</small>{% endif %}</label>
+
+  {% when 'quantity' %}
+    <div class="ps-form__quantity" data-ps-quantity {{ block.shopify_attributes }}>
+      <label for="Quantity-{{ section.id }}">{{ block.settings.label }}</label>
+      <div><button type="button" data-ps-quantity-change="-1" aria-label="{{ block.settings.decrease_label | escape }}">−</button><input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1"><button type="button" data-ps-quantity-change="1" aria-label="{{ block.settings.increase_label | escape }}">+</button></div>
+    </div>
+
+  {% when 'buy_buttons' %}
+    <div class="ps-buy-buttons" {{ block.shopify_attributes }}>
+      <button class="ps-add-button" type="submit" data-ps-add-button data-add-label="{{ block.settings.add_label | escape }}" data-sold-out-label="{{ block.settings.sold_out_label | escape }}" data-unavailable-label="{{ block.settings.unavailable_label | escape }}" {% unless selected_variant.available %}disabled{% endunless %}>
+        <span class="ps-add-button__label" data-ps-add-label>{% if selected_variant.available %}{{ block.settings.add_label }}{% else %}{{ block.settings.sold_out_label }}{% endif %}</span>
+      </button>
+      <p class="ps-form__status" data-ps-status role="status"></p>
+    </div>
+
+  {% when 'quantity_offer' %}
+    <div class="ps-offer-group" {{ block.shopify_attributes }}>
+      <button type="button" class="ps-offer" data-ps-offer-toggle data-ps-offer-block-id="{{ block.id }}" aria-expanded="{{ block.settings.default_open }}">
+        <strong>{{ block.settings.heading }}</strong><span> - {{ block.settings.summary }}</span>
+        <span class="ps-offer__more">{{ block.settings.toggle_label }} <svg class="ps-offer__icon" aria-hidden="true" viewBox="0 0 12 8" focusable="false"><path d="M1 1.25 6 6.25 11 1.25"/></svg></span>
+      </button>
+      <div class="ps-quantity-savings{% if block.settings.default_open %} is-open{% endif %}" data-ps-offer-details{% unless block.settings.default_open %} hidden{% endunless %}>
+        <div><strong>{{ block.settings.column_one_heading }}</strong><strong>{{ block.settings.column_two_heading }}</strong></div>
+        {% for row_index in (1..3) %}
+          {% assign label_key = 'row_' | append: row_index | append: '_label' %}
+          {% assign value_key = 'row_' | append: row_index | append: '_value' %}
+          {% if block.settings[label_key] != blank or block.settings[value_key] != blank %}<div><span>{{ block.settings[label_key] }}</span><span>{{ block.settings[value_key] }}</span></div>{% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+  {% when 'assurances' %}
+    <ul class="ps-assurances" {{ block.shopify_attributes }}>
+      {% for item_index in (1..5) %}
+        {% assign item_key = 'item_' | append: item_index %}
+        {% if block.settings[item_key] != blank %}<li>{{ block.settings[item_key] }}</li>{% endif %}
+      {% endfor %}
+    </ul>
+
+  {% when 'payment_methods' %}
+    <div class="ps-payment-block" {{ block.shopify_attributes }}>
+      {% if block.settings.heading != blank %}<p>{{ block.settings.heading }}</p>{% endif %}
+      {% render 'shopify-payment-icons', context: 'product', label: block.settings.accessibility_label %}
+      {% if block.settings.note != blank %}<small>{{ block.settings.note }}</small>{% endif %}
+    </div>
+{% endcase %}
+

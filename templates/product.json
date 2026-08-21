@@ -11,12 +11,46 @@
   "sections": {
     "main": {
       "type": "main-product",
+      "blocks": {
+        "reviews": { "type": "reviews", "settings": { "label": "Verified reviews" } },
+        "title": { "type": "title", "settings": {} },
+        "vendor": { "type": "vendor", "settings": { "label": "Artist:" } },
+        "price": { "type": "price", "settings": {} },
+        "shipping_note": { "type": "shipping_note", "settings": { "text": "Free shipping on qualifying orders." } },
+        "material": { "type": "material", "settings": { "label": "Material:", "value": "Poster" } },
+        "size_selector": { "type": "size_selector", "settings": { "label": "Size:", "guide_label": "Size guide" } },
+        "variant_options": { "type": "variant_options", "settings": {} },
+        "passepartout": { "type": "passepartout", "settings": { "label": "Passepartout:", "empty_value": "None", "add_label": "Add passepartout", "loading_label": "Loading…", "options_label": "Passepartout options" } },
+        "frame": { "type": "frame", "settings": { "label": "Frame:", "empty_value": "No frame", "add_label": "Add frame", "loading_label": "Loading…", "options_label": "Frame options" } },
+        "hanging_kit": { "type": "hanging_kit", "settings": { "label": "Canvas print hanging kit", "price_text": "(+ $5.81)" } },
+        "quantity": { "type": "quantity", "settings": { "label": "Quantity", "decrease_label": "Decrease quantity", "increase_label": "Increase quantity" } },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "add_label": "Add to cart", "sold_out_label": "Sold out", "unavailable_label": "Unavailable" } },
+        "quantity_offer": { "type": "quantity_offer", "settings": { "heading": "SUMMER OFFER", "summary": "BUY3+ Save 15%", "toggle_label": "more", "default_open": false, "column_one_heading": "Buy quantity", "column_two_heading": "Discount", "row_1_label": "Buy 1", "row_1_value": "Standard price", "row_2_label": "Buy 2", "row_2_value": "Save 10%", "row_3_label": "Buy 3+", "row_3_value": "Save 15%" } },
+        "assurances": { "type": "assurances", "settings": { "item_1": "Immediately ready to hang", "item_2": "Free worldwide shipping over $49", "item_3": "Estimated delivery: Jul 29 - Jul 31" } },
+        "payment_methods": { "type": "payment_methods", "settings": { "heading": "Securely packaged & paid", "accessibility_label": "Accepted payment methods", "note": "♢ Special packaging for art galleries" } }
+      },
+      "block_order": [
+        "reviews",
+        "title",
+        "vendor",
+        "price",
+        "shipping_note",
+        "material",
+        "size_selector",
+        "variant_options",
+        "passepartout",
+        "frame",
+        "hanging_kit",
+        "quantity",
+        "buy_buttons",
+        "quantity_offer",
+        "assurances",
+        "payment_methods"
+      ],
       "settings": {
         "enable_css_framing_preview": true,
         "show_breadcrumb": true,
         "show_thumbnail_navigation": false,
-        "review_label": "Verified reviews",
-        "shipping_note": "Free shipping on qualifying orders.",
         "product_details_heading": "Product details",
         "shipping_returns_heading": "Shipping and returns",
         "shipping_returns_content": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>",
@@ -172,4 +206,5 @@
     "information"
   ]
 }
+
 

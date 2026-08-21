@@ -126,16 +126,16 @@
     const values = selectedValues();
     const variant = variants.find((item) => item.options.every((value, index) => value === values[index]));
     if (!variant) {
-      addButton.disabled = true;
-      addLabel.textContent = 'Unavailable';
-      status.textContent = 'This option combination is unavailable.';
+      if (addButton) addButton.disabled = true;
+      if (addLabel) addLabel.textContent = addButton?.dataset.unavailableLabel || 'Unavailable';
+      if (status) status.textContent = 'This option combination is unavailable.';
       return;
     }
     variantInput.value = variant.id;
     renderPrice(variant);
-    addButton.disabled = !variant.available;
-    addLabel.textContent = variant.available ? 'Add to cart' : 'Sold out';
-    status.textContent = variant.available ? '' : 'This variant is sold out.';
+    if (addButton) addButton.disabled = !variant.available;
+    if (addLabel) addLabel.textContent = variant.available ? (addButton?.dataset.addLabel || 'Add to cart') : (addButton?.dataset.soldOutLabel || 'Sold out');
+    if (status) status.textContent = variant.available ? '' : 'This variant is sold out.';
     if (variant.featured_media?.id) setMedia(variant.featured_media.id);
     root.dispatchEvent(new CustomEvent('product:variant-change', { detail: { variant } }));
   };
@@ -203,6 +203,12 @@
   offerToggle?.addEventListener('click', () => {
     const open = offerToggle.getAttribute('aria-expanded') !== 'true';
     offerToggle.setAttribute('aria-expanded', String(open));
+    window.dataLayer?.push({
+      event: 'product_offer_toggle',
+      product_id: root.dataset.psProductId || null,
+      block_id: offerToggle.dataset.psOfferBlockId || null,
+      expanded: open,
+    });
     if (!offerDetails) return;
 
     window.clearTimeout(offerCloseTimer);
@@ -257,4 +263,5 @@
     }
   });
 })();
+
 
