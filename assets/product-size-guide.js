@@ -19,8 +19,8 @@
 
     return parsed.map((item) => ({
       ...item,
-      widthPercent: item.dimensions ? (item.dimensions.width / maximumDimension) * 86 : 58,
-      heightPercent: item.dimensions ? (item.dimensions.height / maximumDimension) * 86 : 78
+      widthPercent: item.dimensions ? (item.dimensions.width / maximumDimension) * 96 : 66,
+      heightPercent: item.dimensions ? (item.dimensions.height / maximumDimension) * 96 : 88
     }));
   };
 
@@ -139,3 +139,4 @@
   initializeWithin(document);
   document.addEventListener('shopify:section:load', (event) => initializeWithin(event.target));
 })();
+
