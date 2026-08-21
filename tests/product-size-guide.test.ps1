@@ -5,6 +5,7 @@ $snippet = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\product-size
 $styles = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\product-size-guide.css') -Raw
 $script = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\product-size-guide.js') -Raw
 $defaultSection = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\main-product.liquid') -Raw
+$defaultPurchaseBlocks = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\product-purchase-block.liquid') -Raw
 $customSection = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\custom-product-main.liquid') -Raw
 
 function Assert-Contains([string]$Value, [string]$Expected, [string]$Message) {
@@ -14,9 +15,11 @@ function Assert-Contains([string]$Value, [string]$Expected, [string]$Message) {
 foreach ($section in @($defaultSection, $customSection)) {
   Assert-Contains $section "'product-size-guide.css' | asset_url" 'Every product context must load the shared size-guide styles.'
   Assert-Contains $section "'product-size-guide.js' | asset_url" 'Every product context must load the shared size-guide controller.'
-  Assert-Contains $section 'data-ps-size-guide-open' 'Every product Size guide button must expose the shared open hook.'
   Assert-Contains $section "render 'product-size-guide'" 'Every product context must render the shared size-guide modal.'
 }
+
+Assert-Contains $defaultPurchaseBlocks 'data-ps-size-guide-open' 'The default product Size guide block must expose the shared open hook.'
+Assert-Contains $customSection 'data-ps-size-guide-open' 'The custom product Size guide button must expose the shared open hook.'
 
 Assert-Contains $snippet 'product.options_with_values' 'The size guide must read the current product option values.'
 Assert-Contains $snippet "normalized_option_name contains 'size'" 'The size guide must select the current product Size option.'

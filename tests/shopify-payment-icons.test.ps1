@@ -4,6 +4,7 @@ $themeRoot = Split-Path -Parent $PSScriptRoot
 $snippet = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\shopify-payment-icons.liquid') -Raw
 $styles = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\shopify-payment-icons.css') -Raw
 $mainProduct = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\main-product.liquid') -Raw
+$mainProductPurchaseBlocks = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\product-purchase-block.liquid') -Raw
 $customProduct = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\custom-product-main.liquid') -Raw
 $cartMarkup = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\cart-drawer.liquid') -Raw
 $cartScript = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\cart-drawer.js') -Raw
@@ -23,7 +24,7 @@ Assert-Contains $snippet 'shop.enabled_payment_types' 'Payment icons must come f
 Assert-Contains $snippet 'payment_type_svg_tag' 'Payment methods must use Shopify-native SVG icons.'
 Assert-Contains $snippet 'data-payment-source="shop.enabled_payment_types"' 'The rendered icon list must expose its traceable Shopify data source.'
 Assert-Contains $snippet 'role="list"' 'The icon collection must retain list semantics.'
-Assert-Contains $mainProduct "render 'shopify-payment-icons', context: 'product'" 'Default products must use the shared Shopify payment icon snippet.'
+Assert-Contains $mainProductPurchaseBlocks "render 'shopify-payment-icons', context: 'product'" 'Default products must use the shared Shopify payment icon snippet.'
 Assert-Contains $customProduct "render 'shopify-payment-icons', context: 'product'" 'Custom product templates must use the shared Shopify payment icon snippet.'
 Assert-Contains $cartMarkup 'data-cart-drawer-payment-icons' 'The cart drawer must provide server-rendered payment icons to its JavaScript renderer.'
 Assert-Contains $cartMarkup "render 'shopify-payment-icons', context: 'cart'" 'The cart drawer must use the shared Shopify payment icon snippet.'
@@ -40,7 +41,7 @@ Assert-Contains $layout 'drawer_build=shopify-payment-icons-v1-20260819' 'The up
 
 $hardcodedLabels = @('AMEX', 'Apple Pay', 'G Pay', '>PayPal<', '>VISA<', '>Klarna<', 'Pay')
 foreach ($label in $hardcodedLabels) {
-  if ($mainProduct.Contains($label) -or $customProduct.Contains($label) -or $cartScript.Contains($label)) {
+  if ($mainProduct.Contains($label) -or $mainProductPurchaseBlocks.Contains($label) -or $customProduct.Contains($label) -or $cartScript.Contains($label)) {
     throw "Hardcoded payment label remains in a storefront payment entry point: $label"
   }
 }
