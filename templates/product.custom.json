@@ -13,6 +13,8 @@
       "type": "custom-product-main",
       "settings": {
         "framing_render_mode": "image",
+        "customer_notice_heading": "Customer Notice",
+        "customer_notice_content": "<ul><li>By uploading an image, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
@@ -64,54 +66,14 @@
     "lifestyle": {
       "type": "custom-product-lifestyle",
       "blocks": {
-        "series_abstract": {
-          "type": "series",
-          "settings": {
-            "collection": "abstract-geometric-prints"
-          }
-        },
-        "series_figurative": {
-          "type": "series",
-          "settings": {
-            "collection": "figurative-fashion-prints"
-          }
-        },
-        "series_botanical": {
-          "type": "series",
-          "settings": {
-            "collection": "botanical-floral-prints"
-          }
-        },
-        "series_animals": {
-          "type": "series",
-          "settings": {
-            "collection": "animals-prints"
-          }
-        },
-        "series_photography": {
-          "type": "series",
-          "settings": {
-            "collection": "photography-landscape-prints"
-          }
-        },
-        "series_minimal": {
-          "type": "series",
-          "settings": {
-            "collection": "minimal-neutral-prints"
-          }
-        },
-        "series_food": {
-          "type": "series",
-          "settings": {
-            "collection": "food-kitchen-art-prints"
-          }
-        },
-        "series_typography": {
-          "type": "series",
-          "settings": {
-            "collection": "typography-quotes-prints"
-          }
-        }
+        "series_abstract": { "type": "series", "settings": { "collection": "abstract-geometric-prints" } },
+        "series_figurative": { "type": "series", "settings": { "collection": "figurative-fashion-prints" } },
+        "series_botanical": { "type": "series", "settings": { "collection": "botanical-floral-prints" } },
+        "series_animals": { "type": "series", "settings": { "collection": "animals-prints" } },
+        "series_photography": { "type": "series", "settings": { "collection": "photography-landscape-prints" } },
+        "series_minimal": { "type": "series", "settings": { "collection": "minimal-neutral-prints" } },
+        "series_food": { "type": "series", "settings": { "collection": "food-kitchen-art-prints" } },
+        "series_typography": { "type": "series", "settings": { "collection": "typography-quotes-prints" } }
       },
       "block_order": [
         "series_abstract",
@@ -198,3 +160,4 @@
     "information"
   ]
 }
+
