@@ -7,6 +7,7 @@ $mainProduct = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\main-pro
 $customProduct = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\custom-product-main.liquid') -Raw
 $cartMarkup = Get-Content -LiteralPath (Join-Path $themeRoot 'snippets\cart-drawer.liquid') -Raw
 $cartScript = Get-Content -LiteralPath (Join-Path $themeRoot 'assets\cart-drawer.js') -Raw
+$footer = Get-Content -LiteralPath (Join-Path $themeRoot 'sections\footer.liquid') -Raw
 $layout = Get-Content -LiteralPath (Join-Path $themeRoot 'layout\theme.liquid') -Raw
 $legacyStyles = @(
   Get-Content -LiteralPath (Join-Path $themeRoot 'assets\product-showcase.css') -Raw
@@ -28,7 +29,11 @@ Assert-Contains $cartMarkup 'data-cart-drawer-payment-icons' 'The cart drawer mu
 Assert-Contains $cartMarkup "render 'shopify-payment-icons', context: 'cart'" 'The cart drawer must use the shared Shopify payment icon snippet.'
 Assert-Contains $cartScript "drawer.querySelector('[data-cart-drawer-payment-icons]')" 'The cart drawer controller must read its Shopify-rendered icon template.'
 Assert-Contains $cartScript '${paymentIconsMarkup}' 'The cart drawer footer must insert the server-rendered payment icons.'
+Assert-Contains $footer 'section.settings.show_payment_icons' 'The footer must expose a payment-icon visibility setting.'
+Assert-Contains $footer 'shop.enabled_payment_types != empty' 'The footer must only reserve payment space when Shopify has enabled payment methods.'
+Assert-Contains $footer "render 'shopify-payment-icons', context: 'footer'" 'The footer must reuse the shared Shopify payment icon snippet.'
 Assert-Contains $styles '.shopify-payment-icons--cart' 'Shared payment icon styles must include a cart-drawer layout.'
+Assert-Contains $styles '.shopify-payment-icons--footer' 'Shared payment icon styles must include a footer layout.'
 Assert-Contains $styles '.shopify-payment-icons__icon' 'Shared payment icon styles must size Shopify SVGs consistently.'
 Assert-Contains $layout "'shopify-payment-icons.css' | asset_url" 'The theme layout must load the shared payment icon stylesheet globally.'
 Assert-Contains $layout 'drawer_build=shopify-payment-icons-v1-20260819' 'The updated cart drawer script must use a cache-busting version.'
