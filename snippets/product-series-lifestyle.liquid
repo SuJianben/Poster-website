@@ -30,12 +30,6 @@
       assign lifestyle_seed = product.id | divided_by: 1000
       assign series_image_index = lifestyle_seed | modulo: series_image_count
       assign series_image_number = series_image_index | plus: 1
-      for candidate_image in series_images
-        if forloop.index0 == series_image_index
-          assign series_image = candidate_image
-          break
-        endif
-      endfor
       assign series_image_source = 'series_metafield'
     else
       assign series_image = matched_series.image | default: matched_series.featured_image
@@ -51,7 +45,10 @@
   assign lifestyle_source = 'bundled_fallback'
   assign lifestyle_alt = product.title | append: ' in a styled interior'
 
-  if series_image != blank
+  if series_image_source == 'series_metafield'
+    assign lifestyle_source = series_image_source
+    assign lifestyle_alt = matched_series.title | append: ' collection'
+  elsif series_image != blank
     assign lifestyle_source = series_image_source
     assign lifestyle_alt = series_image.alt | default: matched_series.title | append: ' collection'
   elsif fallback_image != blank
@@ -67,7 +64,16 @@
   {% if series_image_count > 0 %}data-lifestyle-image-count="{{ series_image_count }}"{% endif %}
   {% if series_image_number > 0 %}data-lifestyle-image-number="{{ series_image_number }}"{% endif %}
 >
-  {% if series_image != blank %}
+  {% if lifestyle_source == 'series_metafield' %}
+    {% for candidate_media in series_images %}
+      {% if forloop.index0 == series_image_index %}
+        {% assign candidate_image = candidate_media.preview_image %}
+        {% assign candidate_alt = candidate_media.alt | default: lifestyle_alt %}
+        {{ candidate_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: candidate_alt }}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% elsif series_image != blank %}
     {{ series_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: lifestyle_alt }}
   {% elsif fallback_image != blank %}
     {{ fallback_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: lifestyle_alt }}
