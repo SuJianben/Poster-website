@@ -1,1 +1,52 @@
-{"general":{"search":"Search","cart":"Cart","subscribe":"Subscribe","email_placeholder":"your@email.com","no_products":"No products found."},"product":{"add_to_cart":"Add to cart","sold_out":"Sold out","quantity":"Quantity","variant":"Options"},"cart":{"title":"Cart","empty":"Your cart is empty.","total":"Total","checkout":"Checkout","continue":"Continue shopping"},"search":{"title":"Search","placeholder":"Search posters"},"collections":{"title":"Collections"},"404":{"title":"Page not found","text":"The page you requested does not exist.","back_home":"Back home"},"password":{"message":"This store is opening soon.","placeholder":"Enter password","submit":"Enter"}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "search": "Search",
+    "cart": "Cart",
+    "subscribe": "Subscribe",
+    "email_placeholder": "your@email.com",
+    "no_products": "No products found."
+  },
+  "newsletter": {
+    "email_label": "Email address",
+    "success": "Thanks for subscribing."
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "sold_out": "Sold out",
+    "quantity": "Quantity",
+    "variant": "Options"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "total": "Total",
+    "checkout": "Checkout",
+    "continue": "Continue shopping"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search posters"
+  },
+  "collections": {
+    "title": "Collections"
+  },
+  "404": {
+    "title": "Page not found",
+    "text": "The page you requested does not exist.",
+    "back_home": "Back home"
+  },
+  "password": {
+    "message": "This store is opening soon.",
+    "placeholder": "Enter password",
+    "submit": "Enter"
+  }
+}
