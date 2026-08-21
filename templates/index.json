@@ -208,7 +208,7 @@
         "card_artwork_padding": 12,
         "discount_badge_text": "Discount",
         "enable_personalizer": true,
-        "mobile_text": "Turn your favourite photo into a personalised poster. Made for your space.",
+        "mobile_text": "Turn your favourite photo into a personalised poster.",
         "personalizer_scene_image": "shopify://shop_images/home-personalizer-scene-after-upload.jpg",
         "upload_heading": "Upload your image",
         "upload_button_label": "Choose image",
