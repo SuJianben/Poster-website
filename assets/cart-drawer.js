@@ -45,8 +45,11 @@
     document.documentElement.classList.remove('is-cart-drawer-open');
   };
   const optionText = (item) => item.variant_title && item.variant_title !== 'Default Title' ? `<p class="cd-drawer__variant">${escapeHtml(item.variant_title)}</p>` : '';
+  const artworkImage = (item) => typeof item.properties?.['Custom artwork'] === 'string' && item.properties['Custom artwork'].trim()
+    ? item.properties['Custom artwork']
+    : item.image || '';
   const propertyText = (item) => Object.entries(item.properties || {})
-    .filter(([key, value]) => value && !key.startsWith('_') && !['Passepartout', 'Frame'].includes(key))
+    .filter(([key, value]) => value && !key.startsWith('_') && !['Custom artwork', 'Passepartout', 'Frame'].includes(key))
     .map(([key, value]) => `<p class="cd-drawer__properties">${escapeHtml(key)}: ${escapeHtml(value)}</p>`).join('');
   const priceText = (item) => item.original_line_price > item.final_line_price ? `<s>${money(item.original_line_price)}</s><strong>${money(item.final_line_price)}</strong>` : money(item.final_line_price);
   const isFramingComponent = (item) => Boolean(item.properties?._framing_component);
@@ -74,7 +77,7 @@
     content.innerHTML = cart.items.filter((item) => !isFramingComponent(item)).map((item) => {
       const children = childItems(cart, item);
       const configuredLinePrice = children.reduce((total, child) => total + child.final_line_price, item.final_line_price);
-      return `<article class="cd-drawer__item" data-cart-line="${escapeHtml(item.key)}"><img class="cd-drawer__image" src="${escapeHtml(item.image || '')}" alt="${escapeHtml(item.product_title)}"><div class="cd-drawer__item-copy"><a class="cd-drawer__item-title" href="${escapeHtml(item.url)}">${escapeHtml(item.product_title)}</a>${optionText(item)}${propertyText(item)}${componentText(children)}<div class="cd-drawer__item-bottom"><div class="cd-drawer__quantity"><button type="button" data-cart-quantity="-1" aria-label="Decrease quantity">−</button><output>${item.quantity}</output><button type="button" data-cart-quantity="1" aria-label="Increase quantity">+</button></div><div class="cd-drawer__price">${money(configuredLinePrice)}</div></div></div><button class="cd-drawer__remove" type="button" data-cart-remove aria-label="Remove ${escapeHtml(item.product_title)}">×</button></article>`;
+      return `<article class="cd-drawer__item" data-cart-line="${escapeHtml(item.key)}"><img class="cd-drawer__image" src="${escapeHtml(artworkImage(item))}" alt="${escapeHtml(item.product_title)}"><div class="cd-drawer__item-copy"><a class="cd-drawer__item-title" href="${escapeHtml(item.url)}">${escapeHtml(item.product_title)}</a>${optionText(item)}${propertyText(item)}${componentText(children)}<div class="cd-drawer__item-bottom"><div class="cd-drawer__quantity"><button type="button" data-cart-quantity="-1" aria-label="Decrease quantity">−</button><output>${item.quantity}</output><button type="button" data-cart-quantity="1" aria-label="Increase quantity">+</button></div><div class="cd-drawer__price">${money(configuredLinePrice)}</div></div></div><button class="cd-drawer__remove" type="button" data-cart-remove aria-label="Remove ${escapeHtml(item.product_title)}">×</button></article>`;
     }).join('');
     footer.hidden = false;
     footer.innerHTML = `<div class="cd-drawer__totals"><div class="cd-drawer__total-row"><span>Subtotal</span><span>${money(cart.total_price)}</span></div><div class="cd-drawer__total-row"><span>Shipping</span><span>Calculated at checkout</span></div></div><p class="cd-drawer__tax-note">Tax included. Shipping and discounts calculated at checkout.</p><a class="cd-drawer__checkout" href="/checkout"><span class="cd-drawer__lock" aria-hidden="true"></span><span class="cd-drawer__checkout-label">SECURE CHECKOUT</span></a><p class="cd-drawer__guarantee">Order without risk - 100% money-back guarantee</p>${paymentIconsMarkup}`;
@@ -147,4 +150,5 @@
     init();
   }
 })();
+
 

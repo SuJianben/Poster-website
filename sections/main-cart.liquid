@@ -44,7 +44,12 @@
                 <article class="cp-cart__item" data-cart-page-line="{{ item.key }}">
                   <button class="cp-cart__remove" type="button" data-cart-page-change="0" aria-label="Remove {{ item.product.title | escape }}">×</button>
                   <a class="cp-cart__image" href="{{ item.url }}">
-                    {% if item.image %}
+                    {% assign custom_artwork = item.properties['Custom artwork'] %}
+                    {% if custom_artwork != blank %}
+                      {% # theme-check-disable RemoteAsset %}
+                      <img src="{{ custom_artwork | escape }}" alt="{{ item.product.title | escape }}" loading="lazy" width="220" height="220">
+                      {% # theme-check-enable RemoteAsset %}
+                    {% elsif item.image %}
                       {{ item.image | image_url: width: 220 | image_tag: widths: '110, 160, 220', alt: item.product.title }}
                     {% endif %}
                   </a>
@@ -123,3 +128,4 @@
   ]
 }
 {% endschema %}
+

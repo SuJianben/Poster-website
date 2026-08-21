@@ -9,11 +9,6 @@
     return error;
   };
 
-  const attachAddonsToExistingParent = (items, parentLineKey) => items.map((item) => {
-    const { parent_id: _parentVariantId, ...addon } = item;
-    return { ...addon, parent_line_key: parentLineKey };
-  });
-
   const addJsonItems = async (items) => {
     const response = await fetch(endpoint('cart/add.js'), {
       method: 'POST',
@@ -24,14 +19,17 @@
     return response.json();
   };
 
-  const addParentWithArtwork = async (form, parentItem, artworkFile) => {
-    const formData = new FormData(form);
-    formData.set('id', String(parentItem.id));
-    formData.set('quantity', String(parentItem.quantity));
-    formData.set('properties[Custom artwork]', artworkFile, artworkFile.name);
-    Object.entries(parentItem.properties || {}).forEach(([key, value]) => {
-      formData.set(`properties[${key}]`, String(value));
+  const addItemsWithArtwork = async (items, artworkFile) => {
+    const formData = new FormData();
+    items.forEach((item, index) => {
+      formData.set(`items[${index}][id]`, String(item.id));
+      formData.set(`items[${index}][quantity]`, String(item.quantity));
+      if (item.parent_id) formData.set(`items[${index}][parent_id]`, String(item.parent_id));
+      Object.entries(item.properties || {}).forEach(([key, value]) => {
+        formData.set(`items[${index}][properties][${key}]`, String(value));
+      });
     });
+    formData.set('items[0][properties][Custom artwork]', artworkFile, artworkFile.name);
     const response = await fetch(endpoint('cart/add.js'), {
       method: 'POST',
       headers: { Accept: 'application/json' },
@@ -39,16 +37,6 @@
     });
     if (!response.ok) throw await responseError(response, 'Could not upload this image to the cart.');
     return response.json();
-  };
-
-  const removeAddedParent = async (itemKey) => {
-    if (!itemKey) return false;
-    const response = await fetch(endpoint('cart/change.js'), {
-      method: 'POST',
-      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: itemKey, quantity: 0 }),
-    });
-    return response.ok;
   };
 
   const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
@@ -83,20 +71,10 @@
         return refreshAfterConfirmedAdd({ hasArtwork: false });
       }
 
-      const [parentItem, ...addonItems] = cartPayload.items;
-      const parentResponse = await addParentWithArtwork(form, parentItem, file);
-      const parentLine = parentResponse.items?.[0] || parentResponse;
-      try {
-        if (addonItems.length) {
-          await addJsonItems(attachAddonsToExistingParent(addonItems, parentLine.key));
-        }
-      } catch (error) {
-        const rolledBack = await removeAddedParent(parentLine.key).catch(() => false);
-        if (!rolledBack) error.message = `${error.message} The main item may still be in your cart.`;
-        throw error;
-      }
+      await addItemsWithArtwork(cartPayload.items, file);
       return refreshAfterConfirmedAdd({ hasArtwork: true });
     },
   };
 })();
+
 
