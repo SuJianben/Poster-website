@@ -23,6 +23,12 @@ Assert-Contains $section 'data-home-personalizer-preview' 'The scene image must 
 Assert-Contains $section 'data-home-personalizer-scene-initial' 'The original editorial image must remain the initial scene.'
 Assert-Contains $section 'data-home-personalizer-scene-personalized' 'The configured after-upload scene must have a separate render layer.'
 Assert-Contains $section '"id":"personalizer_scene_image"' 'The after-upload scene image must be replaceable in the theme editor.'
+Assert-Contains $section 'class="home-personalizer__mobile-description"' 'The enabled personalizer must render its description inside the mobile image overlay.'
+Assert-Contains $section 'class="home-personalizer__desktop-description"' 'The enabled personalizer must retain a dedicated desktop description.'
+Assert-Contains $styles '@media (max-width: 750px)' 'The description overlay must use the storefront mobile breakpoint.'
+Assert-Contains $styles '.home-personalizer__desktop-description {' 'The desktop description must have a mobile visibility rule.'
+Assert-Contains $styles 'background: linear-gradient(180deg' 'The mobile description must sit on a contrast mask.'
+Assert-Contains $styles 'pointer-events: none;' 'The mobile description overlay must not block scene interactions.'
 
 $uploadPosition = $section.IndexOf("render 'home-personalizer-upload'")
 $ctaPosition = $section.IndexOf('<a class="text-link"')
