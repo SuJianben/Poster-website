@@ -66,12 +66,21 @@
     throw new Error('Could not refresh cart.');
   };
 
+  const refreshAfterConfirmedAdd = async (result) => {
+    try {
+      return { ...result, cart: await getCart(), cartRefreshDeferred: false };
+    } catch (error) {
+      if (error.status !== 429) throw error;
+      return { ...result, cart: null, cartRefreshDeferred: true };
+    }
+  };
+
   window.CustomProductCart = {
     async add({ form, cartPayload, artwork }) {
       const file = artwork?.getFile?.();
       if (!file) {
         await addJsonItems(cartPayload.items);
-        return { cart: await getCart(), hasArtwork: false };
+        return refreshAfterConfirmedAdd({ hasArtwork: false });
       }
 
       const [parentItem, ...addonItems] = cartPayload.items;
@@ -86,7 +95,7 @@
         if (!rolledBack) error.message = `${error.message} The main item may still be in your cart.`;
         throw error;
       }
-      return { cart: await getCart(), hasArtwork: true };
+      return refreshAfterConfirmedAdd({ hasArtwork: true });
     },
   };
 })();

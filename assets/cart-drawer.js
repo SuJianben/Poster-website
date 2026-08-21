@@ -29,6 +29,16 @@
     footer.hidden = true;
     open();
   };
+  const showAdded = (quantity = 1) => {
+    const addedQuantity = Math.max(1, Number(quantity) || 1);
+    const currentCount = Math.max(0, Number(document.querySelector('.cart-count')?.textContent || count?.textContent || 0));
+    const nextCount = currentCount + addedQuantity;
+    if (count) count.textContent = nextCount;
+    document.querySelectorAll('.cart-count').forEach((badge) => { badge.textContent = nextCount; badge.hidden = false; });
+    content.innerHTML = '<div class="cd-drawer__empty cd-drawer__added" role="status"><p>Added to cart.</p><a href="/cart">View cart</a><button type="button" data-cart-drawer-close>Continue shopping</button></div>';
+    footer.hidden = true;
+    open();
+  };
   const close = () => {
     drawer.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
@@ -98,6 +108,9 @@
     openError() {
       showError();
     },
+    openAdded(quantity) {
+      showAdded(quantity);
+    },
     refresh: async () => {
       const cart = await fetchCart();
       render(cart);
@@ -134,3 +147,4 @@
     init();
   }
 })();
+

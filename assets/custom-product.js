@@ -232,7 +232,7 @@
       if (!window.CustomProductCart) throw new Error('The cart service is unavailable. Please refresh and try again.');
       const cartResult = await window.CustomProductCart.add({ form, cartPayload, artwork: root.productArtwork });
       const cart = cartResult.cart;
-      document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart } }));
+      if (cart) document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart } }));
       window.dataLayer?.push({
         event: 'framing_configuration_added',
         product_variant_id: String(variantInput.value),
@@ -253,7 +253,11 @@
           image_height: artworkMetadata?.height || null,
         });
       }
-      window.CartDrawer?.open(cart);
+      if (cart) {
+        window.CartDrawer?.open(cart);
+      } else {
+        window.CartDrawer?.openAdded(quantity);
+      }
       addLabel.textContent = 'Added to cart';
     } catch (error) {
       console.error(`Custom product cart add failed. status=${error.status || 'unknown'} message=${error.message || 'Unknown cart error'}`);
