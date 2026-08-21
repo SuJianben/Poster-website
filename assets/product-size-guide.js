@@ -57,7 +57,11 @@
       items.forEach((item) => {
         const isCurrent = item.dataset.sizeLabel === selectedSize;
         item.classList.toggle('is-current', isCurrent);
-        item.toggleAttribute('aria-current', isCurrent);
+        if (isCurrent) {
+          item.setAttribute('aria-current', 'true');
+        } else {
+          item.removeAttribute('aria-current');
+        }
         const currentLabel = item.querySelector('[data-ps-size-guide-current]');
         if (currentLabel) currentLabel.hidden = !isCurrent;
       });
