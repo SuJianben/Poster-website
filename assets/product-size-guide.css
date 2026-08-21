@@ -8,9 +8,9 @@
 .ps-size-guide-modal__close { display: grid; flex: 0 0 auto; width: 40px; height: 40px; place-items: center; border: 1px solid #d9dcdb; background: #fff; color: inherit; cursor: pointer; font-size: 28px; line-height: 1; }
 .ps-size-guide-modal__description { max-width: 610px; margin: 18px 0 0; color: #656b6d; font-size: 14px; line-height: 1.55; }
 .ps-size-guide-modal__sizes { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-top: 28px; }
-.ps-size-guide-modal__item { min-width: 0; padding: 16px; border: 1px solid #e0e2e1; background: #f7f8f7; }
+.ps-size-guide-modal__item { min-width: 0; padding: 4px 4px 16px; border: 1px solid #e0e2e1; background: #f7f8f7; }
 .ps-size-guide-modal__item.is-current { border-color: #222628; background: #fff; box-shadow: inset 0 0 0 1px #222628; }
-.ps-size-guide-modal__visual { display: flex; width: 100%; height: 230px; align-items: flex-end; justify-content: center; padding: 8px; border-bottom: 1px solid #c9cdcb; }
+.ps-size-guide-modal__visual { display: flex; width: 100%; height: 250px; align-items: flex-end; justify-content: center; padding: 6px 0 8px; border-bottom: 1px solid #c9cdcb; }
 .ps-size-guide-modal__poster { position: relative; display: grid; width: var(--ps-size-guide-width, 58%); height: var(--ps-size-guide-height, 78%); min-width: 18px; min-height: 24px; place-items: center; border: 3px solid #25292a; background: #fff; box-shadow: 0 5px 12px rgb(0 0 0 / 13%); transition: width .25s ease, height .25s ease; }
 .ps-size-guide-modal__poster::before { position: absolute; inset: 8%; border: 1px solid #d7dad9; content: ''; }
 .ps-size-guide-modal__poster-art { width: 58%; height: 62%; background: linear-gradient(145deg, #e5d9c1 0 38%, #839d8c 38% 65%, #344b43 65%); }
@@ -25,10 +25,11 @@ body.ps-size-guide-is-open { overflow: hidden; }
   .ps-size-guide-modal__sizes { display: flex; gap: 12px; margin-right: -16px; overflow-x: auto; padding: 0 16px 8px 0; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .ps-size-guide-modal__sizes::-webkit-scrollbar { display: none; }
   .ps-size-guide-modal__item { flex: 0 0 68vw; max-width: 260px; scroll-snap-align: start; }
-  .ps-size-guide-modal__visual { height: 210px; }
+  .ps-size-guide-modal__visual { max-width: 160px; height: 230px; margin-inline: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ps-size-guide-modal__poster { transition: none; }
 }
+
 

@@ -12,15 +12,19 @@
 
   const calculateRelativeSizes = (labels) => {
     const parsed = labels.map((label) => ({ label, dimensions: parseSizeLabel(label) }));
-    const maximumDimension = Math.max(
+    const maximumWidth = Math.max(
       1,
-      ...parsed.flatMap((item) => item.dimensions ? [item.dimensions.width, item.dimensions.height] : [])
+      ...parsed.map((item) => item.dimensions?.width || 0)
+    );
+    const maximumHeight = Math.max(
+      1,
+      ...parsed.map((item) => item.dimensions?.height || 0)
     );
 
     return parsed.map((item) => ({
       ...item,
-      widthPercent: item.dimensions ? (item.dimensions.width / maximumDimension) * 96 : 66,
-      heightPercent: item.dimensions ? (item.dimensions.height / maximumDimension) * 96 : 88
+      widthPercent: item.dimensions ? Math.sqrt(item.dimensions.width / maximumWidth) * 96 : 76,
+      heightPercent: item.dimensions ? Math.sqrt(item.dimensions.height / maximumHeight) * 96 : 88
     }));
   };
 
@@ -139,4 +143,5 @@
   initializeWithin(document);
   document.addEventListener('shopify:section:load', (event) => initializeWithin(event.target));
 })();
+
 
