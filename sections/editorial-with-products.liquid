@@ -50,11 +50,18 @@
       {% for block in hotspot_blocks %}
         {% render 'editorial-product-hotspot', block: block, section: section %}
       {% endfor %}
+      {% if section.settings.enable_personalizer and section.settings.text != blank %}
+        <div class="home-personalizer__mobile-description">
+          <p>{{ section.settings.text }}</p>
+        </div>
+      {% endif %}
     </div>
     <div class="editorial__copy">
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
       <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.text }}</p>
+      {% if section.settings.text != blank %}
+        <p{% if section.settings.enable_personalizer %} class="home-personalizer__desktop-description"{% endif %}>{{ section.settings.text }}</p>
+      {% endif %}
       {% if section.settings.enable_personalizer %}
         {% render 'home-personalizer-upload', section: section %}
       {% endif %}
@@ -180,6 +187,7 @@
   "presets": [{"name":"Editorial with products"}]
 }
 {% endschema %}
+
 
 
 

@@ -11,6 +11,10 @@
   isolation: isolate;
 }
 
+.home-personalizer__mobile-description {
+  display: none;
+}
+
 .home-personalizer__scene-layer {
   position: relative;
   z-index: 0;
@@ -242,6 +246,33 @@
   }
 }
 
+@media (max-width: 750px) {
+  .home-personalizer__mobile-description {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    padding: 76px 16px 18px;
+    background: linear-gradient(180deg, rgb(10 12 12 / 0%) 0%, rgb(10 12 12 / 78%) 100%);
+    color: #fff;
+    pointer-events: none;
+  }
+
+  .home-personalizer__mobile-description p {
+    max-width: 34rem;
+    margin: 0;
+    color: inherit;
+    font: 400 15px/1.55 var(--sans);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 35%);
+  }
+
+  .home-personalizer__desktop-description {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-personalizer__dropzone,
   .home-personalizer__upload-button,
@@ -249,4 +280,5 @@
     transition: none;
   }
 }
+
 
