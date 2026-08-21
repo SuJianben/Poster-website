@@ -12,6 +12,7 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "sale_badge": { "type": "sale_badge", "settings": { "label": "Save" } },
         "reviews": { "type": "reviews", "settings": { "label": "Verified reviews" } },
         "title": { "type": "title", "settings": {} },
         "vendor": { "type": "vendor", "settings": { "label": "Artist:" } },
@@ -30,6 +31,7 @@
         "payment_methods": { "type": "payment_methods", "settings": { "heading": "Securely packaged & paid", "accessibility_label": "Accepted payment methods", "note": "♢ Special packaging for art galleries" } }
       },
       "block_order": [
+        "sale_badge",
         "reviews",
         "title",
         "vendor",

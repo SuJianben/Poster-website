@@ -60,10 +60,16 @@
 
   {% when 'variant_options' %}
     {% unless product.has_only_default_variant %}
-      <div class="ps-variant-options" {{ block.shopify_attributes }}>
-        {% for option in product.options_with_values %}
-          {% assign option_name = option.name | downcase %}
-          {% unless option_name contains 'size' %}
+      {% assign has_other_variant_options = false %}
+      {% for option in product.options_with_values %}
+        {% assign option_name = option.name | downcase %}
+        {% unless option_name contains 'size' %}{% assign has_other_variant_options = true %}{% endunless %}
+      {% endfor %}
+      {% if has_other_variant_options %}
+        <div class="ps-variant-options" {{ block.shopify_attributes }}>
+          {% for option in product.options_with_values %}
+            {% assign option_name = option.name | downcase %}
+            {% unless option_name contains 'size' %}
             <fieldset class="ps-option-group" data-ps-option-group data-option-position="{{ option.position }}">
               <legend>{{ option.name }}: <span data-ps-option-label>{{ option.selected_value }}</span></legend>
               <div class="ps-option-values">
@@ -73,9 +79,10 @@
                 {% endfor %}
               </div>
             </fieldset>
-          {% endunless %}
-        {% endfor %}
-      </div>
+            {% endunless %}
+          {% endfor %}
+        </div>
+      {% endif %}
     {% endunless %}
 
   {% when 'passepartout' %}
