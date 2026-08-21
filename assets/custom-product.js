@@ -256,10 +256,7 @@
       window.CartDrawer?.open(cart);
       addLabel.textContent = 'Added to cart';
     } catch (error) {
-      console.error('Custom product cart add failed.', {
-        status: error.status || null,
-        message: error.message || 'Unknown cart error',
-      });
+      console.error(`Custom product cart add failed. status=${error.status || 'unknown'} message=${error.message || 'Unknown cart error'}`);
       window.CartDrawer?.openError();
       status.textContent = error.message || 'Could not add this item to cart.';
       addLabel.textContent = 'Try again';
