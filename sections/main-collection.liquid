@@ -1,4 +1,4 @@
-{{ 'collection-gallery.css' | asset_url | stylesheet_tag }}
+{{ 'collection-gallery.css' | asset_url | append: '&cg=20260821-spacing-1' | stylesheet_tag }}
 <script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'collection-filters.js' | asset_url }}" defer="defer"></script>
 
@@ -242,5 +242,6 @@
   ]
 }
 {% endschema %}
+
 
 
