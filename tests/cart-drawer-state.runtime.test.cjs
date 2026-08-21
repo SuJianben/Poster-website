@@ -36,8 +36,8 @@ const drawer = {
 const documentMock = {
   readyState: 'complete',
   documentElement: { lang: 'en', classList: new ClassListMock() },
-  querySelector: (selector) => selector === '[data-cart-drawer]' ? drawer : null,
-  querySelectorAll: () => [],
+  querySelector: (selector) => selector === '[data-cart-drawer]' ? drawer : selector === '.cart-count' ? count : null,
+  querySelectorAll: (selector) => selector === '.cart-count' ? [count] : [],
   addEventListener: () => {},
 };
 const context = {
@@ -65,7 +65,15 @@ assert.match(content.innerHTML, /couldn’t add this item/i, 'The drawer must sh
 assert.equal(footer.hidden, true, 'The footer must remain hidden in the error state.');
 assert.equal(drawer.classList.contains('is-open'), true, 'The error state must remain visible to the customer.');
 
+count.textContent = '2';
+context.window.CartDrawer.openAdded(1);
+assert.match(content.innerHTML, /Added to cart/i, 'A confirmed add must show a success fallback when only cart refresh is delayed.');
+assert.match(content.innerHTML, /View cart/i, 'The refresh fallback must provide a direct cart link.');
+assert.equal(count.textContent, 3, 'The success fallback must update the visible parent-product count without counting hidden add-ons.');
+assert.equal(footer.hidden, true, 'The regular totals footer must remain hidden until a full cart payload is available.');
+
 const customProductSource = fs.readFileSync(path.join(__dirname, '..', 'assets', 'custom-product.js'), 'utf8');
 assert.match(customProductSource, /CartDrawer\?\.openError\(\)/, 'Custom product failures must leave the loading state.');
+assert.match(customProductSource, /CartDrawer\?\.openAdded\(quantity\)/, 'Confirmed adds with a delayed refresh must use the success fallback.');
 
 console.log('Cart drawer loading and error state runtime checks passed.');
