@@ -10,8 +10,15 @@
   const paymentIconsTemplate = drawer.querySelector('[data-cart-drawer-payment-icons]');
   const paymentIconsMarkup = paymentIconsTemplate?.innerHTML.trim() || '';
   let latestCart = null;
+  let addedRefreshToken = 0;
   const money = (cents) => new Intl.NumberFormat(document.documentElement.lang || 'en', { style: 'currency', currency: window.Shopify?.currency?.active || 'USD' }).format(cents / 100);
   const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
+  const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+  const fetchCart = async () => {
+    const response = await fetch('/cart.js', { headers: { Accept: 'application/json' } });
+    if (!response.ok) throw new Error('Could not load cart');
+    return response.json();
+  };
 
   const open = () => {
     drawer.classList.add('is-open');
@@ -20,26 +27,54 @@
     window.setTimeout(() => panel?.focus(), 30);
   };
   const showLoading = () => {
+    addedRefreshToken += 1;
     content.innerHTML = '<div class="cd-drawer__empty cd-drawer__loading"><p>Loading your cart…</p></div>';
     footer.hidden = true;
     open();
   };
   const showError = () => {
+    addedRefreshToken += 1;
     content.innerHTML = '<div class="cd-drawer__empty cd-drawer__error" role="alert"><p>We couldn’t add this item to your cart. Please try again.</p><button type="button" data-cart-drawer-close>Close</button></div>';
     footer.hidden = true;
     open();
   };
-  const showAdded = (quantity = 1) => {
+  const showAddedFallback = () => {
+    content.innerHTML = '<div class="cd-drawer__empty cd-drawer__added" role="status"><p>Added to cart.</p><a href="/cart">View cart</a><button type="button" data-cart-drawer-close>Continue shopping</button></div>';
+    footer.hidden = true;
+  };
+  const showAdded = async (quantity = 1) => {
     const addedQuantity = Math.max(1, Number(quantity) || 1);
     const currentCount = Math.max(0, Number(document.querySelector('.cart-count')?.textContent || count?.textContent || 0));
     const nextCount = currentCount + addedQuantity;
     if (count) count.textContent = nextCount;
     document.querySelectorAll('.cart-count').forEach((badge) => { badge.textContent = nextCount; badge.hidden = false; });
-    content.innerHTML = '<div class="cd-drawer__empty cd-drawer__added" role="status"><p>Added to cart.</p><a href="/cart">View cart</a><button type="button" data-cart-drawer-close>Continue shopping</button></div>';
+    content.innerHTML = '<div class="cd-drawer__empty cd-drawer__loading" role="status"><p>Added to cart. Loading your cart…</p></div>';
     footer.hidden = true;
     open();
+    const refreshToken = ++addedRefreshToken;
+    const retryDelays = [800, 1600, 3000, 5000, 8000];
+    for (let attempt = 0; attempt < retryDelays.length; attempt += 1) {
+      await wait(retryDelays[attempt]);
+      if (refreshToken !== addedRefreshToken) return null;
+      try {
+        const cart = await fetchCart();
+        if (refreshToken !== addedRefreshToken) return null;
+        render(cart);
+        window.dataLayer?.push({ event: 'cart_drawer_refresh_recovered', retry_attempt: attempt + 1 });
+        return cart;
+      } catch (error) {
+        // A confirmed cart addition must not be submitted again. Only the
+        // read request is retried while Shopify or the edge limiter recovers.
+      }
+    }
+    if (refreshToken === addedRefreshToken) {
+      showAddedFallback();
+      window.dataLayer?.push({ event: 'cart_drawer_refresh_deferred', retry_attempts: retryDelays.length });
+    }
+    return null;
   };
   const close = () => {
+    addedRefreshToken += 1;
     drawer.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
     document.documentElement.classList.remove('is-cart-drawer-open');
@@ -65,6 +100,7 @@
     return `<div class="cd-drawer__component"><span><b>${escapeHtml(kind)}</b> · ${escapeHtml(style)} · ${escapeHtml(size)}</span><strong>${money(item.final_line_price)}</strong></div>`;
   }).join('');
   const render = (cart) => {
+    addedRefreshToken += 1;
     latestCart = cart;
     const displayCount = visibleCount(cart);
     if (count) count.textContent = displayCount;
@@ -82,7 +118,6 @@
     footer.hidden = false;
     footer.innerHTML = `<div class="cd-drawer__totals"><div class="cd-drawer__total-row"><span>Subtotal</span><span>${money(cart.total_price)}</span></div><div class="cd-drawer__total-row"><span>Shipping</span><span>Calculated at checkout</span></div></div><p class="cd-drawer__tax-note">Tax included. Shipping and discounts calculated at checkout.</p><a class="cd-drawer__checkout" href="/checkout"><span class="cd-drawer__lock" aria-hidden="true"></span><span class="cd-drawer__checkout-label">SECURE CHECKOUT</span></a><p class="cd-drawer__guarantee">Order without risk - 100% money-back guarantee</p>${paymentIconsMarkup}`;
   };
-  const fetchCart = async () => { const response = await fetch('/cart.js', { headers: { Accept: 'application/json' } }); if (!response.ok) throw new Error('Could not load cart'); return response.json(); };
   const changeLine = async (key, quantity) => {
     drawer.classList.add('is-busy');
     try {
@@ -112,7 +147,7 @@
       showError();
     },
     openAdded(quantity) {
-      showAdded(quantity);
+      return showAdded(quantity);
     },
     refresh: async () => {
       const cart = await fetchCart();
@@ -150,5 +185,6 @@
     init();
   }
 })();
+
 
 
