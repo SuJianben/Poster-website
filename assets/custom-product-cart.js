@@ -51,10 +51,19 @@
     return response.ok;
   };
 
+  const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+
   const getCart = async () => {
-    const response = await fetch(endpoint('cart.js'), { headers: { Accept: 'application/json' } });
-    if (!response.ok) throw await responseError(response, 'Could not refresh cart.');
-    return response.json();
+    const retryDelays = [400, 800, 1600];
+    for (let attempt = 0; attempt <= retryDelays.length; attempt += 1) {
+      const response = await fetch(endpoint('cart.js'), { headers: { Accept: 'application/json' } });
+      if (response.ok) return response.json();
+      if (response.status !== 429 || attempt === retryDelays.length) {
+        throw await responseError(response, 'Could not refresh cart.');
+      }
+      await wait(retryDelays[attempt]);
+    }
+    throw new Error('Could not refresh cart.');
   };
 
   window.CustomProductCart = {
