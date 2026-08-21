@@ -77,11 +77,11 @@
         <div class="ps-left-details" data-ps-accordions>
           <section class="ps-accordion-panel" data-ps-accordion>
             <button class="ps-accordion-panel__trigger" type="button" data-ps-accordion-trigger aria-expanded="false" aria-controls="ps-product-details-{{ section.id }}">
-              <span>{{ section.settings.product_details_heading }}</span><span class="ps-accordion-panel__icon" aria-hidden="true">+</span>
+              <span>{{ section.settings.customer_notice_heading }}</span><span class="ps-accordion-panel__icon" aria-hidden="true">+</span>
             </button>
             <div class="ps-accordion-panel__body" id="ps-product-details-{{ section.id }}" data-ps-accordion-panel aria-hidden="true">
               <div class="ps-accordion-panel__body-inner">
-                <div class="ps-detail-content rte">{{ product.description | default: '<p>Made to order with carefully selected materials and designed to bring character to your space.</p>' }}</div>
+                <div class="ps-detail-content rte">{{ section.settings.customer_notice_content }}</div>
               </div>
             </div>
           </section>
@@ -322,9 +322,15 @@
     },
     {
       "type": "text",
-      "id": "product_details_heading",
-      "label": "Product details heading",
-      "default": "Product details"
+      "id": "customer_notice_heading",
+      "label": "Customer notice heading",
+      "default": "Customer Notice"
+    },
+    {
+      "type": "richtext",
+      "id": "customer_notice_content",
+      "label": "Customer notice content",
+      "default": "<ul><li>By uploading an image, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>"
     },
     {
       "type": "text",
@@ -351,3 +357,4 @@
   ]
 }
 {% endschema %}
+

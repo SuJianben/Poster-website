@@ -25,7 +25,8 @@
         "crop_cancel_label": "Cancel",
         "crop_confirm_label": "Use crop",
         "require_artwork": true,
-        "product_details_heading": "Product details",
+        "customer_notice_heading": "Customer Notice",
+        "customer_notice_content": "<ul><li>By uploading an image, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>",
         "shipping_returns_heading": "Shipping and returns",
         "shipping_returns_content": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>",
         "passepartout_product": "system-passepartout-addon",
@@ -180,3 +181,4 @@
     "information"
   ]
 }
+

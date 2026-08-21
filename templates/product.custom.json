@@ -64,14 +64,54 @@
     "lifestyle": {
       "type": "custom-product-lifestyle",
       "blocks": {
-        "series_abstract": { "type": "series", "settings": { "collection": "abstract-geometric-prints" } },
-        "series_figurative": { "type": "series", "settings": { "collection": "figurative-fashion-prints" } },
-        "series_botanical": { "type": "series", "settings": { "collection": "botanical-floral-prints" } },
-        "series_animals": { "type": "series", "settings": { "collection": "animals-prints" } },
-        "series_photography": { "type": "series", "settings": { "collection": "photography-landscape-prints" } },
-        "series_minimal": { "type": "series", "settings": { "collection": "minimal-neutral-prints" } },
-        "series_food": { "type": "series", "settings": { "collection": "food-kitchen-art-prints" } },
-        "series_typography": { "type": "series", "settings": { "collection": "typography-quotes-prints" } }
+        "series_abstract": {
+          "type": "series",
+          "settings": {
+            "collection": "abstract-geometric-prints"
+          }
+        },
+        "series_figurative": {
+          "type": "series",
+          "settings": {
+            "collection": "figurative-fashion-prints"
+          }
+        },
+        "series_botanical": {
+          "type": "series",
+          "settings": {
+            "collection": "botanical-floral-prints"
+          }
+        },
+        "series_animals": {
+          "type": "series",
+          "settings": {
+            "collection": "animals-prints"
+          }
+        },
+        "series_photography": {
+          "type": "series",
+          "settings": {
+            "collection": "photography-landscape-prints"
+          }
+        },
+        "series_minimal": {
+          "type": "series",
+          "settings": {
+            "collection": "minimal-neutral-prints"
+          }
+        },
+        "series_food": {
+          "type": "series",
+          "settings": {
+            "collection": "food-kitchen-art-prints"
+          }
+        },
+        "series_typography": {
+          "type": "series",
+          "settings": {
+            "collection": "typography-quotes-prints"
+          }
+        }
       },
       "block_order": [
         "series_abstract",
@@ -158,4 +198,3 @@
     "information"
   ]
 }
-
