@@ -34,6 +34,7 @@
 <section
   class="ps-product ps-section"
   data-ps-product
+  data-ps-product-id="{{ product.id }}"
   data-ps-product-context="custom"
   data-section-id="{{ section.id }}"
   data-ps-framing-render-mode="{{ framing_render_mode }}"
@@ -101,113 +102,12 @@
       </div>
 
       <aside class="ps-purchase" aria-label="Purchase {{ product.title | escape }}">
-        {% if product.compare_at_price_max > product.price %}<span class="ps-sale-badge">Save {{ product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max }}%</span>{% endif %}
-        <p class="ps-review-line">★★★★★ <span>{{ section.settings.review_label }}</span></p>
-        <h1>{{ product.title }}</h1>
-        {% if product.vendor != blank %}<p class="ps-vendor">Artist: <strong>{{ product.vendor }}</strong></p>{% endif %}
-        <div class="ps-price" data-ps-price>
-          <span class="ps-price__current">{{ selected_variant.price | money }}</span>
-          <s class="ps-price__compare {% unless selected_variant.compare_at_price > selected_variant.price %}is-hidden{% endunless %}" data-ps-compare>{{ selected_variant.compare_at_price | money }}</s>
-        </div>
-        <p class="ps-shipping-note">{{ section.settings.shipping_note }}</p>
-
-        {% render 'custom-artwork-upload', section: section, form_id: product_form_id %}
-        {% render 'custom-artwork-cropper', section: section %}
-
-        <div class="ps-product-config" aria-label="Product configuration">
-          <div class="ps-config-group">
-            <p class="ps-config-label">Material: <strong data-ps-choice-output>Poster</strong></p>
-            <div class="ps-config-options" data-ps-choice-group>
-              <button type="button" class="is-selected" data-ps-choice aria-pressed="true">Poster</button>
-            </div>
-          </div>
-          {% unless product.has_only_default_variant %}
-            {% for option in product.options_with_values %}
-              {% assign option_name = option.name | downcase %}
-              {% if option_name contains 'size' %}
-                <fieldset class="ps-config-group ps-option-group" data-ps-option-group data-option-position="{{ option.position }}" aria-label="{{ option.name | escape }}">
-                  <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong data-ps-option-label>{{ option.selected_value }}</strong></p><button type="button" class="ps-size-guide" data-ps-size-guide-open aria-haspopup="dialog" aria-controls="ProductSizeGuide-{{ section.id }}">Size guide</button></div>
-                  <div class="ps-config-options ps-config-options--size">
-                    {% for value in option.values %}
-                      <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
-                      <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
-                    {% endfor %}
-                  </div>
-                </fieldset>
-              {% endif %}
-            {% endfor %}
-          {% endunless %}
-          <div class="ps-config-group">
-            <p class="ps-config-label">Passepartout: <strong data-ps-choice-output>None</strong></p>
-            <div class="ps-frame-select ps-choice-select" data-ps-framing-select="passepartout">
-              <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
-                <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-choice-select-value>Add passepartout</span></span>
-                <span class="ps-frame-trigger__price" data-ps-choice-select-price>Loading…</span>
-              </button>
-              <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="Passepartout options"></div>
-            </div>
-          </div>
-          <div class="ps-config-group">
-            <p class="ps-config-label">Frame: <strong data-ps-choice-output>No frame</strong></p>
-            <div class="ps-frame-select" data-ps-framing-select="frame">
-              <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
-                <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-frame-trigger-plus data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-frame-select-value data-ps-choice-select-value>Add frame</span></span>
-                <span class="ps-frame-trigger__price" data-ps-choice-select-price>Loading…</span>
-              </button>
-              <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="Frame options"></div>
-            </div>
-          </div>
-          <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
-        </div>
-
         {% form 'product', product, id: product_form_id, class: 'ps-form', data_ps_form: '' %}
           <input type="hidden" name="id" value="{{ selected_variant.id }}" data-ps-variant-input>
-          {% unless product.has_only_default_variant %}
-            {% for option in product.options_with_values %}
-              {% assign option_name = option.name | downcase %}
-              {% unless option_name contains 'size' %}
-                <fieldset class="ps-option-group" data-ps-option-group data-option-position="{{ option.position }}">
-                  <legend>{{ option.name }}: <span data-ps-option-label>{{ option.selected_value }}</span></legend>
-                  <div class="ps-option-values">
-                    {% for value in option.values %}
-                      <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
-                      <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
-                    {% endfor %}
-                  </div>
-                </fieldset>
-              {% endunless %}
-            {% endfor %}
-          {% endunless %}
-
-          <div class="ps-form__quantity" data-ps-quantity>
-            <label for="Quantity-{{ section.id }}">Quantity</label>
-            <div><button type="button" data-ps-quantity-change="-1" aria-label="Decrease quantity">−</button><input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1"><button type="button" data-ps-quantity-change="1" aria-label="Increase quantity">+</button></div>
-          </div>
-          <button class="ps-add-button" type="submit" data-ps-add-button {% unless selected_variant.available %}disabled{% endunless %}>
-            <span class="ps-add-button__label" data-ps-add-label>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
-          </button>
-          <p class="ps-form__status" data-ps-status role="status"></p>
+          {% for block in section.blocks %}
+            {% render 'custom-product-purchase-block', block: block, product: product, section: section, selected_variant: selected_variant, form_id: product_form_id %}
+          {% endfor %}
         {% endform %}
-
-        <div class="ps-offer-group">
-          <button type="button" class="ps-offer" data-ps-offer-toggle aria-expanded="false"><strong>SUMMER OFFER</strong><span> - BUY3+ Save 15%</span><span class="ps-offer__more">more <svg class="ps-offer__icon" aria-hidden="true" viewBox="0 0 12 8" focusable="false"><path d="M1 1.25 6 6.25 11 1.25"/></svg></span></button>
-          <div class="ps-quantity-savings" data-ps-offer-details hidden>
-            <div><strong>Buy quantity</strong><strong>Discount</strong></div>
-            <div><span>Buy 1</span><span>Standard price</span></div>
-            <div><span>Buy 2</span><span>Save 10%</span></div>
-            <div><span>Buy 3+</span><span>Save 15%</span></div>
-          </div>
-        </div>
-        <ul class="ps-assurances">
-          <li>Immediately ready to hang</li>
-          <li>Free worldwide shipping over $49</li>
-          <li>Estimated delivery: Jul 29 - Jul 31</li>
-        </ul>
-        <div class="ps-payment-block">
-          <p>Securely packaged &amp; paid</p>
-          {% render 'shopify-payment-icons', context: 'product', label: 'Accepted payment methods' %}
-          <small>♢ Special packaging for art galleries</small>
-        </div>
         <div class="ps-details-relocation-anchor" data-ps-details-mobile-anchor aria-hidden="true"></div>
       </aside>
     </div>
@@ -265,66 +165,6 @@
     },
     {
       "type": "text",
-      "id": "review_label",
-      "label": "Review label",
-      "default": "Verified reviews"
-    },
-    {
-      "type": "text",
-      "id": "shipping_note",
-      "label": "Shipping note",
-      "default": "Free shipping on qualifying orders."
-    },
-    {
-      "type": "text",
-      "id": "upload_heading",
-      "label": "Upload heading",
-      "default": "Upload your image"
-    },
-    {
-      "type": "text",
-      "id": "upload_button_label",
-      "label": "Upload button label",
-      "default": "Choose image"
-    },
-    {
-      "type": "text",
-      "id": "upload_help_text",
-      "label": "Upload help text",
-      "default": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels."
-    },
-    {
-      "type": "text",
-      "id": "crop_heading",
-      "label": "Crop dialog heading",
-      "default": "Crop your image"
-    },
-    {
-      "type": "text",
-      "id": "crop_help_text",
-      "label": "Crop dialog help text",
-      "default": "Choose a supported frame ratio, then position and resize the crop area."
-    },
-    {
-      "type": "text",
-      "id": "crop_cancel_label",
-      "label": "Crop cancel button",
-      "default": "Cancel"
-    },
-    {
-      "type": "text",
-      "id": "crop_confirm_label",
-      "label": "Crop confirm button",
-      "default": "Use crop"
-    },
-    {
-      "type": "checkbox",
-      "id": "require_artwork",
-      "label": "Require an image before add to cart",
-      "default": true
-    },
-    {
-      "type": "text",
       "id": "customer_notice_heading",
       "label": "Customer notice heading",
       "default": "Customer Notice"
@@ -357,8 +197,206 @@
       "id": "frame_product",
       "label": "Frame add-on product"
     }
+  ],
+  "max_blocks": 30,
+  "blocks": [
+    {
+      "type": "sale_badge",
+      "name": "Sale badge",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Save" }
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Review summary",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Verified reviews" }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Product title",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "vendor",
+      "name": "Artist or vendor",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Artist:" }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "shipping_note",
+      "name": "Shipping note",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Free shipping on qualifying orders." }
+      ]
+    },
+    {
+      "type": "artwork_upload",
+      "name": "Artwork upload",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "upload_heading", "label": "Upload heading", "default": "Upload your image" },
+        { "type": "text", "id": "drop_label", "label": "Dropzone label", "default": "Drag and drop your image here" },
+        { "type": "text", "id": "or_label", "label": "Separator label", "default": "or" },
+        { "type": "text", "id": "upload_button_label", "label": "Upload button", "default": "Choose image" },
+        { "type": "text", "id": "upload_help_text", "label": "Upload help text", "default": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels." },
+        { "type": "text", "id": "remove_label", "label": "Remove button", "default": "Remove" },
+        { "type": "checkbox", "id": "require_artwork", "label": "Require an image before add to cart", "default": true },
+        { "type": "header", "content": "Crop dialog" },
+        { "type": "text", "id": "crop_heading", "label": "Heading", "default": "Crop your image" },
+        { "type": "text", "id": "crop_help_text", "label": "Image-mode help text", "default": "Choose a supported frame ratio, then position and resize the crop area." },
+        { "type": "text", "id": "crop_css_help_text", "label": "CSS-mode help text", "default": "Choose a fixed ratio, or select Free crop to adjust the shape freely." },
+        { "type": "text", "id": "crop_close_label", "label": "Close accessibility label", "default": "Close image cropper" },
+        { "type": "text", "id": "landscape_label", "label": "Landscape option", "default": "Landscape" },
+        { "type": "text", "id": "square_label", "label": "Square option", "default": "Square" },
+        { "type": "text", "id": "portrait_label", "label": "Portrait option", "default": "Portrait" },
+        { "type": "text", "id": "free_crop_label", "label": "Free crop option", "default": "Free crop" },
+        { "type": "text", "id": "any_ratio_label", "label": "Free crop ratio label", "default": "Any ratio" },
+        { "type": "textarea", "id": "fixed_instruction", "label": "Fixed crop instruction", "default": "Drag to reposition. Drag a corner to resize while keeping the selected ratio." },
+        { "type": "textarea", "id": "freeform_instruction", "label": "Free crop instruction", "default": "Drag to reposition. Drag any corner to resize freely." },
+        { "type": "text", "id": "crop_cancel_label", "label": "Cancel button", "default": "Cancel" },
+        { "type": "text", "id": "crop_confirm_label", "label": "Confirm button", "default": "Use crop" }
+      ]
+    },
+    {
+      "type": "material",
+      "name": "Material",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Material:" },
+        { "type": "text", "id": "value", "label": "Value", "default": "Poster" }
+      ]
+    },
+    {
+      "type": "size_selector",
+      "name": "Size selector",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Size:" },
+        { "type": "text", "id": "guide_label", "label": "Size guide label", "default": "Size guide" }
+      ]
+    },
+    {
+      "type": "variant_options",
+      "name": "Other variant options",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "passepartout",
+      "name": "Passepartout selector",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Passepartout:" },
+        { "type": "text", "id": "empty_value", "label": "Empty value", "default": "None" },
+        { "type": "text", "id": "add_label", "label": "Add label", "default": "Add passepartout" },
+        { "type": "text", "id": "loading_label", "label": "Loading label", "default": "Loading…" },
+        { "type": "text", "id": "options_label", "label": "Options accessibility label", "default": "Passepartout options" }
+      ]
+    },
+    {
+      "type": "frame",
+      "name": "Frame selector",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Frame:" },
+        { "type": "text", "id": "empty_value", "label": "Empty value", "default": "No frame" },
+        { "type": "text", "id": "add_label", "label": "Add label", "default": "Add frame" },
+        { "type": "text", "id": "loading_label", "label": "Loading label", "default": "Loading…" },
+        { "type": "text", "id": "options_label", "label": "Options accessibility label", "default": "Frame options" }
+      ]
+    },
+    {
+      "type": "hanging_kit",
+      "name": "Hanging kit",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Canvas print hanging kit" },
+        { "type": "text", "id": "price_text", "label": "Price text", "default": "(+ $5.81)" }
+      ]
+    },
+    {
+      "type": "quantity",
+      "name": "Quantity selector",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Quantity" },
+        { "type": "text", "id": "decrease_label", "label": "Decrease accessibility label", "default": "Decrease quantity" },
+        { "type": "text", "id": "increase_label", "label": "Increase accessibility label", "default": "Increase quantity" }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy button",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "add_label", "label": "Available label", "default": "Add to cart" },
+        { "type": "text", "id": "sold_out_label", "label": "Sold out label", "default": "Sold out" },
+        { "type": "text", "id": "unavailable_label", "label": "Unavailable label", "default": "Unavailable" }
+      ]
+    },
+    {
+      "type": "quantity_offer",
+      "name": "Quantity offer",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "SUMMER OFFER" },
+        { "type": "text", "id": "summary", "label": "Summary", "default": "BUY3+ Save 15%" },
+        { "type": "text", "id": "toggle_label", "label": "Toggle label", "default": "more" },
+        { "type": "checkbox", "id": "default_open", "label": "Open by default", "default": false },
+        { "type": "header", "content": "Table headings" },
+        { "type": "text", "id": "column_one_heading", "label": "First column", "default": "Buy quantity" },
+        { "type": "text", "id": "column_two_heading", "label": "Second column", "default": "Discount" },
+        { "type": "header", "content": "Table row 1" },
+        { "type": "text", "id": "row_1_label", "label": "First column", "default": "Buy 1" },
+        { "type": "text", "id": "row_1_value", "label": "Second column", "default": "Standard price" },
+        { "type": "header", "content": "Table row 2" },
+        { "type": "text", "id": "row_2_label", "label": "First column", "default": "Buy 2" },
+        { "type": "text", "id": "row_2_value", "label": "Second column", "default": "Save 10%" },
+        { "type": "header", "content": "Table row 3" },
+        { "type": "text", "id": "row_3_label", "label": "First column", "default": "Buy 3+" },
+        { "type": "text", "id": "row_3_value", "label": "Second column", "default": "Save 15%" }
+      ]
+    },
+    {
+      "type": "assurances",
+      "name": "Service assurances",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "item_1", "label": "Line 1", "default": "Immediately ready to hang" },
+        { "type": "text", "id": "item_2", "label": "Line 2", "default": "Free worldwide shipping over $49" },
+        { "type": "text", "id": "item_3", "label": "Line 3", "default": "Estimated delivery: Jul 29 - Jul 31" },
+        { "type": "text", "id": "item_4", "label": "Line 4" },
+        { "type": "text", "id": "item_5", "label": "Line 5" }
+      ]
+    },
+    {
+      "type": "payment_methods",
+      "name": "Payment methods",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Securely packaged & paid" },
+        { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Accepted payment methods" },
+        { "type": "text", "id": "note", "label": "Bottom note", "default": "♢ Special packaging for art galleries" }
+      ]
+    }
   ]
 }
 {% endschema %}
+
 
 

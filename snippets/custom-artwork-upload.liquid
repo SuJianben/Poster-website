@@ -5,17 +5,18 @@
   data-ps-artwork-upload
   data-max-file-bytes="20971520"
   data-max-image-pixels="20000000"
+  {{ block.shopify_attributes }}
 >
-  <p class="ps-config-label ps-artwork-upload__heading">{{ section.settings.upload_heading }}</p>
+  <p class="ps-config-label ps-artwork-upload__heading">{{ block.settings.upload_heading }}</p>
   <div class="ps-artwork-upload__dropzone" data-ps-artwork-dropzone>
     <svg class="ps-artwork-upload__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v3.25A2.25 2.25 0 0 0 7.25 20h9.5A2.25 2.25 0 0 0 19 17.75V14.5" />
     </svg>
     <div class="ps-artwork-upload__copy">
-      <strong>Drag and drop your image here</strong>
-      <span>or</span>
+      <strong>{{ block.settings.drop_label }}</strong>
+      <span>{{ block.settings.or_label }}</span>
     </div>
-    <label class="ps-artwork-upload__button" for="{{ artwork_input_id }}">{{ section.settings.upload_button_label }}</label>
+    <label class="ps-artwork-upload__button" for="{{ artwork_input_id }}">{{ block.settings.upload_button_label }}</label>
     <input
       class="ps-artwork-upload__input"
       id="{{ artwork_input_id }}"
@@ -25,13 +26,14 @@
       form="{{ form_id }}"
       data-ps-artwork-input
       aria-describedby="{{ artwork_input_id }}-help {{ artwork_input_id }}-status"
-      {% if section.settings.require_artwork %}required{% endif %}
+      {% if block.settings.require_artwork %}required{% endif %}
     >
   </div>
-  <p class="ps-artwork-upload__help" id="{{ artwork_input_id }}-help">{{ section.settings.upload_help_text }}</p>
+  <p class="ps-artwork-upload__help" id="{{ artwork_input_id }}-help">{{ block.settings.upload_help_text }}</p>
   <div class="ps-artwork-upload__selection" data-ps-artwork-selection hidden>
     <span class="ps-artwork-upload__file" data-ps-artwork-file></span>
-    <button class="ps-artwork-upload__remove" type="button" data-ps-artwork-remove>Remove</button>
+    <button class="ps-artwork-upload__remove" type="button" data-ps-artwork-remove>{{ block.settings.remove_label }}</button>
   </div>
   <p class="ps-artwork-upload__status" id="{{ artwork_input_id }}-status" data-ps-artwork-status role="status" aria-live="polite"></p>
 </div>
+

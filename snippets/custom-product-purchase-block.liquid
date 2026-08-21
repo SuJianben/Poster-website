@@ -1,0 +1,13 @@
+{% comment %}
+  Adds the custom-artwork block to the shared product purchase block renderer.
+  Common product controls remain centralized in product-purchase-block.liquid.
+{% endcomment %}
+
+{% case block.type %}
+  {% when 'artwork_upload' %}
+    {% render 'custom-artwork-upload', section: section, block: block, form_id: form_id %}
+    {% render 'custom-artwork-cropper', section: section, block: block %}
+  {% else %}
+    {% render 'product-purchase-block', block: block, product: product, section: section, selected_variant: selected_variant %}
+{% endcase %}
+
