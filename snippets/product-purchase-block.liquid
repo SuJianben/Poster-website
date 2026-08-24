@@ -110,7 +110,7 @@
     </div>
 
   {% when 'hanging_kit' %}
-    <label class="ps-addon" {{ block.shopify_attributes }}><input type="checkbox"><span></span>{{ block.settings.label }}{% if block.settings.price_text != blank %} <small>{{ block.settings.price_text }}</small>{% endif %}</label>
+    <div class="ps-default-config" {{ block.shopify_attributes }}>{{ block.settings.label }}</div>
 
   {% when 'quantity' %}
     <div class="ps-form__quantity" data-ps-quantity {{ block.shopify_attributes }}>
@@ -157,3 +157,4 @@
       {% if block.settings.note != blank %}<small>{{ block.settings.note }}</small>{% endif %}
     </div>
 {% endcase %}
+
