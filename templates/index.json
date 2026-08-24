@@ -264,7 +264,7 @@
         "hotspot_pink_flowers": {
           "type": "hotspot",
           "settings": {
-            "product": "flowers-on-blue-table",
+            "product": "rose-table-bloom",
             "position_x": 42,
             "position_y": 31
           }
@@ -280,7 +280,7 @@
         "hotspot_blue": {
           "type": "hotspot",
           "settings": {
-            "product": "12pm",
+            "product": "sky-plane",
             "position_x": 80,
             "position_y": 56
           }
