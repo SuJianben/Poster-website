@@ -107,6 +107,7 @@
         },
         "quantity_offer": {
           "type": "quantity_offer",
+          "disabled": true,
           "settings": {
             "heading": "SUMMER OFFER",
             "summary": "BUY3+ Save 15%",
