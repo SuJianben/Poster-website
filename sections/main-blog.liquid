@@ -2,9 +2,9 @@
 <script src="{{ 'collection-gallery.js' | asset_url }}" defer="defer"></script>
 
 {% assign story_count = blog.articles_count %}
-{% if story_count == 0 %}{% assign story_count = 12 %}{% endif %}
 {% assign story_categories = 'Curated By,Home Stories,Journal' | split: ',' %}
 
+{% paginate blog.articles by 12 %}
 <section class="cg-collection" data-cg-collection data-columns="4">
   <div class="cg-shell">
     <div class="cg-breadcrumb">{{ blog.title | default: 'Stories' }}</div>
@@ -20,7 +20,11 @@
     <nav class="cg-category-nav" aria-label="Story categories">
       {% for category in story_categories %}
         {% assign category_label = category | strip %}
-        <a class="{% if forloop.first %}is-current{% endif %}" href="{{ blog.url }}/tagged/{{ category_label | handleize }}">{{ category_label }}</a>
+        {% assign is_current_category = false %}
+        {% if current_tags contains category_label or current_tags == blank and forloop.first %}
+          {% assign is_current_category = true %}
+        {% endif %}
+        <a class="{% if is_current_category %}is-current{% endif %}" href="{{ blog.url }}/tagged/{{ category_label | handleize }}">{{ category_label }}</a>
       {% endfor %}
     </nav>
 
@@ -40,32 +44,30 @@
           </div>
         </article>
       {% else %}
-        {% assign fallback_images = 'figma-lifestyle-hero.jpg|figma-lifestyle-nordic.jpg|figma-lifestyle-cinematic.jpg|reference-gallery-01.jpg|reference-gallery-02.jpg|reference-gallery-03.jpg|reference-gallery-04.jpg|reference-gallery-05.jpg|reference-gallery-06.jpg|reference-tilted-01.jpg|reference-tilted-02.jpg|reference-tilted-03.jpg' | split: '|' %}
-        {% assign fallback_titles = 'At Home With Clara|The Art of Living Well|A New Perspective|Collecting With Intention|Rooms With Stories|Inside the Studio|The Everyday Gallery|Objects of Affection|The Colour of Home|A Quiet Weekend|Notes on Craft|Living With Art' | split: '|' %}
-        {% for fallback_image in fallback_images %}
-          {% assign fallback_index = forloop.index0 %}
-          <article class="cg-product" data-cg-product data-cg-fallback>
-            <a class="cg-product-media" href="{{ blog.url }}" aria-label="{{ fallback_titles[fallback_index] | escape }}">
-              <span class="cg-badge">Curated By</span>
-              <img class="cg-product-image" src="{{ fallback_image | asset_url }}" alt="{{ fallback_titles[fallback_index] | escape }}" width="1200" height="1500" loading="lazy">
-            </a>
-            <div class="cg-product-meta">
-              <a class="cg-product-title" href="{{ blog.url }}">{{ fallback_titles[fallback_index] }}</a>
-              <span class="cg-product-price">Journal</span>
-              <span class="cg-product-vendor">{{ shop.name | escape }}</span>
-            </div>
-          </article>
-        {% endfor %}
+        <p class="cg-product-grid__empty">No stories are available in this category yet.</p>
       {% endfor %}
     </div>
 
-    <nav class="cg-pagination" data-cg-pagination aria-label="Story pages">
-      <button class="is-current" type="button" data-cg-page="1" aria-current="page">1</button>
-      <button type="button" data-cg-page="2">2</button>
-      <button class="cg-pagination__next" type="button" data-cg-next aria-label="Next page">›</button>
-    </nav>
+    {% if paginate.pages > 1 %}
+      <nav class="cg-pagination" aria-label="Story pages">
+        {% if paginate.previous %}
+          <a class="cg-pagination__previous" href="{{ paginate.previous.url }}" aria-label="Previous page">‹</a>
+        {% endif %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}">{{ part.title }}</a>
+          {% else %}
+            <span{% if part.title == paginate.current_page %} class="is-current" aria-current="page"{% endif %}>{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+        {% if paginate.next %}
+          <a class="cg-pagination__next" href="{{ paginate.next.url }}" aria-label="Next page">›</a>
+        {% endif %}
+      </nav>
+    {% endif %}
   </div>
 </section>
+{% endpaginate %}
 
 {% schema %}
 {
@@ -73,3 +75,4 @@
   "settings": []
 }
 {% endschema %}
+
