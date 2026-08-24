@@ -158,7 +158,7 @@
             "asset_name": "figma-poster-n1.jpg",
             "title": "Langosta",
             "meta": "Hendrik Schuette · $199",
-            "link": "shopify://products/langosta"
+            "link": "shopify://products/scarlet-lobster"
           }
         },
         "n2": {
@@ -272,7 +272,7 @@
         "hotspot_you": {
           "type": "hotspot",
           "settings": {
-            "product": "the-dream",
+            "product": "ivory-daydream",
             "position_x": 60,
             "position_y": 48
           }
