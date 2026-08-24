@@ -357,6 +357,7 @@
         "review_2",
         "review_3"
       ],
+      "disabled": true,
       "settings": {
         "heading": "What our customers say",
         "score": "",
