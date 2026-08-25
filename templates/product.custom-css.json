@@ -110,7 +110,7 @@
         "hanging_kit": {
           "type": "hanging_kit",
           "settings": {
-            "label": "Scroll Rod"
+            "label": "Product default configuration Scroll Rod"
           }
         },
         "quantity": {
@@ -131,6 +131,7 @@
         },
         "quantity_offer": {
           "type": "quantity_offer",
+          "disabled": true,
           "settings": {
             "heading": "SUMMER OFFER",
             "summary": "BUY3+ Save 15%",
