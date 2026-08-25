@@ -80,12 +80,13 @@
             {% assign product_artist = product.metafields.custom.artist.value | default: product.metafields.custom.artist | default: product.vendor %}
             {% assign hover_media = blank %}
             {% assign discount_badge = section.settings.discount_badge_text %}
+            {% assign discount_variant = product.selected_or_first_available_variant %}
             {% if product.media.size > 1 and product.media[1].media_type == 'image' %}
               {% assign hover_media = product.media[1] %}
             {% endif %}
-            {% if product.compare_at_price_max > product.price_min and product.compare_at_price_max > 0 %}
-              {% assign discount_saving = product.compare_at_price_max | minus: product.price_min %}
-              {% assign discount_percentage = discount_saving | times: 100.0 | divided_by: product.compare_at_price_max | round %}
+            {% if discount_variant.compare_at_price > discount_variant.price and discount_variant.compare_at_price > 0 %}
+              {% assign discount_saving = discount_variant.compare_at_price | minus: discount_variant.price %}
+              {% assign discount_percentage = discount_saving | times: 100.0 | divided_by: discount_variant.compare_at_price | round %}
               {% assign discount_badge = 'Discount ' | append: discount_percentage | append: '%' %}
             {% endif %}
             <article
@@ -108,8 +109,8 @@
                 {% if product_artist != blank %}<p class="editorial-depth-card__eyebrow">{{ product_artist }}</p>{% endif %}
                 <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
                 <p class="editorial-depth-card__price">
-                  <span>From {{ product.price_min | money }}</span>
-                  {% if product.compare_at_price_max > product.price_min %}<s>{{ product.compare_at_price_max | money }}</s>{% endif %}
+                  <span>From {{ discount_variant.price | money }}</span>
+                  {% if discount_variant.compare_at_price > discount_variant.price %}<s>{{ discount_variant.compare_at_price | money }}</s>{% endif %}
                 </p>
               </div>
             </article>
@@ -189,6 +190,7 @@
   "presets": [{"name":"Editorial with products"}]
 }
 {% endschema %}
+
 
 
 
