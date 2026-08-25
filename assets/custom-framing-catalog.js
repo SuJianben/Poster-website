@@ -3,7 +3,7 @@
     passepartout: 'system-passepartout-addon',
     frame: 'system-frame-addon',
   };
-  const EXPECTED_VARIANTS = { passepartout: 143, frame: 207 };
+  const EXPECTED_VARIANTS = { passepartout: 143, frame: 225 };
   const PASSEPARTOUT_FITS = new Map([
     ['a3 (29.7x42 cm)', 'A4 (21x29,7 cm)'],
     ['a2 (42x59.4 cm)', 'A3 (29,7x42 cm)'],
