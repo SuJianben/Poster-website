@@ -5,9 +5,17 @@
 
 {% case block.type %}
   {% when 'sale_badge' %}
-    {% if product.compare_at_price_max > product.price %}
-      <span class="ps-sale-badge" {{ block.shopify_attributes }}>{{ block.settings.label }} {{ product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max }}%</span>
+    {% assign variant_discount_percentage = 0 %}
+    {% assign variant_has_discount = false %}
+    {% if selected_variant.compare_at_price > selected_variant.price and selected_variant.compare_at_price > 0 %}
+      {% assign variant_discount_saving = selected_variant.compare_at_price | minus: selected_variant.price %}
+      {% assign variant_discount_percentage = variant_discount_saving | times: 100.0 | divided_by: selected_variant.compare_at_price | round %}
+      {% assign variant_has_discount = true %}
     {% endif %}
+    <span class="ps-sale-badge{% unless variant_has_discount %} is-hidden{% endunless %}" data-ps-sale-badge {{ block.shopify_attributes }}>
+      <span data-ps-sale-badge-label>{{ block.settings.label }}</span>
+      <span data-ps-sale-badge-value>{{ variant_discount_percentage }}%</span>
+    </span>
 
   {% when 'reviews' %}
     <p class="ps-review-line" {{ block.shopify_attributes }}>★★★★★ <span>{{ block.settings.label }}</span></p>
