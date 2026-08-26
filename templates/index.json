@@ -15,7 +15,7 @@
         "offshore": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/FIGURATIVE_FASHION.jpg",
+            "image": "shopify://shop_images/remakebanner3.jpg",
             "asset_name": "reference-gallery-03.jpg",
             "title": "FIGURATIVE & FASHION",
             "text": "Art in Motion Expressive figures, fluid lines and colour in movement.",
@@ -25,7 +25,7 @@
         "high_country": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/THE_ART_OF_PROCESS.jpg",
+            "image": "shopify://shop_images/remakebanner1.jpg",
             "asset_name": "reference-gallery-02.jpg",
             "title": "THE ART OF PROCESS",
             "text": "A Day in Form Geometric studies from morning to midnight.",
@@ -35,7 +35,7 @@
         "pines": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/BOTANICAL_FLORAL.jpg",
+            "image": "shopify://shop_images/remakebanner2.jpg",
             "asset_name": "BOTANICAL & FLORAL",
             "title": "Into the Pines",
             "text": "Vases in Bloom Painterly botanicals for rooms that need colour.",
