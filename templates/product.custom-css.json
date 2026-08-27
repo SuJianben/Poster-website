@@ -20,8 +20,9 @@
         },
         "reviews": {
           "type": "reviews",
+          "disabled": true,
           "settings": {
-            "label": "Verified reviews"
+            "label": "Made personally for you"
           }
         },
         "title": {
@@ -41,7 +42,7 @@
         "shipping_note": {
           "type": "shipping_note",
           "settings": {
-            "text": "Free shipping on qualifying orders."
+            "text": "Free UK shipping on all orders."
           }
         },
         "artwork_upload": {
@@ -193,7 +194,7 @@
         "customer_notice_heading": "Customer Notice",
         "customer_notice_content": "<ul><li>By uploading an image, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>",
         "shipping_returns_heading": "Shipping and returns",
-        "shipping_returns_content": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>",
+        "shipping_returns_content": "<p>Orders are processed within 2 business days. Standard UK delivery normally takes 10–15 business days after dispatch. Custom, personalised, and made-to-order products cannot be returned for change-of-mind reasons once production begins. This does not affect your rights if an item is faulty, damaged, incorrect, or not as described.</p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
@@ -213,24 +214,24 @@
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Satisfied or money back",
-            "text": "Shop with confidence."
+            "title": "Quality issue support",
+            "text": "We’ll put it right if your order is faulty, damaged or incorrect."
           }
         },
         "free_shipping": {
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Free shipping",
-            "text": "On qualifying orders."
+            "title": "Free UK shipping",
+            "text": "On all UK orders."
           }
         },
         "returns": {
           "type": "benefit",
           "settings": {
             "icon": "returns",
-            "title": "30 days return right",
-            "text": "Easy returns when eligible."
+            "title": "Made-to-order policy",
+            "text": "No change-of-mind returns once production begins."
           }
         }
       },
