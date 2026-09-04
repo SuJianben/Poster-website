@@ -1,9 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-contact",
-      "settings": {}
+      "settings": {
+        "company_name": "ZHILINK GLOBAL LTD",
+        "company_address": "Registered office: Suite 302, 4 Station Square, Cambridge, United Kingdom, CB1 2GE\nCompany No. 17157223 (England and Wales)\nPrints are produced at our studio in Foshan, China and shipped directly to the UK.",
+        "company_phone": "+44 7726246488",
+        "company_email": "support@posterandform.com"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

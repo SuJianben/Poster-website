@@ -151,50 +151,6 @@
     },
     "editorial_1": {
       "type": "editorial-with-products",
-      "blocks": {
-        "n1": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-n1.jpg",
-            "title": "Langosta",
-            "meta": "Hendrik Schuette · $199",
-            "link": "shopify://products/scarlet-lobster"
-          }
-        },
-        "n2": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-n2.jpg",
-            "title": "Still Water",
-            "meta": "Joakim Nådell · $179",
-            "link": ""
-          }
-        },
-        "n4": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-n4.jpg",
-            "title": "Green Peaks",
-            "meta": "Sebastian Doll · $189",
-            "link": ""
-          }
-        },
-        "n5": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-n5.jpg",
-            "title": "Snow Lake",
-            "meta": "Daniil Smetanin · $175",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "n1",
-        "n2",
-        "n4",
-        "n5"
-      ],
       "settings": {
         "image": "shopify://shop_images/custom-1.jpg",
         "fallback_image_asset": "figma-lifestyle-nordic.jpg",
@@ -225,42 +181,6 @@
     "editorial_2": {
       "type": "editorial-with-products",
       "blocks": {
-        "c2": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-c2.jpg",
-            "title": "The Tramp",
-            "meta": "Smithsonian · $249",
-            "link": ""
-          }
-        },
-        "c1": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-c1.jpg",
-            "title": "Silver Screen",
-            "meta": "Luthfian Alfajr · $189",
-            "link": ""
-          }
-        },
-        "c4": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-c4.jpg",
-            "title": "Neon Marquee",
-            "meta": "Christian Lue · $179",
-            "link": ""
-          }
-        },
-        "c3": {
-          "type": "poster",
-          "settings": {
-            "asset_name": "figma-poster-c3.jpg",
-            "title": "Monster Nights",
-            "meta": "Lilian Do Khac · $159",
-            "link": ""
-          }
-        },
         "hotspot_pink_flowers": {
           "type": "hotspot",
           "settings": {
@@ -287,10 +207,6 @@
         }
       },
       "block_order": [
-        "c2",
-        "c1",
-        "c4",
-        "c3",
         "hotspot_pink_flowers",
         "hotspot_you",
         "hotspot_blue"
