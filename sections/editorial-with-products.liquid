@@ -51,7 +51,7 @@
       <div class="page-width editorial-depth-grid" data-editorial-depth-grid>
         {% if section.settings.collection != blank %}
           {% for product in section.settings.collection.products limit: 4 %}
-            {% assign product_artist = product.metafields.custom.artist.value | default: product.metafields.custom.artist | default: product.vendor %}
+            {% assign product_artist = product.vendor %}
             {% assign hover_media = blank %}
             {% assign discount_badge = section.settings.discount_badge_text %}
             {% if product.media.size > 1 and product.media[1].media_type == 'image' %}
