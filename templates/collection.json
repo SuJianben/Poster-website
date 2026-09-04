@@ -55,7 +55,9 @@
         "bathroom",
         "home_office"
       ],
-      "settings": {}
+      "settings": {
+        "discount_badge_text": ""
+      }
     }
   },
   "order": [
