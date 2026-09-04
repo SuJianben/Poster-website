@@ -1,0 +1,30 @@
+.ps-section .ps-artwork-upload { display: grid; gap: 8px; }
+.ps-section .ps-artwork-upload__heading { margin-bottom: 0; }
+.ps-section .ps-artwork-upload__dropzone { display: flex; min-height: 126px; align-items: center; justify-content: center; gap: 12px; padding: 18px; border: 1px dashed #aeb2b2; background: #fafafa; color: var(--ps-ink); text-align: center; transition: border-color .18s ease, background-color .18s ease; }
+.ps-section .ps-artwork-upload__dropzone.is-dragging { border-color: var(--ps-ink); background: #f1f2f1; }
+.ps-section .ps-artwork-upload__dropzone:has(.ps-artwork-upload__input:focus-visible) { border-color: var(--ps-ink); outline: 2px solid var(--ps-ink); outline-offset: 2px; }
+.ps-section .ps-artwork-upload[data-state="ready"] .ps-artwork-upload__dropzone { border-style: solid; border-color: #7b9d86; background: #f7faf8; }
+.ps-section .ps-artwork-upload__icon { width: 25px; height: 25px; flex: 0 0 25px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5; }
+.ps-section .ps-artwork-upload__copy { display: grid; gap: 2px; font: 400 11px/1.3 var(--sans); }
+.ps-section .ps-artwork-upload__copy strong { font-weight: 600; }
+.ps-section .ps-artwork-upload__copy span { color: var(--ps-muted); }
+.ps-section .ps-artwork-upload__button { display: inline-grid; min-height: 38px; padding: 0 15px; place-items: center; border: 1px solid var(--ps-ink); background: var(--ps-ink); color: #fff; cursor: pointer; font: 700 10px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; transition: background-color .18s ease, color .18s ease; }
+.ps-section .ps-artwork-upload__button:hover, .ps-section .ps-artwork-upload__button:focus-visible { background: #fff; color: var(--ps-ink); outline: 0; }
+.ps-section .ps-artwork-upload__input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.ps-section .ps-artwork-upload__help, .ps-section .ps-artwork-upload__status { margin: 0; color: var(--ps-muted); font: 400 10px/1.35 var(--sans); }
+.ps-section .ps-artwork-upload__selection { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 10px; background: #f5f6f5; font: 500 11px/1.3 var(--sans); }
+.ps-section .ps-artwork-upload__selection[hidden] { display: none; }
+.ps-section .ps-artwork-upload__file { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ps-section .ps-artwork-upload__remove { flex: 0 0 auto; padding: 0; border: 0; background: transparent; color: var(--ps-ink); cursor: pointer; font: 600 10px/1 var(--sans); text-decoration: underline; text-underline-offset: 2px; }
+.ps-section .ps-artwork-upload__status.is-error { color: #a33831; }
+.ps-section .ps-artwork-upload__status.is-success { color: #3f7653; }
+
+@media (max-width: 900px) {
+  .ps-section .ps-artwork-upload__dropzone { min-height: 112px; flex-wrap: wrap; gap: 9px; padding: 15px; }
+  .ps-section .ps-artwork-upload__copy { flex: 1 1 150px; text-align: left; }
+  .ps-section .ps-artwork-upload__button { flex: 1 0 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-section .ps-artwork-upload__dropzone, .ps-section .ps-artwork-upload__button { transition: none; }
+}

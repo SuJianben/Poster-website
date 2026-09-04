@@ -1,0 +1,131 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-product-main",
+      "settings": {
+        "framing_render_mode": "css",
+        "passepartout_product": "system-passepartout-addon",
+        "frame_product": "system-frame-addon"
+      }
+    },
+    "benefits": {
+      "type": "custom-product-benefits",
+      "blocks": {
+        "premium_quality": {
+          "type": "benefit",
+          "settings": {
+            "icon": "quality",
+            "title": "Premium quality",
+            "text": "Made with carefully selected materials."
+          }
+        },
+        "money_back": {
+          "type": "benefit",
+          "settings": {
+            "icon": "guarantee",
+            "title": "Satisfied or money back",
+            "text": "Shop with confidence."
+          }
+        },
+        "free_shipping": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free shipping",
+            "text": "On qualifying orders."
+          }
+        },
+        "returns": {
+          "type": "benefit",
+          "settings": {
+            "icon": "returns",
+            "title": "30 days return right",
+            "text": "Easy returns when eligible."
+          }
+        }
+      },
+      "block_order": [
+        "premium_quality",
+        "money_back",
+        "free_shipping",
+        "returns"
+      ],
+      "settings": {}
+    },
+    "lifestyle": {
+      "type": "custom-product-lifestyle",
+      "settings": {}
+    },
+    "information": {
+      "type": "custom-product-info",
+      "blocks": {
+        "description": {
+          "type": "tab",
+          "settings": {
+            "label": "Description",
+            "content_source": "product_description"
+          }
+        },
+        "fair_pricing": {
+          "type": "tab",
+          "settings": {
+            "label": "Fair Pricing",
+            "content_source": "custom",
+            "heading": "Fair pricing",
+            "content": "<p>We keep pricing clear and considered, so you can choose a piece you love with confidence. Every order is made with carefully selected materials and prepared with lasting quality in mind.</p>"
+          }
+        },
+        "artist": {
+          "type": "tab",
+          "settings": {
+            "label": "Artist Information",
+            "content_source": "artist_information",
+            "heading": "Artist information"
+          }
+        },
+        "material": {
+          "type": "tab",
+          "settings": {
+            "label": "Material & Workmanship",
+            "content_source": "custom",
+            "heading": "Material & workmanship",
+            "content": "<p>Made with carefully selected materials, precise printing and thoughtful finishing. Every piece is prepared for a clean presentation and long-lasting everyday enjoyment.</p>"
+          }
+        },
+        "shipping": {
+          "type": "tab",
+          "settings": {
+            "label": "Shipping and Returns",
+            "content_source": "custom",
+            "heading": "Shipping and returns",
+            "content": "<p>Orders are prepared with care and securely packed for delivery. Shipping details are shown before checkout, and eligible returns can be requested within the applicable return period.</p>"
+          }
+        },
+        "security": {
+          "type": "tab",
+          "settings": {
+            "label": "Security",
+            "content_source": "custom",
+            "heading": "Security",
+            "content": "<p>Your order is handled through Shopify’s secure checkout. We use protected payment processing and securely packaged delivery so you can shop with confidence.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "fair_pricing",
+        "artist",
+        "material",
+        "shipping",
+        "security"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "benefits",
+    "lifestyle",
+    "information"
+  ]
+}

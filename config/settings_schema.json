@@ -3,6 +3,7 @@
     "name": "Theme style",
     "settings": [
       {"type":"image_picker","id":"logo","label":"Logo image"},
+      {"type":"image_picker","id":"favicon","label":"Favicon image","info":"Upload a square image for browser tabs and bookmarks."},
       {"type":"range","id":"page_width","label":"Content width","min":1100,"max":1600,"step":20,"default":1440,"unit":"px"},
       {"type":"color","id":"color_background","label":"Background","default":"#FFFFFF"},
       {"type":"color","id":"color_surface","label":"Soft surface","default":"#FAFAFA"},

@@ -1,0 +1,132 @@
+{{ 'product-showcase.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-information-tabs.js' | asset_url }}" defer="defer"></script>
+
+<section
+  class="ps-description-shell ps-section"
+  data-ps-information-tabs
+  data-product-handle="{{ product.handle | escape }}"
+>
+  <div class="ps-description-tabs" role="tablist" aria-label="{{ section.settings.accessibility_label | escape }}">
+    {% for block in section.blocks %}
+      <button
+        class="{% if forloop.first %}is-active{% endif %}"
+        id="ps-information-tab-{{ section.id }}-{{ block.id }}"
+        type="button"
+        role="tab"
+        data-ps-description-tab="{{ block.id }}"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+        aria-controls="ps-information-panel-{{ section.id }}-{{ block.id }}"
+        {{ block.shopify_attributes }}
+      >
+        {{ block.settings.label }}
+      </button>
+    {% endfor %}
+  </div>
+
+  <div class="ps-description-panels">
+    {% for block in section.blocks %}
+      <div
+        class="ps-description-panel{% if forloop.first %} is-active{% endif %}"
+        id="ps-information-panel-{{ section.id }}-{{ block.id }}"
+        role="tabpanel"
+        data-ps-description-panel="{{ block.id }}"
+        aria-labelledby="ps-information-tab-{{ section.id }}-{{ block.id }}"
+        {% unless forloop.first %}hidden{% endunless %}
+        tabindex="0"
+      >
+        <div class="ps-description{% if block.settings.content_source == 'product_description' %} rte{% endif %}">
+          {% case block.settings.content_source %}
+            {% when 'product_description' %}
+              {{ product.description }}
+            {% when 'artist_information' %}
+              {% if block.settings.heading != blank %}<h2>{{ block.settings.heading }}</h2>{% endif %}
+              <p>{% if product.vendor != blank %}{{ product.vendor }}{% else %}Our artist collection{% endif %} brings distinctive ideas and character to every piece. Each artwork is selected to give your space a more personal point of view.</p>
+            {% else %}
+              {% if block.settings.heading != blank %}<h2>{{ block.settings.heading }}</h2>{% endif %}
+              {{ block.settings.content }}
+          {% endcase %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product information tabs",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Product information"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Information tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab label",
+          "default": "Information"
+        },
+        {
+          "type": "select",
+          "id": "content_source",
+          "label": "Content source",
+          "default": "custom",
+          "options": [
+            { "value": "product_description", "label": "Product description" },
+            { "value": "artist_information", "label": "Product artist" },
+            { "value": "custom", "label": "Custom content" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Content heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Custom content",
+          "default": "<p>Add information for this tab.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product information tabs",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Description",
+            "content_source": "product_description"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Fair Pricing",
+            "heading": "Fair pricing"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Artist Information",
+            "content_source": "artist_information",
+            "heading": "Artist information"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

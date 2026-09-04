@@ -1,0 +1,37 @@
+<div class="ps-cropper" data-ps-cropper hidden>
+  <div class="ps-cropper__backdrop" data-ps-cropper-cancel></div>
+  <section class="ps-cropper__dialog" role="dialog" aria-modal="true" aria-labelledby="ps-cropper-heading-{{ section.id }}">
+    <header class="ps-cropper__header">
+      <div>
+        <h2 id="ps-cropper-heading-{{ section.id }}">{{ section.settings.crop_heading }}</h2>
+        <p>{{ section.settings.crop_help_text }}</p>
+      </div>
+      <button class="ps-cropper__close" type="button" data-ps-cropper-cancel aria-label="Close image cropper">×</button>
+    </header>
+
+    <div class="ps-cropper__workspace" data-ps-cropper-workspace>
+      <canvas class="ps-cropper__canvas" data-ps-cropper-canvas></canvas>
+    </div>
+
+    <div class="ps-cropper__ratio-group" role="radiogroup" aria-label="Artwork ratio">
+      <button class="ps-cropper__ratio is-selected" type="button" data-ps-cropper-ratio="landscape" role="radio" aria-checked="true">
+        <span class="ps-cropper__ratio-shape ps-cropper__ratio-shape--landscape" aria-hidden="true"></span>
+        <span>Landscape</span><small>1.414 : 1</small>
+      </button>
+      <button class="ps-cropper__ratio" type="button" data-ps-cropper-ratio="square" role="radio" aria-checked="false">
+        <span class="ps-cropper__ratio-shape ps-cropper__ratio-shape--square" aria-hidden="true"></span>
+        <span>Square</span><small>1 : 1</small>
+      </button>
+      <button class="ps-cropper__ratio" type="button" data-ps-cropper-ratio="portrait" role="radio" aria-checked="false">
+        <span class="ps-cropper__ratio-shape ps-cropper__ratio-shape--portrait" aria-hidden="true"></span>
+        <span>Portrait</span><small>1 : 1.414</small>
+      </button>
+    </div>
+
+    <p class="ps-cropper__instruction">Drag to reposition. Drag a corner to resize while keeping the selected ratio.</p>
+    <footer class="ps-cropper__actions">
+      <button class="ps-cropper__button ps-cropper__button--secondary" type="button" data-ps-cropper-cancel>{{ section.settings.crop_cancel_label }}</button>
+      <button class="ps-cropper__button ps-cropper__button--primary" type="button" data-ps-cropper-confirm>{{ section.settings.crop_confirm_label }}</button>
+    </footer>
+  </section>
+</div>

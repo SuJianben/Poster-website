@@ -1,0 +1,12 @@
+.ps-section .ps-css-frame, .ps-section .ps-css-mat, .ps-section .ps-css-artwork { display: contents; }
+.ps-section .ps-print-preview .print-preview__layer { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; object-fit: contain; transform-origin: center; }
+.ps-section .ps-print-preview .print-preview__layer--art { z-index: 1; max-height: none; object-fit: contain; transform: scale(var(--art-scale, .75)); transition: transform .24s ease; }
+.ps-section .ps-print-preview .print-preview__layer--passepartout { z-index: 2; transform: scale(var(--ps-framing-layer-scale, 1)); }
+.ps-section .ps-print-preview .print-preview__layer--frame { z-index: 3; transform: scale(var(--ps-framing-layer-scale, 1)); }
+.ps-section .ps-print-preview .print-preview__layer[hidden] { display: none !important; }
+.ps-section .ps-print-preview .print-preview__inner[data-has-passepartout="true"] .print-preview__layer--art { transform: scale(.57); transition: none; }
+.ps-section .ps-print-preview .print-preview__inner[data-has-frame="true"] .print-preview__layer--frame { display: block; filter: drop-shadow(0 8px 10px rgb(35 25 18 / 22%)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-section .ps-print-preview .print-preview__layer--art { transition: none; }
+}

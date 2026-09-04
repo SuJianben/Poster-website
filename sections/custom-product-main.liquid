@@ -1,0 +1,336 @@
+{{ 'custom-product.css' | asset_url | stylesheet_tag }}
+{{ 'custom-artwork-upload.css' | asset_url | stylesheet_tag }}
+{{ 'custom-artwork-cropper.css' | asset_url | stylesheet_tag }}
+{% assign framing_render_mode = section.settings.framing_render_mode | default: 'image' %}
+{% if framing_render_mode == 'css' %}
+  {{ 'custom-css-framing.css' | asset_url | stylesheet_tag }}
+{% else %}
+  {{ 'custom-image-framing.css' | asset_url | stylesheet_tag }}
+{% endif %}
+<script src="{{ 'custom-artwork-cropper-geometry.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
+<script src="{{ 'custom-artwork-cropper.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
+<script src="{{ 'custom-framing-catalog.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
+{% if framing_render_mode == 'css' %}
+  <script src="{{ 'custom-css-framing.js' | asset_url }}&psv=css-framing-20260817" defer="defer"></script>
+{% else %}
+  <script src="{{ 'custom-image-framing.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
+{% endif %}
+<script src="{{ 'custom-framing.js' | asset_url }}&psv=image-framing-20260814" defer="defer"></script>
+<script src="{{ 'custom-artwork-upload.js' | asset_url }}&psv=cropper-20260814" defer="defer"></script>
+<script src="{{ 'custom-product-cart.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
+<script src="{{ 'custom-product.js' | asset_url }}&psv=artwork-upload-20260814" defer="defer"></script>
+
+{% assign selected_variant = product.selected_or_first_available_variant %}
+{% assign preview_media = product.media | where: 'media_type', 'image' | last %}
+{% capture product_form_id %}custom-product-form-{{ section.id }}{% endcapture %}
+
+<section class="ps-product ps-section" data-ps-product data-section-id="{{ section.id }}" data-ps-framing-render-mode="{{ framing_render_mode }}">
+  <div class="ps-shell">
+    {% if section.settings.show_breadcrumb %}
+      <nav class="ps-breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a><span>/</span>
+        {% if collection %}<a href="{{ collection.url }}">{{ collection.title }}</a><span>/</span>{% endif %}
+        <span aria-current="page">{{ product.title }}</span>
+      </nav>
+    {% endif %}
+
+    <div class="ps-layout">
+      <div class="ps-left">
+        <div class="ps-media-stage">
+          <div class="ps-main-media">
+            <print-preview class="ps-print-preview" data-ps-art-preview data-orientation="portrait" data-media-id="{{ preview_media.id | default: product.media.first.id }}" style="--pdp-aspect: {% if preview_media %}{{ preview_media.preview_image.width }} / {{ preview_media.preview_image.height }}{% else %}800 / 1100{% endif %};">
+              <div class="print-preview__inner" data-pdp-print-preview data-pdp-canvas data-ps-preview-canvas>
+                <div class="print-preview__bg" aria-hidden="true"></div>
+                <div class="ps-css-frame" data-ps-css-frame data-has-frame="false">
+                  <div class="ps-css-mat" data-ps-css-mat data-has-mat="false">
+                    <div class="ps-css-artwork" data-ps-css-artwork>
+                      {% if preview_media %}
+                        <img
+                          class="ps-main-media__image print-preview__layer print-preview__layer--art"
+                          data-ps-main-image
+                          data-pdp-print-art
+                          src="{{ preview_media.preview_image | image_url: width: 1800 }}"
+                          srcset="{{ preview_media.preview_image | image_url: width: 640 }} 640w, {{ preview_media.preview_image | image_url: width: 900 }} 900w, {{ preview_media.preview_image | image_url: width: 1200 }} 1200w, {{ preview_media.preview_image | image_url: width: 1600 }} 1600w, {{ preview_media.preview_image | image_url: width: 1800 }} 1800w"
+                          sizes="(min-width: 901px) 58vw, 100vw"
+                          width="{{ preview_media.preview_image.width }}"
+                          height="{{ preview_media.preview_image.height }}"
+                          loading="eager"
+                          alt="{{ preview_media.alt | default: product.title | escape }}"
+                        >
+                      {% else %}
+                        <img class="ps-main-media__image print-preview__layer print-preview__layer--art" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <img class="print-preview__layer print-preview__layer--passepartout" data-ps-framing-layer="passepartout" width="800" height="1100" alt="" hidden aria-hidden="true">
+                <img class="print-preview__layer print-preview__layer--frame" data-ps-framing-layer="frame" width="800" height="1100" alt="" hidden aria-hidden="true">
+              </div>
+            </print-preview>
+            <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
+            <button class="ps-media-navigation ps-media-navigation--next" type="button" data-ps-media-direction="1" aria-label="Show next image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" /></svg></button>
+          </div>
+        </div>
+        <div class="ps-details-relocation-anchor" data-ps-details-desktop-anchor aria-hidden="true"></div>
+        <div class="ps-left-details" data-ps-accordions>
+          <section class="ps-accordion-panel" data-ps-accordion>
+            <button class="ps-accordion-panel__trigger" type="button" data-ps-accordion-trigger aria-expanded="false" aria-controls="ps-product-details-{{ section.id }}">
+              <span>{{ section.settings.product_details_heading }}</span><span class="ps-accordion-panel__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="ps-accordion-panel__body" id="ps-product-details-{{ section.id }}" data-ps-accordion-panel aria-hidden="true">
+              <div class="ps-accordion-panel__body-inner">
+                <div class="ps-detail-content rte">{{ product.description | default: '<p>Made to order with carefully selected materials and designed to bring character to your space.</p>' }}</div>
+              </div>
+            </div>
+          </section>
+          <section class="ps-accordion-panel" data-ps-accordion>
+            <button class="ps-accordion-panel__trigger" type="button" data-ps-accordion-trigger aria-expanded="false" aria-controls="ps-shipping-returns-{{ section.id }}">
+              <span>{{ section.settings.shipping_returns_heading }}</span><span class="ps-accordion-panel__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="ps-accordion-panel__body" id="ps-shipping-returns-{{ section.id }}" data-ps-accordion-panel aria-hidden="true">
+              <div class="ps-accordion-panel__body-inner">
+                <div class="ps-detail-content">{{ section.settings.shipping_returns_content }}</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <aside class="ps-purchase" aria-label="Purchase {{ product.title | escape }}">
+        {% if product.compare_at_price_max > product.price %}<span class="ps-sale-badge">Save {{ product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max }}%</span>{% endif %}
+        <p class="ps-review-line">★★★★★ <span>{{ section.settings.review_label }}</span></p>
+        <h1>{{ product.title }}</h1>
+        {% if product.vendor != blank %}<p class="ps-vendor">Artist: <strong>{{ product.vendor }}</strong></p>{% endif %}
+        <div class="ps-price" data-ps-price>
+          <span class="ps-price__current">{{ selected_variant.price | money }}</span>
+          <s class="ps-price__compare {% unless selected_variant.compare_at_price > selected_variant.price %}is-hidden{% endunless %}" data-ps-compare>{{ selected_variant.compare_at_price | money }}</s>
+        </div>
+        <p class="ps-shipping-note">{{ section.settings.shipping_note }}</p>
+
+        {% render 'custom-artwork-upload', section: section, form_id: product_form_id %}
+        {% render 'custom-artwork-cropper', section: section %}
+
+        <div class="ps-product-config" aria-label="Product configuration">
+          <div class="ps-config-group">
+            <p class="ps-config-label">Material: <strong data-ps-choice-output>Poster</strong></p>
+            <div class="ps-config-options" data-ps-choice-group>
+              <button type="button" class="is-selected" data-ps-choice aria-pressed="true">Poster</button>
+            </div>
+          </div>
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              {% assign option_name = option.name | downcase %}
+              {% if option_name contains 'size' %}
+                <fieldset class="ps-config-group ps-option-group" data-ps-option-group data-option-position="{{ option.position }}" aria-label="{{ option.name | escape }}">
+                  <div class="ps-config-label-row"><p class="ps-config-label">Size: <strong data-ps-option-label>{{ option.selected_value }}</strong></p><button type="button" class="ps-size-guide">Size guide</button></div>
+                  <div class="ps-config-options ps-config-options--size">
+                    {% for value in option.values %}
+                      <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                      <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
+                    {% endfor %}
+                  </div>
+                </fieldset>
+              {% endif %}
+            {% endfor %}
+          {% endunless %}
+          <div class="ps-config-group">
+            <p class="ps-config-label">Passepartout: <strong data-ps-choice-output>None</strong></p>
+            <div class="ps-frame-select ps-choice-select" data-ps-framing-select="passepartout">
+              <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
+                <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-choice-select-value>Add passepartout</span></span>
+                <span class="ps-frame-trigger__price" data-ps-choice-select-price>Loading…</span>
+              </button>
+              <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="Passepartout options"></div>
+            </div>
+          </div>
+          <div class="ps-config-group">
+            <p class="ps-config-label">Frame: <strong data-ps-choice-output>No frame</strong></p>
+            <div class="ps-frame-select" data-ps-framing-select="frame">
+              <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
+                <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-frame-trigger-plus data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-frame-select-value data-ps-choice-select-value>Add frame</span></span>
+                <span class="ps-frame-trigger__price" data-ps-choice-select-price>Loading…</span>
+              </button>
+              <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="Frame options"></div>
+            </div>
+          </div>
+          <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
+        </div>
+
+        {% form 'product', product, id: product_form_id, class: 'ps-form', data_ps_form: '' %}
+          <input type="hidden" name="id" value="{{ selected_variant.id }}" data-ps-variant-input>
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              {% assign option_name = option.name | downcase %}
+              {% unless option_name contains 'size' %}
+                <fieldset class="ps-option-group" data-ps-option-group data-option-position="{{ option.position }}">
+                  <legend>{{ option.name }}: <span data-ps-option-label>{{ option.selected_value }}</span></legend>
+                  <div class="ps-option-values">
+                    {% for value in option.values %}
+                      <input id="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}" type="radio" name="option-{{ option.position }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                      <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
+                    {% endfor %}
+                  </div>
+                </fieldset>
+              {% endunless %}
+            {% endfor %}
+          {% endunless %}
+
+          <div class="ps-form__quantity" data-ps-quantity>
+            <label for="Quantity-{{ section.id }}">Quantity</label>
+            <div><button type="button" data-ps-quantity-change="-1" aria-label="Decrease quantity">−</button><input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1"><button type="button" data-ps-quantity-change="1" aria-label="Increase quantity">+</button></div>
+          </div>
+          <button class="ps-add-button" type="submit" data-ps-add-button {% unless selected_variant.available %}disabled{% endunless %}>
+            <span class="ps-add-button__label" data-ps-add-label>{% if selected_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
+          </button>
+          <p class="ps-form__status" data-ps-status role="status"></p>
+        {% endform %}
+
+        <div class="ps-offer-group">
+          <button type="button" class="ps-offer" data-ps-offer-toggle aria-expanded="false"><strong>SUMMER OFFER</strong><span> - BUY3+ Save 15%</span><span class="ps-offer__more">more <svg class="ps-offer__icon" aria-hidden="true" viewBox="0 0 12 8" focusable="false"><path d="M1 1.25 6 6.25 11 1.25"/></svg></span></button>
+          <div class="ps-quantity-savings" data-ps-offer-details hidden>
+            <div><strong>Buy quantity</strong><strong>Discount</strong></div>
+            <div><span>Buy 1</span><span>Standard price</span></div>
+            <div><span>Buy 2</span><span>Save 10%</span></div>
+            <div><span>Buy 3+</span><span>Save 15%</span></div>
+          </div>
+        </div>
+        <ul class="ps-assurances">
+          <li>Immediately ready to hang</li>
+          <li>Free worldwide shipping over $49</li>
+          <li>Estimated delivery: Jul 29 - Jul 31</li>
+        </ul>
+        <div class="ps-payment-block">
+          <p>Securely packaged &amp; paid</p>
+          <div class="ps-payment-badges" aria-label="Accepted payment methods"><span>AMEX</span><span>Apple Pay</span><span>blik</span><span>G Pay</span><span>MC</span><span>PayPal</span><span>VISA</span><span>Klarna</span></div>
+          <small>♢ Special packaging for art galleries</small>
+        </div>
+        <div class="ps-details-relocation-anchor" data-ps-details-mobile-anchor aria-hidden="true"></div>
+      </aside>
+    </div>
+
+  </div>
+
+</section>
+
+<script type="application/json" data-ps-variants>
+  {{ product.variants | json }}
+</script>
+{% render 'custom-framing-catalog', section: section %}
+
+{% schema %}
+{
+  "name": "Custom product main",
+  "settings": [
+    {
+      "type": "select",
+      "id": "framing_render_mode",
+      "label": "Frame preview rendering",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image assets"
+        },
+        {
+          "value": "css",
+          "label": "CSS rendering"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "Show breadcrumb",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_label",
+      "label": "Review label",
+      "default": "Verified reviews"
+    },
+    {
+      "type": "text",
+      "id": "shipping_note",
+      "label": "Shipping note",
+      "default": "Free shipping on qualifying orders."
+    },
+    {
+      "type": "text",
+      "id": "upload_heading",
+      "label": "Upload heading",
+      "default": "Upload your image"
+    },
+    {
+      "type": "text",
+      "id": "upload_button_label",
+      "label": "Upload button label",
+      "default": "Choose image"
+    },
+    {
+      "type": "text",
+      "id": "upload_help_text",
+      "label": "Upload help text",
+      "default": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels."
+    },
+    {
+      "type": "text",
+      "id": "crop_heading",
+      "label": "Crop dialog heading",
+      "default": "Crop your image"
+    },
+    {
+      "type": "text",
+      "id": "crop_help_text",
+      "label": "Crop dialog help text",
+      "default": "Choose a supported frame ratio, then position and resize the crop area."
+    },
+    {
+      "type": "text",
+      "id": "crop_cancel_label",
+      "label": "Crop cancel button",
+      "default": "Cancel"
+    },
+    {
+      "type": "text",
+      "id": "crop_confirm_label",
+      "label": "Crop confirm button",
+      "default": "Use crop"
+    },
+    {
+      "type": "checkbox",
+      "id": "require_artwork",
+      "label": "Require an image before add to cart",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "product_details_heading",
+      "label": "Product details heading",
+      "default": "Product details"
+    },
+    {
+      "type": "text",
+      "id": "shipping_returns_heading",
+      "label": "Shipping and returns heading",
+      "default": "Shipping and returns"
+    },
+    {
+      "type": "richtext",
+      "id": "shipping_returns_content",
+      "label": "Shipping and returns content",
+      "default": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>"
+    },
+    {
+      "type": "product",
+      "id": "passepartout_product",
+      "label": "Passepartout add-on product"
+    },
+    {
+      "type": "product",
+      "id": "frame_product",
+      "label": "Frame add-on product"
+    }
+  ]
+}
+{% endschema %}

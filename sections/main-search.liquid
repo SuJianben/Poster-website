@@ -11,7 +11,7 @@
     {% if search.performed %}
       {% if search.results_count > 0 %}
         <div class="sp-search__results product-grid">
-          {% for item in search.results %}{% if item.object_type == 'product' %}{% render 'poster-card', product: item %}{% endif %}{% endfor %}
+          {% for item in search.results %}{% if item.object_type == 'product' %}{% unless item.tags contains 'system:framing-addon' %}{% render 'poster-card', product: item %}{% endunless %}{% endif %}{% endfor %}
         </div>
       {% else %}<p class="sp-search__empty">No products found.</p>{% endif %}
     {% endif %}

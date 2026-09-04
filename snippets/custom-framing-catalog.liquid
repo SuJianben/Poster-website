@@ -1,0 +1,74 @@
+{%- liquid
+  assign passepartout_product = section.settings.passepartout_product
+  if passepartout_product == blank
+    assign passepartout_product = all_products['system-passepartout-addon']
+  endif
+  assign frame_product = section.settings.frame_product
+  if frame_product == blank
+    assign frame_product = all_products['system-frame-addon']
+  endif
+  assign preview_anchor_name = 'ps-mat-white-portrait.png'
+  assign preview_anchor_url = preview_anchor_name | asset_url
+  assign preview_base_url = preview_anchor_url | split: preview_anchor_name | first
+-%}
+<script type="application/json" data-ps-framing-catalog>
+{
+  "previewBaseUrl": {{ preview_base_url | json }},
+  "passepartout": {
+    "productId": {{ passepartout_product.id | json }},
+    "handle": {{ passepartout_product.handle | json }},
+    "variants": [
+      {%- for variant in passepartout_product.variants -%}
+        {%- assign style_slug = variant.metafields.custom.framing_style_slug.value -%}
+        {%- assign portrait_asset = 'ps-mat-' | append: style_slug | append: '-portrait.png' -%}
+        {%- assign landscape_asset = 'ps-mat-' | append: style_slug | append: '-landscape.png' -%}
+        {%- assign square_asset = 'ps-mat-' | append: style_slug | append: '-square.png' -%}
+        {
+          "id": {{ variant.id | json }},
+          "style": {{ variant.option1 | json }},
+          "styleSlug": {{ style_slug | json }},
+          "size": {{ variant.option2 | json }},
+          "fitsSize": {{ variant.metafields.custom.fits_size.value | json }},
+          "price": {{ variant.price }},
+          "formattedPrice": {{ variant.price | money | json }},
+          "available": {{ variant.available | json }},
+          "sku": {{ variant.sku | json }},
+          "preview": {
+            "portrait": {{ portrait_asset | asset_url | json }},
+            "landscape": {{ landscape_asset | asset_url | json }},
+            "square": {{ square_asset | asset_url | json }}
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  },
+  "frame": {
+    "productId": {{ frame_product.id | json }},
+    "handle": {{ frame_product.handle | json }},
+    "variants": [
+      {%- for variant in frame_product.variants -%}
+        {%- assign style_slug = variant.metafields.custom.framing_style_slug.value -%}
+        {%- assign portrait_asset = 'ps-frame-' | append: style_slug | append: '-portrait.png' -%}
+        {%- assign landscape_asset = 'ps-frame-' | append: style_slug | append: '-landscape.png' -%}
+        {%- assign square_asset = 'ps-frame-' | append: style_slug | append: '-square.png' -%}
+        {
+          "id": {{ variant.id | json }},
+          "style": {{ variant.option1 | json }},
+          "styleSlug": {{ style_slug | json }},
+          "size": {{ variant.option2 | json }},
+          "fitsSize": {{ variant.metafields.custom.fits_size.value | json }},
+          "price": {{ variant.price }},
+          "formattedPrice": {{ variant.price | money | json }},
+          "available": {{ variant.available | json }},
+          "sku": {{ variant.sku | json }},
+          "preview": {
+            "portrait": {{ portrait_asset | asset_url | json }},
+            "landscape": {{ landscape_asset | asset_url | json }},
+            "square": {{ square_asset | asset_url | json }}
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+}
+</script>

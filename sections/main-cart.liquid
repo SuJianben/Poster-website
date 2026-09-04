@@ -5,6 +5,12 @@
 {%- if recommendation_collection == blank -%}
   {%- assign recommendation_collection = collections.all -%}
 {%- endif -%}
+{%- assign visible_cart_count = 0 -%}
+{%- for item in cart.items -%}
+  {%- if item.properties._framing_component == blank -%}
+    {%- assign visible_cart_count = visible_cart_count | plus: item.quantity -%}
+  {%- endif -%}
+{%- endfor -%}
 
 <section class="cp-cart" data-cart-page>
   <div class="cp-cart__shell">
@@ -12,13 +18,29 @@
       <a href="{{ routes.root_url }}">Home</a><span aria-hidden="true">/</span><span>Your Shopping Cart</span>
     </nav>
 
-    {% if cart.item_count > 0 %}
+    {% if visible_cart_count > 0 %}
       {% form 'cart', cart, class: 'cp-cart__form' %}
         <div class="cp-cart__layout">
           <div class="cp-cart__items-panel">
-            <h1>Your cart (<span data-cart-page-count>{{ cart.item_count }}</span>)</h1>
+            <h1>Your cart (<span data-cart-page-count>{{ visible_cart_count }}</span>)</h1>
             <div class="cp-cart__items">
               {% for item in cart.items %}
+                {% if item.properties._framing_component != blank %}{% continue %}{% endif %}
+                {% assign configured_line_price = item.final_line_price %}
+                {% assign configuration_id = item.properties._framing_config %}
+                {% capture framing_components %}
+                  {% if configuration_id != blank %}
+                    {% for component in cart.items %}
+                      {% if component.properties._framing_component != blank and component.properties._framing_config == configuration_id %}
+                        {% assign configured_line_price = configured_line_price | plus: component.final_line_price %}
+                        <div class="cp-cart__component">
+                          <span><b>{% if component.properties._framing_component == 'passepartout' %}Passepartout{% else %}Frame{% endif %}</b> · {{ component.properties._framing_style }} · {{ component.properties._framing_size }}</span>
+                          <strong>{{ component.final_line_price | money }}</strong>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endcapture %}
                 <article class="cp-cart__item" data-cart-page-line="{{ item.key }}">
                   <button class="cp-cart__remove" type="button" data-cart-page-change="0" aria-label="Remove {{ item.product.title | escape }}">×</button>
                   <a class="cp-cart__image" href="{{ item.url }}">
@@ -33,13 +55,14 @@
                       <strong>{{ item.final_price | money }}</strong>
                       {% if item.original_price > item.final_price %}<s>{{ item.original_price | money }}</s>{% endif %}
                     </div>
+                    {{ framing_components }}
                   </div>
                   <label class="cp-cart__quantity" aria-label="Quantity for {{ item.product.title | escape }}">
                     <button type="button" data-cart-page-change="-1" aria-label="Decrease quantity for {{ item.product.title | escape }}">−</button>
-                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity" data-cart-page-quantity>
+                    <input type="number" value="{{ item.quantity }}" min="0" aria-label="Quantity" data-cart-page-quantity>
                     <button type="button" data-cart-page-change="1" aria-label="Increase quantity for {{ item.product.title | escape }}">+</button>
                   </label>
-                  <strong class="cp-cart__item-total" data-cart-page-line-total>{{ item.final_line_price | money }}</strong>
+                  <strong class="cp-cart__item-total" data-cart-page-line-total>{{ configured_line_price | money }}</strong>
                 </article>
               {% endfor %}
             </div>
@@ -66,6 +89,7 @@
         <div class="cp-recent__rail-wrap">
           <div class="cp-recent__rail" data-cart-recent-rail>
             {% for product in recommendation_collection.products limit: section.settings.recommendation_limit %}
+              {% if product.tags contains 'system:framing-addon' %}{% continue %}{% endif %}
               {%- assign alternate_image = product.images[1] -%}
               <article class="cp-recent__card">
                 <a href="{{ product.url }}" class="cp-recent__image">

@@ -1,0 +1,128 @@
+{% liquid
+  assign filter_is_active = false
+  if filter.active_values.size > 0
+    assign filter_is_active = true
+  endif
+  if filter.type == 'price_range'
+    if filter.min_value.value != blank or filter.max_value.value != blank
+      assign filter_is_active = true
+    endif
+  endif
+%}
+
+<details class="cg-native-filter"{% if filter_is_active %} open{% endif %}>
+  <summary>
+    <span>{{ filter.label }}</span>
+    {% if filter.active_values.size > 0 %}
+      <span class="cg-native-filter__selected">{{ filter.active_values.size }}</span>
+    {% endif %}
+    <span class="cg-native-filter__toggle" aria-hidden="true"></span>
+  </summary>
+
+  <div class="cg-native-filter__body">
+    {% case filter.type %}
+      {% when 'list' %}
+        <ul class="cg-filter-values" role="list">
+          {% for filter_value in filter.values %}
+            {% assign value_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index %}
+            <li>
+              <label class="cg-filter-option" for="{{ value_id }}">
+                <input
+                  id="{{ value_id }}"
+                  type="checkbox"
+                  name="{{ filter_value.param_name }}"
+                  value="{{ filter_value.value }}"
+                  {% if filter_value.active %}checked{% endif %}
+                  {% if filter_value.count == 0 and filter_value.active == false %}disabled{% endif %}
+                >
+                {% if filter.presentation == 'swatch' and filter_value.swatch != blank %}
+                  <span
+                    class="cg-filter-swatch"
+                    {% if filter_value.swatch.image %}
+                      style="background-image:url('{{ filter_value.swatch.image | image_url: width: 40 }}')"
+                    {% elsif filter_value.swatch.color %}
+                      style="background-color:{{ filter_value.swatch.color }}"
+                    {% endif %}
+                    aria-hidden="true"
+                  ></span>
+                {% elsif filter.presentation == 'image' and filter_value.image != blank %}
+                  {{ filter_value.image | image_url: width: 40 | image_tag: class: 'cg-filter-image', loading: 'lazy', alt: '' }}
+                {% endif %}
+                <span class="cg-filter-option__label">{{ filter_value.label }}</span>
+                <span class="cg-filter-option__count">{{ filter_value.count }}</span>
+              </label>
+            </li>
+          {% endfor %}
+        </ul>
+
+      {% when 'boolean' %}
+        <ul class="cg-filter-values" role="list">
+          {% if filter.true_value %}
+            <li>
+              <label class="cg-filter-option" for="Filter-{{ filter.param_name | escape }}-true">
+                <input
+                  id="Filter-{{ filter.param_name | escape }}-true"
+                  type="checkbox"
+                  name="{{ filter.true_value.param_name }}"
+                  value="{{ filter.true_value.value }}"
+                  {% if filter.true_value.active %}checked{% endif %}
+                  {% if filter.true_value.count == 0 and filter.true_value.active == false %}disabled{% endif %}
+                >
+                <span class="cg-filter-option__label">{{ filter.true_value.label }}</span>
+                <span class="cg-filter-option__count">{{ filter.true_value.count }}</span>
+              </label>
+            </li>
+          {% endif %}
+          {% if filter.false_value %}
+            <li>
+              <label class="cg-filter-option" for="Filter-{{ filter.param_name | escape }}-false">
+                <input
+                  id="Filter-{{ filter.param_name | escape }}-false"
+                  type="checkbox"
+                  name="{{ filter.false_value.param_name }}"
+                  value="{{ filter.false_value.value }}"
+                  {% if filter.false_value.active %}checked{% endif %}
+                  {% if filter.false_value.count == 0 and filter.false_value.active == false %}disabled{% endif %}
+                >
+                <span class="cg-filter-option__label">{{ filter.false_value.label }}</span>
+                <span class="cg-filter-option__count">{{ filter.false_value.count }}</span>
+              </label>
+            </li>
+          {% endif %}
+        </ul>
+
+      {% when 'price_range' %}
+        {% assign range_max = filter.range_max | money_without_currency | replace: ',', '' %}
+        <div class="cg-price-range">
+          <label>
+            <span>From</span>
+            <span class="cg-price-range__field">
+              <span>{{ cart.currency.symbol }}</span>
+              <input
+                type="number"
+                name="{{ filter.min_value.param_name }}"
+                value="{% if filter.min_value.value %}{{ filter.min_value.value | money_without_currency | replace: ',', '' }}{% endif %}"
+                min="0"
+                max="{{ range_max }}"
+                placeholder="0"
+              >
+            </span>
+          </label>
+          <label>
+            <span>To</span>
+            <span class="cg-price-range__field">
+              <span>{{ cart.currency.symbol }}</span>
+              <input
+                type="number"
+                name="{{ filter.max_value.param_name }}"
+                value="{% if filter.max_value.value %}{{ filter.max_value.value | money_without_currency | replace: ',', '' }}{% endif %}"
+                min="0"
+                max="{{ range_max }}"
+                placeholder="{{ range_max }}"
+              >
+            </span>
+          </label>
+        </div>
+    {% endcase %}
+  </div>
+</details>

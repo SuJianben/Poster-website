@@ -18,6 +18,10 @@ html.is-cart-drawer-open { overflow: hidden; }
 .cd-drawer__item-copy { min-width: 0; padding-right: 23px; }
 .cd-drawer__item-title { display: block; overflow: hidden; margin: 0 0 4px; color: #050505; font: 700 14px/1.14 var(--sans, Arial, sans-serif); text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
 .cd-drawer__variant, .cd-drawer__properties { margin: 0; color: #555a61; font: 700 13px/1.28 var(--sans, Arial, sans-serif); }
+.cd-drawer__component { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 5px; color: #555a61; font: 500 11px/1.25 var(--sans, Arial, sans-serif); }
+.cd-drawer__component span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cd-drawer__component b { color: #111; font-weight: 700; text-transform: uppercase; }
+.cd-drawer__component strong { flex: 0 0 auto; color: #111; font-weight: 600; }
 .cd-drawer__remove { position: absolute; top: 0; right: 0; width: 25px; height: 25px; padding: 0; border: 0; background: transparent; color: #050505; cursor: pointer; font: 400 27px/20px Arial, sans-serif; }
 .cd-drawer__item-bottom { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 19px; }
 .cd-drawer__quantity { display: inline-flex; height: 40px; align-items: center; overflow: hidden; border: 1px solid #e0e0e0; border-radius: 10px; }

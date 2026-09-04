@@ -1,17 +1,21 @@
 {{ 'product-showcase.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'product-showcase.js' | asset_url }}&psv=layered-preview-20260803" defer="defer"></script>
+<script src="{{ 'product-framing-catalog.js' | asset_url }}&psv=framing-catalog-fallback-20260814" defer="defer"></script>
+<script src="{{ 'product-framing.js' | asset_url }}&psv=framing-catalog-fallback-20260814" defer="defer"></script>
+<script src="{{ 'product-showcase.js' | asset_url }}&psv=framing-addons-20260814" defer="defer"></script>
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign selected_media = selected_variant.featured_media | default: product.featured_media %}
 {% assign preview_media = product.media | where: 'media_type', 'image' | last %}
 
-<section class="ps-product" data-ps-product data-section-id="{{ section.id }}">
+<section class="ps-product ps-section" data-ps-product data-section-id="{{ section.id }}">
   <div class="ps-shell">
-    <nav class="ps-breadcrumb" aria-label="Breadcrumb">
-      <a href="{{ routes.root_url }}">Home</a><span>/</span>
-      {% if collection %}<a href="{{ collection.url }}">{{ collection.title }}</a><span>/</span>{% endif %}
-      <span aria-current="page">{{ product.title }}</span>
-    </nav>
+    {% if section.settings.show_breadcrumb %}
+      <nav class="ps-breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a><span>/</span>
+        {% if collection %}<a href="{{ collection.url }}">{{ collection.title }}</a><span>/</span>{% endif %}
+        <span aria-current="page">{{ product.title }}</span>
+      </nav>
+    {% endif %}
 
     <div class="ps-layout">
       <div class="ps-left">
@@ -49,9 +53,8 @@
                 {% else %}
                   <img class="ps-main-media__image print-preview__layer print-preview__layer--art" data-ps-main-image data-pdp-print-art src="{{ 'figma-poster-a1.jpg' | asset_url }}" width="1200" height="1500" alt="{{ product.title | escape }}">
                 {% endif %}
-                <img class="print-preview__layer print-preview__layer--passepartout" data-pdp-print-passepartout src="{{ 'ps-print-passepartout-white.png' | asset_url }}" width="800" height="1100" alt="" hidden aria-hidden="true">
-                <img class="print-preview__layer print-preview__layer--frame print-preview__layer--frame-oak" data-pdp-print-frame="oak" src="{{ 'ps-print-frame-nature-oak.png' | asset_url }}" width="800" height="1100" alt="" hidden aria-hidden="true">
-                <img class="print-preview__layer print-preview__layer--frame print-preview__layer--frame-black" data-pdp-print-frame="black" src="{{ 'ps-print-frame-dark-oak.png' | asset_url }}" width="800" height="1100" alt="" hidden aria-hidden="true">
+                <img class="print-preview__layer print-preview__layer--passepartout" data-ps-framing-layer="passepartout" width="800" height="1100" alt="" hidden aria-hidden="true">
+                <img class="print-preview__layer print-preview__layer--frame" data-ps-framing-layer="frame" width="800" height="1100" alt="" hidden aria-hidden="true">
               </div>
             </print-preview>
             <button class="ps-media-navigation ps-media-navigation--previous" type="button" data-ps-media-direction="-1" aria-label="Show previous image"><svg class="ps-action-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" /></svg></button>
@@ -62,7 +65,7 @@
         <div class="ps-left-details" data-ps-accordions>
           <section class="ps-accordion-panel" data-ps-accordion>
             <button class="ps-accordion-panel__trigger" type="button" data-ps-accordion-trigger aria-expanded="false" aria-controls="ps-product-details-{{ section.id }}">
-              <span>Product details</span><span class="ps-accordion-panel__icon" aria-hidden="true">+</span>
+              <span>{{ section.settings.product_details_heading }}</span><span class="ps-accordion-panel__icon" aria-hidden="true">+</span>
             </button>
             <div class="ps-accordion-panel__body" id="ps-product-details-{{ section.id }}" data-ps-accordion-panel aria-hidden="true">
               <div class="ps-accordion-panel__body-inner">
@@ -72,11 +75,11 @@
           </section>
           <section class="ps-accordion-panel" data-ps-accordion>
             <button class="ps-accordion-panel__trigger" type="button" data-ps-accordion-trigger aria-expanded="false" aria-controls="ps-shipping-returns-{{ section.id }}">
-              <span>Shipping and returns</span><span class="ps-accordion-panel__icon" aria-hidden="true">+</span>
+              <span>{{ section.settings.shipping_returns_heading }}</span><span class="ps-accordion-panel__icon" aria-hidden="true">+</span>
             </button>
             <div class="ps-accordion-panel__body" id="ps-shipping-returns-{{ section.id }}" data-ps-accordion-panel aria-hidden="true">
               <div class="ps-accordion-panel__body-inner">
-                <div class="ps-detail-content"><p>Each order is made for you. Delivery estimates are shown before checkout.</p></div>
+                <div class="ps-detail-content">{{ section.settings.shipping_returns_content }}</div>
               </div>
             </div>
           </section>
@@ -85,22 +88,20 @@
 
       <aside class="ps-purchase" aria-label="Purchase {{ product.title | escape }}">
         {% if product.compare_at_price_max > product.price %}<span class="ps-sale-badge">Save {{ product.compare_at_price_max | minus: product.price | times: 100 | divided_by: product.compare_at_price_max }}%</span>{% endif %}
-        <p class="ps-review-line">★★★★★ <span>Verified reviews</span></p>
+        <p class="ps-review-line">★★★★★ <span>{{ section.settings.review_label }}</span></p>
         <h1>{{ product.title }}</h1>
         {% if product.vendor != blank %}<p class="ps-vendor">Artist: <strong>{{ product.vendor }}</strong></p>{% endif %}
         <div class="ps-price" data-ps-price>
           <span class="ps-price__current">{{ selected_variant.price | money }}</span>
           <s class="ps-price__compare {% unless selected_variant.compare_at_price > selected_variant.price %}is-hidden{% endunless %}" data-ps-compare>{{ selected_variant.compare_at_price | money }}</s>
         </div>
-        <p class="ps-shipping-note">Free shipping on qualifying orders.</p>
+        <p class="ps-shipping-note">{{ section.settings.shipping_note }}</p>
 
         <div class="ps-product-config" aria-label="Product configuration">
           <div class="ps-config-group">
-            <p class="ps-config-label">Material: <strong data-ps-choice-output>Canvas</strong></p>
+            <p class="ps-config-label">Material: <strong data-ps-choice-output>Poster</strong></p>
             <div class="ps-config-options" data-ps-choice-group>
-              <button type="button" data-ps-choice aria-pressed="false">Poster</button>
-              <button type="button" class="is-selected" data-ps-choice aria-pressed="true">Canvas</button>
-              <button type="button" data-ps-choice aria-pressed="false">Acrylic</button>
+              <button type="button" class="is-selected" data-ps-choice aria-pressed="true">Poster</button>
             </div>
           </div>
           {% unless product.has_only_default_variant %}
@@ -121,30 +122,22 @@
           {% endunless %}
           <div class="ps-config-group">
             <p class="ps-config-label">Passepartout: <strong data-ps-choice-output>None</strong></p>
-            <div class="ps-frame-select ps-choice-select" data-ps-choice-select data-ps-empty-label="Add passepartout" data-ps-empty-price="From €15,00">
+            <div class="ps-frame-select ps-choice-select" data-ps-framing-select="passepartout">
               <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
                 <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-choice-select-value>Add passepartout</span></span>
-                <span class="ps-frame-trigger__price" data-ps-choice-select-price>From €15,00</span>
+                <span class="ps-frame-trigger__price" data-ps-choice-select-price>Loading…</span>
               </button>
-              <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="mat" role="listbox" aria-label="Passepartout options">
-                <button type="button" class="ps-frame-option ps-mat-option--none is-selected" data-ps-choice data-ps-preview-value="none" data-ps-choice-label="No passepartout" data-ps-choice-price="From €15,00" aria-pressed="true" role="option" aria-selected="true"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">No passepartout</span></span></button>
-                <button type="button" class="ps-frame-option ps-mat-option--white" data-ps-choice data-ps-preview-value="white" data-ps-choice-label="White passepartout" data-ps-choice-price="€15,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">White passepartout</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€15,00</span></button>
-                <button type="button" class="ps-frame-option ps-mat-option--black" data-ps-choice data-ps-preview-value="black" data-ps-choice-label="Black passepartout" data-ps-choice-price="€15,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">Black passepartout</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€15,00</span></button>
-              </div>
+              <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="Passepartout options"></div>
             </div>
           </div>
           <div class="ps-config-group">
             <p class="ps-config-label">Frame: <strong data-ps-choice-output>No frame</strong></p>
-            <div class="ps-frame-select" data-ps-frame-select data-ps-choice-select data-ps-empty-label="Add frame" data-ps-empty-price="From €35,00">
+            <div class="ps-frame-select" data-ps-framing-select="frame">
               <button class="ps-frame-select__trigger" type="button" data-ps-frame-trigger aria-expanded="false" aria-haspopup="listbox">
                 <span class="ps-frame-trigger__label"><span class="ps-frame-trigger__plus" data-ps-frame-trigger-plus data-ps-choice-select-plus aria-hidden="true">+</span><span data-ps-frame-select-value data-ps-choice-select-value>Add frame</span></span>
-                <span class="ps-frame-trigger__price" data-ps-frame-trigger-price data-ps-choice-select-price>From €35,00</span>
+                <span class="ps-frame-trigger__price" data-ps-choice-select-price>Loading…</span>
               </button>
-              <div class="ps-frame-options" data-ps-choice-group data-ps-preview-target="frame" role="listbox" aria-label="Frame options">
-                <button type="button" class="ps-frame-option ps-frame-option--natural is-selected" data-ps-choice data-ps-preview-value="none" data-ps-frame-name="No frame" data-ps-frame-price="From €35,00" aria-pressed="true" role="option" aria-selected="true"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">No frame</span></span></button>
-                <button type="button" class="ps-frame-option ps-frame-option--white" data-ps-choice data-ps-preview-value="oak" data-ps-frame-name="Oak frame" data-ps-frame-price="€45,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">Oak frame</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€45,00</span></button>
-                <button type="button" class="ps-frame-option ps-frame-option--black" data-ps-choice data-ps-preview-value="black" data-ps-frame-name="Black frame" data-ps-frame-price="€45,00" aria-pressed="false" role="option" aria-selected="false"><span class="ps-frame-option__swatch"></span><span class="ps-frame-option__details"><span class="ps-frame-option__name">Black frame</span><span class="ps-frame-option__size">A4 (21x29,7 cm)</span></span><span class="ps-frame-option__price">€45,00</span></button>
-              </div>
+              <div class="ps-frame-options" data-ps-framing-options role="listbox" aria-label="Frame options"></div>
             </div>
           </div>
           <label class="ps-addon"><input type="checkbox"><span></span>Canvas print hanging kit <small>(+ $5.81)</small></label>
@@ -204,66 +197,62 @@
 
   </div>
 
-  <section class="ps-benefits" aria-label="Shopping benefits">
-    <div><strong>Premium quality</strong><span>Made with carefully selected materials.</span></div>
-    <div><strong>Satisfied or money back</strong><span>Shop with confidence.</span></div>
-    <div><strong>Free shipping</strong><span>On qualifying orders.</span></div>
-    <div><strong>30 days return right</strong><span>Easy returns when eligible.</span></div>
-  </section>
-
-  <div class="ps-lifestyle">
-    {% if section.settings.lifestyle_image %}
-      {{ section.settings.lifestyle_image | image_url: width: 2200 | image_tag: loading: 'lazy', widths: '750,1200,1600,2200', alt: product.title }}
-    {% else %}
-      <img src="{{ 'figma-lifestyle-hero.jpg' | asset_url }}" width="2200" height="1240" loading="lazy" alt="{{ product.title | escape }} in a styled interior">
-    {% endif %}
-  </div>
-
-  <section class="ps-description-shell">
-    <div class="ps-description-tabs" role="tablist" aria-label="Product information">
-      <button class="is-active" id="ps-description-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="description" aria-selected="true" aria-controls="ps-description-panel-{{ section.id }}">Description</button>
-      <button id="ps-fair-pricing-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="fair-pricing" aria-selected="false" aria-controls="ps-fair-pricing-panel-{{ section.id }}">Fair Pricing</button>
-      <button id="ps-artist-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="artist" aria-selected="false" aria-controls="ps-artist-panel-{{ section.id }}">Artist Information</button>
-      <button id="ps-material-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="material" aria-selected="false" aria-controls="ps-material-panel-{{ section.id }}">Material &amp; Workmanship</button>
-      <button id="ps-shipping-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="shipping" aria-selected="false" aria-controls="ps-shipping-panel-{{ section.id }}">Shipping and Returns</button>
-      <button id="ps-security-tab-{{ section.id }}" type="button" role="tab" data-ps-description-tab="security" aria-selected="false" aria-controls="ps-security-panel-{{ section.id }}">Security</button>
-    </div>
-
-    <div class="ps-description-panels">
-      <div class="ps-description-panel is-active" id="ps-description-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="description" aria-labelledby="ps-description-tab-{{ section.id }}" tabindex="0">
-        <div class="ps-description rte">{{ product.description }}</div>
-      </div>
-      <div class="ps-description-panel" id="ps-fair-pricing-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="fair-pricing" aria-labelledby="ps-fair-pricing-tab-{{ section.id }}" hidden tabindex="0">
-        <div class="ps-description"><h2>Fair pricing</h2><p>We keep pricing clear and considered, so you can choose a piece you love with confidence. Every order is made with carefully selected materials and prepared with lasting quality in mind.</p></div>
-      </div>
-      <div class="ps-description-panel" id="ps-artist-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="artist" aria-labelledby="ps-artist-tab-{{ section.id }}" hidden tabindex="0">
-        <div class="ps-description"><h2>Artist information</h2><p>{% if product.vendor != blank %}{{ product.vendor }}{% else %}Our artist collection{% endif %} brings distinctive ideas and character to every piece. Each artwork is selected to give your space a more personal point of view.</p></div>
-      </div>
-      <div class="ps-description-panel" id="ps-material-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="material" aria-labelledby="ps-material-tab-{{ section.id }}" hidden tabindex="0">
-        <div class="ps-description"><h2>Material &amp; workmanship</h2><p>Made with carefully selected materials, precise printing and thoughtful finishing. Every piece is prepared for a clean presentation and long-lasting everyday enjoyment.</p></div>
-      </div>
-      <div class="ps-description-panel" id="ps-shipping-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="shipping" aria-labelledby="ps-shipping-tab-{{ section.id }}" hidden tabindex="0">
-        <div class="ps-description"><h2>Shipping and returns</h2><p>Orders are prepared with care and securely packed for delivery. Shipping details are shown before checkout, and eligible returns can be requested within the applicable return period.</p></div>
-      </div>
-      <div class="ps-description-panel" id="ps-security-panel-{{ section.id }}" role="tabpanel" data-ps-description-panel="security" aria-labelledby="ps-security-tab-{{ section.id }}" hidden tabindex="0">
-        <div class="ps-description"><h2>Security</h2><p>Your order is handled through Shopify’s secure checkout. We use protected payment processing and securely packaged delivery so you can shop with confidence.</p></div>
-      </div>
-    </div>
-  </section>
 </section>
 
 <script type="application/json" data-ps-variants>
   {{ product.variants | json }}
 </script>
+{% render 'product-framing-catalog', section: section %}
 
 {% schema %}
 {
   "name": "Main product",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "lifestyle_image",
-      "label": "Lifestyle image below product"
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "Show breadcrumb",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_label",
+      "label": "Review label",
+      "default": "Verified reviews"
+    },
+    {
+      "type": "text",
+      "id": "shipping_note",
+      "label": "Shipping note",
+      "default": "Free shipping on qualifying orders."
+    },
+    {
+      "type": "text",
+      "id": "product_details_heading",
+      "label": "Product details heading",
+      "default": "Product details"
+    },
+    {
+      "type": "text",
+      "id": "shipping_returns_heading",
+      "label": "Shipping and returns heading",
+      "default": "Shipping and returns"
+    },
+    {
+      "type": "richtext",
+      "id": "shipping_returns_content",
+      "label": "Shipping and returns content",
+      "default": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>"
+    },
+    {
+      "type": "product",
+      "id": "passepartout_product",
+      "label": "Passepartout add-on product"
+    },
+    {
+      "type": "product",
+      "id": "frame_product",
+      "label": "Frame add-on product"
     }
   ]
 }
