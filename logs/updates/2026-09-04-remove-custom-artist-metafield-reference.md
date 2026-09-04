@@ -6,7 +6,7 @@
 
 ## 修改范围
 
-- `sections/editorial-with-products.liquid`：将编辑区商品卡片的艺术家来源改为 `product.vendor`，移除对 `product.metafields.custom.artist` 及其 `.value` 的读取。
+- `sections/editorial-with-products.liquid`：移除首页编辑区商品卡片的艺术家署名行及其数据变量，避免删除元字段后仍通过 `product.vendor` 显示名字。
 - 产品详情页的 `Artist` 展示、`Artist Information` 内容块及其他元字段逻辑未修改；它们使用商品供应商或其他独立数据来源，不依赖 `custom.artist`。
 
 ## 版本备份
@@ -17,7 +17,7 @@
 ## 自检
 
 - 已确认活动主题不再包含 `product.metafields.custom.artist` 读取。
-- 已确认 `product.vendor` 艺术家展示仍保留。
+- 已确认产品详情页的 `product.vendor` 艺术家展示仍保留。
 - Shopify 元字段定义和值未由本次代码操作删除，需由运营在后台人工删除。
 
 ## 遗留事项

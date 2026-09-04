@@ -51,7 +51,6 @@
       <div class="page-width editorial-depth-grid" data-editorial-depth-grid>
         {% if section.settings.collection != blank %}
           {% for product in section.settings.collection.products limit: 4 %}
-            {% assign product_artist = product.vendor %}
             {% assign hover_media = blank %}
             {% assign discount_badge = section.settings.discount_badge_text %}
             {% if product.media.size > 1 and product.media[1].media_type == 'image' %}
@@ -79,7 +78,6 @@
                 {% if discount_badge != blank %}<span class="editorial-depth-card__badge">{{ discount_badge }}</span>{% endif %}
               </a>
               <div class="editorial-depth-card__content">
-                {% if product_artist != blank %}<p class="editorial-depth-card__eyebrow">{{ product_artist }}</p>{% endif %}
                 <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
                 <p class="editorial-depth-card__price">
                   <span>From {{ product.price_min | money }}</span>
