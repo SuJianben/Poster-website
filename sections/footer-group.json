@@ -52,11 +52,12 @@
       "settings": {
         "show_newsletter": true,
         "newsletter_heading": "Newsletter",
-        "newsletter_text": "Get 10% off your first order.",
+        "newsletter_text": "Get 25% off your first order.",
         "show_brand_info": true,
         "brand_logo_width": 80,
         "brand_heading": "PosterAndForm",
         "brand_content": "<p>Company： ZHILINK GLOBAL LTD <br/>Company Address：Suite 302 4 Station Square, Cambridge, United Kingdom CB1 2GE<br/>Telephone： +44 7529279167</p><p>Email：<a href=\"mailto:support@posterandform.com\" target=\"_blank\">support@posterandform.com</a></p>",
+        "show_payment_icons": true,
         "bottom_text": "Curated art prints for considered spaces."
       }
     }
