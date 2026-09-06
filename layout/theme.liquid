@@ -1,6 +1,52 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
+    <!-- BEGIN Google Ads Tracking (PosterAndForm) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18302569250"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18302569250');
+
+  // Page-type events (fire before user interaction — for view/AddToCart/BeginCheckout diagnostics)
+  (function(){
+    var path = window.location.pathname;
+    if (/^\/products\//.test(path)) {
+      gtag('event', 'view_item', {send_to: 'AW-18302569250'});
+    } else if (/^\/cart/.test(path)) {
+      gtag('event', 'view_cart', {send_to: 'AW-18302569250'});
+    } else if (/^\/checkouts?\//.test(path)) {
+      gtag('event', 'begin_checkout', {send_to: 'AW-18302569250'});
+    }
+  })();
+
+  // Add-to-cart: intercept clicks on any ATC button, plus fetch to /cart/add
+  document.addEventListener('DOMContentLoaded', function(){
+    // Click delegation (works for most themes: [name="add"], [data-add-to-cart], .btn--add-to-cart etc.)
+    document.addEventListener('click', function(e){
+      var t = e.target.closest('button[name="add"], button[data-add-to-cart], .btn--add-to-cart, [data-action="add-to-cart"], form[action$="/cart/add"] [type="submit"]');
+      if (t) {
+        gtag('event', 'add_to_cart', {send_to: 'AW-18302569250'});
+      }
+    }, true);
+
+    // Fetch/XHR safety net for AJAX carts
+    var _f = window.fetch;
+    if (_f) {
+      window.fetch = function(url, opts){
+        try {
+          var u = (typeof url === 'string') ? url : (url && url.url) || '';
+          if (u && u.indexOf('/cart/add') !== -1) {
+            gtag('event', 'add_to_cart', {send_to: 'AW-18302569250'});
+          }
+        } catch(_) {}
+        return _f.apply(this, arguments);
+      };
+    }
+  });
+</script>
+<!-- END Google Ads Tracking -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="{{ settings.color_accent }}">
