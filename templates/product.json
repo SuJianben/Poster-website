@@ -126,8 +126,8 @@
         "assurances": {
           "type": "assurances",
           "settings": {
-            "item_1": "Immediately ready to hang",
-            "item_2": "Free shipping within the UK",
+            "item_1": "Made to order in our own studio",
+            "item_2": "Free UK delivery · Ships in 12–15 working days",
             "item_3": "Secure payment",
             "item_4": "",
             "item_5": ""
@@ -167,7 +167,7 @@
         "show_thumbnail_navigation": false,
         "product_details_heading": "Product details",
         "shipping_returns_heading": "Shipping and returns",
-        "shipping_returns_content": "<p>Each order is made for you. Delivery estimates are shown before checkout.</p>",
+        "shipping_returns_content": "<p>Each print is made to order in our own studio in Foshan, China. Standard UK delivery: <strong>12–15 working days</strong> from order (production + tracked shipping). All UK orders ship <strong>free</strong>.</p><p>We accept returns within 30 days of delivery for unused items in original packaging — please email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> to arrange.</p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
