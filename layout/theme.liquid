@@ -50,8 +50,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="{{ settings.color_accent }}">
-    <title>{% if page_title == blank %}{{ shop.name }}{% else %}{{ page_title }}{% unless page_title contains shop.name %} | {{ shop.name }}{% endunless %}{% endif %}</title>
-    {% if page_description != blank %}
+    <title>{% if request.page_type == 'index' %}PosterAndForm | Curated Art Prints for the Modern UK Home · From £29{% elsif page_title == blank %}{{ shop.name }}{% else %}{{ page_title }}{% unless page_title contains shop.name %} | {{ shop.name }}{% endunless %}{% endif %}</title>
+    {% if request.page_type == 'index' %}
+      <meta name="description" content="Curated art prints for the modern UK home. From £29, each one made when you order. Free UK delivery, 12–15 working days, 30-day returns.">
+    {% elsif page_description != blank %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
     <link rel="canonical" href="{{ canonical_url }}">
@@ -77,6 +79,7 @@
     <script src="{{ 'search-overlay.js' | asset_url }}" defer="defer"></script>
   </head>
   <body class="store-root template-{{ request.page_type | handle }}">
+    <div class="pf-announce" role="region" aria-label="Announcement" style="background:#111;color:#fff;text-align:center;font:500 12px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;letter-spacing:.06em;padding:9px 16px;">Free UK delivery · Made to order · From £29</div>
     {% sections 'header-group' %}
     <main id="MainContent" role="main">{{ content_for_layout }}</main>
     {% sections 'footer-group' %}
