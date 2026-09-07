@@ -12,26 +12,161 @@
     "main": {
       "type": "custom-product-main",
       "blocks": {
-        "sale_badge": { "type": "sale_badge", "settings": { "label": "Save" } },
-        "reviews": { "type": "reviews", "settings": { "label": "Verified reviews" } },
-        "title": { "type": "title", "settings": {} },
-        "vendor": { "type": "vendor", "settings": { "label": "Artist:" } },
-        "price": { "type": "price", "settings": {} },
-        "shipping_note": { "type": "shipping_note", "settings": { "text": "Free shipping on qualifying orders." } },
-        "artwork_upload": { "type": "artwork_upload", "settings": { "upload_heading": "Upload your image", "drop_label": "Drag and drop your image here", "or_label": "or", "upload_button_label": "Choose image", "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.", "remove_label": "Remove", "require_artwork": true, "crop_heading": "Crop your image", "crop_help_text": "Choose a supported frame ratio, then position and resize the crop area.", "crop_css_help_text": "Choose a fixed ratio, or select Free crop to adjust the shape freely.", "crop_close_label": "Close image cropper", "landscape_label": "Landscape", "square_label": "Square", "portrait_label": "Portrait", "free_crop_label": "Free crop", "any_ratio_label": "Any ratio", "fixed_instruction": "Drag to reposition. Drag a corner to resize while keeping the selected ratio.", "freeform_instruction": "Drag to reposition. Drag any corner to resize freely.", "crop_cancel_label": "Cancel", "crop_confirm_label": "Use crop" } },
-        "material": { "type": "material", "settings": { "label": "Material:", "value": "Poster" } },
-        "size_selector": { "type": "size_selector", "settings": { "label": "Size:", "guide_label": "Size guide" } },
-        "variant_options": { "type": "variant_options", "settings": {} },
-        "passepartout": { "type": "passepartout", "settings": { "label": "Passepartout:", "empty_value": "None", "add_label": "Add passepartout", "loading_label": "Loading…", "options_label": "Passepartout options" } },
-        "frame": { "type": "frame", "settings": { "label": "Frame:", "empty_value": "No frame", "add_label": "Add frame", "loading_label": "Loading…", "options_label": "Frame options" } },
-        "hanging_kit": { "type": "hanging_kit", "settings": { "label": "Canvas print hanging kit", "price_text": "(+ $5.81)" } },
-        "quantity": { "type": "quantity", "settings": { "label": "Quantity", "decrease_label": "Decrease quantity", "increase_label": "Increase quantity" } },
-        "buy_buttons": { "type": "buy_buttons", "settings": { "add_label": "Add to cart", "sold_out_label": "Sold out", "unavailable_label": "Unavailable" } },
-        "quantity_offer": { "type": "quantity_offer", "settings": { "heading": "SUMMER OFFER", "summary": "BUY3+ Save 15%", "toggle_label": "more", "default_open": false, "column_one_heading": "Buy quantity", "column_two_heading": "Discount", "row_1_label": "Buy 1", "row_1_value": "Standard price", "row_2_label": "Buy 2", "row_2_value": "Save 10%", "row_3_label": "Buy 3+", "row_3_value": "Save 15%" } },
-        "assurances": { "type": "assurances", "settings": { "item_1": "Immediately ready to hang", "item_2": "Free worldwide shipping over $49", "item_3": "Estimated delivery: Jul 29 - Jul 31" } },
-        "payment_methods": { "type": "payment_methods", "settings": { "heading": "Securely packaged & paid", "accessibility_label": "Accepted payment methods", "note": "♢ Special packaging for art galleries" } }
+        "sale_badge": {
+          "type": "sale_badge",
+          "settings": {
+            "label": "Save"
+          }
+        },
+        "reviews": {
+          "type": "reviews",
+          "settings": {
+            "label": "Verified reviews"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "vendor": {
+          "type": "vendor",
+          "settings": {
+            "label": "Artist:"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "shipping_note": {
+          "type": "shipping_note",
+          "settings": {
+            "text": "Free UK delivery · Made to order · 12–15 working days"
+          }
+        },
+        "artwork_upload": {
+          "type": "artwork_upload",
+          "settings": {
+            "upload_heading": "Upload your image",
+            "drop_label": "Drag and drop your image here",
+            "or_label": "or",
+            "upload_button_label": "Choose image",
+            "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB and 20 megapixels.",
+            "remove_label": "Remove",
+            "require_artwork": true,
+            "crop_heading": "Crop your image",
+            "crop_help_text": "Choose a supported frame ratio, then position and resize the crop area.",
+            "crop_css_help_text": "Choose a fixed ratio, or select Free crop to adjust the shape freely.",
+            "crop_close_label": "Close image cropper",
+            "landscape_label": "Landscape",
+            "square_label": "Square",
+            "portrait_label": "Portrait",
+            "free_crop_label": "Free crop",
+            "any_ratio_label": "Any ratio",
+            "fixed_instruction": "Drag to reposition. Drag a corner to resize while keeping the selected ratio.",
+            "freeform_instruction": "Drag to reposition. Drag any corner to resize freely.",
+            "crop_cancel_label": "Cancel",
+            "crop_confirm_label": "Use crop"
+          }
+        },
+        "material": {
+          "type": "material",
+          "settings": {
+            "label": "Material:",
+            "value": "Poster"
+          }
+        },
+        "size_selector": {
+          "type": "size_selector",
+          "settings": {
+            "label": "Size:",
+            "guide_label": "Size guide"
+          }
+        },
+        "variant_options": {
+          "type": "variant_options",
+          "settings": {}
+        },
+        "passepartout": {
+          "type": "passepartout",
+          "settings": {
+            "label": "Passepartout:",
+            "empty_value": "None",
+            "add_label": "Add passepartout",
+            "loading_label": "Loading…",
+            "options_label": "Passepartout options"
+          }
+        },
+        "frame": {
+          "type": "frame",
+          "settings": {
+            "label": "Frame:",
+            "empty_value": "No frame",
+            "add_label": "Add frame",
+            "loading_label": "Loading…",
+            "options_label": "Frame options"
+          }
+        },
+        "hanging_kit": {
+          "type": "hanging_kit",
+          "settings": {
+            "label": "Hanging scroll rod included at no extra cost"
+          }
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {
+            "label": "Quantity",
+            "decrease_label": "Decrease quantity",
+            "increase_label": "Increase quantity"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "add_label": "Add to cart",
+            "sold_out_label": "Sold out",
+            "unavailable_label": "Unavailable"
+          }
+        },
+        "assurances": {
+          "type": "assurances",
+          "settings": {
+            "item_1": "Printed only when you order — from your own photo",
+            "item_2": "Free tracked UK delivery in 12–15 working days",
+            "item_3": "Preview every detail before you order",
+            "item_4": "Secure checkout · Apple Pay, Google Pay, Klarna",
+            "item_5": ""
+          }
+        },
+        "payment_methods": {
+          "type": "payment_methods",
+          "settings": {
+            "heading": "Securely packaged & paid",
+            "accessibility_label": "Accepted payment methods",
+            "note": "Rolled in a rigid protective tube — never folded"
+          }
+        }
       },
-      "block_order": ["sale_badge", "reviews", "title", "vendor", "price", "shipping_note", "artwork_upload", "material", "size_selector", "variant_options", "passepartout", "frame", "hanging_kit", "quantity", "buy_buttons", "quantity_offer", "assurances", "payment_methods"],
+      "block_order": [
+        "sale_badge",
+        "reviews",
+        "title",
+        "vendor",
+        "price",
+        "shipping_note",
+        "artwork_upload",
+        "material",
+        "size_selector",
+        "variant_options",
+        "passepartout",
+        "frame",
+        "hanging_kit",
+        "quantity",
+        "buy_buttons",
+        "assurances",
+        "payment_methods"
+      ],
       "settings": {
         "framing_render_mode": "image",
         "customer_notice_heading": "Customer Notice",
@@ -47,32 +182,32 @@
           "type": "benefit",
           "settings": {
             "icon": "quality",
-            "title": "Premium quality",
-            "text": "Made with carefully selected materials."
+            "title": "Archival quality",
+            "text": "200gsm matte fine art paper, fade-resistant pigment inks."
           }
         },
         "money_back": {
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Satisfied or money back",
-            "text": "Shop with confidence."
+            "title": "Hand-inspected",
+            "text": "Every print checked before it’s packed."
           }
         },
         "free_shipping": {
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Free shipping",
-            "text": "On qualifying orders."
+            "title": "Free UK delivery",
+            "text": "Tracked, 12–15 working days, made to order."
           }
         },
         "returns": {
           "type": "benefit",
           "settings": {
             "icon": "returns",
-            "title": "30 days return right",
-            "text": "Easy returns when eligible."
+            "title": "Reprint guarantee",
+            "text": "Damaged or not as previewed? We reprint or refund."
           }
         }
       },
@@ -87,14 +222,54 @@
     "lifestyle": {
       "type": "custom-product-lifestyle",
       "blocks": {
-        "series_abstract": { "type": "series", "settings": { "collection": "abstract-geometric-prints" } },
-        "series_figurative": { "type": "series", "settings": { "collection": "figurative-fashion-prints" } },
-        "series_botanical": { "type": "series", "settings": { "collection": "botanical-floral-prints" } },
-        "series_animals": { "type": "series", "settings": { "collection": "animals-prints" } },
-        "series_photography": { "type": "series", "settings": { "collection": "photography-landscape-prints" } },
-        "series_minimal": { "type": "series", "settings": { "collection": "minimal-neutral-prints" } },
-        "series_food": { "type": "series", "settings": { "collection": "food-kitchen-art-prints" } },
-        "series_typography": { "type": "series", "settings": { "collection": "typography-quotes-prints" } }
+        "series_abstract": {
+          "type": "series",
+          "settings": {
+            "collection": "abstract-geometric-prints"
+          }
+        },
+        "series_figurative": {
+          "type": "series",
+          "settings": {
+            "collection": "figurative-fashion-prints"
+          }
+        },
+        "series_botanical": {
+          "type": "series",
+          "settings": {
+            "collection": "botanical-floral-prints"
+          }
+        },
+        "series_animals": {
+          "type": "series",
+          "settings": {
+            "collection": "animals-prints"
+          }
+        },
+        "series_photography": {
+          "type": "series",
+          "settings": {
+            "collection": "photography-landscape-prints"
+          }
+        },
+        "series_minimal": {
+          "type": "series",
+          "settings": {
+            "collection": "minimal-neutral-prints"
+          }
+        },
+        "series_food": {
+          "type": "series",
+          "settings": {
+            "collection": "food-kitchen-art-prints"
+          }
+        },
+        "series_typography": {
+          "type": "series",
+          "settings": {
+            "collection": "typography-quotes-prints"
+          }
+        }
       },
       "block_order": [
         "series_abstract",
@@ -121,10 +296,10 @@
         "fair_pricing": {
           "type": "tab",
           "settings": {
-            "label": "Fair Pricing",
+            "label": "Why this price",
             "content_source": "custom",
-            "heading": "Fair pricing",
-            "content": "<p>We keep pricing clear and considered, so you can choose a piece you love with confidence. Every order is made with carefully selected materials and prepared with lasting quality in mind.</p>"
+            "heading": "Why this price",
+            "content": "<p><strong>Your photo, printed like art — not like a photo lab.</strong></p><ul><li><strong>Made to order</strong> — printed after you order, never stocked</li><li><strong>Archival materials</strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades</li><li><strong>Checked by hand</strong> — every sheet inspected before it’s rolled and packed</li><li><strong>Direct from the studio</strong> — no middle layer</li></ul><p>Free UK delivery on every order.</p>"
           }
         },
         "artist": {
@@ -141,16 +316,16 @@
             "label": "Material & Workmanship",
             "content_source": "custom",
             "heading": "Material & workmanship",
-            "content": "<p>Made with carefully selected materials, precise printing and thoughtful finishing. Every piece is prepared for a clean presentation and long-lasting everyday enjoyment.</p>"
+            "content": "<p><strong>Made to be looked at every day.</strong></p><p>Your image is printed on <strong>200gsm matte fine art paper</strong> using <strong>pigment inks</strong> for deep colour and long-term fade resistance. The matte surface keeps reflections down in daylight and lamplight alike.</p><p>Upload a JPEG, PNG or WebP up to 20 MB; the preview shows exactly how your crop will print. Every print is inspected by hand, then rolled in a rigid protective tube.</p>"
           }
         },
         "shipping": {
           "type": "tab",
           "settings": {
-            "label": "Shipping and Returns",
+            "label": "Delivery & returns",
             "content_source": "custom",
-            "heading": "Shipping and returns",
-            "content": "<p>Orders are prepared with care and securely packed for delivery. Shipping details are shown before checkout, and eligible returns can be requested within the applicable return period.</p>"
+            "heading": "Delivery & returns",
+            "content": "<p><strong>Printed for you, then sent to you.</strong></p><p>We don’t hold stock. Your print is made after you order, then shipped tracked to your UK address. Please allow <strong>12–15 working days</strong> in total.</p><p>UK delivery is <strong>free on every order</strong>. You’ll receive a tracking link by email as soon as your parcel is dispatched.</p><p><strong>Returns:</strong> personalised prints are made to your specification and can only be returned if faulty or not as previewed. Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>"
           }
         },
         "security": {
@@ -181,5 +356,3 @@
     "information"
   ]
 }
-
-
