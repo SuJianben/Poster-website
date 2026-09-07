@@ -42,7 +42,7 @@
         "shipping_note": {
           "type": "shipping_note",
           "settings": {
-            "text": "Free shipping on qualifying orders."
+            "text": "Free UK delivery · Made to order · 12–15 working days"
           }
         },
         "material": {
@@ -86,7 +86,7 @@
         "hanging_kit": {
           "type": "hanging_kit",
           "settings": {
-            "label": "Product default configuration Scroll Rod"
+            "label": "Hanging scroll rod included at no extra cost"
           }
         },
         "quantity": {
@@ -105,31 +105,13 @@
             "unavailable_label": "Unavailable"
           }
         },
-        "quantity_offer": {
-          "type": "quantity_offer",
-          "disabled": true,
-          "settings": {
-            "heading": "SUMMER OFFER",
-            "summary": "BUY3+ Save 15%",
-            "toggle_label": "more",
-            "default_open": false,
-            "column_one_heading": "Buy quantity",
-            "column_two_heading": "Discount",
-            "row_1_label": "Buy 1",
-            "row_1_value": "Standard price",
-            "row_2_label": "Buy 2",
-            "row_2_value": "Save 10%",
-            "row_3_label": "Buy 3+",
-            "row_3_value": "Save 15%"
-          }
-        },
         "assurances": {
           "type": "assurances",
           "settings": {
-            "item_1": "Made to order in our own studio",
-            "item_2": "Free UK delivery · Ships in 12–15 working days",
-            "item_3": "Secure payment",
-            "item_4": "",
+            "item_1": "Printed only when you order — no stock, no waste",
+            "item_2": "Free tracked UK delivery in 12–15 working days",
+            "item_3": "30-day returns on unused prints",
+            "item_4": "Secure checkout · Apple Pay, Google Pay, Klarna",
             "item_5": ""
           }
         },
@@ -138,7 +120,7 @@
           "settings": {
             "heading": "Securely packaged & paid",
             "accessibility_label": "Accepted payment methods",
-            "note": "♢ Special packaging for art galleries"
+            "note": "Rolled in a rigid protective tube — never folded"
           }
         }
       },
@@ -157,7 +139,6 @@
         "hanging_kit",
         "quantity",
         "buy_buttons",
-        "quantity_offer",
         "assurances",
         "payment_methods"
       ],
@@ -166,8 +147,8 @@
         "show_breadcrumb": true,
         "show_thumbnail_navigation": false,
         "product_details_heading": "Product details",
-        "shipping_returns_heading": "Shipping and returns",
-        "shipping_returns_content": "<p>Each print is made to order in our own studio in Foshan, China. Standard UK delivery: <strong>12–15 working days</strong> from order (production + tracked shipping). All UK orders ship <strong>free</strong>.</p><p>We accept returns within 30 days of delivery for unused items in original packaging — please email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> to arrange.</p>",
+        "shipping_returns_heading": "Delivery & returns",
+        "shipping_returns_content": "<p><strong>Made only when you order.</strong> We don’t print in bulk or hold warehouse stock — every piece is printed after your order comes in, so nothing is overproduced and nothing goes to waste.</p><p>That’s why delivery takes a little longer than off-the-shelf retailers: please allow <strong>12–15 working days</strong> from order to your door. Every UK order ships <strong>free</strong>, fully tracked, rolled in a rigid tube so it arrives flat and unmarked.</p><p><strong>Changed your mind?</strong> Return any unused print in its original packaging within 30 days of delivery for a full refund — email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> and we’ll sort it.</p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
@@ -179,32 +160,32 @@
           "type": "benefit",
           "settings": {
             "icon": "quality",
-            "title": "Premium quality",
-            "text": "Made with carefully selected materials."
+            "title": "Archival quality",
+            "text": "200gsm matte fine art paper, fade-resistant pigment inks."
           }
         },
         "money_back": {
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Satisfied or money back",
-            "text": "Shop with confidence."
+            "title": "Hand-inspected",
+            "text": "Every print checked before it’s packed."
           }
         },
         "free_shipping": {
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Free shipping",
-            "text": "On qualifying orders."
+            "title": "Free UK delivery",
+            "text": "Tracked, 12–15 working days, made to order."
           }
         },
         "returns": {
           "type": "benefit",
           "settings": {
             "icon": "returns",
-            "title": "30 days return right",
-            "text": "Easy returns when eligible."
+            "title": "30-day returns",
+            "text": "Unused prints in original packaging."
           }
         }
       },
@@ -297,10 +278,10 @@
         "fair_pricing": {
           "type": "tab",
           "settings": {
-            "label": "Fair Pricing",
+            "label": "Why this price",
             "content_source": "custom",
-            "heading": "Fair pricing",
-            "content": "<p><strong>Thoughtful art, fairly priced.</strong></p><p>We believe beautiful art should feel special without being out of reach. Our prices reflect the quality of the print, the materials selected, and the care involved in preparing every order.</p><p>By keeping our collection focused and our process straightforward, we can offer considered designs at honest prices—without unnecessary markups.</p><ul><li>Carefully curated artwork  </li><li>Quality materials and detailed production  </li><li>Clear pricing with no hidden product costs</li></ul>"
+            "heading": "Why this price",
+            "content": "<p><strong>Between throwaway and gallery.</strong></p><p>A £4 poster is printed by the thousand on thin stock and sold from a warehouse. A £150 gallery print carries the gallery’s rent. We sit deliberately in between.</p><ul><li><strong>Made to order</strong> — nothing is mass-printed or left in storage</li><li><strong>Archival materials</strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades</li><li><strong>Checked by hand</strong> — every sheet is inspected before it’s rolled and packed</li><li><strong>No middle layer</strong> — you buy directly from the studio that prints it</li></ul><p>Prices start at £24 for A4 and £29 for 30×40 cm. Free UK delivery on every order.</p>"
           }
         },
         "artist": {
@@ -318,16 +299,16 @@
             "label": "Material & Workmanship",
             "content_source": "custom",
             "heading": "Material & workmanship",
-            "content": "<p><strong>Made to be enjoyed, every day.</strong></p><p>Each poster is produced with close attention to colour, clarity, and finish. The artwork is carefully prepared for print so that its original details and tonal balance are preserved across the available sizes.</p><p>A smooth matte surface helps reduce unwanted reflections and gives the artwork a refined, gallery-inspired appearance. Every print is inspected before it is carefully packed for delivery.</p><ul><li>High-resolution art reproduction  </li><li>Refined matte appearance  </li><li>Clear details and balanced colour  </li><li>Carefully checked and securely packaged</li></ul>"
+            "content": "<p><strong>Made to be looked at every day.</strong></p><p>Each print is produced on <strong>200gsm matte fine art paper</strong> using <strong>pigment inks</strong>, chosen for deep colour and long-term fade resistance. The matte surface keeps reflections down so the artwork reads clearly in daylight and lamplight alike.</p><p>Artwork is prepared individually for each size so detail and tonal balance hold from A4 up to 100×140 cm. Every print is inspected by hand, then rolled in a rigid protective tube — never folded.</p><ul><li>200gsm matte fine art paper</li><li>Fade-resistant pigment inks</li><li>Prepared per size, not simply enlarged</li><li>Hand-inspected, tube-packed</li></ul>"
           }
         },
         "shipping": {
           "type": "tab",
           "settings": {
-            "label": "Shipping and Returns",
+            "label": "Delivery & returns",
             "content_source": "custom",
-            "heading": "Shipping and returns",
-            "content": "<p><strong>Carefully packed, from us to your door.</strong></p><p>Your order is prepared and packaged with care to help protect the artwork throughout its journey. Available delivery methods, shipping costs, and estimated delivery times are shown during checkout based on your destination.</p><p>Once your order has been dispatched, tracking information will be provided whenever the selected delivery service supports it.</p><p>If your order arrives damaged or there is a problem with an item, please contact us as soon as possible so we can review the issue and help make it right.</p><p>Returns are handled in accordance with our return policy. Personalised products may have different return conditions because they are created specifically for you.</p>"
+            "heading": "Delivery & returns",
+            "content": "<p><strong>Printed for you, then sent to you.</strong></p><p>We don’t hold stock. Your print is made after you order, then shipped tracked to your UK address. Please allow <strong>12–15 working days</strong> in total — a little longer than a warehouse retailer, and the reason nothing we make goes to waste.</p><p>UK delivery is <strong>free on every order</strong>. You’ll receive a tracking link by email as soon as your parcel is dispatched.</p><p><strong>Returns:</strong> unused prints in original packaging can be returned within 30 days of delivery for a full refund. Personalised prints are made to your specification and can only be returned if faulty. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>"
           }
         },
         "security": {
