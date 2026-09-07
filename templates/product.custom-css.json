@@ -42,7 +42,7 @@
         "shipping_note": {
           "type": "shipping_note",
           "settings": {
-            "text": "Free UK shipping on all orders."
+            "text": "Free UK delivery · Made to order · 12–15 working days"
           }
         },
         "artwork_upload": {
@@ -111,7 +111,7 @@
         "hanging_kit": {
           "type": "hanging_kit",
           "settings": {
-            "label": "Product default configuration Scroll Rod"
+            "label": "Hanging scroll rod included at no extra cost"
           }
         },
         "quantity": {
@@ -130,31 +130,13 @@
             "unavailable_label": "Unavailable"
           }
         },
-        "quantity_offer": {
-          "type": "quantity_offer",
-          "disabled": true,
-          "settings": {
-            "heading": "SUMMER OFFER",
-            "summary": "BUY3+ Save 15%",
-            "toggle_label": "more",
-            "default_open": false,
-            "column_one_heading": "Buy quantity",
-            "column_two_heading": "Discount",
-            "row_1_label": "Buy 1",
-            "row_1_value": "Standard price",
-            "row_2_label": "Buy 2",
-            "row_2_value": "Save 10%",
-            "row_3_label": "Buy 3+",
-            "row_3_value": "Save 15%"
-          }
-        },
         "assurances": {
           "type": "assurances",
           "settings": {
-            "item_1": "Immediately ready to hang",
-            "item_2": "Free shipping within the UK",
-            "item_3": "Secure payment",
-            "item_4": "",
+            "item_1": "Printed only when you order — from your own photo",
+            "item_2": "Free tracked UK delivery in 12–15 working days",
+            "item_3": "Preview every detail before you order",
+            "item_4": "Secure checkout · Apple Pay, Google Pay, Klarna",
             "item_5": ""
           }
         },
@@ -163,7 +145,7 @@
           "settings": {
             "heading": "Securely packaged & paid",
             "accessibility_label": "Accepted payment methods",
-            "note": "♢ Special packaging for art galleries"
+            "note": "Rolled in a rigid protective tube — never folded"
           }
         }
       },
@@ -183,7 +165,6 @@
         "hanging_kit",
         "quantity",
         "buy_buttons",
-        "quantity_offer",
         "assurances",
         "payment_methods"
       ],
@@ -193,8 +174,8 @@
         "show_breadcrumb": true,
         "customer_notice_heading": "Customer Notice",
         "customer_notice_content": "<ul><li>By uploading an image, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>",
-        "shipping_returns_heading": "Shipping and returns",
-        "shipping_returns_content": "<p>Orders are processed within 2 business days. Standard UK delivery normally takes 10–15 business days after dispatch. Custom, personalised, and made-to-order products cannot be returned for change-of-mind reasons once production begins. This does not affect your rights if an item is faulty, damaged, incorrect, or not as described.</p>",
+        "shipping_returns_heading": "Delivery & returns",
+        "shipping_returns_content": "<p><strong>Made only when you order.</strong> Your personalised print is produced after your order comes in — nothing is pre-printed, nothing goes to waste.</p><p>Please allow <strong>12–15 working days</strong> from order to your door. Every UK order ships <strong>free</strong>, fully tracked, rolled in a rigid tube.</p><p>Personalised prints are made to your specification, so they can only be returned if faulty or not as previewed. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
@@ -206,32 +187,32 @@
           "type": "benefit",
           "settings": {
             "icon": "quality",
-            "title": "Premium quality",
-            "text": "Made with carefully selected materials."
+            "title": "Archival quality",
+            "text": "200gsm matte fine art paper, fade-resistant pigment inks."
           }
         },
         "money_back": {
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Quality issue support",
-            "text": "We’ll put it right if your order is faulty, damaged or incorrect."
+            "title": "Reprint guarantee",
+            "text": "Damaged or not as previewed? We reprint or refund."
           }
         },
         "free_shipping": {
           "type": "benefit",
           "settings": {
             "icon": "shipping",
-            "title": "Free UK shipping",
-            "text": "On all UK orders."
+            "title": "Free UK delivery",
+            "text": "Tracked, 12–15 working days, made to order."
           }
         },
         "returns": {
           "type": "benefit",
           "settings": {
             "icon": "returns",
-            "title": "Made-to-order policy",
-            "text": "No change-of-mind returns once production begins."
+            "title": "Made to order",
+            "text": "Printed after you order — no stock, no waste."
           }
         }
       },
@@ -324,10 +305,10 @@
         "fair_pricing": {
           "type": "tab",
           "settings": {
-            "label": "Fair Pricing",
+            "label": "Why this price",
             "content_source": "custom",
-            "heading": "Fair pricing",
-            "content": "<p><strong>Thoughtful art, fairly priced.</strong></p><p>We believe beautiful art should feel special without being out of reach. Our prices reflect the quality of the print, the materials selected, and the care involved in preparing every order.</p><p>By keeping our collection focused and our process straightforward, we can offer considered designs at honest prices—without unnecessary markups.</p><ul><li>Carefully curated artwork  </li><li>Quality materials and detailed production  </li><li>Clear pricing with no hidden product costs</li></ul>"
+            "heading": "Why this price",
+            "content": "<p><strong>Your photo, printed like art — not like a photo lab.</strong></p><ul><li><strong>Made to order</strong> — printed after you order, never stocked</li><li><strong>Archival materials</strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades</li><li><strong>Checked by hand</strong> — every sheet inspected before it’s rolled and packed</li><li><strong>Direct from the studio</strong> — no middle layer</li></ul><p>Free UK delivery on every order.</p>"
           }
         },
         "artist": {
@@ -345,16 +326,16 @@
             "label": "Material & Workmanship",
             "content_source": "custom",
             "heading": "Material & workmanship",
-            "content": "<p><strong>Made to be enjoyed, every day.</strong></p><p>Each poster is produced with close attention to colour, clarity, and finish. The artwork is carefully prepared for print so that its original details and tonal balance are preserved across the available sizes.</p><p>A smooth matte surface helps reduce unwanted reflections and gives the artwork a refined, gallery-inspired appearance. Every print is inspected before it is carefully packed for delivery.</p><ul><li>High-resolution art reproduction  </li><li>Refined matte appearance  </li><li>Clear details and balanced colour  </li><li>Carefully checked and securely packaged</li></ul>"
+            "content": "<p><strong>Made to be looked at every day.</strong></p><p>Your image is printed on <strong>200gsm matte fine art paper</strong> using <strong>pigment inks</strong> for deep colour and long-term fade resistance. The matte surface keeps reflections down in daylight and lamplight alike.</p><p>Upload a JPEG, PNG or WebP up to 20 MB; the preview shows exactly how your crop will print. Every print is inspected by hand, then rolled in a rigid protective tube.</p>"
           }
         },
         "shipping": {
           "type": "tab",
           "settings": {
-            "label": "Shipping and Returns",
+            "label": "Delivery & returns",
             "content_source": "custom",
-            "heading": "Shipping and returns",
-            "content": "<p><strong>Carefully packed, from us to your door.</strong></p><p>Your order is prepared and packaged with care to help protect the artwork throughout its journey. Available delivery methods, shipping costs, and estimated delivery times are shown during checkout based on your destination.</p><p>Once your order has been dispatched, tracking information will be provided whenever the selected delivery service supports it.</p><p>If your order arrives damaged or there is a problem with an item, please contact us as soon as possible so we can review the issue and help make it right.</p><p>Returns are handled in accordance with our return policy. Personalised products may have different return conditions because they are created specifically for you.</p>"
+            "heading": "Delivery & returns",
+            "content": "<p><strong>Printed for you, then sent to you.</strong></p><p>We don’t hold stock. Your print is made after you order, then shipped tracked to your UK address. Please allow <strong>12–15 working days</strong> in total.</p><p>UK delivery is <strong>free on every order</strong>. You’ll receive a tracking link by email as soon as your parcel is dispatched.</p><p><strong>Returns:</strong> personalised prints are made to your specification and can only be returned if faulty or not as previewed. Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>"
           }
         },
         "security": {
