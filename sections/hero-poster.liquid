@@ -45,7 +45,7 @@
   {% endif %}
   <div class="phg__content">
     <div class="phg__copy" data-phg-copy>
-      {% if section.settings.brand_line != blank %}<p class="phg__brand" style="margin:0 0 14px;font:500 12px/1.4 inherit;letter-spacing:.14em;text-transform:uppercase;opacity:.9">{{ section.settings.brand_line | escape }}</p>{% endif %}
+      {% if section.settings.brand_line != blank %}<p class="phg__brand" style="margin:0 0 18px;font-size:15px;line-height:1.45;font-weight:500;letter-spacing:.01em;max-width:30ch;opacity:.95">{{ section.settings.brand_line | escape }}</p>{% endif %}
       <p class="phg__counter" data-phg-counter>01 / 06</p>
       <h1 data-phg-title>{{ section.blocks.first.settings.title }}</h1>
       <p class="phg__text" data-phg-text>{{ section.blocks.first.settings.text }}</p>
