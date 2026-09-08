@@ -23,6 +23,34 @@
     {% endfor %}
   </div>
 
+  <div class="ps-mob-accordion">
+    {% for block in section.blocks %}
+      <details class="ps-mob-accordion__item"{% if forloop.first %} open{% endif %}>
+        <summary>{{ block.settings.label }}<span aria-hidden="true">+</span></summary>
+        <div class="ps-description{% if block.settings.content_source == 'product_description' %} rte{% endif %}">
+          {% case block.settings.content_source %}
+            {% when 'product_description' %}{{ product.description }}
+            {% when 'artist_information' %}<p>{% if product.vendor != blank %}{{ product.vendor }}{% else %}Our artist collection{% endif %} brings distinctive ideas and character to every piece.</p>
+            {% else %}{{ block.settings.content }}
+          {% endcase %}
+        </div>
+      </details>
+    {% endfor %}
+  </div>
+  <style>
+    .ps-mob-accordion{display:none}
+    @media (max-width:767px){
+      .ps-mob-accordion{display:block}
+      [data-ps-information-tabs] .ps-description-tabs,[data-ps-information-tabs] .ps-description-panels{display:none !important}
+      .ps-mob-accordion__item{border-top:1px solid #e5e5e5}
+      .ps-mob-accordion__item:last-child{border-bottom:1px solid #e5e5e5}
+      .ps-mob-accordion__item summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-weight:600;font-size:16px;cursor:pointer}
+      .ps-mob-accordion__item summary::-webkit-details-marker{display:none}
+      .ps-mob-accordion__item summary span{font-size:20px;line-height:1;color:#888}
+      .ps-mob-accordion__item[open] summary span{transform:rotate(45deg)}
+      .ps-mob-accordion__item .ps-description{padding:0 0 18px;font-size:15px;line-height:1.6}
+    }
+  </style>
   <div class="ps-description-panels">
     {% for block in section.blocks %}
       <div

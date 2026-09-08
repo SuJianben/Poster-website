@@ -23,6 +23,10 @@
   {% when 'title' %}
     <h1 {{ block.shopify_attributes }}>{{ product.title }}</h1>
 
+  {% when 'short_description' %}
+    {%- assign sd_first = product.description | split: '</p>' | first | strip_html | strip -%}
+    {%- if sd_first != blank -%}<p class="ps-short-description" {{ block.shopify_attributes }}>{{ sd_first | truncate: 160 }}</p>{%- endif -%}
+
   {% when 'vendor' %}
     {% if product.vendor != blank %}
       <p class="ps-vendor" {{ block.shopify_attributes }}>{{ block.settings.label }} <strong>{{ product.vendor }}</strong></p>
@@ -138,6 +142,31 @@
       </button>
       <p class="ps-form__status" data-ps-status role="status"></p>
     </div>
+    <div class="ps-sticky-atc" data-ps-sticky-atc hidden aria-hidden="true">
+      <div class="ps-sticky-atc__meta"><strong data-ps-sticky-price>{{ selected_variant.price | money }}</strong><span data-ps-sticky-size>{% for option in product.options_with_values %}{% assign on = option.name | downcase %}{% if on contains 'size' %}{{ option.selected_value }}{% endif %}{% endfor %}</span></div>
+      <button type="button" class="ps-add-button ps-sticky-atc__button" data-ps-sticky-button>{{ block.settings.add_label }}</button>
+    </div>
+    <style>
+      .ps-short-description{margin:2px 0 10px;font-size:14px;line-height:1.5;color:#444}
+      .ps-sticky-atc{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #e5e5e5;box-shadow:0 -6px 18px rgba(0,0,0,.06)}
+      .ps-sticky-atc[hidden]{display:none}
+      .ps-sticky-atc__meta{display:flex;flex-direction:column;min-width:0;font-size:12px;color:#666;line-height:1.3}
+      .ps-sticky-atc__meta strong{font-size:16px;color:#111}
+      .ps-sticky-atc__button{flex:1;min-height:46px}
+      body.ps-sticky-atc-visible{padding-bottom:78px}
+      @media (min-width:768px){.ps-sticky-atc{display:none !important}}
+    </style>
+    <script>(function(){
+      var bar=document.currentScript.previousElementSibling.previousElementSibling; if(!bar||!bar.hasAttribute('data-ps-sticky-atc'))bar=document.querySelector('[data-ps-sticky-atc]'); if(!bar)return;
+      var form=bar.closest('form')||document; var real=form.querySelector('[data-ps-add-button]'); if(!real)return;
+      var mq=window.matchMedia('(max-width:767px)');
+      function show(v){bar.hidden=!v;bar.setAttribute('aria-hidden',String(!v));document.body.classList.toggle('ps-sticky-atc-visible',v);}
+      var io=new IntersectionObserver(function(es){ if(!mq.matches){show(false);return;} var e=es[0]; show(!e.isIntersecting && e.boundingClientRect.top<0); },{threshold:0});
+      io.observe(real);
+      bar.querySelector('[data-ps-sticky-button]').addEventListener('click',function(){ real.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ real.click(); },350); });
+      function sync(){ var price=form.querySelector('[data-ps-price] .ps-price__current'); var sp=bar.querySelector('[data-ps-sticky-price]'); if(price&&sp)sp.textContent=price.textContent; var sz=form.querySelector('[data-ps-option-group] [data-ps-option-label]'); var ss=bar.querySelector('[data-ps-sticky-size]'); if(sz&&ss)ss.textContent=sz.textContent; var lbl=real.querySelector('[data-ps-add-label]'); var b=bar.querySelector('[data-ps-sticky-button]'); if(lbl&&b){b.textContent=lbl.textContent;b.disabled=real.disabled;} }
+      form.addEventListener('change',function(){setTimeout(sync,50);}); new MutationObserver(sync).observe(form.querySelector('[data-ps-price]')||form,{childList:true,subtree:true,characterData:true}); sync();
+    })();</script>
 
   {% when 'quantity_offer' %}
     <div class="ps-offer-group" {{ block.shopify_attributes }}>
