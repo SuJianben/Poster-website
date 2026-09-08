@@ -1,0 +1,19 @@
+{%- comment -%} product-size-detail: value -> cm / inches / frame fit. Facts only. {%- endcomment -%}
+{%- assign v = value | strip -%}
+{%- case v -%}
+  {%- when 'A4 (21x29,7 cm)' -%}True ISO A4 · 21 × 29.7 cm · 8.3 × 11.7 in · fits any standard A4 frame
+  {%- when 'A3 (29,7x42 cm)' -%}True ISO A3 · 29.7 × 42 cm · 11.7 × 16.5 in · fits any standard A3 frame
+  {%- when 'A2 (42x59,4 cm)' -%}True ISO A2 · 42 × 59.4 cm · 16.5 × 23.4 in · fits any standard A2 frame
+  {%- when 'A1 (59,4x84,1 cm)' -%}True ISO A1 · 59.4 × 84.1 cm · 23.4 × 33.1 in · fits any standard A1 frame
+  {%- when '30x40 cm' -%}30 × 40 cm · 11.8 × 15.7 in · fits standard 30 × 40 cm frames
+  {%- when '40x50 cm' -%}40 × 50 cm · 15.7 × 19.7 in · fits standard 40 × 50 cm frames
+  {%- when '50x50 cm' -%}50 × 50 cm · 19.7 × 19.7 in · fits standard 50 × 50 cm square frames
+  {%- when '50x70 cm' -%}50 × 70 cm · 19.7 × 27.6 in · fits standard 50 × 70 cm frames
+  {%- when '60x80 cm' -%}60 × 80 cm · 23.6 × 31.5 in · fits standard 60 × 80 cm frames
+  {%- when '70x70 cm' -%}70 × 70 cm · 27.6 × 27.6 in · fits standard 70 × 70 cm square frames
+  {%- when '70x100 cm' -%}70 × 100 cm · 27.6 × 39.4 in · fits standard 70 × 100 cm frames
+  {%- when '100x100 cm' -%}100 × 100 cm · 39.4 × 39.4 in · statement square format
+  {%- when '100x140 cm' -%}100 × 140 cm · 39.4 × 55.1 in · fits standard 100 × 140 cm frames
+  {%- when '140x200 cm' -%}140 × 200 cm · 55.1 × 78.7 in · oversized wall piece
+  {%- else -%}{{ v }}
+{%- endcase -%}

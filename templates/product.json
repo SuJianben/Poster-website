@@ -42,7 +42,7 @@
         "shipping_note": {
           "type": "shipping_note",
           "settings": {
-            "text": "Free UK delivery · Made to order · 12–15 working days"
+            "text": "Free UK delivery · Made to order · 12–17 working days"
           }
         },
         "material": {
@@ -109,7 +109,7 @@
           "type": "assurances",
           "settings": {
             "item_1": "Printed only when you order — no stock, no waste",
-            "item_2": "Free tracked UK delivery in 12–15 working days",
+            "item_2": "Free tracked UK delivery in 12–17 working days",
             "item_3": "30-day returns on unused prints",
             "item_4": "Secure checkout · Apple Pay, Google Pay, Klarna",
             "item_5": ""
@@ -148,7 +148,7 @@
         "show_thumbnail_navigation": false,
         "product_details_heading": "Product details",
         "shipping_returns_heading": "Delivery & returns",
-        "shipping_returns_content": "<p><strong>Made only when you order.</strong> We don’t print in bulk or hold warehouse stock — every piece is printed after your order comes in, so nothing is overproduced and nothing goes to waste.</p><p>That’s why delivery takes a little longer than off-the-shelf retailers: please allow <strong>12–15 working days</strong> from order to your door. Every UK order ships <strong>free</strong>, fully tracked, rolled in a rigid tube so it arrives flat and unmarked.</p><p><strong>Changed your mind?</strong> Return any unused print in its original packaging within 30 days of delivery for a full refund — email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> and we’ll sort it.</p>",
+        "shipping_returns_content": "<p><strong>Made only when you order.<\/strong> We don’t print in bulk or hold warehouse stock — every piece is printed after your order comes in, so nothing is overproduced and nothing goes to waste.<\/p><p>That’s why delivery takes a little longer than off-the-shelf retailers: please allow <strong>12–17 working days<\/strong> from order to your door. Every UK order ships <strong>free<\/strong>, fully tracked, rolled in a rigid tube so it arrives flat and unmarked.<\/p><p><strong>Changed your mind?<\/strong> Return any unused print in its original packaging within 30 days of delivery for a full refund — email <a href=\"mailto:support@posterandform.com\">support@posterandform.com<\/a> and we’ll sort it.<\/p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
@@ -177,7 +177,7 @@
           "settings": {
             "icon": "shipping",
             "title": "Free UK delivery",
-            "text": "Tracked, 12–15 working days, made to order."
+            "text": "Tracked, 12–17 working days, made to order."
           }
         },
         "returns": {
@@ -272,7 +272,7 @@
             "label": "Description",
             "content_source": "product_description",
             "heading": "",
-            "content": "<p>Add information for this tab.</p>"
+            "content": "<p>Add information for this tab.<\/p>"
           }
         },
         "fair_pricing": {
@@ -281,7 +281,7 @@
             "label": "Why this price",
             "content_source": "custom",
             "heading": "Why this price",
-            "content": "<p><strong>Between throwaway and gallery.</strong></p><p>A £4 poster is printed by the thousand on thin stock and sold from a warehouse. A £150 gallery print carries the gallery’s rent. We sit deliberately in between.</p><ul><li><strong>Made to order</strong> — nothing is mass-printed or left in storage</li><li><strong>Archival materials</strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades</li><li><strong>Checked by hand</strong> — every sheet is inspected before it’s rolled and packed</li><li><strong>No middle layer</strong> — you buy directly from the studio that prints it</li></ul><p>Prices start at £24 for A4 and £29 for 30×40 cm. Free UK delivery on every order.</p>"
+            "content": "<p><strong>Between throwaway and gallery.<\/strong><\/p><p>A £4 poster is printed by the thousand on thin stock and sold from a warehouse. A £150 gallery print carries the gallery’s rent. We sit deliberately in between.<\/p><ul><li><strong>Made to order<\/strong> — nothing is mass-printed or left in storage<\/li><li><strong>Archival materials<\/strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades<\/li><li><strong>Checked by hand<\/strong> — every sheet is inspected before it’s rolled and packed<\/li><li><strong>No middle layer<\/strong> — you buy directly from the studio that prints it<\/li><\/ul><p>Prices start at £24 for A4 and £29 for 30×40 cm. Free UK delivery on every order.<\/p>"
           }
         },
         "artist": {
@@ -290,7 +290,7 @@
             "label": "Artist Information",
             "content_source": "custom",
             "heading": "Artist information",
-            "content": "<p><strong>Behind every artwork is a distinct creative point of view.</strong></p><p>Every artwork in the PosterAndForm collection is selected for its distinctive visual character, thoughtful composition, and ability to bring personality into a room.</p><p>From expressive forms and subtle textures to confident colour and quiet minimalism, our collection brings together different creative perspectives. Each piece is chosen not only for how it looks on its own, but for how naturally it can become part of your everyday surroundings.</p><p>We believe the right artwork does more than complete a wall—it creates atmosphere, invites attention, and makes a space feel more personal.</p>"
+            "content": "<p><strong>Behind every artwork is a distinct creative point of view.<\/strong><\/p><p>Every artwork in the PosterAndForm collection is selected for its distinctive visual character, thoughtful composition, and ability to bring personality into a room.<\/p><p>From expressive forms and subtle textures to confident colour and quiet minimalism, our collection brings together different creative perspectives. Each piece is chosen not only for how it looks on its own, but for how naturally it can become part of your everyday surroundings.<\/p><p>We believe the right artwork does more than complete a wall—it creates atmosphere, invites attention, and makes a space feel more personal.<\/p>"
           }
         },
         "material": {
@@ -299,7 +299,7 @@
             "label": "Material & Workmanship",
             "content_source": "custom",
             "heading": "Material & workmanship",
-            "content": "<p><strong>Made to be looked at every day.</strong></p><p>Each print is produced on <strong>200gsm matte fine art paper</strong> using <strong>pigment inks</strong>, chosen for deep colour and long-term fade resistance. The matte surface keeps reflections down so the artwork reads clearly in daylight and lamplight alike.</p><p>Artwork is prepared individually for each size so detail and tonal balance hold from A4 up to 100×140 cm. Every print is inspected by hand, then rolled in a rigid protective tube — never folded.</p><ul><li>200gsm matte fine art paper</li><li>Fade-resistant pigment inks</li><li>Prepared per size, not simply enlarged</li><li>Hand-inspected, tube-packed</li></ul>"
+            "content": "<p><strong>Made to be looked at every day.<\/strong><\/p><p>Each print is produced on <strong>200gsm matte fine art paper<\/strong> using <strong>pigment inks<\/strong>, chosen for deep colour and long-term fade resistance. The matte surface keeps reflections down so the artwork reads clearly in daylight and lamplight alike.<\/p><p>Artwork is prepared individually for each size so detail and tonal balance hold from A4 up to 100×140 cm. Every print is inspected by hand, then rolled in a rigid protective tube — never folded.<\/p><ul><li>200gsm matte fine art paper<\/li><li>Fade-resistant pigment inks<\/li><li>Prepared per size, not simply enlarged<\/li><li>Hand-inspected, tube-packed<\/li><\/ul>"
           }
         },
         "shipping": {
@@ -308,7 +308,7 @@
             "label": "Delivery & returns",
             "content_source": "custom",
             "heading": "Delivery & returns",
-            "content": "<p><strong>Printed for you, then sent to you.</strong></p><p>We don’t hold stock. Your print is made after you order, then shipped tracked to your UK address. Please allow <strong>12–15 working days</strong> in total — a little longer than a warehouse retailer, and the reason nothing we make goes to waste.</p><p>UK delivery is <strong>free on every order</strong>. You’ll receive a tracking link by email as soon as your parcel is dispatched.</p><p><strong>Returns:</strong> unused prints in original packaging can be returned within 30 days of delivery for a full refund. Personalised prints are made to your specification and can only be returned if faulty. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>"
+            "content": "<p><strong>Printed for you, then sent to you.<\/strong><\/p><p>We don’t hold stock. Your print is made after you order, then shipped tracked to your UK address. Please allow <strong>12–17 working days<\/strong> in total — a little longer than a warehouse retailer, and the reason nothing we make goes to waste.<\/p><p>UK delivery is <strong>free on every order<\/strong>. You’ll receive a tracking link by email as soon as your parcel is dispatched.<\/p><p><strong>Returns:<\/strong> unused prints in original packaging can be returned within 30 days of delivery for a full refund. Personalised prints are made to your specification and can only be returned if faulty. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com<\/a> with a photo and we’ll reprint or refund.<\/p>"
           }
         },
         "security": {
@@ -317,7 +317,7 @@
             "label": "Security",
             "content_source": "custom",
             "heading": "Security",
-            "content": "<p><strong>A secure and protected checkout.</strong></p><p>Your checkout is securely processed through Shopify and the payment providers available in your region. Payment details are encrypted during the transaction and are not stored directly by PosterAndForm.</p><p>We only use the information required to process your order, arrange delivery, and provide customer support. Your personal details will never be sold.</p><ul><li>Secure Shopify checkout  </li><li>Encrypted payment processing  </li><li>Trusted payment providers  </li><li>Responsible handling of personal information</li></ul>"
+            "content": "<p><strong>A secure and protected checkout.<\/strong><\/p><p>Your checkout is securely processed through Shopify and the payment providers available in your region. Payment details are encrypted during the transaction and are not stored directly by PosterAndForm.<\/p><p>We only use the information required to process your order, arrange delivery, and provide customer support. Your personal details will never be sold.<\/p><ul><li>Secure Shopify checkout  <\/li><li>Encrypted payment processing  <\/li><li>Trusted payment providers  <\/li><li>Responsible handling of personal information<\/li><\/ul>"
           }
         }
       },

@@ -32,7 +32,7 @@
       </header>
 
       <p class="ps-size-guide-modal__description" id="ProductSizeGuideDescription-{{ section.id }}">
-        Compare the sizes available for this product. The shapes are shown in relative scale.
+        Compare the sizes available for this product (shapes in relative scale). Every size is the full sheet size and matches a standard frame size, so it fits off-the-shelf frames. A-sizes are true ISO A-sizes. Free scroll rod included; frames optional.
       </p>
 
       <div class="ps-size-guide-modal__sizes" data-ps-size-guide-sizes>
@@ -45,6 +45,7 @@
             </div>
             <div class="ps-size-guide-modal__item-copy">
               <strong>{{ value | escape }}</strong>
+              <span class="ps-size-guide-modal__detail">{% render 'product-size-detail', value: value %}</span>
               <span data-ps-size-guide-current hidden>Current size</span>
             </div>
           </article>

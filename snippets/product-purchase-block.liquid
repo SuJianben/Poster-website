@@ -61,6 +61,11 @@
                 <label for="Option-{{ section.id }}-{{ option.position }}-{{ forloop.index }}">{{ value }}</label>
               {% endfor %}
             </div>
+            <p class="ps-size-hint" data-ps-size-hint>
+              {% for value in option.values %}<span data-ps-size-hint-for="{{ value | escape }}"{% unless option.selected_value == value %} hidden{% endunless %}>{% render 'product-size-detail', value: value %}</span>{% endfor %}
+            </p>
+            <style>.ps-size-hint{margin:6px 0 0;font-size:12px;line-height:1.4;color:#555}.ps-size-guide-modal__detail{display:block;font-size:12px;color:#555;margin-top:2px}</style>
+            <script>(function(){var f=document.currentScript.closest('[data-ps-option-group]');if(!f)return;f.addEventListener('change',function(e){if(!e.target||e.target.type!=='radio')return;f.querySelectorAll('[data-ps-size-hint-for]').forEach(function(s){s.hidden=s.getAttribute('data-ps-size-hint-for')!==e.target.value;});});})();</script>
           </fieldset>
         {% endif %}
       {% endfor %}

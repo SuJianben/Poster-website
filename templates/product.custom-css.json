@@ -42,7 +42,7 @@
         "shipping_note": {
           "type": "shipping_note",
           "settings": {
-            "text": "Free UK delivery · Made to order · 12–15 working days"
+            "text": "Free UK delivery · Made to order · 12–17 working days"
           }
         },
         "artwork_upload": {
@@ -134,7 +134,7 @@
           "type": "assurances",
           "settings": {
             "item_1": "Printed only when you order — from your own photo",
-            "item_2": "Free tracked UK delivery in 12–15 working days",
+            "item_2": "Free tracked UK delivery in 12–17 working days",
             "item_3": "Preview every detail before you order",
             "item_4": "Secure checkout · Apple Pay, Google Pay, Klarna",
             "item_5": ""
@@ -173,9 +173,9 @@
         "css_oak_texture_scale": 100,
         "show_breadcrumb": true,
         "customer_notice_heading": "Customer Notice",
-        "customer_notice_content": "<ul><li>By uploading an image, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>",
+        "customer_notice_content": "<ul><li>By uploading an image, you confirm that you own the copyright or have obtained all necessary permissions to use it.<\/li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.<\/li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.<\/li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.<\/li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.<\/li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.<\/li><\/ul>",
         "shipping_returns_heading": "Delivery & returns",
-        "shipping_returns_content": "<p><strong>Made only when you order.</strong> Your personalised print is produced after your order comes in — nothing is pre-printed, nothing goes to waste.</p><p>Please allow <strong>12–15 working days</strong> from order to your door. Every UK order ships <strong>free</strong>, fully tracked, rolled in a rigid tube.</p><p>Personalised prints are made to your specification, so they can only be returned if faulty or not as previewed. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>",
+        "shipping_returns_content": "<p><strong>Made only when you order.<\/strong> Your personalised print is produced after your order comes in — nothing is pre-printed, nothing goes to waste.<\/p><p>Please allow <strong>12–17 working days<\/strong> from order to your door. Every UK order ships <strong>free<\/strong>, fully tracked, rolled in a rigid tube.<\/p><p>Personalised prints are made to your specification, so they can only be returned if faulty or not as previewed. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com<\/a> with a photo and we’ll reprint or refund.<\/p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
@@ -204,7 +204,7 @@
           "settings": {
             "icon": "shipping",
             "title": "Free UK delivery",
-            "text": "Tracked, 12–15 working days, made to order."
+            "text": "Tracked, 12–17 working days, made to order."
           }
         },
         "returns": {
@@ -299,7 +299,7 @@
             "label": "Description",
             "content_source": "product_description",
             "heading": "",
-            "content": "<p>Add information for this tab.</p>"
+            "content": "<p>Add information for this tab.<\/p>"
           }
         },
         "fair_pricing": {
@@ -308,7 +308,7 @@
             "label": "Why this price",
             "content_source": "custom",
             "heading": "Why this price",
-            "content": "<p><strong>Your photo, printed like art — not like a photo lab.</strong></p><ul><li><strong>Made to order</strong> — printed after you order, never stocked</li><li><strong>Archival materials</strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades</li><li><strong>Checked by hand</strong> — every sheet inspected before it’s rolled and packed</li><li><strong>Direct from the studio</strong> — no middle layer</li></ul><p>Free UK delivery on every order.</p>"
+            "content": "<p><strong>Your photo, printed like art — not like a photo lab.<\/strong><\/p><ul><li><strong>Made to order<\/strong> — printed after you order, never stocked<\/li><li><strong>Archival materials<\/strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades<\/li><li><strong>Checked by hand<\/strong> — every sheet inspected before it’s rolled and packed<\/li><li><strong>Direct from the studio<\/strong> — no middle layer<\/li><\/ul><p>Free UK delivery on every order.<\/p>"
           }
         },
         "artist": {
@@ -317,7 +317,7 @@
             "label": "Artist Information",
             "content_source": "custom",
             "heading": "Artist information",
-            "content": "<p><strong>Art chosen for the way it makes a space feel.</strong></p><p>Every artwork in the PosterAndForm collection is selected for its distinctive visual character, thoughtful composition, and ability to bring personality into a room.</p><p>From expressive forms and subtle textures to confident colour and quiet minimalism, our collection brings together different creative perspectives. Each piece is chosen not only for how it looks on its own, but for how naturally it can become part of your everyday surroundings.</p><p>We believe the right artwork does more than complete a wall—it creates atmosphere, invites attention, and makes a space feel more personal.</p>"
+            "content": "<p><strong>Art chosen for the way it makes a space feel.<\/strong><\/p><p>Every artwork in the PosterAndForm collection is selected for its distinctive visual character, thoughtful composition, and ability to bring personality into a room.<\/p><p>From expressive forms and subtle textures to confident colour and quiet minimalism, our collection brings together different creative perspectives. Each piece is chosen not only for how it looks on its own, but for how naturally it can become part of your everyday surroundings.<\/p><p>We believe the right artwork does more than complete a wall—it creates atmosphere, invites attention, and makes a space feel more personal.<\/p>"
           }
         },
         "material": {
@@ -326,7 +326,7 @@
             "label": "Material & Workmanship",
             "content_source": "custom",
             "heading": "Material & workmanship",
-            "content": "<p><strong>Made to be looked at every day.</strong></p><p>Your image is printed on <strong>200gsm matte fine art paper</strong> using <strong>pigment inks</strong> for deep colour and long-term fade resistance. The matte surface keeps reflections down in daylight and lamplight alike.</p><p>Upload a JPEG, PNG or WebP up to 20 MB; the preview shows exactly how your crop will print. Every print is inspected by hand, then rolled in a rigid protective tube.</p>"
+            "content": "<p><strong>Made to be looked at every day.<\/strong><\/p><p>Your image is printed on <strong>200gsm matte fine art paper<\/strong> using <strong>pigment inks<\/strong> for deep colour and long-term fade resistance. The matte surface keeps reflections down in daylight and lamplight alike.<\/p><p>Upload a JPEG, PNG or WebP up to 20 MB; the preview shows exactly how your crop will print. Every print is inspected by hand, then rolled in a rigid protective tube.<\/p>"
           }
         },
         "shipping": {
@@ -335,7 +335,7 @@
             "label": "Delivery & returns",
             "content_source": "custom",
             "heading": "Delivery & returns",
-            "content": "<p><strong>Printed for you, then sent to you.</strong></p><p>We don’t hold stock. Your print is made after you order, then shipped tracked to your UK address. Please allow <strong>12–15 working days</strong> in total.</p><p>UK delivery is <strong>free on every order</strong>. You’ll receive a tracking link by email as soon as your parcel is dispatched.</p><p><strong>Returns:</strong> personalised prints are made to your specification and can only be returned if faulty or not as previewed. Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>"
+            "content": "<p><strong>Printed for you, then sent to you.<\/strong><\/p><p>We don’t hold stock. Your print is made after you order, then shipped tracked to your UK address. Please allow <strong>12–17 working days<\/strong> in total.<\/p><p>UK delivery is <strong>free on every order<\/strong>. You’ll receive a tracking link by email as soon as your parcel is dispatched.<\/p><p><strong>Returns:<\/strong> personalised prints are made to your specification and can only be returned if faulty or not as previewed. Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com<\/a> with a photo and we’ll reprint or refund.<\/p>"
           }
         },
         "security": {
@@ -344,7 +344,7 @@
             "label": "Security",
             "content_source": "custom",
             "heading": "Security",
-            "content": "<p><strong>A secure and protected checkout.</strong></p><p>Your checkout is securely processed through Shopify and the payment providers available in your region. Payment details are encrypted during the transaction and are not stored directly by PosterAndForm.</p><p>We only use the information required to process your order, arrange delivery, and provide customer support. Your personal details will never be sold.</p><ul><li>Secure Shopify checkout  </li><li>Encrypted payment processing  </li><li>Trusted payment providers  </li><li>Responsible handling of personal information</li></ul>"
+            "content": "<p><strong>A secure and protected checkout.<\/strong><\/p><p>Your checkout is securely processed through Shopify and the payment providers available in your region. Payment details are encrypted during the transaction and are not stored directly by PosterAndForm.<\/p><p>We only use the information required to process your order, arrange delivery, and provide customer support. Your personal details will never be sold.<\/p><ul><li>Secure Shopify checkout  <\/li><li>Encrypted payment processing  <\/li><li>Trusted payment providers  <\/li><li>Responsible handling of personal information<\/li><\/ul>"
           }
         }
       },
