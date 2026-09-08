@@ -48,3 +48,6 @@ html.is-cart-drawer-open { overflow: hidden; }
 .cd-drawer.is-busy .cd-drawer__body { opacity: .62; pointer-events: none; }
 @media (max-width: 600px) { .cd-drawer__panel { width: min(100%, 430px); }.cd-drawer__header { padding: 0 20px; }.cd-drawer__body { padding: 23px 20px; }.cd-drawer__footer { padding: 22px 20px 16px; }.cd-drawer__item { grid-template-columns: 92px minmax(0, 1fr); gap: 14px; }.cd-drawer__image { width: 92px; height: 92px; } }
 @media (prefers-reduced-motion: reduce) { .cd-drawer__backdrop, .cd-drawer__panel { transition: none; } }
+
+/* touch devices: no sticky hover on checkout button */
+@media (hover: none) { .cd-drawer__checkout:hover { color: #fff; } .cd-drawer__checkout:hover::before { transform: scaleX(0); } }
