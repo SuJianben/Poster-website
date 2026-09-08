@@ -138,3 +138,6 @@ body.cg-drawer-active { overflow: hidden; }
 
 
 
+
+/* mobile: hide desktop column switcher (grid is fixed at 2 columns on phones) */
+@media (max-width: 750px) { .cg-segment[aria-label="Gallery columns"] { display: none !important; } }
