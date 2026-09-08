@@ -24,7 +24,7 @@
         "link_column_9DQ9pY": {
           "type": "link_column",
           "settings": {
-            "heading": "Collections",
+            "heading": "Styles",
             "menu": "collections"
           }
         },
@@ -38,7 +38,7 @@
         "about": {
           "type": "link_column",
           "settings": {
-            "heading": "Customer Service",
+            "heading": "Help",
             "menu": "customer-service"
           }
         }
@@ -56,7 +56,7 @@
         "show_brand_info": true,
         "brand_logo_width": 80,
         "brand_heading": "PosterAndForm",
-        "brand_content": "<p>Curated art prints for the modern UK home. From £24, each one made when you order.<\/p><p><strong>ZHILINK GLOBAL LTD<\/strong><br>Company No. 17157223 (England &amp; Wales)<br>Suite 302, 4 Station Square, Cambridge CB1 2GE, United Kingdom<\/p><p>Made to order \u00b7 Printed after you order \u00b7 Duties handled \u2014 nothing to pay on delivery.<\/p><p>Tel: <a href=\"tel:+447726246488\">+44 7726246488<\/a><br>Email: <a href=\"mailto:support@posterandform.com\">support@posterandform.com<\/a><\/p>",
+        "brand_content": "<p>Curated art prints for the modern UK home. From £24, each one made when you order.</p><p><strong>ZHILINK GLOBAL LTD</strong><br>Company No. 17157223 (England &amp; Wales)<br>Suite 302, 4 Station Square, Cambridge CB1 2GE, United Kingdom</p><p>Made to order · Printed after you order · Duties handled — nothing to pay on delivery.</p><p>Tel: <a href=\"tel:+447726246488\">+44 7726246488</a><br>Email: <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a></p>",
         "show_payment_icons": true,
         "bottom_text": "Art prints for the modern UK home, made when you order."
       }

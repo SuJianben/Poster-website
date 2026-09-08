@@ -70,18 +70,35 @@
         {% endif %}
 
         {% for block in section.blocks %}
-          <div {{ block.shopify_attributes }}>
+          <div class="footer-col" data-footer-col {{ block.shopify_attributes }}>
             {% if block.settings.heading != blank %}
-              <h3>{{ block.settings.heading | escape }}</h3>
+              <h3 class="footer-col__heading" data-footer-col-toggle>{{ block.settings.heading | escape }}<span class="footer-col__icon" aria-hidden="true">+</span></h3>
             {% endif %}
 
             {% if block.settings.menu != blank %}
+              <div class="footer-col__links" data-footer-col-links>
               {% for link in block.settings.menu.links %}
                 <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
               {% endfor %}
+              </div>
             {% endif %}
           </div>
         {% endfor %}
+        <style>
+          .footer-col__icon{display:none}
+          @media (max-width:750px){
+            .footer-links{grid-template-columns:1fr !important;gap:0 !important}
+            .footer-brand{margin-bottom:8px}
+            .footer-col{border-top:1px solid var(--line,#e5e5e5)}
+            .footer-col__heading{display:flex;justify-content:space-between;align-items:center;margin:0 !important;padding:16px 0;cursor:pointer;font-size:12px}
+            .footer-col__icon{display:inline;font-size:18px;line-height:1;color:#888;font-weight:400;transition:transform .2s}
+            .footer-col.is-open .footer-col__icon{transform:rotate(45deg)}
+            .footer-col__links{display:none;padding:0 0 12px}
+            .footer-col.is-open .footer-col__links{display:block}
+            .footer-col__links a{margin:8px 0 !important;font-size:15px !important}
+          }
+        </style>
+        <script>(function(){var mq=window.matchMedia('(max-width:750px)');document.querySelectorAll('[data-footer-col-toggle]').forEach(function(h){h.addEventListener('click',function(){if(!mq.matches)return;h.closest('[data-footer-col]').classList.toggle('is-open');});});})();</script>
       </div>
     {% endif %}
 
