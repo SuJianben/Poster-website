@@ -8,16 +8,17 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'AW-18302569250');
+  gtag('config', 'G-L8G4JJFYKT', {send_page_view: false}); // GA4: 页面浏览由 Shopify 渠道上报，这里只补电商事件
 
   // Page-type events (fire before user interaction — for view/AddToCart/BeginCheckout diagnostics)
   (function(){
     var path = window.location.pathname;
     if (/^\/products\//.test(path)) {
-      gtag('event', 'view_item', {send_to: 'AW-18302569250'});
+      gtag('event', 'view_item', {send_to: ['AW-18302569250', 'G-L8G4JJFYKT']});
     } else if (/^\/cart/.test(path)) {
-      gtag('event', 'view_cart', {send_to: 'AW-18302569250'});
+      gtag('event', 'view_cart', {send_to: ['AW-18302569250', 'G-L8G4JJFYKT']});
     } else if (/^\/checkouts?\//.test(path)) {
-      gtag('event', 'begin_checkout', {send_to: 'AW-18302569250'});
+      gtag('event', 'begin_checkout', {send_to: ['AW-18302569250', 'G-L8G4JJFYKT']});
     }
   })();
 
@@ -27,7 +28,7 @@
     document.addEventListener('click', function(e){
       var t = e.target.closest('button[name="add"], button[data-add-to-cart], .btn--add-to-cart, [data-action="add-to-cart"], form[action$="/cart/add"] [type="submit"]');
       if (t) {
-        gtag('event', 'add_to_cart', {send_to: 'AW-18302569250'});
+        gtag('event', 'add_to_cart', {send_to: ['AW-18302569250', 'G-L8G4JJFYKT']});
       }
     }, true);
 
@@ -38,7 +39,7 @@
         try {
           var u = (typeof url === 'string') ? url : (url && url.url) || '';
           if (u && u.indexOf('/cart/add') !== -1) {
-            gtag('event', 'add_to_cart', {send_to: 'AW-18302569250'});
+            gtag('event', 'add_to_cart', {send_to: ['AW-18302569250', 'G-L8G4JJFYKT']});
           }
         } catch(_) {}
         return _f.apply(this, arguments);
