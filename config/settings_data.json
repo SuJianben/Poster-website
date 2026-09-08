@@ -17,7 +17,28 @@
     "color_muted": "#666666",
     "color_border": "#EAEAEA",
     "color_accent": "#0A0A0A",
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "4015264832934714879": {
+        "type": "shopify://apps/cwillsendwill-popup-email/blocks/app/a5670cf8-5705-4b01-ad9e-447033feae26",
+        "disabled": false,
+        "settings": {
+          "enable_gdpr_mode": false,
+          "enable_cwtracks_listener": false
+        }
+      },
+      "6159598353363395418": {
+        "type": "shopify://apps/google-youtube/blocks/store_widget/14ec7bd0-ac77-49a9-9417-90752398bdff",
+        "disabled": true,
+        "settings": {
+          "widget_position": "LEFT_BOTTOM",
+          "side_margin": 36,
+          "bottom_margin": 36,
+          "mobile_side_margin": 16,
+          "mobile_bottom_margin": 46
+        }
+      }
+    }
   },
   "presets": {
     "Default": {
