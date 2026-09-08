@@ -92,6 +92,7 @@
               </div>
             </div>
           </section>
+          <script>(function(){ if(!window.matchMedia('(max-width:767px)').matches) return; var s=document.currentScript.previousElementSibling; if(!s||!s.hasAttribute('data-ps-accordion')) return; s.classList.remove('is-open'); var t=s.querySelector('[data-ps-accordion-trigger]'); var p=s.querySelector('[data-ps-accordion-panel]'); if(t)t.setAttribute('aria-expanded','false'); if(p)p.setAttribute('aria-hidden','true'); })();</script>
         </div>
       </div>
 
@@ -214,6 +215,12 @@
       "settings": [
         { "type": "text", "id": "text", "label": "Text", "default": "Free shipping on qualifying orders." }
       ]
+    },
+    {
+      "type": "short_description",
+      "name": "Short description",
+      "limit": 1,
+      "settings": []
     },
     {
       "type": "material",
