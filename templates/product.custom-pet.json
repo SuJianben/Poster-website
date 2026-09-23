@@ -18,12 +18,6 @@
             "label": "Save"
           }
         },
-        "reviews": {
-          "type": "reviews",
-          "settings": {
-            "label": "Verified reviews"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
@@ -67,13 +61,6 @@
             "freeform_instruction": "Drag to reposition. Drag any corner to resize freely.",
             "crop_cancel_label": "Cancel",
             "crop_confirm_label": "Use crop"
-          }
-        },
-        "material": {
-          "type": "material",
-          "settings": {
-            "label": "Material:",
-            "value": "Fine art print from your photo"
           }
         },
         "size_selector": {
@@ -150,15 +137,13 @@
       },
       "block_order": [
         "sale_badge",
-        "reviews",
         "title",
         "vendor",
         "price",
         "shipping_note",
         "artwork_upload",
-        "material",
-        "size_selector",
         "variant_options",
+        "size_selector",
         "passepartout",
         "frame",
         "hanging_kit",
@@ -172,7 +157,7 @@
         "customer_notice_heading": "Customer Notice",
         "customer_notice_content": "<ul><li>By uploading a photo, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>",
         "shipping_returns_heading": "Delivery & returns",
-        "shipping_returns_content": "<p><strong>Made only when you order.</strong> Your personalised print is produced after your order comes in — nothing is pre-printed, nothing goes to waste.</p><p>Please allow <strong>12–17 working days</strong> from order to your door. Every UK order ships <strong>free</strong>, fully tracked, rolled in a rigid tube.</p><p>Personalised prints are made to your specification, so they can only be returned if faulty or not as previewed. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>",
+        "shipping_returns_content": "<p><strong>Made only when you order.</strong> Your personalised print is produced after your order comes in — nothing is pre-printed, nothing goes to waste.</p><p>Your artwork is emailed within <strong>2 working days</strong>; after you approve it, please allow <strong>12–17 working days</strong> to your door. Every UK order ships <strong>free</strong>, fully tracked, rolled in a rigid tube.</p><p>Personalised prints are made to your specification, so they can only be returned if faulty or not as approved. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>",
         "passepartout_product": "system-passepartout-addon",
         "frame_product": "system-frame-addon"
       }
