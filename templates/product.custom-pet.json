@@ -1,0 +1,360 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "custom-product-main",
+      "blocks": {
+        "sale_badge": {
+          "type": "sale_badge",
+          "settings": {
+            "label": "Save"
+          }
+        },
+        "reviews": {
+          "type": "reviews",
+          "settings": {
+            "label": "Verified reviews"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "vendor": {
+          "type": "vendor",
+          "settings": {
+            "label": "Artist:"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "shipping_note": {
+          "type": "shipping_note",
+          "settings": {
+            "text": "Free UK delivery · Hand-made, not AI · Artwork emailed within 2 working days"
+          }
+        },
+        "artwork_upload": {
+          "type": "artwork_upload",
+          "settings": {
+            "upload_heading": "Upload your pet's photo",
+            "drop_label": "Drag and drop your pet's photo here",
+            "or_label": "or",
+            "upload_button_label": "Choose photo",
+            "upload_help_text": "JPEG, PNG or WebP · maximum 20 MB. Face clearly visible, good light, one pet per portrait.",
+            "remove_label": "Remove",
+            "require_artwork": true,
+            "crop_heading": "Crop your photo",
+            "crop_help_text": "Keep your pet's whole head inside the crop area – our designer will do the rest.",
+            "crop_css_help_text": "Choose a fixed ratio, or select Free crop to adjust the shape freely.",
+            "crop_close_label": "Close image cropper",
+            "landscape_label": "Landscape",
+            "square_label": "Square",
+            "portrait_label": "Portrait",
+            "free_crop_label": "Free crop",
+            "any_ratio_label": "Any ratio",
+            "fixed_instruction": "Drag to reposition. Drag a corner to resize while keeping the selected ratio.",
+            "freeform_instruction": "Drag to reposition. Drag any corner to resize freely.",
+            "crop_cancel_label": "Cancel",
+            "crop_confirm_label": "Use crop"
+          }
+        },
+        "material": {
+          "type": "material",
+          "settings": {
+            "label": "Material:",
+            "value": "Fine art print from your photo"
+          }
+        },
+        "size_selector": {
+          "type": "size_selector",
+          "settings": {
+            "label": "Size:",
+            "guide_label": "Size guide"
+          }
+        },
+        "variant_options": {
+          "type": "variant_options",
+          "settings": {}
+        },
+        "passepartout": {
+          "type": "passepartout",
+          "settings": {
+            "label": "Passepartout:",
+            "empty_value": "None",
+            "add_label": "Add passepartout",
+            "loading_label": "Loading…",
+            "options_label": "Passepartout options"
+          }
+        },
+        "frame": {
+          "type": "frame",
+          "settings": {
+            "label": "Frame:",
+            "empty_value": "No frame",
+            "add_label": "Add frame",
+            "loading_label": "Loading…",
+            "options_label": "Frame options"
+          }
+        },
+        "hanging_kit": {
+          "type": "hanging_kit",
+          "settings": {
+            "label": "Hanging scroll rod included at no extra cost"
+          }
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {
+            "label": "Quantity",
+            "decrease_label": "Decrease quantity",
+            "increase_label": "Increase quantity"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "add_label": "Add to cart",
+            "sold_out_label": "Sold out",
+            "unavailable_label": "Unavailable"
+          }
+        },
+        "assurances": {
+          "type": "assurances",
+          "settings": {
+            "item_1": "Hand-made by our designers, not by AI",
+            "item_2": "You approve the artwork by email before we print",
+            "item_3": "Free tracked UK delivery, 12–17 working days after approval",
+            "item_4": "Secure checkout · Apple Pay, Google Pay, Klarna",
+            "item_5": ""
+          }
+        },
+        "payment_methods": {
+          "type": "payment_methods",
+          "settings": {
+            "heading": "Securely packaged & paid",
+            "accessibility_label": "Accepted payment methods",
+            "note": "Rolled in a rigid protective tube — never folded"
+          }
+        }
+      },
+      "block_order": [
+        "sale_badge",
+        "reviews",
+        "title",
+        "vendor",
+        "price",
+        "shipping_note",
+        "artwork_upload",
+        "material",
+        "size_selector",
+        "variant_options",
+        "passepartout",
+        "frame",
+        "hanging_kit",
+        "quantity",
+        "buy_buttons",
+        "assurances",
+        "payment_methods"
+      ],
+      "settings": {
+        "framing_render_mode": "image",
+        "customer_notice_heading": "Customer Notice",
+        "customer_notice_content": "<ul><li>By uploading a photo, you confirm that you own the copyright or have obtained all necessary permissions to use it.</li><li>Do not upload film, television, anime, brand, celebrity, illegal, or otherwise prohibited content.</li><li>We reserve the right to refuse any order suspected of infringing intellectual property or other rights.</li><li>Uploaded files are retained and deleted in accordance with our stated file-retention and deletion procedures.</li><li>You grant us a limited licence to use the uploaded image solely as necessary to produce and fulfil your order.</li><li>We maintain a complaint and takedown process for reporting and removing potentially infringing content.</li></ul>",
+        "shipping_returns_heading": "Delivery & returns",
+        "shipping_returns_content": "<p><strong>Made only when you order.</strong> Your personalised print is produced after your order comes in — nothing is pre-printed, nothing goes to waste.</p><p>Please allow <strong>12–17 working days</strong> from order to your door. Every UK order ships <strong>free</strong>, fully tracked, rolled in a rigid tube.</p><p>Personalised prints are made to your specification, so they can only be returned if faulty or not as previewed. Arrived damaged? Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>",
+        "passepartout_product": "system-passepartout-addon",
+        "frame_product": "system-frame-addon"
+      }
+    },
+    "benefits": {
+      "type": "custom-product-benefits",
+      "blocks": {
+        "premium_quality": {
+          "type": "benefit",
+          "settings": {
+            "icon": "quality",
+            "title": "Archival quality",
+            "text": "200gsm matte fine art paper, fade-resistant pigment inks."
+          }
+        },
+        "money_back": {
+          "type": "benefit",
+          "settings": {
+            "icon": "guarantee",
+            "title": "Made by hand",
+            "text": "A designer places your pet into the painting – no AI generation."
+          }
+        },
+        "free_shipping": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free UK delivery",
+            "text": "Tracked, 12–17 working days, made to order."
+          }
+        },
+        "returns": {
+          "type": "benefit",
+          "settings": {
+            "icon": "returns",
+            "title": "Approve before print",
+            "text": "Change it once for free, or cancel for a full refund before we print."
+          }
+        }
+      },
+      "block_order": [
+        "premium_quality",
+        "money_back",
+        "free_shipping",
+        "returns"
+      ],
+      "settings": {}
+    },
+    "lifestyle": {
+      "type": "custom-product-lifestyle",
+      "blocks": {
+        "series_abstract": {
+          "type": "series",
+          "settings": {
+            "collection": "abstract-geometric-prints"
+          }
+        },
+        "series_figurative": {
+          "type": "series",
+          "settings": {
+            "collection": "figurative-fashion-prints"
+          }
+        },
+        "series_botanical": {
+          "type": "series",
+          "settings": {
+            "collection": "botanical-floral-prints"
+          }
+        },
+        "series_animals": {
+          "type": "series",
+          "settings": {
+            "collection": "animals-prints"
+          }
+        },
+        "series_photography": {
+          "type": "series",
+          "settings": {
+            "collection": "photography-landscape-prints"
+          }
+        },
+        "series_minimal": {
+          "type": "series",
+          "settings": {
+            "collection": "minimal-neutral-prints"
+          }
+        },
+        "series_food": {
+          "type": "series",
+          "settings": {
+            "collection": "food-kitchen-art-prints"
+          }
+        },
+        "series_typography": {
+          "type": "series",
+          "settings": {
+            "collection": "typography-quotes-prints"
+          }
+        }
+      },
+      "block_order": [
+        "series_abstract",
+        "series_figurative",
+        "series_botanical",
+        "series_animals",
+        "series_photography",
+        "series_minimal",
+        "series_food",
+        "series_typography"
+      ],
+      "settings": {}
+    },
+    "information": {
+      "type": "custom-product-info",
+      "blocks": {
+        "description": {
+          "type": "tab",
+          "settings": {
+            "label": "Description",
+            "content_source": "product_description"
+          }
+        },
+        "fair_pricing": {
+          "type": "tab",
+          "settings": {
+            "label": "Why this price",
+            "content_source": "custom",
+            "heading": "Why this price",
+            "content": "<p><strong>A designer's time, not a filter.</strong></p><ul><li><strong>Hand-made</strong> — your pet is cut out, placed and blended into the painting by a real person, then checked by a second designer</li><li><strong>Approve first</strong> — you see the finished artwork by email and can ask for one free change before anything is printed</li><li><strong>Archival materials</strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades</li><li><strong>Free UK delivery</strong> — tracked, made to order</li></ul>"
+          }
+        },
+        "artist": {
+          "type": "tab",
+          "settings": {
+            "label": "Artist Information",
+            "content_source": "artist_information",
+            "heading": "Artist information"
+          }
+        },
+        "material": {
+          "type": "tab",
+          "settings": {
+            "label": "Material & Workmanship",
+            "content_source": "custom",
+            "heading": "Material & workmanship",
+            "content": "<p><strong>Made to be looked at every day.</strong></p><p>Your image is printed on <strong>200gsm matte fine art paper</strong> using <strong>pigment inks</strong> for deep colour and long-term fade resistance. The matte surface keeps reflections down in daylight and lamplight alike.</p><p>Upload a JPEG, PNG or WebP up to 20 MB; the preview shows exactly how your crop will print. Every print is inspected by hand, then rolled in a rigid protective tube.</p>"
+          }
+        },
+        "shipping": {
+          "type": "tab",
+          "settings": {
+            "label": "Delivery & returns",
+            "content_source": "custom",
+            "heading": "Delivery & returns",
+            "content": "<p><strong>Printed for you, then sent to you.</strong></p><p>We don’t hold stock. Your print is made after you order, then shipped tracked to your UK address. Your artwork is emailed within 2 working days of ordering; once you approve it, please allow <strong>12–17 working days</strong> for printing and delivery.</p><p>UK delivery is <strong>free on every order</strong>. You’ll receive a tracking link by email as soon as your parcel is dispatched.</p><p><strong>Returns:</strong> personalised prints are made to your specification and can only be returned if faulty or not as previewed. Email <a href=\"mailto:support@posterandform.com\">support@posterandform.com</a> with a photo and we’ll reprint or refund.</p>"
+          }
+        },
+        "security": {
+          "type": "tab",
+          "settings": {
+            "label": "Security",
+            "content_source": "custom",
+            "heading": "Security",
+            "content": "<p>Your order is handled through Shopify’s secure checkout. We use protected payment processing and securely packaged delivery so you can shop with confidence.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "fair_pricing",
+        "artist",
+        "material",
+        "shipping",
+        "security"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "benefits",
+    "lifestyle",
+    "information"
+  ]
+}
