@@ -35,7 +35,7 @@
         "shipping_note": {
           "type": "shipping_note",
           "settings": {
-            "text": "Free UK delivery · Hand-made, not AI · Artwork emailed within 2 working days"
+            "text": "Free UK delivery · Designer-checked · Artwork emailed within 2 working days"
           }
         },
         "artwork_upload": {
@@ -49,7 +49,7 @@
             "remove_label": "Remove",
             "require_artwork": true,
             "crop_heading": "Crop your photo",
-            "crop_help_text": "Keep your pet's whole head inside the crop area – our designer will do the rest.",
+            "crop_help_text": "Keep your pet's whole head inside the crop area – we will do the rest.",
             "crop_css_help_text": "Choose a fixed ratio, or select Free crop to adjust the shape freely.",
             "crop_close_label": "Close image cropper",
             "landscape_label": "Landscape",
@@ -119,7 +119,7 @@
         "assurances": {
           "type": "assurances",
           "settings": {
-            "item_1": "Hand-made by our designers, not by AI",
+            "item_1": "Created from your photo, checked by a designer",
             "item_2": "You approve the artwork by email before we print",
             "item_3": "Free tracked UK delivery, 12–17 working days after approval",
             "item_4": "Secure checkout · Apple Pay, Google Pay, Klarna",
@@ -177,8 +177,8 @@
           "type": "benefit",
           "settings": {
             "icon": "guarantee",
-            "title": "Made by hand",
-            "text": "A designer places your pet into the painting – no AI generation."
+            "title": "Designer-checked",
+            "text": "Every artwork is reviewed and refined by a real person before you see it."
           }
         },
         "free_shipping": {
@@ -286,7 +286,7 @@
             "label": "Why this price",
             "content_source": "custom",
             "heading": "Why this price",
-            "content": "<p><strong>A designer's time, not a filter.</strong></p><ul><li><strong>Hand-made</strong> — your pet is cut out, placed and blended into the painting by a real person, then checked by a second designer</li><li><strong>Approve first</strong> — you see the finished artwork by email and can ask for one free change before anything is printed</li><li><strong>Archival materials</strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades</li><li><strong>Free UK delivery</strong> — tracked, made to order</li></ul>"
+            "content": "<p><strong>A portrait made for one pet only.</strong></p><ul><li><strong>Made for you</strong> — your pet's likeness recreated inside a masterpiece, then reviewed and refined by a designer</li><li><strong>Approve first</strong> — you see the finished artwork by email and can ask for one free change before anything is printed</li><li><strong>Archival materials</strong> — 200gsm matte fine art paper and pigment inks that hold their colour for decades</li><li><strong>Free UK delivery</strong> — tracked, made to order</li></ul>"
           }
         },
         "artist": {
